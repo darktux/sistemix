@@ -431,44 +431,12 @@
             $("#nac").val(JSON.stringify(row.asociado_nacionalidad).replace(/"/gi,''));
             $("#est").val(JSON.stringify(row.asociado_estadocivil).replace(/"/gi,''));
             $("#dep").val(JSON.stringify(row.asociado_departamento).replace(/"/gi,''));
-            $("#mun").val(JSON.stringify(row.asociado_montomaximo).replace(/"/gi,''));
-            $("#dir").val(JSON.stringify(row.asociado_montomaximo).replace(/"/gi,''));
-            $("#prouof").val(JSON.stringify(row.asociado_montomaximo).replace(/"/gi,''));
-            $("#ingmen").val(JSON.stringify(row.asociado_montomaximo).replace(/"/gi,''));
-            $("#inst").val(JSON.stringify(row.asociado_montomaximo).replace(/"/gi,''));
+            $("#mun").val(JSON.stringify(row.asociado_municipio).replace(/"/gi,''));
+            $("#dir").val(JSON.stringify(row.asociado_direcion).replace(/"/gi,''));
+            $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
+            $("#ingmen").val(JSON.stringify(row.asociado_ingresomes).replace(/"/gi,''));
+            $("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -488,78 +456,13 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
-            if(confirm("Realmente desea eliminar el registro del tipo de credito "+JSON.stringify(row.tipocredito_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
+            if(confirm("Realmente desea eliminar el registro del tipo de credito "+JSON.stringify(row.asociado_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
             	datos = {
-	            	id:JSON.stringify(row.tipocredito_id).replace(/"/gi,''),
+	            	id:JSON.stringify(row.asociado_id).replace(/"/gi,''),
 	            	acc:'del'
 	            }
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -628,7 +531,7 @@ function ejecutarajax(datos){
 
 
 
-        url: "php/TipoCredito.php",/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR *****************************************************************************/
+        url: "php/Asociado.php",/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR *****************************************************************************/
         
 
 
@@ -732,7 +635,7 @@ function ejecutarajax(datos){
 
 
 
-        		$('#tabla1').bootstrapTable('refresh',{url:'php/TipoCredito.php?acc=getjsontabla',pageList: [5,10,25,50,100]});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla',pageList: [5,10,25,50,100]});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
 
 
 
