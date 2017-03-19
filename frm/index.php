@@ -43,7 +43,12 @@
                 <li><a id="opc-tcue1">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cre1" class="dropdown-content">
+<<<<<<< HEAD
                 <li><a id="opc-ncre2">Gestionar crédito</a></li>
+=======
+                <li><a id="opc-scre2">Solicitudes de crédito</a></li>
+                <li><a id="opc-ncre2">Nuevo crédito</a></li>
+>>>>>>> origin/master
                 <li><a id="opc-mcre2">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcre2">Tipo de crédito</a></li>
@@ -68,7 +73,12 @@
                 <li><a id="opc-tcue2">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cre2" class="dropdown-content">
+<<<<<<< HEAD
                 <li><a id="opc-ncre2">Gestionar crédito</a></li>
+=======
+                <li><a id="opc-scre2">Solicitudes de crédito</a></li>
+                <li><a id="opc-ncre2">Nuevo crédito</a></li>
+>>>>>>> origin/master
                 <li><a id="opc-mcre2">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcre2">Tipo de crédito</a></li>
@@ -141,6 +151,9 @@
             $("#opc-tcre1").click(function(){
                 $("#formularios").load('html/TipoCredito.php');
             });
+            $("#opc-scre1").click(function(){
+                $("#formularios").load('html/SolicitudCredito.php');
+            });
             $("#opc-ncre1").click(function(){
                 $("#formularios").load('html/Credito.php');
             });
@@ -179,6 +192,9 @@
             });
             $("#opc-mcue2").click(function(){
                 $("#formularios").load('html/ingCuentaMovimiento.php');
+            });
+            $("#opc-scre2").click(function(){
+                $("#formularios").load('html/SolicitudCredito.php');
             });
             $("#opc-tcre2").click(function(){
                 $("#formularios").load('html/TipoCredito.php');
