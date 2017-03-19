@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>CO-AGESALUD - Materialize</title>
+        <title>CO-AGESALUD</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
         <!-- CSS  -->
@@ -55,8 +55,6 @@
                 <li class="divider"></li>
                 <li><a id="opc-abo1">Acerca de</a></li>
             </ul>
-
-
             <ul id="dropdown-per2" class="dropdown-content">
                 <li><a id="opc-nper2">Nuevo asociado</a></li>
                 <li><a id="opc-aper2">Actualizar datos</a></li>
@@ -170,10 +168,8 @@
                 $("#formularios").load('html/about.php');
             });
             $("#logout1").click(function(){
-                window.location.href = "/coagesalud";
+                window.location.href = "../";
             });
-
-
              $("#opc-nper2").click(function(){
                 alert('Evento click sobre un button con class="nper2"');
             });
@@ -214,7 +210,7 @@
                 $("#formularios").load('html/about.php');
             });
             $("#logout2").click(function(){
-                window.location.href = "/coagesalud";
+                window.location.href = "../";
             });
         </script>
     </body>

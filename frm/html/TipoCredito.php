@@ -574,6 +574,9 @@
             '</a>&nbsp;',
             '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
                 '<i class="material-icons">delete</i>',
+            '</a>',
+            '&nbsp;<a class="view ml10" href="javascript:void(0)" title="Ver más">',
+                '<i class="material-icons">info</i>',
             '</a>'
         ].join('');
     }
@@ -766,8 +769,24 @@
 
 	            ejecutarajax(datos);
             }
-        }
+        },
 /*TERMINA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+/*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .view': function (e, value, row, index) {
+
+
+
+
+
+        	alert("sdfkhkj"); /********************************************************************************************************/
+
+
+
+
+
+            
+        }
+/*TERMINA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
     };
 /*TERMINA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 function ejecutarajax(datos){
