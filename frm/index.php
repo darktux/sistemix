@@ -12,7 +12,7 @@
     <body>
         <nav class="teal" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="/coagesalud/frm/index.php" class="brand-logo white-text">CO-AGESALUD</a>
+                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-per1">Asociado<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-cue1">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -129,7 +129,7 @@
                 }
             );
             $("#opc-nper1").click(function(){
-                $("#formularios").load('html/ingAsociado.php');
+                $("#formularios").load('html/Asociado.php');
             });
             $("#opc-aper1").click(function(){
                 alert('Evento click sobre un button con class="aper1"');
@@ -171,7 +171,7 @@
                 window.location.href = "../";
             });
              $("#opc-nper2").click(function(){
-                alert('Evento click sobre un button con class="nper2"');
+                $("#formularios").load('html/Asociado.php');
             });
             $("#opc-aper2").click(function(){
                 alert('Evento click sobre un button con class="aper2"');

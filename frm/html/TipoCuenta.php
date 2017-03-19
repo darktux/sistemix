@@ -81,12 +81,12 @@
 
 
 
-			<h5>Nuevo tipo de crédito</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
+			<h5>Nuevo tipo de cuenta</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
 					<input type="text" name="nom" id="nom" required>
-					<label for="nom">Nombre de la cuenta</label>
+					<label for="nom">Nombre</label>
 				</div>
 				<div class="input-field col s12">
 					<input type="number" name="int" id="int" step="0.01" min="0.00" max="100.00" required>

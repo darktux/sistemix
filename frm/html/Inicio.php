@@ -25,6 +25,7 @@
 			<div class="card-content">
 				<p>
 					Apertura una nueva cuenta para un socio.
+					<br><br>
 				</p>
 			</div>
 		</div>
@@ -53,6 +54,7 @@
 			<div class="card-content">
 				<p>
 					Apertura de un plan de crédito para un socio.
+					<br><br>
 				</p>
 			</div>
 		</div>
@@ -60,7 +62,7 @@
 	<div class="col s12 m6 l3">
 		<div class="card">
 			<div class="card-image">
-				<img src="../img/fondo11.png" height="250">
+				<img src="../img/ad4.png" height="250">
 				<span class="card-title" ><b>Gestión de crédito</b></span>
 				<a id="directo-mcre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 			</div>

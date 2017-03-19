@@ -12,7 +12,7 @@
     <body>
         <nav class="teal" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="/coagesalud" class="brand-logo white-text">CO-AGESALUD</a>
+                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD</a>
                 <ul class="right  hide-on-med-and-down">
                     <li><a href="frm/" class="white-text">Login</a></li>
                     <li><a href="#" class="white-text">Acerca de</a></li>
@@ -127,7 +127,7 @@
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    Derechos reservados <a class="brown-text text-lighten-3" href="http://materializecss.com">COAGESALUD</a>
+                    Derechos reservados <a class="brown-text text-lighten-3" target="_blank" href="http://materializecss.com">COAGESALUD</a>
                 </div>
             </div>
         </footer>

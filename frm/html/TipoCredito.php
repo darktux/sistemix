@@ -86,7 +86,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<input type="text" name="nom" id="nom" required>
-					<label for="nom">Nombre del crédito</label>
+					<label for="nom">Nombre</label>
 				</div>
 				<div class="input-field col s12">
 					<input type="number" name="int" id="int" min="0.00" step="0.01" required>
