@@ -88,6 +88,10 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
+					<input type="number" name="tit" id="tit" required>
+					<label for="tit">Titular de la cuenta</label>
+				</div>
+				<div class="input-field col s12">
 					<input type="number" name="mon" id="mon" required>
 					<label for="mon">Monto de la cuenta</label>
 				</div>

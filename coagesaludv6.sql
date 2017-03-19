@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-03-2017 a las 04:13:09
--- Versión del servidor: 5.7.15-log
--- Versión de PHP: 5.6.26
+-- Tiempo de generación: 19-03-2017 a las 05:52:57
+-- Versión del servidor: 5.7.17-log
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -39,7 +39,8 @@ CREATE TABLE `tab_asociado` (
   `asociado_fechanacimiento` date NOT NULL,
   `asociado_nacionalidad` varchar(100) NOT NULL,
   `asociado_estadocivil` varchar(100) NOT NULL,
-  `asociado_municipio` varchar(100) NOT NULL,
+  `asociado_departamento` varchar(100) NOT NULL,
+  `asociado_municipio` varchar(200) NOT NULL,
   `asociado_direccion` text NOT NULL,
   `asociado_profesionoficio` varchar(200) NOT NULL,
   `asociado_ingresomes` float NOT NULL,
