@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 18-03-2017 a las 03:53:29
+-- Tiempo de generación: 19-03-2017 a las 04:13:09
 -- Versión del servidor: 5.7.15-log
 -- Versión de PHP: 5.6.26
 
@@ -17,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `coagesaludv4`
+-- Base de datos: `coagesaludv3`
 --
+CREATE DATABASE IF NOT EXISTS `coagesaludv3` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `coagesaludv3`;
 
 -- --------------------------------------------------------
 
@@ -43,7 +45,7 @@ CREATE TABLE `tab_asociado` (
   `asociado_ingresomes` float NOT NULL,
   `asociado_estado` varchar(100) NOT NULL,
   `asociado_institucionsaludid` int(11) NOT NULL,
-  `asociado_empresaid` int(11) NOT NULL
+  `asociado_sucursalid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -74,7 +76,7 @@ CREATE TABLE `tab_capital` (
   `capital_cargo` float NOT NULL,
   `capital_abono` float NOT NULL,
   `capital_saldo` float NOT NULL,
-  `capital_empresaid` int(11) NOT NULL
+  `capital_sucursalid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -87,7 +89,7 @@ CREATE TABLE `tab_configuracion` (
   `configuracion_id` int(11) NOT NULL,
   `configuracion_nombre` varchar(200) NOT NULL,
   `configuracion_valor` varchar(200) NOT NULL,
-  `configuracion_empresaid` int(11) NOT NULL
+  `configuracion_sucursalid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -161,21 +163,6 @@ CREATE TABLE `tab_cuenta_movimiento` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tab_empresa`
---
-
-CREATE TABLE `tab_empresa` (
-  `empresa_id` int(11) NOT NULL,
-  `empresa_nombre` varchar(200) NOT NULL,
-  `empresa_nit` varchar(20) NOT NULL,
-  `empresa_razonsocial` text NOT NULL,
-  `empresa_eslogan` text NOT NULL,
-  `empresa_logo` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tab_institucion_salud`
 --
 
@@ -232,6 +219,21 @@ CREATE TABLE `tab_solicitud_credito` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tab_sucursal`
+--
+
+CREATE TABLE `tab_sucursal` (
+  `sucursal_id` int(11) NOT NULL,
+  `sucursal_nombre` varchar(200) NOT NULL,
+  `sucursal_nit` varchar(20) NOT NULL,
+  `sucursal_razonsocial` text NOT NULL,
+  `sucursal_eslogan` text NOT NULL,
+  `sucursal_logo` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tab_tipo_credito`
 --
 
@@ -244,6 +246,24 @@ CREATE TABLE `tab_tipo_credito` (
   `tipocredito_montominimo` float NOT NULL,
   `tipocredito_montomaximo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_tipo_credito`
+--
+
+INSERT INTO `tab_tipo_credito` (`tipocredito_id`, `tipocredito_nombre`, `tipocredito_interes`, `tipocredito_interesxmora`, `tipocredito_plazomaximo`, `tipocredito_montominimo`, `tipocredito_montomaximo`) VALUES
+(2, 'credito dos', 7, 10, 48, 5000, 10000),
+(3, 'credito tres', 7, 10, 60, 10000, 100000),
+(5, 'credito cuatro', 3, 3, 3, 3, 3),
+(12, 'angel', 4.92, 54, 45, 54, 54),
+(13, 'romeo', 1, 2, 3, 4, 5),
+(17, 'no no no si si si ', 5, 5, 5, 5, 5),
+(19, 'probando decimal', 2.5, 0.5, 6, 50, 100),
+(20, 'prueba decimal dos', 0.5, 1.5, 6, 1000.5, 5001.5),
+(21, 'prueba decimal dos', 0.27, 100.12, 11, 1000.12, 654),
+(22, 'prueba decimal dos', 5, 5, 5, 5, 5),
+(23, 'jhg', 8, 8, 8, 8, 8),
+(24, 'uyuiy', 9, 9, 9, 9, 9);
 
 -- --------------------------------------------------------
 
@@ -261,6 +281,23 @@ CREATE TABLE `tab_tipo_cuenta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `tab_tipo_cuenta`
+--
+
+INSERT INTO `tab_tipo_cuenta` (`tipocuenta_id`, `tipocuenta_nombre`, `tipocuenta_interes`, `tipocuenta_montominimo`, `tipocuenta_cobromontominimo`, `tipocuenta_montoapertura`) VALUES
+(1, 'uno', 4, 4, 4, 4),
+(3, 'dos', 7, 7, 7, 7),
+(4, 'tres', 9, 9, 9, 9),
+(5, 'cuatro', 1, 1, 1, 1),
+(6, 'cinco', 2, 2, 2, 2),
+(7, 'seis', 9, 9, 9, 9),
+(8, 'siete', 7, 7, 7, 7),
+(9, 'ocho', 8, 8, 8, 8),
+(10, 'nueve', 9, 9, 9, 9),
+(11, 'diez', 1, 1, 1, 10),
+(12, '11', 11, 11, 11, 11);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -270,7 +307,7 @@ CREATE TABLE `tab_tipo_cuenta` (
 ALTER TABLE `tab_asociado`
   ADD PRIMARY KEY (`asociado_id`),
   ADD KEY `asociado_institucionsaludid` (`asociado_institucionsaludid`),
-  ADD KEY `asociado_empresaid` (`asociado_empresaid`);
+  ADD KEY `asociado_empresaid` (`asociado_sucursalid`);
 
 --
 -- Indices de la tabla `tab_beneficiario`
@@ -283,14 +320,14 @@ ALTER TABLE `tab_beneficiario`
 --
 ALTER TABLE `tab_capital`
   ADD PRIMARY KEY (`capital_id`),
-  ADD KEY `capital_empresaid` (`capital_empresaid`);
+  ADD KEY `capital_empresaid` (`capital_sucursalid`);
 
 --
 -- Indices de la tabla `tab_configuracion`
 --
 ALTER TABLE `tab_configuracion`
   ADD PRIMARY KEY (`configuracion_id`),
-  ADD KEY `configuracion_empresaid` (`configuracion_empresaid`);
+  ADD KEY `configuracion_empresaid` (`configuracion_sucursalid`);
 
 --
 -- Indices de la tabla `tab_credito`
@@ -323,12 +360,6 @@ ALTER TABLE `tab_cuenta_movimiento`
   ADD KEY `cuentamovimiento_cuentaid` (`cuentamovimiento_cuentaid`);
 
 --
--- Indices de la tabla `tab_empresa`
---
-ALTER TABLE `tab_empresa`
-  ADD PRIMARY KEY (`empresa_id`);
-
---
 -- Indices de la tabla `tab_institucion_salud`
 --
 ALTER TABLE `tab_institucion_salud`
@@ -340,6 +371,12 @@ ALTER TABLE `tab_institucion_salud`
 ALTER TABLE `tab_solicitud_credito`
   ADD PRIMARY KEY (`solicitudcredito_id`),
   ADD KEY `solicitudcredito_asociadoid` (`solicitudcredito_asociadoid`);
+
+--
+-- Indices de la tabla `tab_sucursal`
+--
+ALTER TABLE `tab_sucursal`
+  ADD PRIMARY KEY (`sucursal_id`);
 
 --
 -- Indices de la tabla `tab_tipo_credito`
@@ -393,11 +430,6 @@ ALTER TABLE `tab_cuenta`
 ALTER TABLE `tab_cuenta_movimiento`
   MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `tab_empresa`
---
-ALTER TABLE `tab_empresa`
-  MODIFY `empresa_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `tab_institucion_salud`
 --
 ALTER TABLE `tab_institucion_salud`
@@ -408,15 +440,20 @@ ALTER TABLE `tab_institucion_salud`
 ALTER TABLE `tab_solicitud_credito`
   MODIFY `solicitudcredito_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de la tabla `tab_sucursal`
+--
+ALTER TABLE `tab_sucursal`
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --
 ALTER TABLE `tab_tipo_credito`
-  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_cuenta`
 --
 ALTER TABLE `tab_tipo_cuenta`
-  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- Restricciones para tablas volcadas
 --
@@ -426,7 +463,7 @@ ALTER TABLE `tab_tipo_cuenta`
 --
 ALTER TABLE `tab_asociado`
   ADD CONSTRAINT `tab_asociado_ibfk_1` FOREIGN KEY (`asociado_institucionsaludid`) REFERENCES `tab_institucion_salud` (`institucionsalud_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tab_asociado_ibfk_2` FOREIGN KEY (`asociado_empresaid`) REFERENCES `tab_empresa` (`empresa_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tab_asociado_ibfk_2` FOREIGN KEY (`asociado_sucursalid`) REFERENCES `tab_sucursal` (`sucursal_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tab_beneficiario`
@@ -438,13 +475,13 @@ ALTER TABLE `tab_beneficiario`
 -- Filtros para la tabla `tab_capital`
 --
 ALTER TABLE `tab_capital`
-  ADD CONSTRAINT `tab_capital_ibfk_1` FOREIGN KEY (`capital_empresaid`) REFERENCES `tab_empresa` (`empresa_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tab_capital_ibfk_1` FOREIGN KEY (`capital_sucursalid`) REFERENCES `tab_sucursal` (`sucursal_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tab_configuracion`
 --
 ALTER TABLE `tab_configuracion`
-  ADD CONSTRAINT `tab_configuracion_ibfk_1` FOREIGN KEY (`configuracion_empresaid`) REFERENCES `tab_empresa` (`empresa_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tab_configuracion_ibfk_1` FOREIGN KEY (`configuracion_sucursalid`) REFERENCES `tab_sucursal` (`sucursal_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tab_credito`
