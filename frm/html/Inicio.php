@@ -18,8 +18,8 @@
 	<div class="col s12 m6 l3">
 		<div class="card">
 			<div class="card-image">
-				<img src="../img/fondo13.jpg" height="250">
-				<span class="card-title" style="height: 175px;"><b>Nueva cuenta</b></span>
+				<img src="../img/ad1.png" height="250">
+				<span class="card-title black-text"><b>Gestión de cuenta</b></span>
 				<a id="directo-ncue" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 			</div>
 			<div class="card-content">
@@ -32,8 +32,8 @@
 	<div class="col s12 m6 l3">
 		<div class="card">
 			<div class="card-image">
-				<img src="../img/fondo11.png" height="250">
-				<span class="card-title" style="height: 175px;"><b>Movimiento de la cuenta</b></span>
+				<img src="../img/ad2.png" height="250">
+				<span class="card-title black-text"><b>Movimiento de la cuenta</b></span>
 				<a id="directo-mcue" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 			</div>
 			<div class="card-content">
@@ -46,8 +46,8 @@
 	<div class="col s12 m6 l3">
 		<div class="card">
 			<div class="card-image">
-				<img src="../img/fondo13.jpg" height="250">
-				<span class="card-title" style="height: 175px;"><b>Nuevo crédito</b></span>
+				<img src="../img/ad3.png" height="250">
+				<span class="card-title black-text"><b>Solicitud de crédito</b></span>
 				<a id="directo-ncre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 			</div>
 			<div class="card-content">
@@ -61,7 +61,7 @@
 		<div class="card">
 			<div class="card-image">
 				<img src="../img/fondo11.png" height="250">
-				<span class="card-title" style="height: 175px;"><b>Movimiento del crédito</b></span>
+				<span class="card-title" ><b>Gestión de crédito</b></span>
 				<a id="directo-mcre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 			</div>
 			<div class="card-content">
@@ -80,13 +80,13 @@
 	}); // end of document ready
 })(jQuery); // end of jQuery name space
 $("#directo-ncue").click(function(){
-    $("#formularios").load('html/ingCuenta.html');
+    $("#formularios").load('html/Cuenta.php');
 });
 $("#directo-mcue").click(function(){
     $("#formularios").load('html/ingCuentaMovimiento.html');
 });
 $("#directo-ncre").click(function(){
-    $("#formularios").load('html/ingCredito.html');
+    $("#formularios").load('html/Credito.php');
 });
 $("#directo-mcre").click(function(){
     $("#formularios").load('html/ingCreditoMovimiento.html');
