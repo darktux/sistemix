@@ -1,40 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>COAGESALUD - Materialize</title>
+        <title>CO-AGESALUD - Materialize</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-
         <!-- CSS  -->
         <link href="css/iconos.css" rel="stylesheet">
         <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
     </head>
     <body>
-
-
         <nav class="teal" role="navigation">
             <div class="nav-wrapper container">
                 <a id="logo-container" href="/coagesalud" class="brand-logo white-text">CO-AGESALUD</a>
-
                 <ul class="right  hide-on-med-and-down">
-                    <li><a href="/coagesalud/frm/index.php" class="white-text">Login</a></li>
+                    <li><a href="frm/" class="white-text">Login</a></li>
                     <li><a href="#" class="white-text">Acerca de</a></li>
                 </ul>
-
-
-
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a href="/coagesalud/frm/index.php">Login</a></li>
+                    <li><a href="frm/">Login</a></li>
                     <li><a href="#">Acerca de</a></li>
                 </ul>
-
-
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
         </nav>
-
-
         <div id="index-banner" class="parallax-container">
             <div >
                 <div class="container">
@@ -49,7 +38,7 @@
                         <h5 class="header col s12 "></h5>
                     </div>
                     <div class="row center">
-                        <a href="/coagesalud/frm/index.php" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Login</a>
+                        <a href="frm/" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Login</a>
                     </div>
                     
                     <br><br>
@@ -57,8 +46,6 @@
             </div>
             <div class="parallax"><img src="img/fondo6.png" alt="Unsplashed background img 1"></div>
         </div>
-
-
         <div class="container">
             <div class="section">
                 <!--   Icon Section   -->
@@ -70,7 +57,6 @@
                             <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
                         </div>
                     </div>
-
                     <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center teal-text"><i class="material-icons">group</i></h2>
@@ -78,7 +64,6 @@
                             <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
                         </div>
                     </div>
-
                     <div class="col s12 m4">
                         <div class="icon-block">
                             <h2 class="center teal-text"><i class="material-icons">settings</i></h2>
@@ -89,8 +74,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
                 <div class="container">
@@ -101,7 +84,6 @@
             </div>
             <div class="parallax"><img src="img/background2.jpg" alt="Unsplashed background img 2"></div>
         </div> -->
-
         <div class="container">
             <div class="section">
                 <div class="row">
@@ -113,8 +95,6 @@
                 </div>
             </div>
         </div>
-
-
         <!-- <div class="parallax-container valign-wrapper">
             <div class="section no-pad-bot">
                 <div class="container">
@@ -125,7 +105,6 @@
             </div>
             <div class="parallax"><img src="img/background3.jpg" alt="Unsplashed background img 3"></div>
         </div> -->
-
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
@@ -152,8 +131,6 @@
                 </div>
             </div>
         </footer>
-
-
         <!--  Scripts-->
         <script src="js/jquery.js"></script>
         <script src="js/materialize.js"></script>
