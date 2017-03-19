@@ -168,6 +168,7 @@
 <!-- TERMINA EL BLOQUE DEL MODAL -->
 <!-- INICIA EL BLOQUE LA TABLA -->
 <div class="container" style="width: 1200px;">
+	<h4 class="center teal-text">Crédito</h4>
 	<div class="row">
 		<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 		<div class="col s12">
@@ -218,7 +219,7 @@
 
 
 	<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true">
+			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 
 
 

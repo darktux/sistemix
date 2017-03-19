@@ -30,20 +30,20 @@
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
             <ul id="dropdown-per1" class="dropdown-content">
-                <li><a id="opc-nper1">Nuevo asociado</a></li>
+                <li><a id="opc-nper1">Gestionar asociado</a></li>
                 <li><a id="opc-aper1">Actualizar datos</a></li>
                 <li><a id="opc-bper1">Buscar asociados</a></li>
                 <li class="divider"></li>
                 <li><a href="#!">Solicitudes pendientes</a></li>
             </ul>
             <ul id="dropdown-cue1" class="dropdown-content">
-                <li><a id="opc-ncue1">Nueva cuenta</a></li>
+                <li><a id="opc-ncue1">Gestionar cuenta</a></li>
                 <li><a id="opc-mcue1">Movimiento de la cuenta</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcue1">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cre1" class="dropdown-content">
-                <li><a id="opc-ncre2">Nuevo crédito</a></li>
+                <li><a id="opc-ncre2">Gestionar crédito</a></li>
                 <li><a id="opc-mcre2">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcre2">Tipo de crédito</a></li>
@@ -56,19 +56,19 @@
                 <li><a id="opc-abo1">Acerca de</a></li>
             </ul>
             <ul id="dropdown-per2" class="dropdown-content">
-                <li><a id="opc-nper2">Nuevo asociado</a></li>
+                <li><a id="opc-nper2">Gestionar asociado</a></li>
                 <li><a id="opc-aper2">Actualizar datos</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-bper2">Buscar asociado</a></li>
             </ul>
             <ul id="dropdown-cue1" class="dropdown-content">
-                <li><a id="opc-ncue2">Nueva cuenta</a></li>
+                <li><a id="opc-ncue2">Gestionar cuenta</a></li>
                 <li><a id="opc-mcue2">Movimiento de la cuenta</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcue2">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cre2" class="dropdown-content">
-                <li><a id="opc-ncre2">Nuevo crédito</a></li>
+                <li><a id="opc-ncre2">Gestionar crédito</a></li>
                 <li><a id="opc-mcre2">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcre2">Tipo de crédito</a></li>
@@ -81,17 +81,9 @@
                 <li><a id="opc-abo2">Acerca de</a></li>
             </ul>
         </nav>
-        <!-- <div class="container">
-            <div class="section">
-                <div class="row">
-                    <div class="col s12"> -->
-                        <div id="formularios">
+        
+        <div id="formularios"></div>
 
-                        <!-- </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
