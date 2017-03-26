@@ -331,18 +331,18 @@
 	            	par1:$("#par1").val(),
 	            	por1:$("#por1").val(),
 	            	dir1:$("#dir1").val(),
-	            	nom1:$("#nom2").val(),
-	            	par1:$("#par2").val(),
-	            	por1:$("#por2").val(),
-	            	dir1:$("#dir2").val(),
-	            	nom1:$("#nom3").val(),
-	            	par1:$("#par3").val(),
-	            	por1:$("#por3").val(),
-	            	dir1:$("#dir3").val(),
-	            	nom1:$("#nom4").val(),
-	            	par1:$("#par4").val(),
-	            	por1:$("#por4").val(),
-	            	dir1:$("#dir4").val(),
+	            	nom2:$("#nom2").val(),
+	            	par2:$("#par2").val(),
+	            	por2:$("#por2").val(),
+	            	dir2:$("#dir2").val(),
+	            	nom3:$("#nom3").val(),
+	            	par3:$("#par3").val(),
+	            	por3:$("#por3").val(),
+	            	dir3:$("#dir3").val(),
+	            	nom4:$("#nom4").val(),
+	            	par4:$("#par4").val(),
+	            	por4:$("#por4").val(),
+	            	dir4:$("#dir4").val(),
 	            	acc:'set'
 	            }
 		}
@@ -368,18 +368,18 @@
 	            	par1:$("#par1").val(),
 	            	por1:$("#por1").val(),
 	            	dir1:$("#dir1").val(),
-	            	nom1:$("#nom2").val(),
-	            	par1:$("#par2").val(),
-	            	por1:$("#por2").val(),
-	            	dir1:$("#dir2").val(),
-	            	nom1:$("#nom3").val(),
-	            	par1:$("#par3").val(),
-	            	por1:$("#por3").val(),
-	            	dir1:$("#dir3").val(),
-	            	nom1:$("#nom4").val(),
-	            	par1:$("#par4").val(),
-	            	por1:$("#por4").val(),
-	            	dir1:$("#dir4").val(),
+	            	nom2:$("#nom2").val(),
+	            	par2:$("#par2").val(),
+	            	por2:$("#por2").val(),
+	            	dir2:$("#dir2").val(),
+	            	nom3:$("#nom3").val(),
+	            	par3:$("#par3").val(),
+	            	por3:$("#por3").val(),
+	            	dir3:$("#dir3").val(),
+	            	nom4:$("#nom4").val(),
+	            	par4:$("#par4").val(),
+	            	por4:$("#por4").val(),
+	            	dir4:$("#dir4").val(),
 	            	acc:'upd'
 	            }
 		}
@@ -410,15 +410,6 @@
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
 
-
-
-
-
-
-
-
-
-
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
             $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
@@ -432,16 +423,27 @@
             $("#est").val(JSON.stringify(row.asociado_estadocivil).replace(/"/gi,''));
             $("#dep").val(JSON.stringify(row.asociado_departamento).replace(/"/gi,''));
             $("#mun").val(JSON.stringify(row.asociado_municipio).replace(/"/gi,''));
-            $("#dir").val(JSON.stringify(row.asociado_direcion).replace(/"/gi,''));
+            $("#dir").val(JSON.stringify(row.asociado_direccion).replace(/"/gi,''));
             $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
             $("#ingmen").val(JSON.stringify(row.asociado_ingresomes).replace(/"/gi,''));
             $("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-
-
-
-
-
+        	$.ajax({
+				type:"post",
+				url: "php/Asociado.php",
+				data:{acc:'busBen',idasociado: JSON.stringify(row.asociado_id).replace(/"/gi,'')},
+				success:function(data){
+					var obj = $.parseJSON(data);
+					var ii=0;
+					$.each(obj,function(i,item){
+						ii++;						
+						$("#nom"+ii).val(item.beneficiario_nombre);
+						$("#par"+ii).val(item.beneficiario_parentezco);
+						$("#por"+ii).val(item.beneficiario_porcentaje);
+						$("#dir"+ii).val(item.beneficiario_direccion);
+					});
+				}
+			});
 
 
         	$('label').addClass("active");
@@ -457,7 +459,7 @@
 
 
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
-            if(confirm("Realmente desea eliminar el registro del tipo de credito "+JSON.stringify(row.asociado_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
+            if(confirm("Realmente desea eliminar el registro del asociado "+JSON.stringify(row.asociado_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
             	datos = {
 	            	id:JSON.stringify(row.asociado_id).replace(/"/gi,''),
 	            	acc:'del'

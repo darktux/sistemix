@@ -589,7 +589,7 @@
                 this.options.formatColumns()),
                 '<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">',
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.columns),
-                ' <span class="caret"></span>',
+                ' <span class="caret1"></span>',
                 '</button>',
                 '<ul class="dropdown-menu" role="menu">');
 
@@ -772,7 +772,7 @@
             '<span class="page-size">',
             this.options.pageSize,
             '</span>',
-            ' <span class="caret"></span>',
+            ' <span class="caret1"></span>',
             '</button>',
             '<ul class="dropdown-menu" role="menu">'],
             pageList = this.options.pageList;
@@ -1216,7 +1216,7 @@
 
     BootstrapTable.prototype.getCaretHtml = function () {
         return ['<span class="order' + (this.options.sortOrder === 'desc' ? '' : ' dropup') + '">',
-                '<span class="caret" style="margin: 10px 5px;"></span>',
+                '<span class="caret1" style="margin: 10px 5px;"></span>',
             '</span>'].join('');
     };
 

@@ -12,12 +12,8 @@
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
 	switch ($_POST['acc']) {
 		case 'set':
-
-
-
-
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-/*el numero 1 abajo es el id de la empresa principal*/
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+                /*el numero 1 abajo es el id de la empresa principal*/
                 $sql1 = "INSERT INTO 
                     ".$nombretabla."(
                         asociado_nombre,
@@ -36,9 +32,9 @@
                         asociado_ingresomes,
                         asociado_estado,
                         asociado_institucionsaludid,
-                        asociado_empresaid
+                        asociado_sucursalid
                     ) 
-                    VALUES(".$_POST['nom']."',
+                    VALUES('".$_POST['nom']."',
                         '".$_POST['dui']."',
                         '".$_POST['nit']."',
                         '".$_POST['ext']."',
@@ -58,9 +54,7 @@
                     );
                 ";
                 // deshabilitamos el autocommit para llevar a cabo la transacción con varias sentencias
-                
-               // $con->consulta('BEGIN');
-                $con->autocommit(false);
+                $con->consulta('BEGIN');
                 try{
                     $con->consulta($sql1);
                     //Obtengo id del asociado ingresado
@@ -68,223 +62,125 @@
                     if ($row = mysql_fetch_row($rs)) {
                         $id = trim($row[0]);
                     }
-                    
                     for ($i=1; $i < 5; $i++) { 
-                        if(strcmp($_POST['nom'.$i],"")!=0){
-                            $sql2="INSERT INTO tab_beneficiario(
-                                beneficiario_nombre,
-                                beneficiario_direccion,
-                                beneficiario_parentezco,
-                                beneficiario_porcentaje,
-                                beneficiario_asociadoid
-                            ) 
+                        if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
+                            $sql2="
+                            INSERT INTO 
+                                tab_beneficiario(
+                                    beneficiario_nombre,
+                                    beneficiario_direccion,
+                                    beneficiario_parentezco,
+                                    beneficiario_porcentaje,
+                                    beneficiario_asociadoid
+                                )
                             VALUES(
                                 '".$_POST['nom'.$i]."',
+                                '".$_POST['dir'.$i]."',
                                 '".$_POST['par'.$i]."',
                                 '".$_POST['por'.$i]."',
-                                '".$_POST['dir'.$i]."',
                                 '".$id."'
-                            )";
+                            );
+                        ";
+
+                            //echo $sql2;
                             $con->consulta($sql2);
                             
                         }
+
+
                     }
-                    $con->commit();
-                    if($con->getResultado()){
-                        echo "Datos guardados";
-                    }
-                    else{
-                        echo "Error al guardar";
-                    }
+                    $con->consulta('COMMIT');
+
                 }catch(Exception $e){
-                    $con->rollback();
+                    $con->consulta('ROLLBACK');
                     echo 'Error al guardar: ',$e->getMessage(),"\n";
                 }
                 
-                
 
-
-                
 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
 
 
                 if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
                 break;
+
+
+
+
+
     	case 'upd':
-
-
-
-
 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
 
             $sql1="UPDATE 
                 ".$nombretabla." SET 
-                	asociado_nombre='".$_POST['nom']."'
-					asociado_dui='".$_POST['dui']."'
-					asociado_nit='".$_POST['nit']."'
-					asociado_extendido='".$_POST['ext']."'
-					asociado_fechaextendido='".$_POST['fecdui']."'
-					asociado_lugarnacimiento='".$_POST['lugnac']."'
-					asociado_fechanacimiento='".$_POST['fecnac']."'
-					asociado_nacionalidad='".$_POST['nac']."'
-					asociado_estadocivil='".$_POST['est']."'
-					asociado_departamento='".$_POST['dep']."'
-					asociado_municipio='".$_POST['mun']."'
-					asociado_direccion='".$_POST['dir']."'
-					asociado_profesionoficio='".$_POST['prouof']."'
-					asociado_ingresomes='".$_POST['ingmen']."'
-					asociado_institucionsaludid='".$_POST['inst']."'
+                	asociado_nombre='".$_POST['nom']."',
+					asociado_dui='".$_POST['dui']."',
+					asociado_nit='".$_POST['nit']."',
+					asociado_extendido='".$_POST['ext']."',
+					asociado_fechaextendido='".$_POST['fecdui']."',
+					asociado_lugarnacimiento='".$_POST['lugnac']."',
+					asociado_fechanacimiento='".$_POST['fecnac']."',
+					asociado_nacionalidad='".$_POST['nac']."',
+					asociado_estadocivil='".$_POST['est']."',
+					asociado_departamento='".$_POST['dep']."',
+					asociado_municipio='".$_POST['mun']."',
+					asociado_direccion='".$_POST['dir']."',
+					asociado_profesionoficio='".$_POST['prouof']."',
+					asociado_ingresomes='".$_POST['ingmen']."',
+					asociado_institucionsaludid='".$_POST['inst']."',
 					asociado_sucursalid='1'
                 WHERE 
-                    tipocredito_id=".$_POST['id'].";
+                    asociado_id=".$_POST['id'].";
             ";
+            $sql2="DELETE FROM tab_beneficiario WHERE beneficiario_asociadoid='".$_POST['id']."'";
+            $con->consulta('BEGIN');
+            try{
+
+                $con->consulta($sql2);
+                $con->consulta($sql1);
+
+                for ($i=1; $i < 5; $i++) { 
+                    if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
+                        $sql3="
+                        INSERT INTO 
+                            tab_beneficiario(
+                                beneficiario_nombre,
+                                beneficiario_direccion,
+                                beneficiario_parentezco,
+                                beneficiario_porcentaje,
+                                beneficiario_asociadoid
+                            )
+                        VALUES(
+                            '".$_POST['nom'.$i]."',
+                            '".$_POST['dir'.$i]."',
+                            '".$_POST['par'.$i]."',
+                            '".$_POST['por'.$i]."',
+                            '".$_POST['id']."'
+                            );
+                        ";
+
+                        $con->consulta($sql3);
+                        
+                    }
+                }
+                $con->consulta('COMMIT');
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
+        
         case 'del':
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             $con->consulta("DELETE FROM 
                 ".$nombretabla." 
                 WHERE 
-                    tipocredito_id='".$_POST['id']."';
+                    asociado_id='".$_POST['id']."';
             ");
 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
@@ -311,6 +207,16 @@
                 ");
                 $i=0;
                 $salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
+
+        case 'busBen':
+                $con->consulta("SELECT * FROM tab_beneficiario WHERE beneficiario_asociadoid='".$_POST['idasociado']."'");
+                $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
                     $salida[$i]=$fila;
                     $i++;
