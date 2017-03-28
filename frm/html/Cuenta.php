@@ -12,45 +12,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div id="modal1" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario" onsubmit="return submit1();">
 		<input id="idid" type="hidden" value="">
@@ -64,36 +25,28 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			<h5>Nueva cuenta</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
-				<div class="input-field col s12">
-					<input type="number" name="tit" id="tit" required>
-					<label for="tit">Titular de la cuenta</label>
+				<div class="input-field col s10">
+					<input type="text" name="tit" id="tit" readonly="true" required>
+					<div class="fixed-action-btn horizontal" style="position: absolute; display: inline-block; right: -34px">
+						<a class="btn-floating waves-effect waves-light btn-large cyan darken-1"><i class="large material-icons">search</i></a>
+						<ul>
+							<li><a href="#modalBuscarPersona" onclick="bus(1)" class="btn-floating tooltipped blue" data-tooltip="Documento Único de Identidad">DUI</a></li>
+							<li><a href="#modalBuscarPersona" onclick="bus(2)" class="btn-floating tooltipped yellow" data-tooltip="Número de Identificación Tributaria">NIT</a></li>
+							<li><a href="#modalBuscarPersona" onclick="bus(3)" class="btn-floating tooltipped red" data-tooltip="Nombre de la persona">NOM</a></li>
+						</ul>
+					</div>
+					<label for="tit" class="active">Titular de la cuenta</label>
+				</div>
+				<div class="input-field col s12" id="titu" hidden="true">
+					<input type="text" name="tit2" id="tit2">
+					<label for="tit2">Co-titular de la cuenta</label>
 				</div>
 				<div class="input-field col s12">
 					<input type="number" name="mon" id="mon" required>
-					<label for="mon">Monto de la cuenta</label>
+					<label for="mon">Monto de apertura</label>
 				</div>
 				<div class="input-field col s12">
 					<input type="text" name="fecape" id="fecape" required>
@@ -122,30 +75,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 		</div>
 		<div class="modal-footer">
 			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
@@ -168,90 +97,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
 			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -265,42 +112,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
 			            <th data-field="cuenta_monto" data-align="center">Monto</th>
 			            <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th>
@@ -308,45 +119,6 @@
 			            <th data-field="cuenta_asociadoid" data-align="center">Asociado</th>
 			            <th data-field="cuenta_tipocuentaid" data-align="center">Tipo de cuenta</th>
 			            <!-- TERMINAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -364,7 +136,7 @@
 	$(document).ready(function(){
 
 
-
+		$('#titu').hidden='false';
 
 	/*	$.ajax({
 	        type:"post",
