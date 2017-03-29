@@ -125,9 +125,11 @@
         <script src="../js/materialize.js"></script>
         <script src="../js/init.js"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
-                $("#formularios").load('html/Inicio.php');
-            });
+            $( document ).ready()
+                $(function() {
+                    $("#formularios").load('html/Inicio.php');
+                }
+            );
             $("#opc-nper1").click(function(){
                 $("#formularios").load('html/Asociado.php');
             });
