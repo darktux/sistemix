@@ -382,6 +382,8 @@
 
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
             break;
+
+        
 		case 'getjsontabla':
                 $con->consulta("SELECT * FROM 
                     ".$nombretabla.";"
