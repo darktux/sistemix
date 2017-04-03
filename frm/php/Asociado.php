@@ -6,7 +6,7 @@
 
     $nombretabla = 'tab_asociado';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS*********************************************************************/
 
-
+    date_default_timezone_set('AMERICA/EL_SALVADOR');
 
 
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
@@ -84,6 +84,49 @@
 
                             //echo $sql2;
                             $con->consulta($sql2);
+                            
+                        }
+
+
+                    }
+                    $con->consulta('COMMIT');
+
+                }catch(Exception $e){
+                    $con->consulta('ROLLBACK');
+                    echo 'Error al guardar: ',$e->getMessage(),"\n";
+                }
+
+
+                 $con->consulta('BEGIN');
+                try{
+                   // $con->consulta($sql1);
+                    //Obtengo id del asociado ingresado
+                    $fecaper=DATE('Y-m-d');
+                    $rs = mysql_query("SELECT MAX(asociado_id) AS id FROM tab_asociado");
+                    if ($row = mysql_fetch_row($rs)) {
+                        $id = trim($row[0]);
+                    }
+                    for ($i=1; $i < 5; $i++) { 
+                        if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
+                            $sql3="
+                            INSERT INTO 
+                                tab_cuenta(
+                                    cuenta_monto,
+                                    cuenta_fechaapertura,
+                                    cuenta_estado,
+                                    cuenta_asociadoid,
+                                    cuenta_tipocuentaid
+                                )
+                            VALUES( 5,
+                                '".$fecaper."',
+                                '1',
+                                '".$id."',
+                                '13'
+                            );
+                        ";
+
+                            //echo $sql2;
+                            $con->consulta($sql3);
                             
                         }
 

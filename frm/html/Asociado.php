@@ -27,7 +27,7 @@
 			         <label for="dui">DUI</label>
 				</div>
 				<div class="input-field col s12 m6"> 
-			         <input id="nit" name="nit" type="text"  minlength="10" maxlength="10">
+			         <input id="nit" name="nit" type="text"  minlength="17" maxlength="17">
 			         <label for="nit">NIT</label>
 				</div>    				
 			</div>
