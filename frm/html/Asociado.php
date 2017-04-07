@@ -383,9 +383,6 @@
 	            	acc:'upd'
 	            }
 		}
-
-
-
 		ejecutarajax(datos);
     	return false;
 	}
@@ -428,6 +425,8 @@
             $("#ingmen").val(JSON.stringify(row.asociado_ingresomes).replace(/"/gi,''));
             $("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
+
+
         	$.ajax({
 				type:"post",
 				url: "php/Asociado.php",
@@ -447,15 +446,13 @@
 
 
         	$('label').addClass("active");
+        	$("input").prop('disabled', false);
+        	$("textarea").prop('disabled', false);
         	$('#modal1').modal('open');
         },
 /*TERMINA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .remove': function (e, value, row, index) {
-
-
-
-
 
 
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
@@ -466,20 +463,54 @@
 	            }
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
 
-
-
-
-
-
-
-
-
-
-
 	            ejecutarajax(datos);
             }
-        }
+        },
 /*TERMINA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+/*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO DE CAMPO DE row. SON COMO EN LA VASE DE DATOS*/
+		'click .view': function (e,value,row,index){
+			/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
+            $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+            $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+            $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
+            $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
+            $("#ext").val(JSON.stringify(row.asociado_extendido).replace(/"/gi,''));
+            $("#fecdui").val(JSON.stringify(row.asociado_fechaextendido).replace(/"/gi,''));
+            $("#lugnac").val(JSON.stringify(row.asociado_lugarnacimiento).replace(/"/gi,''));
+            $("#fecnac").val(JSON.stringify(row.asociado_fechanacimiento).replace(/"/gi,''));
+            $("#nac").val(JSON.stringify(row.asociado_nacionalidad).replace(/"/gi,''));
+            $("#est").val(JSON.stringify(row.asociado_estadocivil).replace(/"/gi,''));
+            $("#dep").val(JSON.stringify(row.asociado_departamento).replace(/"/gi,''));
+            $("#mun").val(JSON.stringify(row.asociado_municipio).replace(/"/gi,''));
+            $("#dir").val(JSON.stringify(row.asociado_direccion).replace(/"/gi,''));
+            $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
+            $("#ingmen").val(JSON.stringify(row.asociado_ingresomes).replace(/"/gi,''));
+            //$("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
+            //$("#inst option[value='"+JSON.stringify(row.asociado_institucionsaludid)+"'']").attr("selected", "selected");
+        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
+        	$.ajax({
+				type:"post",
+				url: "php/Asociado.php",
+				data:{acc:'busBen',idasociado: JSON.stringify(row.asociado_id).replace(/"/gi,'')},
+				success:function(data){
+					var obj = $.parseJSON(data);
+					var ii=0;
+					$.each(obj,function(i,item){
+						ii++;						
+						$("#nom"+ii).val(item.beneficiario_nombre);
+						$("#par"+ii).val(item.beneficiario_parentezco);
+						$("#por"+ii).val(item.beneficiario_porcentaje);
+						$("#dir"+ii).val(item.beneficiario_direccion);
+					});
+				}
+			});
+
+
+        	$('label').addClass("active");
+        	$("input").prop('disabled', true);
+        	$("textarea").prop('disabled', true);
+        	$('#modal1').modal('open');
+		}
     };
 /*TERMINA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 function ejecutarajax(datos){
