@@ -447,6 +447,9 @@
 
         	$('label').addClass("active");
         	$("input").prop('disabled', false);
+        	$('select').material_select('destroy');
+        	$('select').prop("disabled",false);
+        	$('select').material_select();
         	$("textarea").prop('disabled', false);
         	$('#modal1').modal('open');
         },
@@ -485,8 +488,7 @@
             $("#dir").val(JSON.stringify(row.asociado_direccion).replace(/"/gi,''));
             $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
             $("#ingmen").val(JSON.stringify(row.asociado_ingresomes).replace(/"/gi,''));
-            //$("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
-            //$("#inst option[value='"+JSON.stringify(row.asociado_institucionsaludid)+"'']").attr("selected", "selected");
+            $("#inst").val(JSON.stringify(row.asociado_institucionsaludid).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$.ajax({
 				type:"post",
@@ -508,6 +510,9 @@
 
         	$('label').addClass("active");
         	$("input").prop('disabled', true);
+        	$('select').material_select('destroy');
+        	$('select').prop("disabled",true);
+        	$('select').material_select();
         	$("textarea").prop('disabled', true);
         	$('#modal1').modal('open');
 		}
