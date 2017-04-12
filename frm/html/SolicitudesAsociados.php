@@ -13,7 +13,7 @@
 
 
 
-			<h5>Nuevo Asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
+			<h5>Aprobación de asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12"> 

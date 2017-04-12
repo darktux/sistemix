@@ -31,10 +31,8 @@
             </div>
             <ul id="dropdown-per1" class="dropdown-content">
                 <li><a id="opc-nper1">Gestionar asociado</a></li>
-                <li><a id="opc-aper1">Actualizar datos</a></li>
-                <li><a id="opc-bper1">Buscar asociados</a></li>
                 <li class="divider"></li>
-                <li><a href="#!">Solicitudes pendientes</a></li>
+                <li><a id="opc-spen">Solicitudes pendientes</a></li>
             </ul>
             <ul id="dropdown-cue1" class="dropdown-content">
                 <li><a id="opc-ncue1">Gestionar cuenta</a></li>
@@ -124,6 +122,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/materialize.js"></script>
         <script src="../js/init.js"></script>
+        <script src="../js/jquery.maskedinput.js"></script>
         <script type="text/javascript">
             $( document ).ready()
                 $(function() {
@@ -216,6 +215,9 @@
             });
             $("#opc-abo2").click(function(){
                 $("#formularios").load('html/about.php');
+            });
+            $("#opc-spen").click(function(){
+                $("#formularios").load('html/SolicitudesAsociados.php');
             });
             $("#logout2").click(function(){
                 window.location.href = "../";
