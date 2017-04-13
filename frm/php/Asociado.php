@@ -243,8 +243,8 @@
                 break;
         case 'getjsonselect':
                 $con->consulta("SELECT 
-                        tipocredito_id,
-                        tipocredito_nombre 
+                        asociado_id,
+                        asociado_nombre 
                     FROM 
                         ".$nombretabla.";
                 ");
