@@ -237,7 +237,7 @@
 			            <th data-field="asociado_dui" data-align="center">DUI</th>
 			            <th data-field="asociado_nit" data-align="center">NIT</th>
 			            <th data-field="asociado_municipio" data-align="center">Municipio</th>
-			            <th data-field="asociado_profesionoficio" data-align="center">Profesión u Oficio</th>
+			            <th data-field="asociado_estado" data-align="center">Estado</th>
 			            <!-- TERMINAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->
 
 

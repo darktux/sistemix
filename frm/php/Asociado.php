@@ -241,6 +241,16 @@
                 }
                 echo json_encode($salida);
                 break;
+        case 'getjsontabla2':
+                $con->consulta("SELECT asociado_id,asociado_nombre,asociado_dui,asociado_nit,asociado_municipio,asociado_estado FROM ".$nombretabla." WHERE asociado_estado='En espera';
+                ");
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
         case 'getjsonselect':
                 $con->consulta("SELECT 
                         asociado_id,
