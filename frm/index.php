@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+l<!DOCTYPE html>
 <html lang="es">
     <head>
         <title>CO-AGESALUD</title>
@@ -41,12 +41,9 @@
                 <li><a id="opc-tcue1">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cre1" class="dropdown-content">
-
                 <li><a id="opc-ncre2">Gestionar crédito</a></li>
-
                 <li><a id="opc-scre2">Solicitudes de crédito</a></li>
                 <li><a id="opc-ncre2">Nuevo crédito</a></li>
-
                 <li><a id="opc-mcre2">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a id="opc-tcre2">Tipo de crédito</a></li>
@@ -125,9 +122,7 @@
         <script src="../js/jquery.maskedinput.js"></script>
         <script type="text/javascript">
             $( document ).ready()
-                $(function() {
-                    $("#formularios").load('html/Inicio.php');
-                }
+                $(function() {$("#formularios").load('html/Inicio.php');}
             );
             $("#opc-nper1").click(function(){
                 $("#formularios").load('html/Asociado.php');
