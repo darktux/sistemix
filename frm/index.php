@@ -12,7 +12,7 @@ l<!DOCTYPE html>
     <body>
         <nav class="teal" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD</a>
+                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD de R.L.</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-per1">Asociado<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-cue1">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
