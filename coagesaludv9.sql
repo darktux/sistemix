@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 19-03-2017 a las 05:52:57
+-- Tiempo de generación: 15-04-2017 a las 05:18:25
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -46,8 +46,22 @@ CREATE TABLE `tab_asociado` (
   `asociado_ingresomes` float NOT NULL,
   `asociado_estado` varchar(100) NOT NULL,
   `asociado_institucionsaludid` int(11) NOT NULL,
-  `asociado_sucursalid` int(11) NOT NULL
+  `asociado_sucursalid` int(11) NOT NULL,
+  `asociado_fechasesion` date NOT NULL,
+  `asociado_numacta` int(11) NOT NULL,
+  `asociado_numpunto` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_asociado`
+--
+
+INSERT INTO `tab_asociado` (`asociado_id`, `asociado_nombre`, `asociado_dui`, `asociado_nit`, `asociado_extendido`, `asociado_fechaextendido`, `asociado_lugarnacimiento`, `asociado_fechanacimiento`, `asociado_nacionalidad`, `asociado_estadocivil`, `asociado_departamento`, `asociado_municipio`, `asociado_direccion`, `asociado_profesionoficio`, `asociado_ingresomes`, `asociado_estado`, `asociado_institucionsaludid`, `asociado_sucursalid`, `asociado_fechasesion`, `asociado_numacta`, `asociado_numpunto`) VALUES
+(7, 'Emma Watson', '04123345-6', '2324-121212-111-1', '', '1999-04-15', '', '1999-01-01', 'Savadoreño/a', 'Soltero/a', '0', 'La Libertad', '', '', 0, 'Aprobado', 1, 1, '2017-04-14', 1, '1a'),
+(9, 'hola mundo', '1111111111', '22222222222222222', '', '1999-04-11', '', '1999-04-11', 'Savadoreño/a', 'Viudo/a', '0', 'Cojutepeque', '', '', 0, 'En espera', 1, 1, '0000-00-00', 0, ''),
+(10, 'Elisha Curthberth', '1932393232', '12392092302309239', 'sdaksda', '1999-01-06', 'asdas', '1999-04-06', 'Savadoreño/a', 'Soltero/a', '0', 'Monte San Juan', 'ahi', 'bonita', 1923, 'En espera', 1, 1, '0000-00-00', 0, ''),
+(11, 'Hermione', '213e234234', '234234e234e234234', 'sdflsdlwd', '1999-04-02', 'msdlfnmsklfcml', '1999-04-04', 'Savadoreño/a', 'Soltero/a', '0', 'El Rosario', '', '', 2000, 'En espera', 1, 1, '0000-00-00', 0, ''),
+(13, 'ueueueueue', '8798789898', '23423423423423423', '', '0000-00-00', '', '0000-00-00', 'Savadoreño/a', 'Soltero/a', '0', 'Cojutepeque', '', '', 0, 'En espera', 1, 1, '0000-00-00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -62,6 +76,17 @@ CREATE TABLE `tab_beneficiario` (
   `beneficiario_porcentaje` float NOT NULL,
   `beneficiario_asociadoid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_beneficiario`
+--
+
+INSERT INTO `tab_beneficiario` (`beneficiario_nombre`, `beneficiario_direccion`, `beneficiario_parentezco`, `beneficiario_porcentaje`, `beneficiario_asociadoid`) VALUES
+('jajaja', 'jj tt e ', 'huhu', 40, 9),
+('uiioooiu', 'kdkdk', 'jdjd', 60, 9),
+('Angel Hernandez', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo', 'Novio', 100, 10),
+('uiioooiu', 'kdkdk', 'jdjd', 60, 10),
+('Angel Hernandez', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo', 'Novio', 100, 7);
 
 -- --------------------------------------------------------
 
@@ -136,12 +161,32 @@ CREATE TABLE `tab_credito_movimiento` (
 --
 
 CREATE TABLE `tab_cuenta` (
-  `cuenta_id` int(11) NOT NULL,
+  `cuenta_id` varchar(11) NOT NULL,
   `cuenta_monto` float NOT NULL,
   `cuenta_fechaapertura` date NOT NULL,
   `cuenta_estado` varchar(50) NOT NULL,
   `cuenta_asociadoid` int(11) NOT NULL,
   `cuenta_tipocuentaid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_cuenta`
+--
+
+INSERT INTO `tab_cuenta` (`cuenta_id`, `cuenta_monto`, `cuenta_fechaapertura`, `cuenta_estado`, `cuenta_asociadoid`, `cuenta_tipocuentaid`) VALUES
+('1406568701', 300, '2017-04-13', 'Activada', 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tab_cuenta_autorizados`
+--
+
+CREATE TABLE `tab_cuenta_autorizados` (
+  `cuentaautorizados_cuentaid` varchar(11) NOT NULL,
+  `cuentaautorizados_nombre` varchar(200) NOT NULL,
+  `cuentaautorizados_dui` varchar(10) NOT NULL,
+  `cuentaautorizados_nit` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -158,7 +203,7 @@ CREATE TABLE `tab_cuenta_movimiento` (
   `cuentamovimiento_abono` float NOT NULL,
   `cuentamovimiento_saldo` float NOT NULL,
   `cuentamovimiento_plazo` smallint(6) NOT NULL,
-  `cuentamovimiento_cuentaid` int(11) NOT NULL
+  `cuentamovimiento_cuentaid` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -172,6 +217,13 @@ CREATE TABLE `tab_institucion_salud` (
   `institucionsalud_nombre` text NOT NULL,
   `institucionsalud_direccion` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_institucion_salud`
+--
+
+INSERT INTO `tab_institucion_salud` (`institucionsalud_id`, `institucionsalud_nombre`, `institucionsalud_direccion`) VALUES
+(1, 'Hospital 1 de Mayo', 'Lorem ipsum dolor sit amet');
 
 -- --------------------------------------------------------
 
@@ -231,6 +283,13 @@ CREATE TABLE `tab_sucursal` (
   `sucursal_eslogan` text NOT NULL,
   `sucursal_logo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_sucursal`
+--
+
+INSERT INTO `tab_sucursal` (`sucursal_id`, `sucursal_nombre`, `sucursal_nit`, `sucursal_razonsocial`, `sucursal_eslogan`, `sucursal_logo`) VALUES
+(1, 'CO-AGESALUD Casa Matriz', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -354,6 +413,12 @@ ALTER TABLE `tab_cuenta`
   ADD KEY `cuenta_asociadoid` (`cuenta_asociadoid`);
 
 --
+-- Indices de la tabla `tab_cuenta_autorizados`
+--
+ALTER TABLE `tab_cuenta_autorizados`
+  ADD KEY `cuentaautorizados_cuentaid` (`cuentaautorizados_cuentaid`);
+
+--
 -- Indices de la tabla `tab_cuenta_movimiento`
 --
 ALTER TABLE `tab_cuenta_movimiento`
@@ -399,7 +464,7 @@ ALTER TABLE `tab_tipo_cuenta`
 -- AUTO_INCREMENT de la tabla `tab_asociado`
 --
 ALTER TABLE `tab_asociado`
-  MODIFY `asociado_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `asociado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
@@ -421,11 +486,6 @@ ALTER TABLE `tab_credito`
 ALTER TABLE `tab_credito_movimiento`
   MODIFY `creditomovimiento_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de la tabla `tab_cuenta`
---
-ALTER TABLE `tab_cuenta`
-  MODIFY `cuenta_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT de la tabla `tab_cuenta_movimiento`
 --
 ALTER TABLE `tab_cuenta_movimiento`
@@ -434,7 +494,7 @@ ALTER TABLE `tab_cuenta_movimiento`
 -- AUTO_INCREMENT de la tabla `tab_institucion_salud`
 --
 ALTER TABLE `tab_institucion_salud`
-  MODIFY `institucionsalud_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `institucionsalud_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tab_solicitud_credito`
 --
@@ -444,12 +504,12 @@ ALTER TABLE `tab_solicitud_credito`
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
 ALTER TABLE `tab_sucursal`
-  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --
 ALTER TABLE `tab_tipo_credito`
-  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_cuenta`
 --
@@ -470,7 +530,7 @@ ALTER TABLE `tab_asociado`
 -- Filtros para la tabla `tab_beneficiario`
 --
 ALTER TABLE `tab_beneficiario`
-  ADD CONSTRAINT `tab_beneficiario_ibfk_1` FOREIGN KEY (`beneficiario_asociadoid`) REFERENCES `tab_asociado` (`asociado_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `tab_beneficiario_ibfk_1` FOREIGN KEY (`beneficiario_asociadoid`) REFERENCES `tab_asociado` (`asociado_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tab_capital`
@@ -503,6 +563,12 @@ ALTER TABLE `tab_credito_movimiento`
 ALTER TABLE `tab_cuenta`
   ADD CONSTRAINT `tab_cuenta_ibfk_1` FOREIGN KEY (`cuenta_asociadoid`) REFERENCES `tab_asociado` (`asociado_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `tab_cuenta_ibfk_2` FOREIGN KEY (`cuenta_tipocuentaid`) REFERENCES `tab_tipo_cuenta` (`tipocuenta_id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tab_cuenta_autorizados`
+--
+ALTER TABLE `tab_cuenta_autorizados`
+  ADD CONSTRAINT `tab_cuenta_autorizados_ibfk_1` FOREIGN KEY (`cuentaautorizados_cuentaid`) REFERENCES `tab_cuenta` (`cuenta_id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tab_cuenta_movimiento`

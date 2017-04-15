@@ -83,7 +83,7 @@
 			</table>
 		</div>
 		<script src="../js/bootstrap-table.js"></script>
-		<script src="../js/jquery.maskedinput.js"></script>
+		<!--<script src="../js/jquery.maskedinput.js"></script>-->
 	</div>
 
 
@@ -101,7 +101,7 @@
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -6570 //dias equivalentes a 18 years restados for today
+			//max: -6570 //dias equivalentes a 18 years restados for today
 		});
    		$('select').material_select();
   		//$("#dui").mask("99999999-9"); // Formato del DUI
@@ -142,39 +142,7 @@
 	function submit1(){
 
 		if($("#idid").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
-	            datos = {
-	            	nom:$("#nom").val(),
-	            	dui:$("#dui").val(),
-	            	nit:$("#nit").val(),
-	            	ext:$("#ext").val(),
-	            	fecdui:$("#fecdui").val(),
-	            	lugnac:$("#lugnac").val(),
-	            	fecnac:$("#fecnac").val(),
-	            	nac:$("#nac").val(),
-	            	est:$("#est").val(),
-	            	dep:$("#dep").val(),
-	            	mun:$("#mun").val(),
-	            	dir:$("#dir").val(),
-	            	prouof:$("#prouof").val(),
-	            	ingmen:$("#ingmen").val(),
-	            	status:'En espera',
-	            	inst:$("#inst").val(),
-	            	nom1:$("#nom1").val(),
-	            	par1:$("#par1").val(),
-	            	por1:$("#por1").val(),
-	            	dir1:$("#dir1").val(),
-	            	nom2:$("#nom2").val(),
-	            	par2:$("#par2").val(),
-	            	por2:$("#por2").val(),
-	            	dir2:$("#dir2").val(),
-	            	nom3:$("#nom3").val(),
-	            	par3:$("#par3").val(),
-	            	por3:$("#por3").val(),
-	            	dir3:$("#dir3").val(),
-	            	nom4:$("#nom4").val(),
-	            	par4:$("#par4").val(),
-	            	por4:$("#por4").val(),
-	            	dir4:$("#dir4").val(),
+	            datos = {	
 	            	acc:'set'
 	            }
 		}

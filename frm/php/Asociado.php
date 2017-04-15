@@ -216,7 +216,17 @@
     		break;
 
         case 'upd2':
-            $sql="";
+            $sql="UPDATE 
+                ".$nombretabla." SET 
+                    asociado_fechasesion='".$_POST['fecses']."',
+                    asociado_numacta='".$_POST['nacta']."',
+                    asociado_numpunto='".$_POST['npunto']."',
+                    asociado_estado='Aprobado'
+                WHERE 
+                    asociado_id=".$_POST['id'].";
+            ";
+            $con->consulta($sql);
+            if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
             break;
         
         case 'del':
