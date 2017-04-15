@@ -181,38 +181,10 @@
 		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
 	            datos = {
 	            	id:$("#idid").val(),
-	            	nom:$("#nom").val(),
-	            	dui:$("#dui").val(),
-	            	nit:$("#nit").val(),
-	            	ext:$("#ext").val(),
-	            	fecdui:$("#fecdui").val(),
-	            	lugnac:$("#lugnac").val(),
-	            	fecnac:$("#fecnac").val(),
-	            	nac:$("#nac").val(),
-	            	est:$("#est").val(),
-	            	dep:$("#dep").val(),
-	            	mun:$("#mun").val(),
-	            	dir:$("#dir").val(),
-	            	prouof:$("#prouof").val(),
-	            	ingmen:$("#ingmen").val(),
-	            	inst:$("#inst").val(),
-	            	nom1:$("#nom1").val(),
-	            	par1:$("#par1").val(),
-	            	por1:$("#por1").val(),
-	            	dir1:$("#dir1").val(),
-	            	nom2:$("#nom2").val(),
-	            	par2:$("#par2").val(),
-	            	por2:$("#por2").val(),
-	            	dir2:$("#dir2").val(),
-	            	nom3:$("#nom3").val(),
-	            	par3:$("#par3").val(),
-	            	por3:$("#por3").val(),
-	            	dir3:$("#dir3").val(),
-	            	nom4:$("#nom4").val(),
-	            	par4:$("#par4").val(),
-	            	por4:$("#por4").val(),
-	            	dir4:$("#dir4").val(),
-	            	acc:'upd'
+	            	fecses:$("#fecses").val(),
+	            	nacta:$("#nacta").val(),
+	            	npunto:$("#npunto").val(),
+	            	acc:'upd2'
 	            }
 		}
 		ejecutarajax(datos);

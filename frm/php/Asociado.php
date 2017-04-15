@@ -214,6 +214,10 @@
 
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
+
+        case 'upd2':
+            $sql="";
+            break;
         
         case 'del':
 
