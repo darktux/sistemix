@@ -209,7 +209,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="window.open('html/PDFSolicitudAsociado.php?id='+id,'_blank');">Cancelar</button>
 		</div>
 	</form>
 </div>
@@ -531,10 +531,6 @@ function ejecutarajax(datos){
  
 
 
-
-
-
-
         data:datos,
         success:function(responseText){
         	if(/Registro/.test(responseText)){
@@ -544,102 +540,15 @@ function ejecutarajax(datos){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla',pageList: [5,10,25,50,100]});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 
         		document.getElementById("buscar1").focus();
 				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+
+				window.open('PDFSolicitudAsociado.php?id='+id,'_blank');
         	}
         	else{
         		alert(responseText);
