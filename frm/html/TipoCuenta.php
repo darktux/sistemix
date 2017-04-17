@@ -12,7 +12,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="number" name="cor" id="cor" step="1" min="01" max="99"  value="01" required>
+					<input type="number" name="cor" id="cor" step="1" min="1" max="99"  value="01" required>
 					<label for="cor">Correlativo</label>
 				</div>
 				<div class="input-field col s12">
@@ -214,16 +214,11 @@
 	}
 	/*FINALIZA EL BLOQUE DE LA FUNCION AJAX*/
 	$("#cor").change(function() {
-		switch($('#cor').val()){
-			case '1': $('#cor').val('01'); break;
-			case '2': $('#cor').val('02'); break;
-			case '3': $('#cor').val('03'); break;
-			case '4': $('#cor').val('04'); break;
-			case '5': $('#cor').val('05'); break;
-			case '6': $('#cor').val('06'); break;
-			case '7': $('#cor').val('07'); break;
-			case '8': $('#cor').val('08'); break;
-			case '9': $('#cor').val('09'); break;
+		var a = parseInt($('#cor').val());
+		if(a<10){ 
+			$('#cor').val('0'+a); 
+		}else{
+			$('#cor').val(a);
 		}
 	});
 </script>
