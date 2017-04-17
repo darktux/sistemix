@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-04-2017 a las 00:52:59
+-- Tiempo de generación: 17-04-2017 a las 18:46:07
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -100,11 +100,19 @@ CREATE TABLE `tab_capital` (
   `capital_anio` smallint(6) NOT NULL,
   `capital_fecha` date NOT NULL,
   `capital_concepto` text NOT NULL,
-  `capital_cargo` float NOT NULL,
-  `capital_abono` float NOT NULL,
+  `capital_deposito` float NOT NULL,
+  `capital_retiro` float NOT NULL,
   `capital_saldo` float NOT NULL,
   `capital_sucursalid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_capital`
+--
+
+INSERT INTO `tab_capital` (`capital_id`, `capital_anio`, `capital_fecha`, `capital_concepto`, `capital_deposito`, `capital_retiro`, `capital_saldo`, `capital_sucursalid`) VALUES
+(1, 2017, '2017-04-17', 'uno', 1000, 0, 1000, 1),
+(2, 2017, '2017-04-17', 'primera', 4578.98, 0, 5578.98, 1);
 
 -- --------------------------------------------------------
 
@@ -147,8 +155,8 @@ CREATE TABLE `tab_credito` (
 CREATE TABLE `tab_credito_movimiento` (
   `creditomovimiento_id` int(11) NOT NULL,
   `creditomovimiento_fecha` date NOT NULL,
-  `creditomovimiento_cargo` float NOT NULL,
-  `creditomovimiento_abono` float NOT NULL,
+  `creditomovimiento_deposito` float NOT NULL,
+  `creditomovimiento_retiro` float NOT NULL,
   `creditomovimiento_interes` float NOT NULL,
   `creditomovimiento_capital` float NOT NULL,
   `creditomovimiento_saldo` float NOT NULL,
@@ -175,8 +183,9 @@ CREATE TABLE `tab_cuenta` (
 --
 
 INSERT INTO `tab_cuenta` (`cuenta_id`, `cuenta_monto`, `cuenta_fechaapertura`, `cuenta_estado`, `cuenta_asociadoid`, `cuenta_tipocuentaid`) VALUES
-('01-01-xxxx', 334, '2017-04-16', 'Activada', 7, 4),
-('1406568701', 300, '2017-04-13', 'Activada', 7, 1);
+('01-23432342', 234, '2017-04-17', 'Activada', 7, 13),
+('01-4576743', 45, '2017-04-17', 'Activada', 7, 13),
+('01-67678678', 445, '2017-04-17', 'Activada', 9, 14);
 
 -- --------------------------------------------------------
 
@@ -201,8 +210,8 @@ CREATE TABLE `tab_cuenta_movimiento` (
   `cuentamovimiento_id` int(11) NOT NULL,
   `cuentamovimiento_concepto` text NOT NULL,
   `cuentamovimiento_fecha` date NOT NULL,
-  `cuentamovimiento_cargo` float NOT NULL,
-  `cuentamovimiento_abono` float NOT NULL,
+  `cuentamovimiento_deposito` float NOT NULL,
+  `cuentamovimiento_retiro` float NOT NULL,
   `cuentamovimiento_saldo` float NOT NULL,
   `cuentamovimiento_plazo` smallint(6) NOT NULL,
   `cuentamovimiento_cuentaid` varchar(11) NOT NULL
@@ -282,22 +291,21 @@ CREATE TABLE `tab_sucursal` (
   `sucursal_nombre` varchar(200) NOT NULL,
   `sucursal_nit` varchar(20) NOT NULL,
   `sucursal_razonsocial` text NOT NULL,
-  `sucursal_eslogan` text NOT NULL,
-  `sucursal_logo` text NOT NULL,
   `sucursal_direccion` text NOT NULL,
   `sucursal_telefono` varchar(9) NOT NULL,
-  `sucursal_cuotaingreso` float NOT NULL,
   `sucursal_mision` text NOT NULL,
   `sucursal_vision` text NOT NULL,
-  `sucursal_valores` int(11) NOT NULL
+  `sucursal_valores` text NOT NULL,
+  `sucursal_eslogan` text NOT NULL,
+  `sucursal_logo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tab_sucursal`
 --
 
-INSERT INTO `tab_sucursal` (`sucursal_id`, `sucursal_nombre`, `sucursal_nit`, `sucursal_razonsocial`, `sucursal_eslogan`, `sucursal_logo`, `sucursal_direccion`, `sucursal_telefono`, `sucursal_cuotaingreso`, `sucursal_mision`, `sucursal_vision`, `sucursal_valores`) VALUES
-(1, 'CO-AGESALUD Casa Matriz', '', '', '', '', '', '', 0, '', '', 0);
+INSERT INTO `tab_sucursal` (`sucursal_id`, `sucursal_nombre`, `sucursal_nit`, `sucursal_razonsocial`, `sucursal_direccion`, `sucursal_telefono`, `sucursal_mision`, `sucursal_vision`, `sucursal_valores`, `sucursal_eslogan`, `sucursal_logo`) VALUES
+(1, 'CO-AGESALUD Casa Matriz', '1234-123456-123-1', 'Servicios financieros', 'Col, El jute, Pj, canales, #32, Cojute, Cuscatlan', '1234-5678', 'somos una empresa', 'Ser la mejor empresa', 'Humildad\r\nHonestidad\r\nServicio', 'ahorra con nosotros', '../../img/logos/logo1.png');
 
 -- --------------------------------------------------------
 
@@ -315,6 +323,15 @@ CREATE TABLE `tab_tipo_credito` (
   `tipocredito_montominimo` float NOT NULL,
   `tipocredito_montomaximo` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_tipo_credito`
+--
+
+INSERT INTO `tab_tipo_credito` (`tipocredito_id`, `tipocredito_correlativo`, `tipocredito_nombre`, `tipocredito_interes`, `tipocredito_interesxmora`, `tipocredito_plazomaximo`, `tipocredito_montominimo`, `tipocredito_montomaximo`) VALUES
+(1, '01', 'UNO', 10, 10, 12, 500, 1000),
+(2, '02', 'DOS', 8, 10, 24, 1000, 5000),
+(3, '03', 'TRES', 5, 10, 48, 5000, 10000);
 
 -- --------------------------------------------------------
 
@@ -337,8 +354,10 @@ CREATE TABLE `tab_tipo_cuenta` (
 --
 
 INSERT INTO `tab_tipo_cuenta` (`tipocuenta_id`, `tipocuenta_correlativo`, `tipocuenta_nombre`, `tipocuenta_interes`, `tipocuenta_montominimo`, `tipocuenta_cobromontominimo`, `tipocuenta_montoapertura`) VALUES
-(1, '1', 'uno', 4, 4, 4, 4),
-(4, '2', 'tres', 9, 9, 9, 9);
+(13, '01', 'APORTACIONES', 6, 10, 1, 10),
+(14, '02', 'AHORRO NAVIDEÑO', 6, 10, 1, 10),
+(17, '03', 'AHORRO A LA VISTA', 6, 10, 1, 100),
+(18, '04', 'CO-AGESALITO', 6, 10, 1, 25);
 
 --
 -- Índices para tablas volcadas
@@ -392,8 +411,8 @@ ALTER TABLE `tab_credito_movimiento`
 --
 ALTER TABLE `tab_cuenta`
   ADD PRIMARY KEY (`cuenta_id`),
-  ADD UNIQUE KEY `cuenta_tipocuentaid` (`cuenta_tipocuentaid`),
-  ADD KEY `cuenta_asociadoid` (`cuenta_asociadoid`);
+  ADD KEY `cuenta_asociadoid` (`cuenta_asociadoid`),
+  ADD KEY `cuenta_tipocuentaid` (`cuenta_tipocuentaid`) USING BTREE;
 
 --
 -- Indices de la tabla `tab_cuenta_autorizados`
@@ -454,7 +473,7 @@ ALTER TABLE `tab_asociado`
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
 ALTER TABLE `tab_capital`
-  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito`
 --
@@ -484,17 +503,17 @@ ALTER TABLE `tab_solicitud_credito`
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
 ALTER TABLE `tab_sucursal`
-  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --
 ALTER TABLE `tab_tipo_credito`
-  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_cuenta`
 --
 ALTER TABLE `tab_tipo_cuenta`
-  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Restricciones para tablas volcadas
 --

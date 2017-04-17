@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-04-2017 a las 00:53:13
+-- Tiempo de generación: 17-04-2017 a las 18:46:22
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -78,8 +78,8 @@ CREATE TABLE `tab_capital` (
   `capital_anio` smallint(6) NOT NULL,
   `capital_fecha` date NOT NULL,
   `capital_concepto` text NOT NULL,
-  `capital_cargo` float NOT NULL,
-  `capital_abono` float NOT NULL,
+  `capital_deposito` float NOT NULL,
+  `capital_retiro` float NOT NULL,
   `capital_saldo` float NOT NULL,
   `capital_sucursalid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -125,8 +125,8 @@ CREATE TABLE `tab_credito` (
 CREATE TABLE `tab_credito_movimiento` (
   `creditomovimiento_id` int(11) NOT NULL,
   `creditomovimiento_fecha` date NOT NULL,
-  `creditomovimiento_cargo` float NOT NULL,
-  `creditomovimiento_abono` float NOT NULL,
+  `creditomovimiento_deposito` float NOT NULL,
+  `creditomovimiento_retiro` float NOT NULL,
   `creditomovimiento_interes` float NOT NULL,
   `creditomovimiento_capital` float NOT NULL,
   `creditomovimiento_saldo` float NOT NULL,
@@ -171,8 +171,8 @@ CREATE TABLE `tab_cuenta_movimiento` (
   `cuentamovimiento_id` int(11) NOT NULL,
   `cuentamovimiento_concepto` text NOT NULL,
   `cuentamovimiento_fecha` date NOT NULL,
-  `cuentamovimiento_cargo` float NOT NULL,
-  `cuentamovimiento_abono` float NOT NULL,
+  `cuentamovimiento_deposito` float NOT NULL,
+  `cuentamovimiento_retiro` float NOT NULL,
   `cuentamovimiento_saldo` float NOT NULL,
   `cuentamovimiento_plazo` smallint(6) NOT NULL,
   `cuentamovimiento_cuentaid` varchar(11) NOT NULL
@@ -245,14 +245,13 @@ CREATE TABLE `tab_sucursal` (
   `sucursal_nombre` varchar(200) NOT NULL,
   `sucursal_nit` varchar(20) NOT NULL,
   `sucursal_razonsocial` text NOT NULL,
-  `sucursal_eslogan` text NOT NULL,
-  `sucursal_logo` text NOT NULL,
   `sucursal_direccion` text NOT NULL,
   `sucursal_telefono` varchar(9) NOT NULL,
-  `sucursal_cuotaingreso` float NOT NULL,
   `sucursal_mision` text NOT NULL,
   `sucursal_vision` text NOT NULL,
-  `sucursal_valores` int(11) NOT NULL
+  `sucursal_valores` text NOT NULL,
+  `sucursal_eslogan` text NOT NULL,
+  `sucursal_logo` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -340,8 +339,8 @@ ALTER TABLE `tab_credito_movimiento`
 --
 ALTER TABLE `tab_cuenta`
   ADD PRIMARY KEY (`cuenta_id`),
-  ADD UNIQUE KEY `cuenta_tipocuentaid` (`cuenta_tipocuentaid`),
-  ADD KEY `cuenta_asociadoid` (`cuenta_asociadoid`);
+  ADD KEY `cuenta_asociadoid` (`cuenta_asociadoid`),
+  ADD KEY `cuenta_tipocuentaid` (`cuenta_tipocuentaid`) USING BTREE;
 
 --
 -- Indices de la tabla `tab_cuenta_autorizados`
@@ -402,7 +401,7 @@ ALTER TABLE `tab_asociado`
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
 ALTER TABLE `tab_capital`
-  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito`
 --
@@ -432,17 +431,17 @@ ALTER TABLE `tab_solicitud_credito`
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
 ALTER TABLE `tab_sucursal`
-  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --
 ALTER TABLE `tab_tipo_credito`
-  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `tipocredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_cuenta`
 --
 ALTER TABLE `tab_tipo_cuenta`
-  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- Restricciones para tablas volcadas
 --

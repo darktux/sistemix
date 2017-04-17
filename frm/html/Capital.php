@@ -28,15 +28,15 @@
 					<label for="sal0" class="active">Saldo anterior ($)</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="number" name="car" id="car" value="0.00" min="0.00" step="0.01" required>
-					<label for="car" class="active actsal">cargo ($)</label>
+					<input type="number" name="dep" id="dep" class="actsal" value="0.00" min="0.00" step="0.01" required>
+					<label for="dep" class="active">Deposito ($)</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="number" name="abo" id="abo" value="0.00" min="0.00" step="0.01" required>
-					<label for="abo" class="active actsal">Abono ($)</label>
+					<input type="number" name="ret" id="ret" class="actsal" value="0.00" min="0.00" step="0.01" required>
+					<label for="ret" class="active">Retiro ($)</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="number" name="sal" id="sal" value="1000" readonly>
+					<input type="text" name="sal" id="sal" value="1000" readonly>
 					<label for="sal" class="active">Saldo ($)</label>
 				</div>
 			</div>
@@ -64,8 +64,8 @@
 			            <th data-field="capital_anio" data-align="center">Año</th>
 			            <th data-field="capital_fecha" data-align="center">Fecha</th>
 			            <th data-field="capital_concepto" data-align="center">Concepto</th>
-			            <th data-field="capital_cargo" data-align="center">Cargo ($)</th>
-			            <th data-field="capital_abono" data-align="center">Abono ($)</th>
+			            <th data-field="capital_deposito" data-align="center">Deposito ($)</th>
+			            <th data-field="capital_retiro" data-align="center">Retiro ($)</th>
 			            <th data-field="capital_saldo" data-align="center">Saldo ($)</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ****************************************************************************************-->
 				    </tr>
@@ -95,7 +95,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("ani").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
+				document.getElementById("con").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -109,6 +109,18 @@
 		/*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
+	/*INICIA FUNCION GETSALDO PARA ACTUALIZAR SALDO DE CAPITAL */
+	function getsaldo(){
+		$.ajax({
+	        type:"post",
+	        url: "php/Capital.php",
+	        data:{acc:'getSaldoCapital'},
+	        success:function(responseText){
+	        	$("#sal0").val(responseText);
+	        }
+	    });
+	}
+	/*FINALIZA FUNCION GETSALDO PARA ACTUALIZAR SALDO DE CAPITAL */
 	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	$("#formulario").on(
 		"submit", 
@@ -172,8 +184,8 @@
             $("#ani").val(JSON.stringify(row.capital_anio).replace(/"/gi,''));
             $("#fec").val(JSON.stringify(row.capital_fec).replace(/"/gi,''));
             $("#con").val(JSON.stringify(row.capital_concepto).replace(/"/gi,''));
-            $("#car").val(JSON.stringify(row.capital_cargo).replace(/"/gi,''));
-            $("#abo").val(JSON.stringify(row.capital_abono).replace(/"/gi,''));
+            $("#dep").val(JSON.stringify(row.capital_deposito).replace(/"/gi,''));
+            $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
             $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
         	$('label').addClass("active");
@@ -224,11 +236,10 @@
 	/*FINALIZA EL BLOQUE DE LA FUNCION AJAX*/
 	/*INICIA EL BLOQUE DE LOS EVENTOS*/
 	$(".actsal").blur(function() {
-		c = $("#car").val();
-		a = $("#abo").val();
-		s0= $("#sal0").val();
-		$("#sal").val(s0+c-a);
-
+		var c = parseFloat($("#dep").val());
+		var a = parseFloat($("#ret").val());
+		var s0= parseFloat($("#sal0").val());
+		$("#sal").val( parseFloat(''+(s0+c-a)).toFixed(2) );
 	});
 	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 </script>

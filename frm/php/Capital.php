@@ -73,6 +73,25 @@
             }
             echo json_encode($salida);
             break;
+
+        case 'getSaldoCapital':
+            $con->consulta("
+                SELECT 
+                    capital_saldo 
+                FROM 
+                    ".$nombretabla.";
+                WHERE 
+
+            ");
+            $i=0;$salida=array();
+            if ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                echo $fila[0];
+            }
+            break;
+
+
+
+            
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
