@@ -1,7 +1,7 @@
 <div class="fixed-action-btn">
 	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal2" data-position="top" data-tooltip="Nuevo Asociado" onclick="prepare();"><i class="large material-icons">add</i></a>
 </div>
-
+<!--MODAL NUEVO ASOCIADO-->
 <div id="modal2" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario2" onsubmit="return submit2();">
 		<input id="idid2" type="hidden" value="">
@@ -134,7 +134,7 @@
 			          	<label for="par1">Parentesco</label>
     				</div>
     				<div class="input-field col s12 m2"> 
-			          	<input id="por1" name="por1" type="number" class="validate"  autofocus="true">
+			          	<input id="por1" name="por1" type="number" min="0" max="100" class="validate"  autofocus="true">
 			          	<label for="por1">%</label>
     				</div>
     				<div class="input-field col s12">
@@ -154,7 +154,7 @@
 			          	<label for="par2">Parentesco</label>
     				</div>
     				<div class="input-field col s12 m2"> 
-			          	<input id="por2" name="por2" type="number" class="validate"  autofocus="true">
+			          	<input id="por2" name="por2" type="number" min="0" max="100" class="validate"  autofocus="true">
 			          	<label for="por2">%</label>
     				</div>
     				<div class="input-field col s12">
@@ -174,7 +174,7 @@
 			          	<label for="par3">Parentesco</label>
     				</div>
     				<div class="input-field col s12 m2"> 
-			          	<input id="por3" name="por3" type="number" class="validate"  autofocus="true">
+			          	<input id="por3" name="por3" type="number" min="0" max="100" class="validate"  autofocus="true">
 			          	<label for="por3">%</label>
     				</div>
     				<div class="input-field col s12">
@@ -194,7 +194,7 @@
 			          	<label for="par4">Parentesco</label>
     				</div>
     				<div class="input-field col s12 m2"> 
-			          	<input id="por4" name="por4" type="number" class="validate"  autofocus="true">
+			          	<input id="por4" name="por4" type="number" min="0" max="100" class="validate"  autofocus="true">
 			          	<label for="por4">%</label>
     				</div>
     				<div class="input-field col s12">
@@ -215,10 +215,11 @@
 		</div>
 	</form>
 </div>
-<!-- INICIA EL BLOQUE DEL MODAL -->
+<!-- MODAL APROBACION DE ASOCIADO -->
 <div id="modal1" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario" onsubmit="return submit1();">
 		<input id="idid" type="hidden" value="">
+		<input id="corrAsociado" type="hidden" value="">
 		<div class="modal-content" id="modalcontent">
 
 
@@ -325,6 +326,11 @@
     		selectYears: true, // Creates a dropdown of 15 years to control year
 			max: -1 //dias equivalentes a 18 years restados for today
 		});
+		$('#fecses').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			max: -1 //dias equivalentes a 18 years restados for today
+		});
 		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
 		cargarMunicipios("dep","mun");
@@ -380,6 +386,7 @@
 		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
 	            datos = {
 	            	id:$("#idid").val(),
+	            	corr:$("#corrAsociado").val(),
 	            	fecses:$("#fecses").val(),
 	            	nacta:$("#nacta").val(),
 	            	npunto:$("#npunto").val(),
@@ -489,6 +496,7 @@
 
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+            $("#corrAsociado").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
             $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
@@ -532,12 +540,7 @@ function ejecutarajax2(datos){
 	$.ajax({
         type:"post",
 
-
-
         url: "php/Asociado.php",/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR *****************************************************************************/
- 
-
-
         data:datos,
         success:function(responseText){
         	if(/Registro/.test(responseText)){

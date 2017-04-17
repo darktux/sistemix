@@ -56,7 +56,7 @@
                         '1'
                     );
                 ";
-                // deshabilitamos el autocommit para llevar a cabo la transacción con varias sentencias
+                // Se guarda el asociado
                 $con->consulta('BEGIN');
                 try{
                     $con->consulta($sql1);
@@ -65,6 +65,7 @@
                     if ($row = mysql_fetch_row($rs)) {
                         $id = trim($row[0]);
                     }
+                    //Ingreso los beneficiarios correspondientes al asociado
                     for ($i=1; $i < 5; $i++) { 
                         if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
                             $sql2="
@@ -82,27 +83,10 @@
                                 '".$_POST['par'.$i]."',
                                 '".$_POST['por'.$i]."',
                                 '".$id."'
-                            );
-                        ";
-
-                            //echo $sql2;
+                            );";
                             $con->consulta($sql2);
-                            
                         }
-
-
                     }
-
-                    $rs=mysql_query("SELECT tipocuenta_montoapertura,tipocuenta_id  FROM tab_tipo_cuenta WHERE tipocuenta_correlativo='01'");
-                    if ($row = mysql_fetch_row($rs)) {
-                        $monto = trim($row[0]);
-                        $tipocuentaid=trim($row[1]);
-                    }
-                    $fecaper=DATE('Y-m-d');
-                    
-                    $sql3="INSERT INTO tab_cuenta(cuenta_monto,cuenta_fechaapertura,cuenta_estado,cuenta_asociadoid,cuenta_tipocuentaid) VALUES('".$monto."','".$fecaper."','Activada','".$id."','".$tipocuentaid."')";
-                    $con->consulta($sql3);
-
 
                     $con->consulta('COMMIT');
 
@@ -187,16 +171,36 @@
     		break;
 
         case 'upd2':
-            $sql="UPDATE 
-                ".$nombretabla." SET 
-                    asociado_fechasesion='".$_POST['fecses']."',
-                    asociado_numacta='".$_POST['nacta']."',
-                    asociado_numpunto='".$_POST['npunto']."',
-                    asociado_estado='Aprobado'
-                WHERE 
-                    asociado_id=".$_POST['id'].";
-            ";
-            $con->consulta($sql);
+        $con->consulta('BEGIN');
+            try{
+                $sql="UPDATE 
+                    ".$nombretabla." SET 
+                        asociado_fechasesion='".$_POST['fecses']."',
+                        asociado_numacta='".$_POST['nacta']."',
+                        asociado_numpunto='".$_POST['npunto']."',
+                        asociado_estado='Aprobado'
+                    WHERE 
+                        asociado_id=".$_POST['id'].";
+                ";
+                $con->consulta($sql);
+                //Correlativo es 01 correspondiente a Aportaciones
+                //Se obtiene el monto de apertura de aportaciones
+                $rs=mysql_query("SELECT tipocuenta_montoapertura,tipocuenta_id  FROM tab_tipo_cuenta WHERE tipocuenta_correlativo='01'");
+                if ($row = mysql_fetch_row($rs)) {
+                    $monto = trim($row[0]);
+                    $tipocuentaid=trim($row[1]);
+                }
+                //Se abre la cuenta de aportacion a la persona
+                $sql3="INSERT INTO tab_cuenta(cuenta_id,cuenta_monto,cuenta_fechaapertura,cuenta_estado,cuenta_asociadoid,cuenta_tipocuentaid) VALUES('01-01-".$_POST['corr']."','".$monto."','".$_POST['fecses']."','Activada','".$_POST['id']."','".$tipocuentaid."')";
+                $con->consulta($sql3);
+                //Se ingresa el movimiento correspondiente a la apertura
+                $con->consulta("INSERT INTO tab_cuenta_movimiento(cuentamovimiento_concepto,cuentamovimiento_fecha,cuentamovimiento_deposito,cuentamovimiento_saldo,cuentamovimiento_cuentaid) VALUES ('Apertura de cuenta','".$_POST['fecses']."','".$monto."','".$monto."','01-01-".$_POST['corr']."')");
+                
+                $con->consulta('COMMIT');
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
             if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
             break;
         
@@ -227,7 +231,7 @@
                 echo json_encode($salida);
                 break;
         case 'getjsontabla2':
-                $con->consulta("SELECT asociado_id,asociado_nombre,asociado_dui,asociado_nit,asociado_municipio,asociado_estado FROM ".$nombretabla." WHERE asociado_estado='En espera';
+                $con->consulta("SELECT asociado_id,asociado_correlativo,asociado_nombre,asociado_dui,asociado_nit,asociado_municipio,asociado_estado FROM ".$nombretabla." WHERE asociado_estado='En espera';
                 ");
                 $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
