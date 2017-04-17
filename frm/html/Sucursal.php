@@ -115,7 +115,7 @@
 			}
 			else{
 		    	formData.append("id", $("#idid").val());
-		    	formData.append("acc", "set");
+		    	formData.append("acc", "upd");
 			}
 			$.ajax({
 	            url: "php/Sucursal.php",

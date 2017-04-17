@@ -1,4 +1,6 @@
-
+<div class="fixed-action-btn">
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nuevo Asociado" onclick="prepare();"><i class="large material-icons">add</i></a>
+</div>
 <!-- INICIA EL BLOQUE DEL MODAL -->
 <div id="modal1" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario" onsubmit="return submit1();">
