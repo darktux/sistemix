@@ -13,32 +13,56 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="text" name="nom" id="nom">
+					<input type="text" name="nom" id="nom" required>
 					<label for="nom">Nombre</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="nit" id="nit">
+					<input type="text" name="nit" id="nit" required>
 					<label for="nit">NIT</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="raz" id="raz" min="0">
+					<input type="text" name="raz" id="raz" min="0" required>
 					<label for="raz">Razón social</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="esl" id="esl" min="0">
+					<textarea id="dir" name="dir" class="materialize-textarea" required></textarea>
+					<label for="dir">Dirección</label>
+				</div>
+				<div class="input-field col s12">
+					<input type="text" name="tel" id="tel" min="0" required>
+					<label for="tel">Teléfono</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="mis" name="mis" class="materialize-textarea" required></textarea>
+					<label for="mis">Misión</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="vis" name="vis" class="materialize-textarea" required></textarea>
+					<label for="vis">Visión</label>
+				</div>
+				<div class="input-field col s12">
+					<textarea id="val" name="val" class="materialize-textarea" required></textarea>
+					<label for="val">Valores</label>
+				</div>
+				<div class="input-field col s12">
+					<input type="text" name="esl" id="esl" min="0" required>
 					<label for="esl">Eslogan</label>
 				</div>
+
 				<div class="col s12">
 					<div class="file-field input-field">
-						<div class="btn">
-							<span>Logo</span>
-							<input type="file" name="log" id="log">
+						<div class="row">
+							<div class="btn col s1">
+								<span>Logo</span>
+								<input type="file" name="log" id="log">
+							</div>
+							<div class="fie-path-wrapper col s11">
+								<input class="file-path validate" type="text">
+							</div>	
 						</div>
-						<div class="fie-path-wrapper">
-							<input class="file-path validate" type="text">
-						</div>		
 					</div>
 				</div>
+
 			</div>
 			<!-- TERMINAN ELEMENTOS DEL FORMULARIO *******************************************************************************************************************************************************-->
 		</div>
@@ -166,6 +190,11 @@
             $("#nom").val(JSON.stringify(row.sucursal_nombre).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.sucursal_nit).replace(/"/gi,''));
             $("#raz").val(JSON.stringify(row.sucursal_razonsocial).replace(/"/gi,''));
+            $("#dir").val(JSON.stringify(row.sucursal_direccion).replace(/"/gi,''));
+            $("#tel").val(JSON.stringify(row.sucursal_telefono).replace(/"/gi,''));
+            $("#mis").val(JSON.stringify(row.sucursal_mision).replace(/"/gi,''));
+            $("#vis").val(JSON.stringify(row.sucursal_vision).replace(/"/gi,''));
+            $("#val").val(JSON.stringify(row.sucursal_valores).replace(/"/gi,''));
             $("#esl").val(JSON.stringify(row.sucursal_eslogan).replace(/"/gi,''));
             //$("#log").val(JSON.stringify(row.sucursal_logo).replace(/"/gi,''));
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************************/
@@ -176,7 +205,7 @@
 		/*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .remove': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS*************************************************/
-            if(confirm("Realmente desea eliminar el registro del tipo de credito "+JSON.stringify(row.tipocredito_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
+            if(confirm("Realmente desea eliminar el registro del tipo de credito "+JSON.stringify(row.sucursal_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
             	datos = {
 	            	id:JSON.stringify(row.sucursal_id).replace(/"/gi,''),
 	            	acc:'del'

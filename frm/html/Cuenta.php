@@ -148,7 +148,6 @@
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
 				document.getElementById("cueid").removeAttribute("readonly");
-				document.getElementById("cueidbtn").removeAttribute("disabled");
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 			}
@@ -256,21 +255,24 @@
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-        	$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-        	//$("#asoid").val(JSON.stringify(row.cuenta_asociadoid).replace(/"/gi,''));
         	$("#tit").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
         	$("#tit2").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
+
         	$("#fecape").val(JSON.stringify(row.cuenta_fechaapertura).replace(/"/gi,''));
+        	$("#cueid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+
+        	$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+        	
             $("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
-            $("#cueid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-            $("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
+
             $("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
+
             $("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
+            
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
 		    document.getElementById("cueid").setAttribute("readonly", "");
-		    document.getElementById("cueidbtn").setAttribute("disabled", "");
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },
