@@ -485,7 +485,10 @@
         return [
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
-            '</a>&nbsp;'
+            '</a>&nbsp;',
+            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+                '<i class="material-icons">print</i>',
+            '</a>',
         ].join('');
     }
 /*TERMINA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
@@ -546,19 +549,10 @@ function ejecutarajax2(datos){
         	if(/Registro/.test(responseText)){
         		$('#modal2').modal('close');
         		alert(responseText);
-        		$("#formulario2")[0].reset();
-
-
         		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla2',pageList: [5,10,25,50,100]});
-        		//$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla',pageList: [5,10,25,50,100]});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
-
-
-
-
         		document.getElementById("buscar1").focus();
 				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
-
-				window.open('PDFSolicitudAsociado.php?id='+id,'_blank');
+				$("#formulario2")[0].reset();
         	}
         	else{
         		alert(responseText);
