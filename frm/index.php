@@ -33,9 +33,8 @@
             </div>
             <!-- OPCIONES DEL MENU ASOCIADO -->
             <ul id="dropdown-per1" class="dropdown-content">
-                <li><a class="naso">Gestionar asociado</a></li>
-                <li class="divider"></li>
-                <li><a class="saso">Solicitudes pendientes</a></li>
+                <li><a class="saso">Solicitud de asociado</a></li>
+                <li><a class="naso">Gestionar asociado</a></li>            
             </ul>
             <ul id="dropdown-per2" class="dropdown-content">
                 <li><a class="naso">Gestionar asociado</a></li>
