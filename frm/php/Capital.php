@@ -12,8 +12,8 @@
                     capital_anio,
                     capital_fecha,
                     capital_concepto,
-                    capital_cargo,
-                    capital_abono,
+                    capital_deposito,
+                    capital_retiro,
                     capital_saldo,
                     capital_sucursalid
                 ) 
@@ -21,8 +21,8 @@
                     ".$_POST['ani'].",
                     '".$_POST['fec']."',
                     '".$_POST['con']."',
-                    ".$_POST['car'].",
-                    ".$_POST['abo'].",
+                    ".$_POST['dep'].",
+                    ".$_POST['ret'].",
                     ".$_POST['sal'].",
                     1
                 );
@@ -39,8 +39,8 @@
                     capital_anio='".$_POST['cor']."',
                     capital_fecha='".$_POST['fec']."',
                     capital_concepto=".$_POST['con'].",
-                    capital_cargo=".$_POST['car'].",
-                    capital_abono=".$_POST['abo'].",
+                    capital_deposito=".$_POST['dep'].",
+                    capital_retiro=".$_POST['ret'].",
                     capital_saldo=".$_POST['sal']."
                 WHERE 
                     capital_id=".$_POST['id'].";
@@ -64,7 +64,10 @@
                 SELECT 
                     * 
                 FROM 
-                    ".$nombretabla.";
+                    ".$nombretabla."
+                ORDER BY 
+                    capital_id 
+                DESC;
             ");
             $i=0;$salida=array();
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
@@ -73,25 +76,22 @@
             }
             echo json_encode($salida);
             break;
-
         case 'getSaldoCapital':
             $con->consulta("
                 SELECT 
                     capital_saldo 
                 FROM 
-                    ".$nombretabla.";
-                WHERE 
-
+                    ".$nombretabla." 
+                ORDER BY 
+                    capital_id 
+                DESC 
+                LIMIT 
+                    1;
             ");
-            $i=0;$salida=array();
-            if ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+            if ($fila = mysql_fetch_row($con->getResultado())) {       
                 echo $fila[0];
             }
-            break;
-
-
-
-            
+            break;           
     }
 	//$con->limpiarConsulta();
     $con->desconectar();

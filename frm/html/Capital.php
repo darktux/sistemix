@@ -13,7 +13,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<input type="number" name="ani" id="ani" min="2016" step="1" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y");?>">
-					<label for="ani">Año</label>
+					<label for="ani" class="active">Año</label>
 				</div>
 				<div class="input-field col s12">
 					<input name="fec" id="fec" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
@@ -27,13 +27,23 @@
 					<input type="number" name="sal0" id="sal0" value="1000" readonly>
 					<label for="sal0" class="active">Saldo anterior ($)</label>
 				</div>
-				<div class="input-field col s12">
-					<input type="number" name="dep" id="dep" class="actsal" value="0.00" min="0.00" step="0.01" required>
-					<label for="dep" class="active">Deposito ($)</label>
+				<div class="row">
+					<div class="col s12 m4">
+						<label>Tipo de transacción</label>
+					</div>
+					<div class="input-field col s12 m4">
+				    	<input type="radio" name="tiptra" id="dep1" class="with-gap actsal" required/>
+				    	<label for="dep1">Depósito</label>
+					</div>
+					<div class="input-field col s12 m4">
+				    	<input type="radio" name="tiptra" id="ret1" class="with-gap actsal" required/>
+				    	<label for="ret1">Retiro</label>
+				    </div>
+				    <br>
 				</div>
-				<div class="input-field col s12">
-					<input type="number" name="ret" id="ret" class="actsal" value="0.00" min="0.00" step="0.01" required>
-					<label for="ret" class="active">Retiro ($)</label>
+			    <div class="input-field col s12">
+					<input type="number" name="mon" id="mon" min="0.00" step="0.01" required>
+					<label for="mon" class="active">Monto ($)</label>
 				</div>
 				<div class="input-field col s12">
 					<input type="text" name="sal" id="sal" value="1000" readonly>
@@ -51,7 +61,7 @@
 <!-- FINALIZA EL BLOQUE DEL MODAL -->
 <!-- INICIA EL BLOQUE LA TABLA -->
 <div class="container">
-	<h4 class="center teal-text">Tipo de cuenta</h4>
+	<h4 class="center teal-text">Capital</h4>
 	<div class="row">
 		<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 		<div class="col s12">
@@ -59,7 +69,7 @@
 			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Capital.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
-				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
+				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
 			            <th data-field="capital_anio" data-align="center">Año</th>
 			            <th data-field="capital_fecha" data-align="center">Fecha</th>
@@ -97,6 +107,8 @@
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
 				document.getElementById("con").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
+				$("#mon").val("");
+				getsaldo();
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 				$("#idid").val("");
@@ -105,22 +117,11 @@
 
 				//FINALIZA BLOQUE ANADIR CODIGO SEGUN SE NECESITE**************************************************************************************
 			}
+			
 		});
 		/*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
-	/*INICIA FUNCION GETSALDO PARA ACTUALIZAR SALDO DE CAPITAL */
-	function getsaldo(){
-		$.ajax({
-	        type:"post",
-	        url: "php/Capital.php",
-	        data:{acc:'getSaldoCapital'},
-	        success:function(responseText){
-	        	$("#sal0").val(responseText);
-	        }
-	    });
-	}
-	/*FINALIZA FUNCION GETSALDO PARA ACTUALIZAR SALDO DE CAPITAL */
 	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	$("#formulario").on(
 		"submit", 
@@ -128,8 +129,16 @@
 	    	e.preventDefault();
 	    	var f = $(this);
 	    	var formData = new FormData(document.getElementById("formulario"));
+	    	if(document.getElementById("dep1").checked){//deposito
+				formData.append("dep", $("#mon").val());
+				formData.append("ret", "0.00");
+			}
+			else if(document.getElementById("ret1").checked){//retiro
+				formData.append("dep", "0.00");
+				formData.append("ret", $("#mon").val());
+			}
 	    	if($("#idid").val() == ""){ 
-	        	formData.append("acc", "set"); 
+				formData.append("acc", "set");
 			}
 			else{
 		    	formData.append("id", $("#idid").val());
@@ -234,12 +243,35 @@
     	});
 	}
 	/*FINALIZA EL BLOQUE DE LA FUNCION AJAX*/
-	/*INICIA EL BLOQUE DE LOS EVENTOS*/
-	$(".actsal").blur(function() {
-		var c = parseFloat($("#dep").val());
-		var a = parseFloat($("#ret").val());
+	/*INICIA FUNCION PARA OBTENER DE LA BASE EL SALDO DE CAPITAL */
+	function getsaldo(){
+		$.ajax({
+	        type:"post",
+	        url: "php/Capital.php",
+	        data:{acc:'getSaldoCapital'},
+	        success:function(responseText){
+	        	$("#sal0").val(responseText);
+	        	$("#sal").val(responseText);
+	        	//alert(responseText);
+	        }
+	    });
+	}
+	/*FINALIZA FUNCION PARA OBTENER DE LA BASE EL SALDO DE CAPITAL */
+	/*INICIA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
+	function actualizasaldo(){
 		var s0= parseFloat($("#sal0").val());
-		$("#sal").val( parseFloat(''+(s0+c-a)).toFixed(2) );
-	});
+		if($("#mon").val()==''){m=0.0;}else{var m= parseFloat($("#mon").val());}
+		if(document.getElementById("dep1").checked){//deposito
+			$("#sal").val( parseFloat(''+(s0+m)).toFixed(2) );
+		}
+		else if(document.getElementById("ret1").checked){//retiro
+			$("#sal").val( parseFloat(''+(s0-m)).toFixed(2) );
+		}
+	}
+	/*FINALIZA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
+	/*INICIA EL BLOQUE DE LOS EVENTOS*/
+	$(".actsal").change(function() { actualizasaldo(); });
+	$("#mon").keyup(function() { actualizasaldo(); });
+
 	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 </script>
