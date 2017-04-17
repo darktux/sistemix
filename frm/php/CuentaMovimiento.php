@@ -2,29 +2,28 @@
 	require('Conex.php');
 	$con= new Conex();
 	$con->conectar();
-    $nombretabla = 'tab_capital';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
+    $nombretabla = 'tab_cuenta_movimiento';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
+    if(isset($_GET['idcue'])){$_POST['idcue']=$_GET['idcue'];}
 	switch ($_POST['acc']) {
 		case 'set':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("INSERT INTO 
                 ".$nombretabla."(
-                    capital_anio,
-                    capital_fecha,
-                    capital_concepto,
-                    capital_deposito,
-                    capital_retiro,
-                    capital_saldo,
-                    capital_sucursalid
+                    cuentamovimiento_concepto,
+                    cuentamovimiento_fecha,
+                    cuentamovimiento_deposito,
+                    cuentamovimiento_retiro,
+                    cuentamovimiento_saldo,
+                    cuentamovimiento_cuentaid
                 ) 
                 VALUES(
-                    ".$_POST['ani'].",
-                    '".$_POST['fec']."',
                     '".$_POST['con']."',
+                    '".$_POST['fec']."',
                     ".$_POST['dep'].",
                     ".$_POST['ret'].",
                     ".$_POST['sal'].",
-                    1
+                    '".$_POST['idcue']."'
                 );
             ");
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
@@ -65,8 +64,10 @@
                     * 
                 FROM 
                     ".$nombretabla."
+                WHERE
+                    cuentamovimiento_cuentaid='".$_POST['idcue']."'
                 ORDER BY 
-                    capital_id 
+                    cuentamovimiento_id 
                 DESC;
             ");
             $i=0;$salida=array();
@@ -76,14 +77,16 @@
             }
             echo json_encode($salida);
             break;
-        case 'getSaldoCapital':
+        case 'getSaldoCuenta':
             $con->consulta("
                 SELECT 
-                    capital_saldo 
+                    cuentamovimiento_saldo 
                 FROM 
                     ".$nombretabla." 
+                WHERE
+                    cuentamovimiento_cuentaid='".$_POST['idcue']."'
                 ORDER BY 
-                    capital_id 
+                    cuentamovimiento_id 
                 DESC 
                 LIMIT 
                     1;

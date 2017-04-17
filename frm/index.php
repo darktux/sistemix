@@ -44,13 +44,11 @@
             <!-- OPCIONES DEL MENU CUENTA -->
             <ul id="dropdown-cue1" class="dropdown-content">
                 <li><a class="ncue">Gestionar cuenta</a></li>
-                <li><a class="mcue">Movimiento de la cuenta</a></li>
                 <li class="divider"></li>
                 <li><a class="tcue">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cue2" class="dropdown-content">
                 <li><a class="ncue">Gestionar cuenta</a></li>
-                <li><a class="mcue">Movimiento de la cuenta</a></li>
                 <li class="divider"></li>
                 <li><a class="tcue">Tipo de cuenta</a></li>
             </ul>
@@ -125,7 +123,6 @@
             $(".saso").click(function(){ $("#formularios").load('html/SolicitudesAsociados.php'); });
             //MENU CUENTA
             $(".ncue").click(function(){ $("#formularios").load('html/Cuenta.php'); });
-            $(".mcue").click(function(){ $("#formularios").load('html/CuentaMovimiento.php'); });
             $(".tcue").click(function(){ $("#formularios").load('html/TipoCuenta.php'); });
             //MENU CREDITO
             $(".scre").click(function(){ $("#formularios").load('html/SolicitudCredito.php'); });

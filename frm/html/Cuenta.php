@@ -110,6 +110,7 @@
 <!-- FINALIZA EL BLOQUE DEL MODAL NUEVA CUENTA-->
 <!-- INICIA EL BLOQUE JAVASCRIPT -->
 <script type="text/javascript">
+	var idcuenta=0;
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
@@ -245,7 +246,7 @@
                 '<i class="material-icons">delete</i>',
             '</a>',
             '&nbsp;<a class="view ml10" href="javascript:void(0)" title="Ver más">',
-                '<i class="material-icons">info</i>',
+                '<i class="material-icons">compare_arrows</i>',
             '</a>'
         ].join('');
     }
@@ -292,7 +293,8 @@
 /*FINALIZA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .view': function (e, value, row, index) {
-        	alert("---"); /********************************************************************************************************/
+        	idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
+        	$("#formularios").load('html/CuentaMovimiento.php');
         },
 /*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
