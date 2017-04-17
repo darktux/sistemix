@@ -5,12 +5,16 @@
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
 <div id="modal1" class="modal modal-fixed-footer">
-	<form class="col s12" id="formulario" onsubmit="return submit1();">
+	<form class="col s12" id="formulario">
 		<input id="idid" type="hidden" value="">
 		<div class="modal-content" id="modalcontent">
 			<h5>Nuevo tipo de cuenta</h5><!-- //TITULO DEL MODAL *************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
 			<div class="row">
+				<div class="input-field col s12">
+					<input type="number" name="cor" id="cor" step="1" min="1" max="99"  value="01" required>
+					<label for="cor">Correlativo</label>
+				</div>
 				<div class="input-field col s12">
 					<input type="text" name="nom" id="nom" required>
 					<label for="nom">Nombre</label>
@@ -53,7 +57,7 @@
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-			            <th data-field="tipocuenta_id" data-align="center">Identificador</th>
+			            <th data-field="tipocuenta_correlativo" data-align="center">Correlativo</th>
 			            <th data-field="tipocuenta_nombre" data-align="center">Nombre</th>
 			            <th data-field="tipocuenta_interes" data-align="center">Tasa de interés</th>
 			            <th data-field="tipocuenta_montominimo" data-align="center">Monto mínimo</th>
@@ -82,7 +86,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("nom").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
+				document.getElementById("cor").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -96,33 +100,45 @@
 		/*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
-	/*INICIA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
-	function submit1(){
-		if($("#idid").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) **********************************/
-	            datos = {
-	            	nom:$("#nom").val(),
-	            	int:$("#int").val(),
-	            	monmin:$("#monmin").val(),
-	            	cobmonmin:$("#cobmonmin").val(),
-	            	monape:$("#monape").val(),
-	            	acc:'set'
-	            }
-		}
-		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) ****************************/
-	            datos = {
-	            	id:$("#idid").val(),
-	            	nom:$("#nom").val(),
-	            	int:$("#int").val(),
-	            	monmin:$("#monmin").val(),
-	            	cobmonmin:$("#cobmonmin").val(),
-	            	monape:$("#monape").val(),
-	            	acc:'upd'
-	            }
-		}
-		ejecutarajax(datos);
-    	return false;
-	}
-	/*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
+	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
+	$("#formulario").on(
+		"submit", 
+		function(e){
+	    	e.preventDefault();
+	    	var f = $(this);
+	    	var formData = new FormData(document.getElementById("formulario"));
+	    	if($("#idid").val() == ""){ 
+	        	formData.append("acc", "set"); 
+			}
+			else{
+		    	formData.append("id", $("#idid").val());
+		    	formData.append("acc", "upd");
+			}
+			$.ajax({
+	            url: "php/TipoCuenta.php",
+	            type: "post",
+	            dataType: "html",
+	            data: formData,
+	            cache: false,
+	            contentType: false,
+	     		processData: false,
+	        	success:function(responseText){
+	        		if(/Registro/.test(responseText)){
+	        			$('#modal1').modal('close');
+	        			alert(responseText);
+	        			$("#formulario")[0].reset();
+		        		$('#tabla1').bootstrapTable('refresh',{url:'php/TipoCuenta.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+		        		document.getElementById("buscar1").focus();
+						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+	        		}
+	        		else{
+	        			alert(responseText);
+		        	}
+	    	    }
+	        });
+		}	
+	);
+	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	function operateFormatter(value, row, index) {
         return [
@@ -144,6 +160,7 @@
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
             $("#idid").val(JSON.stringify(row.tipocuenta_id).replace(/"/gi,''));
+            $("#cor").val(JSON.stringify(row.tipocuenta_correlativo).replace(/"/gi,''));
             $("#nom").val(JSON.stringify(row.tipocuenta_nombre).replace(/"/gi,''));
             $("#int").val(JSON.stringify(row.tipocuenta_interes).replace(/"/gi,''));
             $("#monmin").val(JSON.stringify(row.tipocuenta_montominimo).replace(/"/gi,''));
@@ -196,4 +213,12 @@
     	});
 	}
 	/*FINALIZA EL BLOQUE DE LA FUNCION AJAX*/
+	$("#cor").change(function() {
+		var a = parseInt($('#cor').val());
+		if(a<10){ 
+			$('#cor').val('0'+a); 
+		}else{
+			$('#cor').val(a);
+		}
+	});
 </script>

@@ -2,388 +2,56 @@
 	require('Conex.php');
 	$con= new Conex();
 	$con->conectar();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    $nombretabla = 'tab_tipo_cuenta';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS*********************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    $nombretabla = 'tab_tipo_cuenta';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
 	switch ($_POST['acc']) {
 		case 'set':
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-                $con->consulta("INSERT INTO 
-                    ".$nombretabla."(
-                        tipocuenta_nombre,
-                        tipocuenta_interes,
-                        tipocuenta_montominimo,
-                        tipocuenta_cobromontominimo,
-                        tipocuenta_montoapertura
-                    ) 
-                    VALUES('".$_POST['nom']."',
-                            ".$_POST['int'].",
-                            ".$_POST['monmin'].",
-                            ".$_POST['cobmonmin'].",
-                            ".$_POST['monape']."
-                    );
-                ");
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
-                break;
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
+            $con->consulta("INSERT INTO 
+                ".$nombretabla."(
+                    tipocuenta_correlativo,
+                    tipocuenta_nombre,
+                    tipocuenta_interes,
+                    tipocuenta_montominimo,
+                    tipocuenta_cobromontominimo,
+                    tipocuenta_montoapertura
+                ) 
+                VALUES(
+                    '".$_POST['cor']."',
+                    '".$_POST['nom']."',
+                    ".$_POST['int'].",
+                    ".$_POST['monmin'].",
+                    ".$_POST['cobmonmin'].",
+                    ".$_POST['monape']."
+                );
+            ");
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
+            if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+            break;
     	case 'upd':
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("UPDATE 
                 ".$nombretabla." SET 
+                    tipocuenta_correlativo='".$_POST['cor']."',
                     tipocuenta_nombre='".$_POST['nom']."',
-                    tipocuenta_interes='".$_POST['int']."',
-                    tipocuenta_montominimo='".$_POST['monmin']."',
-                    tipocuenta_cobromontominimo='".$_POST['cobmonmin']."',
-                    tipocuenta_montoapertura='".$_POST['monape']."'
+                    tipocuenta_interes=".$_POST['int'].",
+                    tipocuenta_montominimo=".$_POST['monmin'].",
+                    tipocuenta_cobromontominimo=".$_POST['cobmonmin'].",
+                    tipocuenta_montoapertura=".$_POST['monape']."
                 WHERE 
                     tipocuenta_id=".$_POST['id'].";
             ");
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
         case 'del':
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
             $con->consulta("DELETE FROM 
                 ".$nombretabla." 
                 WHERE 
                     tipocuenta_id='".$_POST['id']."';
             ");
-/*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
             break;
 		case 'getjsontabla':
