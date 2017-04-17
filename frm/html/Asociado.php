@@ -14,8 +14,14 @@
 			<h5>Nuevo Asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
+				<div class="input-field col s12">
+					<input type="number" min="1" step="1" max="999" value="001" id="corr" name="corr" required autofocus="true">
+					<label for="corr">Correlativo</label>
+				</div>
+			</div>
+			<div class="row">
 				<div class="input-field col s12"> 
-		          <input id="nom" name="nom" type="text" class="validate" required autofocus="true">
+		          <input id="nom" name="nom" type="text" class="validate" required>
 		          <label for="nom">Nombre completo</label>
 				</div>
 			</div>
@@ -264,7 +270,7 @@
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -6570 //dias equivalentes a 18 years restados for today
+			//max: -6570 //dias equivalentes a 18 years restados for today
 		});
   		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
@@ -303,6 +309,9 @@
 
 
 			}
+		});
+		$("#corr").change(function() {
+			addLeadingZeros ($('#corr').val(), 3);
 		});
 /*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
@@ -511,6 +520,7 @@
 
         	$('label').addClass("active");
         	$("input").prop('disabled', true);
+        	$("#buscar1").prop('disabled', false);
         	$('select').material_select('destroy');
         	$('select').prop("disabled",true);
         	$('select').material_select();
@@ -576,15 +586,24 @@ function cargarInstituciones(){
 }
 
 function prepare(){
-		$('label').addClass("active");
-        $("input").prop('disabled', false);
-        $('select').material_select('destroy');
-        $('select').prop("disabled",false);
-        $('select').material_select();
-        $("textarea").prop('disabled', false);
-        $('#modal1').modal('open');
-        $("#formulario")[0].reset();
-	}
+	$('label').addClass("active");
+    $("input").prop('disabled', false);
+    $('select').material_select('destroy');
+    $('select').prop("disabled",false);
+    $('select').material_select();
+    $("textarea").prop('disabled', false);
+    $('#modal1').modal('open');
+    $("#formulario")[0].reset();
+}
 
+function addLeadingZeros (n, length)
+{
+    var str = (n > 0 ? n : -n) + "";
+    var zeros = "";
+    for (var i = length - str.length; i > 0; i--)
+        zeros += "0";
+    zeros += str;
+    return n >= 0 ? zeros : "-" + zeros;
+}
 </script>
 <script src="../js/funciones.js"></script>

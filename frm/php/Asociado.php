@@ -16,6 +16,7 @@
                 /*el numero 1 abajo es el id de la empresa principal*/
                 $sql1 = "INSERT INTO 
                     ".$nombretabla."(
+                        asociado_correlativo,
                         asociado_nombre,
                         asociado_dui,
                         asociado_nit,
@@ -34,7 +35,8 @@
                         asociado_institucionsaludid,
                         asociado_sucursalid
                     ) 
-                    VALUES('".$_POST['nom']."',
+                    VALUES('".$_POST['corr']."',
+                        '".$_POST['nom']."',
                         '".$_POST['dui']."',
                         '".$_POST['nit']."',
                         '".$_POST['ext']."',
@@ -155,6 +157,7 @@
 
             $sql1="UPDATE 
                 ".$nombretabla." SET 
+                    asociado_correlativo='".$_POST['corr']."',
                 	asociado_nombre='".$_POST['nom']."',
 					asociado_dui='".$_POST['dui']."',
 					asociado_nit='".$_POST['nit']."',

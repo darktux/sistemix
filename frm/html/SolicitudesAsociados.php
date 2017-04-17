@@ -1,5 +1,219 @@
 <div class="fixed-action-btn">
-	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nuevo Asociado" onclick="prepare();"><i class="large material-icons">add</i></a>
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal2" data-position="top" data-tooltip="Nuevo Asociado" onclick="prepare();"><i class="large material-icons">add</i></a>
+</div>
+
+<div id="modal2" class="modal modal-fixed-footer">
+	<form class="col s12" id="formulario2" onsubmit="return submit2();">
+		<input id="idid2" type="hidden" value="">
+		<div class="modal-content" id="modalcontent">
+
+
+
+			<h5>Nuevo Asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
+			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
+			<div class="row">
+				<div class="input-field col s12">
+					<input type="number" min="1" step="1" max="999" value="001" id="corr" name="corr" required autofocus="true">
+					<label for="corr">Correlativo</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12"> 
+		          <input id="nom2" name="nom2" type="text" class="validate" required autofocus="true">
+		          <label for="nom2">Nombre completo</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m6"> 
+			         <input id="dui2" name="dui2" type="text"  minlength="10" maxlength="10" required>
+			         <label for="dui2">DUI</label>
+				</div>
+				<div class="input-field col s12 m6"> 
+			         <input id="nit2" name="nit2" type="text"  minlength="17" maxlength="17" required>
+			         <label for="nit2">NIT</label>
+				</div>    				
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m6">
+					<input id="ext" name="ext" type="text"></input>
+					<label for="ext">Lugar donde fue extendido el DUI</label>
+				</div>
+				<div class="input-field col s12 m6">	
+					<input id="fecdui" name="fecdui" type="date" class="datepicker" >
+					<label for="fecdui" >Fecha de extensión de DUI</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="input-field col s12">	
+					<input id="lugnac" name="lugnac" type="text">
+					<label for="lugnac" >Lugar de nacimiento</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m6">	
+					<input id="fecnac" name="fecnac" type="date" class="datepicker" >
+					<label for="fecnac" >Fecha de nacimiento</label>
+				</div>
+				<div class="input-field col s12 m6">	
+					<input id="nac" name="nac" type="text" value="Savadoreño/a">
+					<label for="nac" class="active" >Nacionalidad</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<select class="" id="est" name="est" required>
+						<option value="" disabled selected>Seleccione un estado</option>
+						<option value="Soltero/a">Soltero/a</option>
+						<option value="Casado/a">Casado/a</option>
+						<option value="Divorciado/a">Divorciado/a</option>
+						<option value="Viudo/a">Viudo/a</option>
+						<option value="Divorciado/a">Divorciado/a</option>
+					</select>
+					<label for="est">Estado civil</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<select name="dep" id="dep" onChange="cargarMunicipios('dep','mun')">
+					</select>
+					<label for="dep">Departamento</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<select id="mun" name="mun">
+					</select>
+					<label for="mun">Municipio</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="dir" name="dir" class="materialize-textarea"></textarea>
+					<label for="dir" >Dirección</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">	
+					<input id="prouof" name="prouof" type="text">
+					<label for="prouof" >Profesión u oficio</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m6">	
+					<input id="ingmen" name="ingmen" type="text">
+					<label for="ingmen" >Ingreso mensual ($)</label>
+				</div>
+				<div class="input-field col s12 m6">
+					<select class="" id="inst" name="inst" required>
+						<option value="" disabled selected>Seleccione una institución</option>
+					</select>
+					<label for="inst">Institución de salud</label>
+				</div>
+			</div>
+		
+			<div id="divBen">
+				<h5>Beneficiarios</h5>
+				<div class="col s12">
+					<ul class="tabs">
+						<li class="tab col s3"><a href="#test1" class="active teal-text">1° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test4" class="teal-text">4° Beneficiario</a></li>
+					</ul>
+				</div>
+				<br><br>
+				
+				<div class="row" id="test1">
+					<div class="input-field col s12 m6">
+						<input id="nom1" name="nom1" type="text" class="validate"  autofocus="true">
+			          	<label for="nom1">Nombre completo</label>
+    				</div>
+					<div class="input-field col s12 m4"> 
+			          	<input id="par1" name="par1" type="text" class="validate"  autofocus="true">
+			          	<label for="par1">Parentesco</label>
+    				</div>
+    				<div class="input-field col s12 m2"> 
+			          	<input id="por1" name="por1" type="number" class="validate"  autofocus="true">
+			          	<label for="por1">%</label>
+    				</div>
+    				<div class="input-field col s12">
+						<textarea id="dir1" name="dir1" class="materialize-textarea"></textarea>
+						<label for="dir1" >Dirección</label>
+					</div>
+    			</div>
+    			
+    			<div class="row" id="test2">
+    				
+					<div class="input-field col s12 m6">
+						<input id="nom2" name="nom2" type="text" class="validate"  autofocus="true">
+			          	<label for="nom2">Nombre completo</label>
+    				</div>
+					<div class="input-field col s12 m4"> 
+			          	<input id="par2" name="par2" type="text" class="validate"  autofocus="true">
+			          	<label for="par2">Parentesco</label>
+    				</div>
+    				<div class="input-field col s12 m2"> 
+			          	<input id="por2" name="por2" type="number" class="validate"  autofocus="true">
+			          	<label for="por2">%</label>
+    				</div>
+    				<div class="input-field col s12">
+						<textarea id="dir2" name="dir2" class="materialize-textarea"></textarea>
+						<label for="dir2" >Dirección</label>
+					</div>
+    			</div>
+    			
+    			<div class="row" id="test3">
+    				
+					<div class="input-field col s12 m6">
+						<input id="nom3" name="nom3" type="text" class="validate"  autofocus="true">
+			          	<label for="nom3">Nombre completo</label>
+    				</div>
+					<div class="input-field col s12 m4"> 
+			          	<input id="par3" name="par3" type="text" class="validate"  autofocus="true">
+			          	<label for="par3">Parentesco</label>
+    				</div>
+    				<div class="input-field col s12 m2"> 
+			          	<input id="por3" name="por3" type="number" class="validate"  autofocus="true">
+			          	<label for="por3">%</label>
+    				</div>
+    				<div class="input-field col s12">
+						<textarea id="dir3" name="dir3" class="materialize-textarea"></textarea>
+						<label for="dir3" >Dirección</label>
+					</div>
+    			</div>
+    		
+    			<div class="row" id="test4">
+    			
+					<div class="input-field col s12 m6">
+						<input id="nom4" name="nom4" type="text" class="validate"  autofocus="true">
+			          	<label for="nom4">Nombre completo</label>
+    				</div>
+					<div class="input-field col s12 m4"> 
+			          	<input id="par4" name="par4" type="text" class="validate"  autofocus="true">
+			          	<label for="par4">Parentesco</label>
+    				</div>
+    				<div class="input-field col s12 m2"> 
+			          	<input id="por4" name="por4" type="number" class="validate"  autofocus="true">
+			          	<label for="por4">%</label>
+    				</div>
+    				<div class="input-field col s12">
+						<textarea id="dir4" name="dir4" class="materialize-textarea"></textarea>
+						<label for="dir4" >Dirección</label>
+					</div>
+    			</div>
+    			<!-- <div class="divider"></div> -->
+			</div>
+
+			<!-- TERMINAN ELEMENTOS DEL FORMULARIO ********************************************************************************************************************************************************-->
+
+
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="window.open('html/PDFSolicitudAsociado.php?id='+id,'_blank');">Cancelar</button>
+		</div>
+	</form>
 </div>
 <!-- INICIA EL BLOQUE DEL MODAL -->
 <div id="modal1" class="modal modal-fixed-footer">
@@ -13,7 +227,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12"> 
-		          <input id="nom" name="nom" type="text" class="validate" disabled autofocus="true">
+		          <input id="nom" name="nom" type="text" class="validate" disabled>
 		          <label for="nom">Nombre completo</label>
 				</div>
 			</div>
@@ -29,7 +243,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12 m6">	
-					<input id="fecses" name="fecses" type="date" class="datepicker" >
+					<input id="fecses" name="fecses" type="date" class="datepicker" autofocus="true">
 					<label for="fecses" >Fecha de sesión</label>
 				</div>
 				<div class="input-field col s12 m6">	
@@ -103,9 +317,15 @@
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			//max: -6570 //dias equivalentes a 18 years restados for today
+			max: -1 //dias equivalentes a 18 years restados for today
 		});
+		$('#dir').trigger('autoresize');
+  		cargarDepartamentos("dep");
+		cargarMunicipios("dep","mun");
+		cargarInstituciones();
    		$('select').material_select();
+   		$('ul.tabs').tabs();
+  		$('.indicator').addClass('teal');
   		//$("#dui").mask("99999999-9"); // Formato del DUI
 		//$("#nit").mask("9999-999999-999-9"); // Formato del NIT
 /*INICIA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
@@ -137,6 +357,9 @@
 
 			}
 		});
+		$("#corr").change(function() {
+			$('#corr').val(addLeadingZeros ($('#corr').val(), 3));
+		});
 /*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
 /*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
@@ -158,6 +381,89 @@
 	            }
 		}
 		ejecutarajax(datos);
+    	return false;
+	}
+/*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
+/*INICIA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
+	function submit2(){
+
+		if($("#idid2").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
+	            datos = {
+	            	corr:$("#corr").val(),
+	            	nom:$("#nom2").val(),
+	            	dui:$("#dui2").val(),
+	            	nit:$("#nit2").val(),
+	            	ext:$("#ext").val(),
+	            	fecdui:$("#fecdui").val(),
+	            	lugnac:$("#lugnac").val(),
+	            	fecnac:$("#fecnac").val(),
+	            	nac:$("#nac").val(),
+	            	est:$("#est").val(),
+	            	dep:$("#dep").val(),
+	            	mun:$("#mun").val(),
+	            	dir:$("#dir").val(),
+	            	prouof:$("#prouof").val(),
+	            	ingmen:$("#ingmen").val(),
+	            	status:'En espera',
+	            	inst:$("#inst").val(),
+	            	nom1:$("#nom1").val(),
+	            	par1:$("#par1").val(),
+	            	por1:$("#por1").val(),
+	            	dir1:$("#dir1").val(),
+	            	nom2:$("#nom2").val(),
+	            	par2:$("#par2").val(),
+	            	por2:$("#por2").val(),
+	            	dir2:$("#dir2").val(),
+	            	nom3:$("#nom3").val(),
+	            	par3:$("#par3").val(),
+	            	por3:$("#por3").val(),
+	            	dir3:$("#dir3").val(),
+	            	nom4:$("#nom4").val(),
+	            	par4:$("#par4").val(),
+	            	por4:$("#por4").val(),
+	            	dir4:$("#dir4").val(),
+	            	acc:'set'
+	            }
+		}
+		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
+	            datos = {
+	            	id:$("#idid2").val(),
+	            	corr:$("#corr").val(),
+	            	nom:$("#nom2").val(),
+	            	dui:$("#dui2").val(),
+	            	nit:$("#nit").val(),
+	            	ext:$("#ext").val(),
+	            	fecdui:$("#fecdui").val(),
+	            	lugnac:$("#lugnac").val(),
+	            	fecnac:$("#fecnac").val(),
+	            	nac:$("#nac").val(),
+	            	est:$("#est").val(),
+	            	dep:$("#dep").val(),
+	            	mun:$("#mun").val(),
+	            	dir:$("#dir").val(),
+	            	prouof:$("#prouof").val(),
+	            	ingmen:$("#ingmen").val(),
+	            	inst:$("#inst").val(),
+	            	nom1:$("#nom1").val(),
+	            	par1:$("#par1").val(),
+	            	por1:$("#por1").val(),
+	            	dir1:$("#dir1").val(),
+	            	nom2:$("#nom2").val(),
+	            	par2:$("#par2").val(),
+	            	por2:$("#por2").val(),
+	            	dir2:$("#dir2").val(),
+	            	nom3:$("#nom3").val(),
+	            	par3:$("#par3").val(),
+	            	por3:$("#por3").val(),
+	            	dir3:$("#dir3").val(),
+	            	nom4:$("#nom4").val(),
+	            	par4:$("#par4").val(),
+	            	por4:$("#por4").val(),
+	            	dir4:$("#dir4").val(),
+	            	acc:'upd'
+	            }
+		}
+		ejecutarajax2(datos);
     	return false;
 	}
 /*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
@@ -185,6 +491,10 @@
 
 
         	$('label').addClass("active");
+        	$("#nom").prop('disabled', true);
+        	$("#dui").prop('disabled', true);
+        	$("#nit").prop('disabled', true);
+        	$("#buscar1").prop('disabled', false);
         	$('#modal1').modal('open');
         }
     };
@@ -205,6 +515,41 @@ function ejecutarajax(datos){
 
         		document.getElementById("buscar1").focus();
 				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+        	}
+        	else{
+        		alert(responseText);
+        	}
+        }
+    });
+}
+function ejecutarajax2(datos){
+	$.ajax({
+        type:"post",
+
+
+
+        url: "php/Asociado.php",/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR *****************************************************************************/
+ 
+
+
+        data:datos,
+        success:function(responseText){
+        	if(/Registro/.test(responseText)){
+        		$('#modal2').modal('close');
+        		alert(responseText);
+        		$("#formulario2")[0].reset();
+
+
+        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla2',pageList: [5,10,25,50,100]});
+        		//$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla',pageList: [5,10,25,50,100]});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+
+
+
+
+        		document.getElementById("buscar1").focus();
+				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+
+				window.open('PDFSolicitudAsociado.php?id='+id,'_blank');
         	}
         	else{
         		alert(responseText);
@@ -240,9 +585,19 @@ function prepare(){
         $('select').prop("disabled",false);
         $('select').material_select();
         $("textarea").prop('disabled', false);
-        $('#modal1').modal('open');
+        $('#modal2').modal('open');
         $("#formulario")[0].reset();
 	}
+
+function addLeadingZeros (n, length)
+{
+    var str = (n > 0 ? n : -n) + "";
+    var zeros = "";
+    for (var i = length - str.length; i > 0; i--)
+        zeros += "0";
+    zeros += str;
+    return n >= 0 ? zeros : "-" + zeros;
+}
 
 </script>
 <script src="../js/funciones.js"></script>
