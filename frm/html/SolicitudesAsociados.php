@@ -211,7 +211,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="window.open('html/PDFSolicitudAsociado.php?id='+id,'_blank');">Cancelar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
 		</div>
 	</form>
 </div>
@@ -486,7 +486,7 @@
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
             '</a>&nbsp;',
-            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
                 '<i class="material-icons">print</i>',
             '</a>',
         ].join('');
@@ -513,6 +513,9 @@
         	$("#nit").prop('disabled', true);
         	$("#buscar1").prop('disabled', false);
         	$('#modal1').modal('open');
+        },
+        'click .imprimir': function(e, value, row, index){
+        	window.open('html/PDFSolicitudAsociado.php?id='+JSON.stringify(row.asociado_correlativo).replace(/"/gi,''),'_blank');
         }
     };
 /*TERMINA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/

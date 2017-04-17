@@ -2,7 +2,6 @@
 	require('Conex.php');
 	$con= new Conex();
 	$con->conectar();
-    date_default_timezone_set('America/El_Salvador');
 
 
     $nombretabla = 'tab_asociado';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS*********************************************************************/

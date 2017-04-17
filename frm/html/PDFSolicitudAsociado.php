@@ -1,5 +1,22 @@
 <?php  
 	require("../../fpdf181/fpdf.php");
+	require("../php/Conex.php");
+
+	$con= new Conex();
+	$con->conectar();
+    date_default_timezone_set('America/El_Salvador');
+    setlocale(LC_TIME,"es_ES.UTF-8");
+    $dia=date('d');
+    $mes=date('m');
+    $ano=date('Y');
+
+    /*$con->consulta("SELECT * FROM");
+    $i=0;$salida=array();
+    while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {
+    	$salida[$i]=$fila;
+    	$i++;
+    }
+    echo json_encode($salida);*/
 
 	$pdf = new FPDF('P','mm','Letter');
 	$pdf->SetMargins(20,10,20);
@@ -14,7 +31,7 @@
 	
 	//Cuerpo
 	$pdf->SetFont('Arial','',10);
-	$pdf->Cell(0,5,'Cojutepeque, _____ de ______ de _____',0,1,J);
+	$pdf->Cell(0,5,'Cojutepeque, '.strftime("%A, %d de %B de %Y %H:%M"),0,1,J);
 	$pdf->Cell(0,5,utf8_decode('Señor(a)'),0,1,J);
 	$pdf->Cell(71,5,utf8_decode('Secretario del Consejo de Administración de '),0,0,J);
 	$pdf->SetFont('Arial','B',10);
