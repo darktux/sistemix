@@ -9,7 +9,7 @@
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content" id="modalcontent">
 		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
-		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Asociado.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true">
+		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Asociado.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
 		    <thead>
 			    <tr>
 			    	<th data-field="operate" data-align="center" data-formatter="operateFormatter1" data-events="operateEvents">Acciones</th>
@@ -29,7 +29,7 @@
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL BUSCAR -->
 <!-- INICIA EL BLOQUE LA TABLA -->
-<div class="container" style="width: 1200px;">
+<div class="container">
 	<h4 class="center teal-text">Cuenta</h4>
 	<div class="row">
 		<div class="col s12">
@@ -75,12 +75,9 @@
 					<input name="fecape" id="fecape" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fecape" class="active">Fecha de apertura</label>
 				</div>
-				<div class="input-field col s11">
+				<div class="input-field col s12">
 					<input type="text" name="cueid" id="cueid" required max="10">
 					<label for="cueid" class="active"></label>
-				</div>
-				<div class="input-field col s1">
-					<a id="cueidbtn" title="Actualizar" class="btn" onclick="getnumber();"><i class="material-icons">loop</i></a>
 				</div>
 				<div class="input-field col s12">
 					<input type="number" name="mon" id="mon" required min="0.00" step="0.01">
@@ -185,6 +182,10 @@
 
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 	function getnumber(){
+		
+		$("#cueid").val("01-");
+		
+		/*
 		$.ajax({
 	        type:"post",
 	        url: "php/Cuenta.php",
@@ -193,6 +194,8 @@
 	        	$("#cueid").val(responseText);
 	        }
 	    });
+		*/
+
 	}
 	/*FINALIZA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 

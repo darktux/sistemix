@@ -80,7 +80,8 @@
                 echo json_encode($salida);
                 break;
         case 'getNumeroCuenta':
-                echo mt_rand(1000000000,9999999999);
+                echo "01-".$_POST['tipocuenta']."-";
+                echo mt_rand(100,999);
                 break;
     }
 	//$con->limpiarConsulta();

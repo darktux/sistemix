@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>CO-AGESALUD</title>
+        <title>CO-AGESALUD de R.L.</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
         <!-- CSS  -->
@@ -12,7 +12,7 @@
     <body>
         <nav class="teal" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD</a>
+                <a id="logo-container" href="" class="brand-logo white-text">CO-AGESALUD de R.L.</a>
                 <ul class="right  hide-on-med-and-down">
                     <li><a href="frm/" class="white-text">Login</a></li>
                     <li><a href="#" class="white-text">Acerca de</a></li>
@@ -74,16 +74,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div class="row center">
-                        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="parallax"><img src="img/background2.jpg" alt="Unsplashed background img 2"></div>
-        </div> -->
         <div class="container">
             <div class="section">
                 <div class="row">
@@ -95,39 +85,28 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="parallax-container valign-wrapper">
-            <div class="section no-pad-bot">
-                <div class="container">
-                    <div class="row center">
-                        <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="parallax"><img src="img/background3.jpg" alt="Unsplashed background img 3"></div>
-        </div> -->
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
-                        <h5 class="white-text">COAGESALUD</h5>
-                        <p class="grey-text text-lighten-4">Cooperativa de ahorro y crédito</p>
+                        <h5 class="white-text">COAGESALUD de R.L.</h5>
+                        <p class="grey-text text-lighten-4">Asociación Cooperativa de Ahorro y Crédito de Empleados del Ministerio de Salud Región Paracentral de Responsabilidad Limitada</p>
                     </div>
                     <div class="col l3 s12">
                         <h5 class="white-text">Configuración</h5>
                         <ul>
-                            <li><a class="white-text" href="#!">General</a></li>
-                            <li><a class="white-text" href="#!">Capial</a></li>
+                            <li><a class="white-text csuc" >Sucursal</a></li>
+                            <li><a class="white-text ccap" >Capital</a></li>
                         </ul>
                     </div>
                     <div class="col l3 s12">
-                        <h5 class="white-text">Acerca de</h5>
-                        
+                        <h5 class="white-text acde">Acerca de</h5>
                     </div>
                 </div>
             </div>
             <div class="footer-copyright">
                 <div class="container">
-                    Derechos reservados <a class="brown-text text-lighten-3" target="_blank" href="http://materializecss.com">COAGESALUD</a>
+                    Derechos reservados <a class="brown-text text-lighten-3" href="http://materializecss.com">COAGESALUD de R.L.</a>
                 </div>
             </div>
         </footer>
