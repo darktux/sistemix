@@ -13,7 +13,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="number" min="1" step="1" max="999" value="001" id="corr" name="corr" required autofocus="true">
+					<input type="number" min="1" step="1" max="999" id="corr" name="corr" required autofocus="true">
 					<label for="corr">Correlativo</label>
 				</div>
 			</div>
@@ -314,7 +314,13 @@
 /*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
-		$('.datepicker').pickadate({
+		$('#fecnac').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			max: -6570, //dias equivalentes a 18 years restados for today
+			selectYears: 80
+		});
+		$('#fecdui').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
 			max: -1 //dias equivalentes a 18 years restados for today
