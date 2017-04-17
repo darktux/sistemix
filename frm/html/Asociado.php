@@ -311,7 +311,7 @@
 			}
 		});
 		$("#corr").change(function() {
-			addLeadingZeros ($('#corr').val(), 3);
+			$('#corr').val(addLeadingZeros ($('#corr').val(), 3));
 		});
 /*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
@@ -321,6 +321,7 @@
 
 		if($("#idid").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
 	            datos = {
+	            	corr:$("#corr").val(),
 	            	nom:$("#nom").val(),
 	            	dui:$("#dui").val(),
 	            	nit:$("#nit").val(),
@@ -359,6 +360,7 @@
 		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
 	            datos = {
 	            	id:$("#idid").val(),
+	            	corr:$("#corr").val(),
 	            	nom:$("#nom").val(),
 	            	dui:$("#dui").val(),
 	            	nit:$("#nit").val(),
@@ -419,6 +421,7 @@
 
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+            $("#corr").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
             $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
@@ -484,6 +487,7 @@
 		'click .view': function (e,value,row,index){
 			/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+            $("#corr").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
             $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
