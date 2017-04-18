@@ -66,7 +66,7 @@
 						<option value="" disabled selected>Seleccione un estado</option>
 						<option value="Soltero/a">Soltero/a</option>
 						<option value="Casado/a">Casado/a</option>
-						<option value="Divorciado/a">Divorciado/a</option>
+						<option value="Acompañado/a">Acompañado/a</option>
 						<option value="Viudo/a">Viudo/a</option>
 						<option value="Divorciado/a">Divorciado/a</option>
 					</select>
