@@ -213,7 +213,7 @@
 		</div>
 		<div class="modal-footer">
 			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="window.open('html/PDFSolicitudAsociado.php?id='+id,'_blank');">Cancelar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
 		</div>
 	</form>
 </div>
@@ -418,7 +418,7 @@
     window.operateEvents = {
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
-
+        	$("#formulario")[0].reset();
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
             $("#corr").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
@@ -485,6 +485,7 @@
 /*TERMINA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO DE CAMPO DE row. SON COMO EN LA VASE DE DATOS*/
 		'click .view': function (e,value,row,index){
+			$("#formulario")[0].reset();
 			/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
             $("#corr").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));

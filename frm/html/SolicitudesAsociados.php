@@ -19,8 +19,8 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12"> 
-		          <input id="nom2" name="nom2" type="text" class="validate" required autofocus="true">
-		          <label for="nom2">Nombre completo</label>
+		          <input id="nomas" name="nomas" type="text" class="validate" required autofocus="true">
+		          <label for="nomas">Nombre completo</label>
 				</div>
 			</div>
 			<div class="row">
@@ -403,7 +403,7 @@
 		if($("#idid2").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
 	            datos = {
 	            	corr:$("#corr").val(),
-	            	nom:$("#nom2").val(),
+	            	nom:$("#nomas").val(),
 	            	dui:$("#dui2").val(),
 	            	nit:$("#nit2").val(),
 	            	ext:$("#ext").val(),
@@ -442,7 +442,7 @@
 	            datos = {
 	            	id:$("#idid2").val(),
 	            	corr:$("#corr").val(),
-	            	nom:$("#nom2").val(),
+	            	nom:$("#nomas").val(),
 	            	dui:$("#dui2").val(),
 	            	nit:$("#nit").val(),
 	            	ext:$("#ext").val(),
@@ -500,7 +500,7 @@
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
             $("#corrAsociado").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
-            $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+            $("#nomas").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
  
