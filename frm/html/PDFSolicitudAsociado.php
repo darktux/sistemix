@@ -12,24 +12,27 @@
     //$mes=date('m');
     //$ano=date('Y');
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////DATOS DE LA BASE DE DATOS//////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Obtengo el monto de aportacion
     $rs=mysql_query("SELECT tipocuenta_montoapertura FROM tab_tipo_cuenta WHERE tipocuenta_correlativo='01'");
     if ($row = mysql_fetch_row($rs)) {
     	$monto = trim($row[0]);
     }
-
+    //Obtengo todos los datos del asociado
     $con->consulta("SELECT * FROM tab_asociado WHERE asociado_correlativo='".$corr."'");
     $rs=$con->getResultado();
     $row=mysql_fetch_array($rs);
-
+    //Obtengo la institucion a la que pertenece el asociado
     $rs2=mysql_query("SELECT * FROM tab_institucion_salud WHERE institucionsalud_id=".$row['asociado_institucionsaludid']);
     if ($row2 = mysql_fetch_row($rs2)) {
     	$institucion = trim($row2[1]);
     }
-    //$nom=trim($row['asociado_nombre']);
-    
     //Convierto el monto a letras
     $texto=numeroATexto($monto);
+    
+
 
 	$pdf = new FPDF('P','mm','Letter');
 	$pdf->SetMargins(20,10,20);
@@ -91,6 +94,31 @@
 	$pdf->Cell(0,5,utf8_decode('$ '.trim($row['asociado_ingresomes'])),'B',1);
 	$pdf->Cell(46,5,utf8_decode('Dependencia donde trabaja: '),0,0);
 	$pdf->Cell(0,5,utf8_decode($institucion),'B',0);
+
+	$pdf->Ln();
+	$pdf->Ln();
+	$pdf->Cell(0,5,utf8_decode('En caso de muerte designo como mis beneficiarios a las siguientes personas:'));
+	$pdf->Ln();
+	$pdf->Ln();
+	//Tabla
+	$pdf->Cell(60,5,utf8_decode('NOMBRE'),1,0);
+	$pdf->Cell(70,5,utf8_decode('DIRECCIÓN'),1,0);
+	$pdf->Cell(35,5,utf8_decode('PARENTESCO'),1,0);
+	$pdf->Cell(10,5,utf8_decode('%'),1,1);
+
+	//Obtengo los beneficiarios correspondientes
+    $rs3=mysql_query("SELECT * FROM tab_beneficiario WHERE beneficiario_asociadoid=".$row['asociado_id']);
+    while ($row3=mysql_fetch_array($rs3)) {
+    	$pdf->Cell(60,5,utf8_decode($row3['beneficiario_nombre']),1,0);
+		$pdf->Cell(70,5,utf8_decode($row3['beneficiario_direccion']),1,0);
+		$pdf->Cell(35,5,utf8_decode($row3['beneficiario_parentezco']),1,0);
+		$pdf->Cell(10,5,utf8_decode($row3['beneficiario_porcentaje']),1,1);
+    }
+    $pdf->Ln();
+	$pdf->Ln();
+	$pdf->Ln();
+	$pdf->Ln();
+    $pdf->Cell(0,5,utf8_decode('F. _____________________________________________'),0,0,R);
 
 	//Genera PDF
 	$pdf->Output();
