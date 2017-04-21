@@ -5,10 +5,10 @@
     $con= new Conex();
     $con->conectar();
 
-	$con->consulta("SELECT asociado_id, asociado_nombre, asociado_profesionoficio, asociado_fechanacimiento, asociado_dui, asociado_departamento, asociado_municipio  FROM tab_asociado where asociado_id='".$_GET['cod']."'");
+	$con->consulta("SELECT a.asociado_correlativo, a.asociado_nombre, a.asociado_profesionoficio, a.asociado_fechanacimiento, a.asociado_dui, a.asociado_departamento, a.asociado_municipio  FROM tab_asociado a, tab_cuenta b, tab_tipo_cuenta c where a.asociado_nombre='".$_GET['id']."'") and a.asociado_id=b.cuenta_idasociado and ;
     
     while ($row = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)){
-		$cod_per= $row['asociado_id'];
+		$cod_per= $row['asociado_correlativo'];
 		$nom= $row['asociado_nombre'];
 		$profe= $row['asociado_profesionoficio'];
 		$fec= $row['asociado_fechanacimiento'];
@@ -47,9 +47,9 @@
     $pdf->SetFont('Arial','B',8);
      $pdf->Cell(0,-15,utf8_decode($_GET['tipo_cuenta']),0,1,'C'); 
    // $pdf->Ln(0.5);
-    $pdf->Cell(0,25,'No. Cuenta:           '.$_GET['cuenta'].'                     ',0,1,'R'); 
+    $pdf->Cell(0,25,'No. Cuenta: '.$_GET['cuenta'],0,1,'R'); 
    // $pdf->Ln(0.5);
-    $pdf->Cell(0,-25,'________________',0,1,'R'); 
+    $pdf->Cell(0,-25,'____________',0,1,'R'); 
     $pdf->Cell(0,40,'Asociado No.:       0'.$cod_per.'       ',0,1,'R'); 
    // $pdf->Ln(0.5);
     $pdf->Cell(0,-40,'________',0,1,'R'); 

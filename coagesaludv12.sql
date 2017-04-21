@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-04-2017 a las 18:46:07
+-- Tiempo de generación: 21-04-2017 a las 05:11:10
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -58,7 +58,7 @@ CREATE TABLE `tab_asociado` (
 --
 
 INSERT INTO `tab_asociado` (`asociado_id`, `asociado_correlativo`, `asociado_nombre`, `asociado_dui`, `asociado_nit`, `asociado_extendido`, `asociado_fechaextendido`, `asociado_lugarnacimiento`, `asociado_fechanacimiento`, `asociado_nacionalidad`, `asociado_estadocivil`, `asociado_departamento`, `asociado_municipio`, `asociado_direccion`, `asociado_profesionoficio`, `asociado_ingresomes`, `asociado_estado`, `asociado_institucionsaludid`, `asociado_sucursalid`, `asociado_fechasesion`, `asociado_numacta`, `asociado_numpunto`) VALUES
-(7, '1', 'Emma Watson', '04123345-6', '2324-121212-111-1', '', '1999-04-15', '', '1999-01-01', 'Savadoreño/a', 'Soltero/a', '0', 'La Libertad', '', '', 0, 'Aprobado', 1, 1, '2017-04-14', 1, '1a'),
+(7, '1', 'Emma Watson', '04123345-6', '2324-121212-111-1', '', '1999-04-15', '', '1999-01-01', 'Savadoreño/a', 'Soltero/a', '', '', '', 'estaaaa', 0, 'Aprobado', 1, 1, '2017-04-14', 1, '1a'),
 (9, '2', 'hola mundo', '1111111111', '22222222222222222', '', '1999-04-11', '', '1999-04-11', 'Savadoreño/a', 'Viudo/a', '0', 'Cojutepeque', '', '', 0, 'En espera', 1, 1, '0000-00-00', 0, ''),
 (10, '3', 'Elisha Curthberth', '1932393232', '12392092302309239', 'sdaksda', '1999-01-06', 'asdas', '1999-04-06', 'Savadoreño/a', 'Soltero/a', '0', 'Monte San Juan', 'ahi', 'bonita', 1923, 'Aprobado', 1, 1, '2017-04-16', 23, '3c'),
 (11, '4', 'Hermione', '213e234234', '234234e234e234234', 'sdflsdlwd', '1999-04-02', 'msdlfnmsklfcml', '1999-04-04', 'Savadoreño/a', 'Soltero/a', '0', 'El Rosario', '', '', 2000, 'En espera', 1, 1, '0000-00-00', 0, ''),
@@ -112,7 +112,18 @@ CREATE TABLE `tab_capital` (
 
 INSERT INTO `tab_capital` (`capital_id`, `capital_anio`, `capital_fecha`, `capital_concepto`, `capital_deposito`, `capital_retiro`, `capital_saldo`, `capital_sucursalid`) VALUES
 (1, 2017, '2017-04-17', 'uno', 1000, 0, 1000, 1),
-(2, 2017, '2017-04-17', 'primera', 4578.98, 0, 5578.98, 1);
+(2, 2017, '2017-04-17', 'primera', 4578.98, 0, 5578.98, 1),
+(3, 2017, '2017-04-17', 'retiro uno', 0, 500, 5078.98, 1),
+(4, 2017, '2017-04-17', 'wert', 700, 0, 5778.98, 1),
+(5, 2017, '2017-04-17', 'ewteg', 0, 778, 5000.98, 1),
+(6, 2017, '2017-04-17', 'comision', 0, 0.98, 5000, 1),
+(7, 2017, '2017-04-17', 'wfsd', 555, 0, 5555, 1),
+(8, 2017, '2017-04-17', 'retiro', 0, 1000, 4555, 1),
+(9, 2017, '2017-04-17', 'deposito', 445, 0, 5000, 1),
+(10, 2017, '2017-04-20', 'ssss', 0, 22221, -17221, 1),
+(11, 2017, '2017-04-20', 'sdsadas', 23413, 0, 6192, 1),
+(12, 2017, '2017-04-20', 'sdfsdfdf', 0, 0, -17264, 1),
+(13, 2017, '2017-04-20', 'addsfd', 23345, 0, 6081, 1);
 
 -- --------------------------------------------------------
 
@@ -171,7 +182,6 @@ CREATE TABLE `tab_credito_movimiento` (
 
 CREATE TABLE `tab_cuenta` (
   `cuenta_id` varchar(11) NOT NULL,
-  `cuenta_monto` float NOT NULL,
   `cuenta_fechaapertura` date NOT NULL,
   `cuenta_estado` varchar(50) NOT NULL,
   `cuenta_asociadoid` int(11) NOT NULL,
@@ -182,10 +192,10 @@ CREATE TABLE `tab_cuenta` (
 -- Volcado de datos para la tabla `tab_cuenta`
 --
 
-INSERT INTO `tab_cuenta` (`cuenta_id`, `cuenta_monto`, `cuenta_fechaapertura`, `cuenta_estado`, `cuenta_asociadoid`, `cuenta_tipocuentaid`) VALUES
-('01-23432342', 234, '2017-04-17', 'Activada', 7, 13),
-('01-4576743', 45, '2017-04-17', 'Activada', 7, 13),
-('01-67678678', 445, '2017-04-17', 'Activada', 9, 14);
+INSERT INTO `tab_cuenta` (`cuenta_id`, `cuenta_fechaapertura`, `cuenta_estado`, `cuenta_asociadoid`, `cuenta_tipocuentaid`) VALUES
+('01-23432342', '2017-04-17', 'Activada', 7, 13),
+('01-4576743', '2017-04-17', 'Activada', 7, 13),
+('01-67678678', '2017-04-17', 'Activada', 9, 14);
 
 -- --------------------------------------------------------
 
@@ -213,9 +223,23 @@ CREATE TABLE `tab_cuenta_movimiento` (
   `cuentamovimiento_deposito` float NOT NULL,
   `cuentamovimiento_retiro` float NOT NULL,
   `cuentamovimiento_saldo` float NOT NULL,
-  `cuentamovimiento_plazo` smallint(6) NOT NULL,
   `cuentamovimiento_cuentaid` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_cuenta_movimiento`
+--
+
+INSERT INTO `tab_cuenta_movimiento` (`cuentamovimiento_id`, `cuentamovimiento_concepto`, `cuentamovimiento_fecha`, `cuentamovimiento_deposito`, `cuentamovimiento_retiro`, `cuentamovimiento_saldo`, `cuentamovimiento_cuentaid`) VALUES
+(1, 'sadfdsgsdsdg uno', '2017-04-13', 55, 0, 55, '01-4576743'),
+(2, 'sadfdsgsdsdg uno', '2017-04-13', 55, 0, 55, '01-4576743'),
+(3, 'dgfhfdgf dos', '2017-04-14', 39, 0, 94, '01-4576743'),
+(4, 'dgfhfdgf dos', '2017-04-14', 39, 0, 94, '01-4576743'),
+(6, 'dgdfdfd', '2017-04-17', 45, 0, 139, '01-4576743'),
+(7, 'uno', '2017-04-17', 100, 0, 239, '01-4576743'),
+(8, 'tresss', '2017-04-17', 500, 0, 739, '01-4576743'),
+(9, 'ddd', '2017-04-17', 100, 0, 100, '01-23432342'),
+(10, 'xccaasd', '2017-04-20', 0, 0, 100, '01-23432342');
 
 -- --------------------------------------------------------
 
@@ -473,7 +497,7 @@ ALTER TABLE `tab_asociado`
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
 ALTER TABLE `tab_capital`
-  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito`
 --
@@ -488,7 +512,7 @@ ALTER TABLE `tab_credito_movimiento`
 -- AUTO_INCREMENT de la tabla `tab_cuenta_movimiento`
 --
 ALTER TABLE `tab_cuenta_movimiento`
-  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `tab_institucion_salud`
 --
@@ -503,7 +527,7 @@ ALTER TABLE `tab_solicitud_credito`
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
 ALTER TABLE `tab_sucursal`
-  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --

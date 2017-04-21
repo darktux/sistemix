@@ -314,7 +314,10 @@
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .imprimir': function (e, value, row, index) {
-       		window.open('html/PDFSolicitudAsociado.php?id='+JSON.stringify(row.asociado_correlativo).replace(/"/gi,''),'_blank');
+        	idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
+        	tipo_cuenta=JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,'');
+        	idasociado=JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,'');
+       		window.open('php/creaPDF.php?id='+idasociado+'&tipo_cuenta='+tipo_cuenta+'&cuenta='+idcuenta,'_blank');
         }
 /*FINALIZA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
     };

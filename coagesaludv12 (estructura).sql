@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-04-2017 a las 18:46:22
+-- Tiempo de generación: 21-04-2017 a las 05:11:24
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -141,7 +141,6 @@ CREATE TABLE `tab_credito_movimiento` (
 
 CREATE TABLE `tab_cuenta` (
   `cuenta_id` varchar(11) NOT NULL,
-  `cuenta_monto` float NOT NULL,
   `cuenta_fechaapertura` date NOT NULL,
   `cuenta_estado` varchar(50) NOT NULL,
   `cuenta_asociadoid` int(11) NOT NULL,
@@ -174,7 +173,6 @@ CREATE TABLE `tab_cuenta_movimiento` (
   `cuentamovimiento_deposito` float NOT NULL,
   `cuentamovimiento_retiro` float NOT NULL,
   `cuentamovimiento_saldo` float NOT NULL,
-  `cuentamovimiento_plazo` smallint(6) NOT NULL,
   `cuentamovimiento_cuentaid` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -401,7 +399,7 @@ ALTER TABLE `tab_asociado`
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
 ALTER TABLE `tab_capital`
-  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `capital_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito`
 --
@@ -416,7 +414,7 @@ ALTER TABLE `tab_credito_movimiento`
 -- AUTO_INCREMENT de la tabla `tab_cuenta_movimiento`
 --
 ALTER TABLE `tab_cuenta_movimiento`
-  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `tab_institucion_salud`
 --
@@ -431,7 +429,7 @@ ALTER TABLE `tab_solicitud_credito`
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
 ALTER TABLE `tab_sucursal`
-  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sucursal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tab_tipo_credito`
 --
