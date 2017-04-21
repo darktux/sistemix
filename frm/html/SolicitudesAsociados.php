@@ -324,12 +324,12 @@
 		$('#fecdui').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -1 //dias equivalentes a 18 years restados for today
+			max: 0 //dias equivalentes a 18 years restados for today
 		});
 		$('#fecses').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -1 //dias equivalentes a 18 years restados for today
+			max: 0 //dias equivalentes a 18 years restados for today
 		});
 		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
@@ -500,7 +500,7 @@
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
             $("#corrAsociado").val(JSON.stringify(row.asociado_correlativo).replace(/"/gi,''));
-            $("#nomas").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+            $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
  

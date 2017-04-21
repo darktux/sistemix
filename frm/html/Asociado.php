@@ -432,6 +432,7 @@
             $("#nac").val(JSON.stringify(row.asociado_nacionalidad).replace(/"/gi,''));
             $("#est").val(JSON.stringify(row.asociado_estadocivil).replace(/"/gi,''));
             $("#dep").val(JSON.stringify(row.asociado_departamento).replace(/"/gi,''));
+            cargarMunicipios('dep','mun');
             $("#mun").val(JSON.stringify(row.asociado_municipio).replace(/"/gi,''));
             $("#dir").val(JSON.stringify(row.asociado_direccion).replace(/"/gi,''));
             $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
@@ -499,6 +500,7 @@
             $("#nac").val(JSON.stringify(row.asociado_nacionalidad).replace(/"/gi,''));
             $("#est").val(JSON.stringify(row.asociado_estadocivil).replace(/"/gi,''));
             $("#dep").val(JSON.stringify(row.asociado_departamento).replace(/"/gi,''));
+            cargarMunicipios('dep','mun');
             $("#mun").val(JSON.stringify(row.asociado_municipio).replace(/"/gi,''));
             $("#dir").val(JSON.stringify(row.asociado_direccion).replace(/"/gi,''));
             $("#prouof").val(JSON.stringify(row.asociado_profesionoficio).replace(/"/gi,''));
