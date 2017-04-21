@@ -41,7 +41,7 @@
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
 				    	<th data-field="cuenta_id" data-align="center"># Cuenta</th>
 				    	<th data-field="cuenta_asociadonombre" data-align="center">Asociado</th>
-			            <th data-field="cuenta_monto" data-align="center">Monto</th>
+			            <th data-field="cuenta_saldo" data-align="center">Saldo ($)</th>
 			            <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th>
 			            <th data-field="cuenta_estado" data-align="center">Estado</th>
 			            <th data-field="cuenta_tipocuentanombre" data-align="center">Tipo de cuenta</th>
@@ -239,15 +239,19 @@
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
+        	'&nbsp;<a class="move ml10" href="javascript:void(0)" title="Transacción">',
+                '<i class="material-icons">compare_arrows</i>',
+            '</a>',
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
             '</a>',
             '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
                 '<i class="material-icons">delete</i>',
             '</a>',
-            '&nbsp;<a class="view ml10" href="javascript:void(0)" title="Ver más">',
-                '<i class="material-icons">compare_arrows</i>',
+            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
+                '<i class="material-icons">print</i>',
             '</a>'
+            
         ].join('');
     }
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
@@ -292,7 +296,7 @@
         },
 /*FINALIZA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .view': function (e, value, row, index) {
+        'click .move': function (e, value, row, index) {
         	idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
         	$("#formularios").load('html/CuentaMovimiento.php');
         },
@@ -306,8 +310,13 @@
         	getnumber();
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
-        }
+        },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+/*INICIA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .imprimir': function (e, value, row, index) {
+       		window.open('html/PDFSolicitudAsociado.php?id='+JSON.stringify(row.asociado_correlativo).replace(/"/gi,''),'_blank');
+        }
+/*FINALIZA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
     };
 /*FINALIZA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 function ejecutarajax(datos){

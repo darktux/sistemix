@@ -61,8 +61,8 @@
                     SELECT 
                         c.*,
                         a.asociado_nombre AS cuenta_asociadonombre,
-                        t.tipocuenta_nombre AS cuenta_tipocuentanombre
-
+                        t.tipocuenta_nombre AS cuenta_tipocuentanombre,
+                        c.cuenta_id AS cuenta_saldo
                     FROM 
                         tab_cuenta c,
                         tab_asociado a,
@@ -72,8 +72,28 @@
                     AND
                         c.cuenta_tipocuentaid=t.tipocuenta_id;
                 ");
+                $resultadoaux = $con->getResultado();
                 $i=0;$salida=array();
-                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
+                    $con->consulta("
+                        SELECT 
+                            cuentamovimiento_saldo 
+                        FROM 
+                            tab_cuenta_movimiento 
+                        WHERE
+                            cuentamovimiento_cuentaid='".$fila['cuenta_id']."'
+                        ORDER BY 
+                            cuentamovimiento_id 
+                        DESC 
+                        LIMIT 
+                            1;
+                    ");
+                    if ($fila2 = mysql_fetch_row($con->getResultado())) {       
+                        $fila['cuenta_saldo']=$fila2[0];
+                    }
+                    else{
+                        $fila['cuenta_saldo']='0.00';
+                    }
                     $salida[$i]=$fila;
                     $i++;
                 }

@@ -38,7 +38,7 @@
 				    <br>
 				</div>
 			    <div class="input-field col s12">
-					<input type="number" name="mon" id="mon" min="0.00" step="0.01" required>
+					<input type="number" name="mon" id="mon" min="1.00" step="0.01" required>
 					<label for="mon" class="active">Monto ($)</label>
 				</div>
 				<div class="input-field col s12">
@@ -125,45 +125,47 @@
 		function(e){
 	    	e.preventDefault();
 	    	var f = $(this);
-	    	var formData = new FormData(document.getElementById("formulario"));
-	    	formData.append("idcue", idcuenta);
-	    	if(document.getElementById("dep1").checked){//deposito
-				formData.append("dep", $("#mon").val());
-				formData.append("ret", "0.00");
-			}
-			else if(document.getElementById("ret1").checked){//retiro
-				formData.append("dep", "0.00");
-				formData.append("ret", $("#mon").val());
-			}
-	    	if($("#idid").val() == ""){ 
-				formData.append("acc", "set");
-			}
-			else{
-		    	formData.append("id", $("#idid").val());
-		    	formData.append("acc", "upd");
-			}
-			$.ajax({
-	            url: "php/CuentaMovimiento.php",
-	            type: "post",
-	            dataType: "html",
-	            data: formData,
-	            cache: false,
-	            contentType: false,
-	     		processData: false,
-	        	success:function(responseText){
-	        		if(/Registro/.test(responseText)){
-	        			$('#modal1').modal('close');
-	        			alert(responseText);
-	        			$("#formulario")[0].reset();
-		        		$('#tabla1').bootstrapTable('refresh',{url:'php/CuentaMovimiento.php?acc=getjsontabla&idcue='+idcuenta+''});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
-		        		document.getElementById("buscar1").focus();
-						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
-	        		}
-	        		else{
-	        			alert(responseText);
-		        	}
-	    	    }
-	        });
+	    	if(validarretiro()){
+		    	var formData = new FormData(document.getElementById("formulario"));
+		    	formData.append("idcue", idcuenta);
+		    	if(document.getElementById("dep1").checked){//deposito
+					formData.append("dep", $("#mon").val());
+					formData.append("ret", "0.00");
+				}
+				else if(document.getElementById("ret1").checked){//retiro
+					formData.append("dep", "0.00");
+					formData.append("ret", $("#mon").val());
+				}
+		    	if($("#idid").val() == ""){ 
+					formData.append("acc", "set");
+				}
+				else{
+			    	formData.append("id", $("#idid").val());
+			    	formData.append("acc", "upd");
+				}
+				$.ajax({
+		            url: "php/CuentaMovimiento.php",
+		            type: "post",
+		            dataType: "html",
+		            data: formData,
+		            cache: false,
+		            contentType: false,
+		     		processData: false,
+		        	success:function(responseText){
+		        		if(/Registro/.test(responseText)){
+		        			$('#modal1').modal('close');
+		        			alert(responseText);
+		        			$("#formulario")[0].reset();
+			        		$('#tabla1').bootstrapTable('refresh',{url:'php/CuentaMovimiento.php?acc=getjsontabla&idcue='+idcuenta+''});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+			        		document.getElementById("buscar1").focus();
+							$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+		        		}
+		        		else{
+		        			alert(responseText);
+			        	}
+		    	    }
+		        });
+		    }
 		}	
 	);
 	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
@@ -267,9 +269,22 @@
 		}
 	}
 	/*FINALIZA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
+	/*INICIA FUNCION PARA VALIDAR RETIRO DE CAPITAL */
+	function validarretiro(){
+		if(document.getElementById("ret1").checked){//retiro
+			if( ($("#sal0").val()-$("#mon").val())<0 ){
+				alert("No tiene fondos suficientes para retirar esa cantidad.");
+				$("#mon").val("0.00");
+				actualizasaldo();
+				return false;
+			}
+		}
+		return true;
+	}
+	/*FINALIZA FUNCION PARA VALIDAR RETIRO DE CAPITAL */
 	/*INICIA EL BLOQUE DE LOS EVENTOS*/
 	$(".actsal").change(function() { actualizasaldo(); });
 	$("#mon").keyup(function() { actualizasaldo(); });
-
+	$("#mon").blur(function(){ validarretiro(); });
 	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 </script>
