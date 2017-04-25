@@ -221,7 +221,7 @@
 <!-- INICIA EL BLOQUE LA TABLA -->
 
 <div class="container">
-	<h4 class="center teal-text">Asociado</h4>
+	<h4 class="center teal-text">Asociados</h4>
 	<div class="row">
 		<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 		<div class="col s12">

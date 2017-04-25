@@ -56,7 +56,6 @@
             <ul id="dropdown-cre1" class="dropdown-content">
                 <li><a class="scre">Solicitudes de crédito</a></li>
                 <li><a class="ncre">Gestionar crédito</a></li>
-                <li><a class="mcre">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a class="tcre">Tipo de crédito</a></li>
                 <li><a class="ccre">Calculadora de crédito</a></li>
@@ -64,7 +63,6 @@
             <ul id="dropdown-cre2" class="dropdown-content">
                 <li><a class="scre">Solicitudes de crédito</a></li>
                 <li><a class="ncre">Gestionar crédito</a></li>
-                <li><a class="mcre">Movimientos del crédito</a></li>
                 <li class="divider"></li>
                 <li><a class="tcre">Tipo de crédito</a></li>
                 <li><a class="ccre">Calculadora de crédito</a></li>

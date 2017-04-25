@@ -42,7 +42,7 @@
 				    	<th data-field="cuenta_id" data-align="center"># Cuenta</th>
 				    	<th data-field="cuenta_asociadonombre" data-align="center">Asociado</th>
 			            <th data-field="cuenta_saldo" data-align="center">Saldo ($)</th>
-			            <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th>
+			            <!-- <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th> -->
 			            <th data-field="cuenta_estado" data-align="center">Estado</th>
 			            <th data-field="cuenta_tipocuentanombre" data-align="center">Tipo de cuenta</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->

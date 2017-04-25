@@ -61,7 +61,7 @@
 			            <th data-field="tipocuenta_nombre" data-align="center">Nombre</th>
 			            <th data-field="tipocuenta_interes" data-align="center">Tasa de interés</th>
 			            <th data-field="tipocuenta_montominimo" data-align="center">Monto mínimo</th>
-			            <th data-field="tipocuenta_cobromontominimo" data-align="center">Cobro monto máximo</th>
+			            <!-- <th data-field="tipocuenta_cobromontominimo" data-align="center">Cobro monto minimo</th> -->
 			            <th data-field="tipocuenta_montoapertura" data-align="center">Monto de apertura</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ****************************************************************************************-->
 				    </tr>

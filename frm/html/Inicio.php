@@ -17,11 +17,25 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col s12 m6 l3">
-			<div class="card" style="width: 256px;">
+	<div class="col s12 m6 l4">
+			<div class="card" >
+				<div class="card-image">
+					<img src="../img/ad3.png">
+					<span class="card-title black-text center"><b>Gestionar socios</b></span>
+					<a id="directo-ncre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
+				</div>
+				<div class="card-content">
+					<p>
+						Apertura de un plan de crédito para un socio.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col s12 m6 l4">
+			<div class="card">
 				<div class="card-image">
 					<img src="../img/ad1.png">
-					<span class="card-title black-text center"><b>Gestionar cuenta</b></span>
+					<span class="card-title black-text center"><b>Gestionar cuentas</b></span>
 					<a id="directo-ncue" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 				</div>
 				<div class="card-content">
@@ -31,7 +45,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col s12 m6 l3">
+		<!-- <div class="col s12 m6 l3">
 			<div class="card" style="width: 256px;">
 				<div class="card-image">
 					<img src="../img/ad2.png">
@@ -44,26 +58,13 @@
 					</p>
 				</div>
 			</div>
-		</div>
-		<div class="col s12 m6 l3">
-			<div class="card" style="width: 256px;">
-				<div class="card-image">
-					<img src="../img/ad3.png">
-					<span class="card-title black-text center"><b>Solicitud de crédito</b></span>
-					<a id="directo-ncre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
-				</div>
-				<div class="card-content">
-					<p>
-						Apertura de un plan de crédito para un socio.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m6 l3">
-			<div class="card" style="width: 256px;">
+		</div> -->
+		
+		<div class="col s12 m6 l4">
+			<div class="card">
 				<div class="card-image">
 					<img src="../img/ad4.png">
-					<span class="card-title black-text center"><b>Gestionar crédito</b></span>
+					<span class="card-title black-text center"><b>Gestionar créditos</b></span>
 					<a id="directo-mcre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
 				</div>
 				<div class="card-content">
