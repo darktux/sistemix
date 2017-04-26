@@ -130,6 +130,93 @@
             echo json_encode($salida);
             break;
 
+        case 'addsol':
+            $con->consulta("BEGIN");
+            try{
+                $con->consulta("INSERT INTO tab_solicitud_credito(
+                    solicitudcredito_sexo,
+                    solicitudcredito_telefonofijo,
+                    solicitudcredito_telefonocelular,
+                    solicitudcredito_lugartrabajo,
+                    solicitudcredito_direcciontrabajo,
+                    solicitudcredito_jefeinmediato,
+                    solicitudcredito_tiempotrabajo,
+                    solicitudcredito_puesto,
+                    solicitudcredito_telefonotrabajo,
+                    solicitudcredito_nombreconyuge,
+                    solicitudcredito_sexoconyuge,
+                    solicitudcredito_duiconyuge,
+                    solicitudcredito_nitconyuge,
+                    solicitudcredito_fechanacimientoconyuge,
+                    solicitudcredito_profesionoficioconyuge,
+                    solicitudcredito_direccionconyuge,
+                    solicitudcredito_estadocivilconyuge,
+                    solicitudcredito_telefonofijoconyuge,
+                    solicitudcredito_telefonocelularconyuge,
+                    solicitudcredito_lugartrabajoconyuge,
+                    solicitudcredito_direcciontrabajoconyuge,
+                    solicitudcredito_sueldomensual,
+                    solicitudcredito_otrosingresos,
+                    solicitudcredito_totalingresos,
+                    solicitudcredito_gastovida,
+                    solicitudcredito_pagodeudas,
+                    solicitudcredito_otrosegresos,
+                    solicitudcredito_totalegresos,
+                    solicitudcredito_nombrereferencia,
+                    solicitudcredito_direccionreferencia,
+                    solicitudcredito_telefonofijoreferencia,
+                    solicitudcredito_telefonocelularreferencia,
+                    solicitudcredito_lugartrabajoreferencia,
+                    solicitudcredito_direcciontrabajoreferencia,
+                    solicitudcredito_asociadoid) VALUES(
+                    '".$_POST['sex']."',
+                    '".$_POST['tel']."',
+                    '".$_POST['cel']."',
+                    '".$_POST['lugt']."',
+                    '".$_POST['dirt']."',
+                    '".$_POST['jefe']."',
+                    '".$_POST['timet']."',
+                    '".$_POST['pues']."',
+                    '".$_POST['telt']."',
+                    '".$_POST['nomc']."',
+                    '".$_POST['sexc']."',
+                    '".$_POST['duic']."',
+                    '".$_POST['nitc']."',
+                    '".$_POST['fecc']."',
+                    '".$_POST['proc']."',
+                    '".$_POST['dirc']."',
+                    '".$_POST['estc']."',
+                    '".$_POST['telc']."',
+                    '".$_POST['celc']."',
+                    '".$_POST['lugc']."',
+                    '".$_POST['dirtc']."',
+                    '".$_POST['suel']."',
+                    '".$_POST['otroi']."',
+                    '".$_POST['toti']."',
+                    '".$_POST['gasv']."',
+                    '".$_POST['pagd']."',
+                    '".$_POST['otroe']."',
+                    '".$_POST['tote']."',
+                    '".$_POST['nomr']."',
+                    '".$_POST['dirr']."',
+                    '".$_POST['telr']."',
+                    '".$_POST['celr']."',
+                    '".$_POST['lugtr']."',
+                    '".$_POST['dirtr']."',
+                    '".$_POST['idid']."'
+                    )");
+
+                //$con->consulta();
+            $con->consulta('COMMIT');
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
+
+            if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+            # code...
+            break;
+
 
     }
 	//$con->limpiarConsulta();

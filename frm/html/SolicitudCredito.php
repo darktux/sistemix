@@ -55,14 +55,15 @@
 <!-- FINALIZA EL BLOQUE DE LA TABLA -->
 <!-- INICIA EL BLOQUE DEL MODAL NUEVA CUENTA -->
 <div id="modal2" class="modal modal-fixed-footer">
-	<form class="col s12" id="formulario" onsubmit="return submit1();">
-		<input id="idid" type="hidden" value="">
+	<form class="col s12" id="formulario">
+		<input id="idid" name="idid" type="hidden" value="">
 		<div class="modal-content" id="modalcontent">
 			<h5>Nueva solicitud de crédito</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
+			<span id="top"></span>
 			<div class="row">
 				<ul id="tabs-swipe-demo" class="tabs swipeable">
-				    <li class="tab col s3 "><a class="active teal-text waves-effect waves-teal" href="#personales"><i class="material-icons">contact_phone</i> Datos Personales</a></li>
+				    <li class="tab col s3"><a class="teal-text waves-effect waves-teal active" href="#personales"><i class="material-icons">contact_phone</i> Datos Personales</a></li>
 				    <li class="tab col s3 " ><a  class="teal-text waves-effect waves-teal" href="#familiares" ><i class="material-icons">supervisor_account</i> Datos Familiares</a></li>
 				    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal" href="#laborales"><i class="material-icons">business</i> Datos Laborales</a></li>
 				    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal" href="#referencias"><i class="material-icons">assignment</i> Referencias</a></li>
@@ -71,7 +72,7 @@
 				<div id="personales" class="col s12 white swipeable">
 					<div class="row">
 						<div class="input-field col s12"> 
-				          <input id="nom" name="nom" type="text" class="validate" required autofocus="true">
+				          <input id="nom" name="nom" type="text" class="validate" disabled>
 				          <label id="lnom" for="nom">Nombre completo</label>
         				</div>
 					</div>
@@ -80,55 +81,14 @@
 							<label for="sex">Sexo</label> 
 						</div>
 						<div class="input-field inline col s3">
-								<input class="with-gap" name="sex" type="radio" id="mas" checked />
+								<input class="with-gap" name="sex" type="radio" id="mas" value="M" checked />
 								<label for="mas">Masculino</label> 	
 						</div>
 						<div class="input-field inline col s3">
-								<input class="with-gap" name="sex" type="radio" id="fem"  />	
+								<input class="with-gap" name="sex" type="radio" id="fem" value="F" />	
 								<label for="fem">Femenino</label>
 						</div>
 						<br><br><br>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">	
-							<input id="fec" name="fec" type="date" class="datepicker" >
-							<label for="fec" >Fecha de nacimiento</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12"> 
-					         <input id="dui" name="dui" type="text"  minlength="10" maxlength="10">
-					         <label for="dui">DUI</label>
-        				</div>
-        			</div>
-        			<div class="row">
-						<div class="input-field col s12">
-							<input type="text" name="nit" id="nit" >
-							<label for="nit">NIT</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">			  		
-				          <textarea id="dir" name="dir" class="materialize-textarea"></textarea>
-				          <label for="dir">Direcci&oacute;n</label>
-					    </div>			    
-					</div>	
-					<div class="row">
-						<div class="input-field col s12">
-							<input type="text" name="pro" id="pro" >
-							<label for="pro">Profesi&oacute;n u oficio</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<select class="" id="est" name="est">
-						      <option value="" disabled selected>Seleccione un estado</option>
-						      <option value="1">Option 1</option>
-						      <option value="2">Option 2</option>
-						      <option value="3">Option 3</option>
-						    </select>
-							<label for="est">Estado civil</label>
-						</div>
 					</div>	
 					<div class="row">
 						<div class="input-field col s12">
@@ -198,10 +158,12 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<select class="" id="estc" name="estc">
-						      <option value="" disabled selected>Seleccione un estado</option>
-						      <option value="1">Option 1</option>
-						      <option value="2">Option 2</option>
-						      <option value="3">Option 3</option>
+						      	<option value="" disabled selected>Seleccione un estado</option>
+								<option value="Soltero/a">Soltero/a</option>
+								<option value="Casado/a">Casado/a</option>
+								<option value="Acompañado/a">Acompañado/a</option>
+								<option value="Viudo/a">Viudo/a</option>
+								<option value="Divorciado/a">Divorciado/a</option>
 						    </select>
 							<label for="estc">Estado civil conyugue</label>
 						</div>
@@ -229,8 +191,7 @@
 				          	<textarea id="dirtc" name="dirtc" class="materialize-textarea"></textarea>
 				          	<label for="dirtc">Direcci&oacute;n de trabajo conyugue</label>
 					    </div>			    
-					</div>
-						
+					</div>	
 				</div>
 
 	  			<div id="laborales" class="col s12 white swipeable">
@@ -352,18 +313,13 @@
 							<label for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
 						</div>
 					</div>
-	  			</div>		
+	  			</div>
+	  			<!-- <a href="#top"><i class="material-icons">keyboard_arrow_up</i></a> -->
+	  			<div class="chip">
+				    <img src="../img/fondo12.jpg" alt="Contact Person">
+				    <a href="#top">Volver arriba</a>
+				</div>		
 	  		</div>
-	  		 <div class="row center-align" style="margin: auto">
-		  		<div class="col s12 center-align">		
-					<ul id="tabs-swipe-demo" class="tabs swipeable">
-					    <li class="tab col s3 "><a class="active teal-text waves-effect waves-teal" onclick="focuss(1);"><i class="material-icons">contact_phone</i>  </a></li>
-					    <li class="tab col s3 "><a  class="teal-text waves-effect waves-teal"  onclick="focuss(2);"><i class="material-icons">supervisor_account</i>  </a></li>
-					    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal" id="op3" onclick="focuss(3);"><i class="material-icons">business</i>  </a></li>
-					    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal"  onclick="focuss(4);"><i class="material-icons">assignment</i> </a></li>
-			  		</ul>
-		  		</div>
-		  	</div>
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO *****************************************************************************************************************************-->
 		</div>
 		<div class="modal-footer">
@@ -382,10 +338,13 @@
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: 1 //dias equivalentes  years restados for today
+			max: -6570, //dias equivalentes  years restados for today
+			selectYears: 80
 		});
 		$('select').material_select('destroy');
-		$('select').material_select();	
+		$('select').material_select();
+		$('ul.tabs').tabs();
+
 	    $.ajax({
 	        type:"post",
 	        url: "php/TipoCuenta.php",
@@ -464,34 +423,45 @@
 	}
 	/*FINALIZA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 
-	/*INICIA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
-	function submit1(){
-		if($("#idid").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
-	            datos = {
-	            	cueid:$("#cueid").val(),
-	            	asoid:$("#asoid").val(),
-	            	fecape:$("#fecape").val(),
-	            	mon:$("#mon").val(),
-	            	tipcueid:$("#tipcueid").val(),
-	            	est:$("#est").val(),
-	            	acc:'set'
-	            }
-		}
-		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
-	            datos = {
-	            	id:$("#idid").val(),
-	            	fecape:$("#fecape").val(),
-	            	mon:$("#mon").val(),
-	            	tipcueid:$("#tipcueid").val(),
-	            	est:$("#est").val(),
-	            	acc:'upd'
-	            }
-		}
-		/*DATOS PARA MODIFICAR UN REGISTRO (FIN DEL BLOQUE) ********************************************************************************************************/
-		ejecutarajax(datos);
-    	return false;
-	}
-	/*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
+	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
+	$("#formulario").on(
+		"submit", 
+		function(e){
+	    	e.preventDefault();
+	    	var f = $(this);
+	    	var formData = new FormData(document.getElementById("formulario"));
+	    	if($("#idid").val() == ""){ 
+	        	formData.append("acc", "set"); 
+			}
+			else{
+		    	formData.append("id", $("#idid").val());
+		    	formData.append("acc", "addsol");
+			}
+			$.ajax({
+	            url: "php/Credito.php",
+	            type: "post",
+	            dataType: "html",
+	            data: formData,
+	            cache: false,
+	            contentType: false,
+	     		processData: false,
+	        	success:function(responseText){
+	        		if(/Registro/.test(responseText)){
+	        			$('.modal').modal('close');
+	        			alert(responseText);
+	        			$("#formulario")[0].reset();
+		        		$('#tabla2').bootstrapTable('refresh',{url:'php/Credito.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+		        		document.getElementById("buscar1").focus();
+						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+	        		}
+	        		else{
+	        			alert(responseText);
+		        	}
+	    	    }
+	        });
+		}	
+	);
+	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	/*INICIA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 	function operateFormatter1(value, row, index) {
         return [
@@ -504,10 +474,7 @@
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
-        	'&nbsp;<a class="move ml10" href="javascript:void(0)" title="Transacción">',
-                '<i class="material-icons">compare_arrows</i>',
-            '</a>',
-            '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
             '</a>',
             '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
@@ -515,7 +482,7 @@
             '</a>',
             '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
                 '<i class="material-icons">print</i>',
-            '</a>'
+            '</a>',
             
         ].join('');
     }
@@ -569,11 +536,9 @@
 /*INICIA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .new': function (e, value, row, index) {
         	//alert("jajajaja"); /********************************************************************************************************/
-        	$("#asoid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
-        	$("#tit").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	$("#tit2").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	getnumber();
-        	//$('label').addClass("active");
+        	$("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+        	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+        	$('#lnom').addClass("active");
         	$('#modal2').modal('open');
         },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
