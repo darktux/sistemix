@@ -63,8 +63,8 @@
 			<span id="top"></span>
 			<div class="row">
 				<ul id="tabs-swipe-demo" class="tabs swipeable">
-					<li class="tab col s2">Pestañas</li>
-				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales"><i class="material-icons">person</i> </a></li>
+					
+				    <li class="tab col s2 active"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales"><i class="material-icons">person</i> </a></li>
 				    <li class="tab col s2 " ><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" ><i class="material-icons">people</i> </a></li>
 				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales"><i class="material-icons">domain</i> </a></li>
 				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias Personales" href="#referencias"><i class="material-icons">people_outline</i> </a></li>
@@ -74,8 +74,8 @@
 				<div id="personales" class="col s12 white swipeable">
 					<div class="row">
 						<div class="input-field col s12"> 
-				          <input id="nom" name="nom" type="text" class="validate" disabled>
-				          <label id="lnom" for="nom">Nombre completo</label>
+				          <input id="nom" name="nom" type="text" class="validate" readonly>
+				          <label id="lnom" class="active"  for="nom">Nombre completo</label>
         				</div>
 					</div>
 					<div class="row">
@@ -222,7 +222,7 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s12">			  		
-							<input type="number" name="suel" value="0.00" onchange="sumi()" id="suel" min="0.00">
+							<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00">
 							<label for="suel" class="active">Sueldo mensual ($)</label>
 						</div>			    
 					</div>
@@ -403,8 +403,7 @@
 		});
 		$('select').material_select('destroy');
 		$('select').material_select();
-		$('ul.tabs').tabs();
-		$('.indicator').addClass('teal');
+		//
 
 	    $.ajax({
 	        type:"post",
@@ -486,6 +485,18 @@
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
+	function sumi()
+	{
+		alert('hi bitch');
+		$('#toti').val(parseFloat($('#suel').val())+parseFloat($('#otroi').val()));
+	}
+
+	function sume()
+	{
+		$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
+	}
+
+
 	function getnumber(){
 		
 		$("#cueid").val("01-");
@@ -618,9 +629,12 @@
         	//alert("jajajaja"); /********************************************************************************************************/
         	$("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
         	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	$('#lnom').addClass("active");
+        	//$('#lnom').addClass("active");
         	$('#modal2').modal('open');
-        	$('ul.tabs').tabs('select_tab','personales');
+        	$('ul.tabs').tabs();
+			$('.indicator').addClass('teal col s2');
+        	//$('ul.tabs').tabs('select_tab', 'personales');
+        	
         },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
@@ -653,17 +667,7 @@ function ejecutarajax(datos){
         	}
         }
     });
-    function calculoCuota(monto, tiempo, interes){
-    	('#')
-    }
-    function sumi()
-	{
-		$('#toti').val(parseFloat($('#suel').val())+parseFloat($('#otroi').val()));
-	}
-
-	function sume()
-	{
-		$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
-	}
+   
+   
 }
 </script>
