@@ -130,6 +130,16 @@
             echo json_encode($salida);
             break;
 
+        case 'getjsontabla2':
+                $con->consulta("SELECT * FROM tab_asociado WHERE asociado_estado='Activo'");
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
+
         case 'addsol':
             $con->consulta("BEGIN");
             try{
