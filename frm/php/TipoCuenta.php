@@ -68,11 +68,14 @@
                 echo json_encode($salida);
                 break;
         case 'getjsonselect':
-                $con->consulta("SELECT 
+                $con->consulta("
+                    SELECT 
                         tipocuenta_id,
                         tipocuenta_nombre 
                     FROM 
-                        ".$nombretabla.";
+                        ".$nombretabla."
+                    WHERE
+                        tipocuenta_nombre <> 'APORTACIONES';
                 ");
                 $i=0;
                 $salida=array();

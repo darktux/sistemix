@@ -1,5 +1,6 @@
 <?php
-	require('Conex.php');
+	date_default_timezone_set('America/El_Salvador');
+    require('Conex.php');
 	$con= new Conex();
 	$con->conectar();
     $nombretabla = 'tab_cuenta';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS*********************************************************************/
@@ -19,11 +20,28 @@
                     ) 
                     VALUES(
                         '".$_POST['cueid']."',
-                        '".$_POST['mon']."',
                         '".$_POST['fecape']."',
                         '".$_POST['est']."',
                         ".$_POST['asoid'].",
                         ".$_POST['tipcueid']."
+                    );
+                ");
+                $con->consulta("INSERT INTO 
+                    tab_cuenta_movimiento(
+                        cuentamovimiento_concepto,
+                        cuentamovimiento_fecha,
+                        cuentamovimiento_deposito,
+                        cuentamovimiento_retiro,
+                        cuentamovimiento_saldo,
+                        cuentamovimiento_cuentaid
+                    ) 
+                    VALUES(
+                        'Apertura de la cuenta',
+                        '".date("Y-m-d")."',
+                        '".$_POST['mon']."',
+                        0.00,
+                        '".$_POST['mon']."',
+                        '".$_POST['cueid']."'
                     );
                 ");
                 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
@@ -55,7 +73,8 @@
             ");
         /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
-            break;     
+            break;       
+
 		case 'getjsontabla':
                 $con->consulta("
                     SELECT 
@@ -94,22 +113,6 @@
                     else{
                         $fila['cuenta_saldo']='0.00';
                     }
-                    $salida[$i]=$fila;
-                    $i++;
-                }
-                echo json_encode($salida);
-                break;
-
-        case 'getjsontablaasociado':
-                $con->consulta("SELECT 
-                        * 
-                    FROM 
-                        tab_asociado
-                    WHERE
-                        asociado_estado='Activo';
-                ");
-                $i=0;$salida=array();
-                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
                     $salida[$i]=$fila;
                     $i++;
                 }

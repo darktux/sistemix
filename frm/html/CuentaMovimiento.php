@@ -89,7 +89,7 @@
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: 1 //dias equivalentes  years restados for today
+			max: true //dias equivalentes  years restados for today
 		});
 		/*INICIA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 		$('.modal').modal({

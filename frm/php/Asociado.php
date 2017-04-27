@@ -217,7 +217,8 @@
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
             break;
 		case 'getjsontabla':
-                $con->consulta("SELECT 
+                $con->consulta("
+                    SELECT 
                         * 
                     FROM 
                         ".$nombretabla.";
@@ -231,6 +232,22 @@
                 break;
         case 'getjsontabla2':
                 $con->consulta("SELECT asociado_id,asociado_correlativo,asociado_nombre,asociado_dui,asociado_nit,asociado_municipio,asociado_estado FROM ".$nombretabla." WHERE asociado_estado='En espera';
+                ");
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
+        case 'getjsontablaactivo':
+            $con->consulta("
+                    SELECT 
+                        * 
+                    FROM 
+                        ".$nombretabla."
+                    WHERE
+                        asociado_estado='Activo';
                 ");
                 $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       

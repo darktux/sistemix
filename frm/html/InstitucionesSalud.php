@@ -12,6 +12,10 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
+					<input type="text" name="cor" id="cor" step="1" min="1" max="99"  value="" required>
+					<label for="cor">Correlativo</label>
+				</div>
+				<div class="input-field col s12">
 					<input type="text" name="nom" id="nom" required>
 					<label for="nom">Nombre</label>
 				</div>
@@ -43,6 +47,7 @@
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
+				    	<th data-field="institucionsalud_correlativo" data-align="center">Correlativo</th>
 			            <th data-field="institucionsalud_nombre" data-align="center">Nombre</th>
 			            <th data-field="institucionsalud_direccion" data-align="center">Dirección</th>
 			            <!-- TERMINAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->
@@ -68,7 +73,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("nom").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
+				document.getElementById("cor").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -88,22 +93,36 @@
 		function(e){
 	    	e.preventDefault();
 	    	var f = $(this);
+	    	var formData = new FormData(document.getElementById("formulario"));
 	    	if($("#idid").val() == ""){ 
-	        	datos = {
-	            	nom:$("#nom").val(),
-	            	dir:$("#dir").val(),
-	            	acc:'set'
-	            } 
+	        	formData.append("acc", "set"); 
 			}
 			else{
-		    	datos = {
-	            	id:$("#idid").val(),
-	            	nom:$("#nom").val(),
-	            	dir:$("#dir").val(),
-	            	acc:'upd'
-	            }
+		    	formData.append("id", $("#idid").val());
+		    	formData.append("acc", "upd");
 			}
-			ejecutarajax(datos);
+			$.ajax({
+	            url: "php/InstitucionesSalud.php",
+	            type: "post",
+	            dataType: "html",
+	            data: formData,
+	            cache: false,
+	            contentType: false,
+	     		processData: false,
+	        	success:function(responseText){
+	        		if(/Registro/.test(responseText)){
+	        			$('#modal1').modal('close');
+	        			alert(responseText);
+	        			$("#formulario")[0].reset();
+		        		$('#tabla1').bootstrapTable('refresh',{url:'php/InstitucionesSalud.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+		        		document.getElementById("buscar1").focus();
+						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+	        		}
+	        		else{
+	        			alert(responseText);
+		        	}
+	    	    }
+	        });
 		}	
 	);
 	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
@@ -169,4 +188,44 @@
 	        }
 	    });
 	}
+	/*INICIA EL BLOQUE DE LOS EVENTOS*/
+	$("#cor").keyup(function() {
+
+		if(!isNaN($('#cor').val()) && $('#cor').val()!=''){
+			var a = parseInt( $('#cor').val() );
+			if(a==0){
+				$('#cor').val(''); 
+			}
+			else if(a<10){
+				$('#cor').val('0'+a);
+			}
+			else{
+				$('#cor').val(''+a);
+			}
+		}
+		else{
+			$('#cor').val(''); 
+		}
+
+	});
+	$("#cor").blur(function() {
+
+		if(!isNaN($('#cor').val()) && $('#cor').val()!=''){
+			var a = parseInt( $('#cor').val() );
+			if(a==0){
+				$('#cor').val(''); 
+			}
+			else if(a<10){
+				$('#cor').val('0'+a);
+			}
+			else{
+				$('#cor').val(''+a);
+			}
+		}
+		else{
+			$('#cor').val(''); 
+		}
+
+	});
+	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 	</script>

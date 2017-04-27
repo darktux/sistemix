@@ -9,7 +9,7 @@
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content" id="modalcontent">
 		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
-		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontablaasociado" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
+		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Asociado.php?acc=getjsontablaactivo" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
 		    <thead>
 			    <tr>
 			    	<th data-field="operate" data-align="center" data-formatter="operateFormatter1" data-events="operateEvents">Acciones</th>
@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontabla"lick-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
@@ -76,18 +76,19 @@
 					<label for="fecape" class="active">Fecha de apertura</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="cueid" id="cueid" required max="10">
-					<label for="cueid" class="active"></label>
-				</div>
-				<div class="input-field col s12">
-					<input type="number" name="mon" id="mon" required min="0.00" step="0.01">
-					<label for="mon">Monto de apertura</label>
-				</div>
-				<div class="input-field col s12">
 				    <select class="" id="tipcueid" required  autocomplete="off">
 				    	<option value="0" disabled selected>Seleccionar</option>
 				    </select>
 				    <label for="tipcueid">Tipos de cuenta</label>
+				</div>
+				<div class="input-field col s12">
+					<input type="text" name="cueid" id="cueid" required max="10">
+					<label for="cueid" class="active"></label>
+				</div>
+				
+				<div class="input-field col s12">
+					<input type="number" name="mon" id="mon" required min="0.00" step="0.01">
+					<label for="mon">Monto de apertura</label>
 				</div>
 				<div class="input-field col s12">
 				    <select class="" id="est" required  autocomplete="off">
@@ -163,7 +164,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("mon").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
+				document.getElementById("tipcueid").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -183,7 +184,7 @@
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 	function getnumber(){
 		
-		$("#cueid").val("01-");
+		$("#cueid").val("01-00-000");
 		
 		/*
 		$.ajax({
@@ -307,7 +308,7 @@
         	$("#asoid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
         	$("#tit").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	$("#tit2").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	getnumber();
+        	$("#cueid").val("00-00-000");
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },
@@ -332,7 +333,7 @@ function ejecutarajax(datos){
         		$('.modal').modal('close');
         		alert(responseText);
         		$("#formulario")[0].reset();
-        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontablaactivo'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
         		$('#tabla2').bootstrapTable('refresh',{url:'php/Cuenta.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
         		document.getElementById("buscar1").focus();
 				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
