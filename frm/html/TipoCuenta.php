@@ -12,7 +12,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="number" name="cor" id="cor" step="1" min="1" max="99"  value="" required>
+					<input type="text" name="cor" id="cor" step="1" min="1" max="99"  value="" required>
 					<label for="cor">Correlativo</label>
 				</div>
 				<div class="input-field col s12">
@@ -214,13 +214,43 @@
 	}
 	/*FINALIZA EL BLOQUE DE LA FUNCION AJAX*/
 	/*INICIA EL BLOQUE DE LOS EVENTOS*/
-	$("#cor").change(function() {
-		var a = parseInt($('#cor').val());
-		if(a<10){ 
-			$('#cor').val('0'+a); 
-		}else{
-			$('#cor').val(a);
+	$("#cor").keyup(function() {
+
+		if(!isNaN($('#cor').val()) && $('#cor').val()!=''){
+			var a = parseInt( $('#cor').val() );
+			if(a==0){
+				$('#cor').val(''); 
+			}
+			else if(a<10){
+				$('#cor').val('0'+a);
+			}
+			else{
+				$('#cor').val(''+a);
+			}
 		}
+		else{
+			$('#cor').val(''); 
+		}
+
+	});
+	$("#cor").blur(function() {
+
+		if(!isNaN($('#cor').val()) && $('#cor').val()!=''){
+			var a = parseInt( $('#cor').val() );
+			if(a==0){
+				$('#cor').val(''); 
+			}
+			else if(a<10){
+				$('#cor').val('0'+a);
+			}
+			else{
+				$('#cor').val(''+a);
+			}
+		}
+		else{
+			$('#cor').val(''); 
+		}
+
 	});
 	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 </script>

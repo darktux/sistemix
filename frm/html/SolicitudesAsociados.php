@@ -13,7 +13,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input type="number" min="1" step="1" max="999" id="corr" name="corr" required autofocus="true">
+					<input type="text" min="1" step="1" max="999" id="corr" name="corr" required autofocus="true">
 					<label for="corr">Correlativo</label>
 				</div>
 			</div>
@@ -351,7 +351,7 @@
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
 
 
-				document.getElementById("nom").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
+				document.getElementById("corr").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
 
 
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
@@ -368,9 +368,7 @@
 
 			}
 		});
-		$("#corr").change(function() {
-			$('#corr').val(addLeadingZeros ($('#corr').val(), 3));
-		});
+		//$("#corr").keyup(function() { $('#corr').val(addLeadingZeros ($('#corr').val(), 3));});
 /*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 	});
 /*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
@@ -595,8 +593,7 @@ function prepare(){
         $('ul.tabs').tabs('select_tab','test1');
 	}
 
-function addLeadingZeros (n, length)
-{
+function addLeadingZeros (n, length){
     var str = (n > 0 ? n : -n) + "";
     var zeros = "";
     for (var i = length - str.length; i > 0; i--)
@@ -604,6 +601,53 @@ function addLeadingZeros (n, length)
     zeros += str;
     return n >= 0 ? zeros : "-" + zeros;
 }
+
+
+	$("#corr").keyup(function() {
+
+		if(!isNaN($('#corr').val()) && $('#corr').val()!=''){
+			var a = parseInt( $('#corr').val() );
+			if(a==0){
+				$('#corr').val(''); 
+			}
+			else if(a<10){
+				$('#corr').val('00'+a); 
+			}
+			else if(a<100){
+				$('#corr').val('0'+a);
+			}
+			else{
+				$('#corr').val(''+a);
+			}
+		}
+		else{
+			$('#corr').val(''); 
+		}
+
+	});
+	$("#corr").blur(function() {
+
+		if(!isNaN($('#corr').val()) && $('#corr').val()!=''){
+			var a = parseInt( $('#corr').val() );
+			if(a==0){
+				$('#corr').val(''); 
+			}
+			else if(a<10){
+				$('#corr').val('00'+a); 
+			}
+			else if(a<100){
+				$('#corr').val('0'+a);
+			}
+			else{
+				$('#corr').val(''+a);
+			}
+		}
+		else{
+			$('#corr').val(''); 
+		}
+
+	});
+
 
 </script>
 <script src="../js/funciones.js"></script>
