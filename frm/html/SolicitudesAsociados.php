@@ -331,7 +331,7 @@
 		$('#fecses').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: 0 //dias equivalentes a 18 years restados for today
+			max: true //dias equivalentes a 18 years restados for today
 		});
 		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
