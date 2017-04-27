@@ -317,7 +317,7 @@
 							<label for="mon" class="active">Monto del crédito ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="pla" onblur="coutix" id="pla" min="0" required>
+							<input type="number" name="pla" onkeyup="coutix()" id="pla" min="0" required>
 							<label for="pla">Plazo del crédito</label>
 						</div>
 						<div class="input-field col s12">
@@ -495,6 +495,7 @@
 	{
 		$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
 	}
+	
 	function cuotix()
 	{
 		alert('hi bitch again');
