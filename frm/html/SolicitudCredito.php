@@ -367,6 +367,15 @@
 	var idcuenta=0;
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
+		$("#tel").mask("9999-9999");
+		$("#cel").mask("9999-9999");
+		$("#duic").mask("99999999-9");
+		$("#nitc").mask("9999-999999-999-9");
+		$("#telc").mask("9999-9999");
+		$("#celc").mask("9999-9999");
+		$("#telr").mask("9999-9999");
+		$("#celr").mask("9999-9999");
+		$("#telt").mask("9999-9999");
 		$('.tooltipped').tooltip({delay: 50});
 		$('#fecc').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
