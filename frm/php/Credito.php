@@ -251,6 +251,20 @@
             # code...
             break;
 
+             case 'getcuota':
+
+                $con->consulta("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['interes']);
+                $i=$con->getResultado();
+                $tiempo=$_POST['tiempo'];
+                $monto=$_POST['monto'];
+                $interes=($i/12)/100;
+                   
+                $constante=pow((1+$interes),$tiempo);
+                $arriba=$constante*$interes;
+                $abajo=$constante-1;
+                $cuota=round((($monto)*($arriba/$abajo)),2);
+                echo $cuota;
+            break;
 
     }
 	//$con->limpiarConsulta();

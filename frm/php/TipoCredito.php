@@ -73,7 +73,8 @@
         case 'getjsonselect':
                 $con->consulta("SELECT 
                         tipocredito_id,
-                        tipocredito_nombre 
+                        tipocredito_nombre,
+                        tipocredito_interes
                     FROM 
                         ".$nombretabla.";
                 ");
