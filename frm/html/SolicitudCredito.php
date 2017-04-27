@@ -487,7 +487,7 @@
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 	function sumi()
 	{
-		alert('hi bitch');
+		//alert('hi bitch');
 		$('#toti').val(parseFloat($('#suel').val())+parseFloat($('#otroi').val()));
 	}
 
