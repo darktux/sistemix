@@ -53,7 +53,7 @@
 </div>
 <script src="../js/bootstrap-table.js"></script>
 <!-- FINALIZA EL BLOQUE DE LA TABLA -->
-<!-- INICIA EL BLOQUE DEL MODAL NUEVA CUENTA -->
+<!-- INICIA EL BLOQUE DEL MODAL NUEVA CREDITO -->
 <div id="modal2" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario">
 		<input id="idid" name="idid" type="hidden" value="">
@@ -63,10 +63,12 @@
 			<span id="top"></span>
 			<div class="row">
 				<ul id="tabs-swipe-demo" class="tabs swipeable">
-				    <li class="tab col s3"><a class="teal-text waves-effect waves-teal active" href="#personales"><i class="material-icons">contact_phone</i> Datos Personales</a></li>
-				    <li class="tab col s3 " ><a  class="teal-text waves-effect waves-teal" href="#familiares" ><i class="material-icons">supervisor_account</i> Datos Familiares</a></li>
-				    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal" href="#laborales"><i class="material-icons">business</i> Datos Laborales</a></li>
-				    <li class="tab col s3 "><a class=" teal-text waves-effect waves-teal" href="#referencias"><i class="material-icons">assignment</i> Referencias</a></li>
+					<li class="tab col s2">Pestañas</li>
+				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales"><i class="material-icons">person</i> </a></li>
+				    <li class="tab col s2 " ><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" ><i class="material-icons">people</i> </a></li>
+				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales"><i class="material-icons">domain</i> </a></li>
+				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias Personales" href="#referencias"><i class="material-icons">people_outline</i> </a></li>
+				    <li class="tab col s2"><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito"><i class="material-icons">monetization_on</i> </a></li>
 	  			</ul>
 				
 				<div id="personales" class="col s12 white swipeable">
@@ -158,9 +160,8 @@
 					<div class="row">
 						<div class="input-field col s12">
 							<select class="" id="estc" name="estc">
-						      	<option value="" disabled selected>Seleccione un estado</option>
 								<option value="Soltero/a">Soltero/a</option>
-								<option value="Casado/a">Casado/a</option>
+								<option value="Casado/a" selected>Casado/a</option>
 								<option value="Acompañado/a">Acompañado/a</option>
 								<option value="Viudo/a">Viudo/a</option>
 								<option value="Divorciado/a">Divorciado/a</option>
@@ -234,14 +235,14 @@
 					<div class="row">
 						<div class="input-field col s12">			  		
 							<input type="number" name="suel" value="0.00" onchange="sumi()" id="suel" min="0.00">
-							<label for="suel" class="active">Sueldo mensual</label>
+							<label for="suel" class="active">Sueldo mensual ($)</label>
 						</div>			    
 					</div>
 					
 					<div class="row">
 						<div class="input-field col s12">			  		
 							<input type="number" value="0.00" name="otroi" id="otroi" onchange="sumi()" min="0.00" >
-							<label class="active" for="otroi">Otros ingresos</label>
+							<label class="active" for="otroi">Otros ingresos ($)</label>
 						</div>			    
 					</div>
 					<div class="row">
@@ -279,7 +280,7 @@
 	  			<div id="referencias" class="col s12 white swipeable">
 	  				<div class="row">
 						<div class="input-field col s12"> 
-				          	<input id="nomr" name="nomr" type="text" class="validate" autofocus="true">
+				          	<input id="nomr" name="nomr" type="text" class="validate">
 				          	<label for="nomr">Nombre referencia</label>
         				</div>
 					</div>
@@ -314,7 +315,50 @@
 						</div>
 					</div>
 	  			</div>
-	  			<!-- <a href="#top"><i class="material-icons">keyboard_arrow_up</i></a> -->
+	  			
+				<div id="credito" class="col s12 white swipeable">
+					<div class="row">
+						<div class="input-field col s12">
+							<input type="number" name="mon" id="mon" value='0.00' min="0.00" required>
+							<label for="mon" class="active">Monto del crédito ($)</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="number" name="cuo" id="cuo" value="0.00" min="0.00" step="0.01" required>
+							<label for="cuo" class="active">Cuota a pagar ($)</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="date" class="datepicker" name="feccon" id="feccon" required>
+							<label for="feccon">Fecha del contrato</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="date" class="datepicker" name="fecpag" id="fecpag" required>
+							<label for="fecpag">Fecha de pago</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="number" name="pla" id="pla" min="0" required>
+							<label for="pla">Plazo del crédito</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="date" class="datepicker" name="fecfin" id="fecfin" required>
+							<label for="fecfin">Fecha final</label>
+						</div>
+						<div class="input-field col s12">
+							<select class="" id="est" name="est">
+								<option value="En espera" selected>En espera</option>
+								<option value="Aprobado">Aprobado</option>
+								<option value="Rechazado">Rechazado</option>
+						    </select>
+							<label for="est">Estado</label>
+						</div>
+						<div class="input-field col s12">
+						    <select class="" id="tipcreid" name="tipcreid" required  autocomplete="off">
+						    	<option value="0" disabled selected>Seleccionar</option>
+						    </select>
+						    <label for="tipcreid">Tipos de crédito</label>
+						</div>
+					</div>
+				</div>
+
 	  			<div class="chip">
 				    <img src="../img/fondo12.jpg" alt="Contact Person">
 				    <a href="#top">Volver arriba</a>
@@ -335,15 +379,34 @@
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
-		$('.datepicker').pickadate({
+		$('#fecc').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -6570, //dias equivalentes  years restados for today
+			max: -6570, //dias equivalentes a 18 years restados for today
+			selectYears: 80
+		});
+		$('#feccon').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			max: true, //dias equivalentes a 18 years restados for today
+			selectYears: 10
+		});
+		$('#fecpag').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: false, // Creates a dropdown of 15 years to control year
+			max: 0, //dias equivalentes a 18 years restados for today
+		});
+		$('#fecfin').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			min: 1, //un dia despues de hoy
+			max: 0, //dias equivalentes a 18 years restados for today
 			selectYears: 80
 		});
 		$('select').material_select('destroy');
 		$('select').material_select();
 		$('ul.tabs').tabs();
+		$('.indicator').addClass('teal');
 
 	    $.ajax({
 	        type:"post",
@@ -387,7 +450,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("mon").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
+				document.getElementById("tel").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -400,6 +463,26 @@
 				$('#modal1').modal('close');
 			}
 		});
+		//CARGA EL SELECT CON LOS TIPOS DE CREDITO
+		$.ajax({
+	        type:"post",
+	        url: "php/TipoCredito.php",
+	        data:{acc:'getjsonselect'},
+	        success:function(responseText){
+	        	var obj = $.parseJSON(responseText);
+	        	$.each(obj, function(i,item){
+	        		//console.log(item.tipocredito_id);
+	        		//console.log(item.tipocredito_nombre);
+	        		var x = document.getElementById("tipcreid");
+	        		var option = document.createElement("option");
+	        		option.text = item.tipocredito_nombre;
+	        		option.value = item.tipocredito_id;
+	        		x.add(option);
+	        	});
+	        	$('#tipcreid').material_select('destroy');
+        		$('#tipcreid').material_select();
+	        }
+	    });
 		/*FINALIZA BLOQUE DE CONFIGURACION DEL MODAL NUEVA CUENTA */
 	});
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
@@ -434,7 +517,6 @@
 	        	formData.append("acc", "set"); 
 			}
 			else{
-		    	formData.append("id", $("#idid").val());
 		    	formData.append("acc", "addsol");
 			}
 			$.ajax({
@@ -540,6 +622,7 @@
         	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	$('#lnom').addClass("active");
         	$('#modal2').modal('open');
+        	$('ul.tabs').tabs('select_tab','personales');
         },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/

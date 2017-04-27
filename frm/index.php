@@ -8,6 +8,7 @@
         <link href="../css/iconos.css" rel="stylesheet">
         <link href="../css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="../css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link rel="shortcut icon" type="imgage/png" href="../img/logos/logo.png">
     </head>
     <body>
         <nav class="teal" role="navigation">
@@ -112,7 +113,6 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/materialize.js"></script>
         <script src="../js/init.js"></script>
-        <script src="../js/jquery.maskedinput.js"></script>
         <script type="text/javascript">
             //INICIO
             $(document).ready(function(){ $("#formularios").load('html/Inicio.php'); });

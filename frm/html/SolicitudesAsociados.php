@@ -63,8 +63,7 @@
 			<div class="row">
 				<div class="input-field col s12">
 					<select class="" id="est" name="est" required>
-						<option value="" disabled selected>Seleccione un estado</option>
-						<option value="Soltero/a">Soltero/a</option>
+						<option value="Soltero/a" selected>Soltero/a</option>
 						<option value="Casado/a">Casado/a</option>
 						<option value="Acompañado/a">Acompañado/a</option>
 						<option value="Viudo/a">Viudo/a</option>
@@ -116,7 +115,7 @@
 				<h5>Beneficiarios</h5>
 				<div class="col s12">
 					<ul class="tabs">
-						<li class="tab col s3"><a href="#test1" class="active teal-text">1° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test1" class="teal-text">1° Beneficiario</a></li>
 						<li class="tab col s3"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
 						<li class="tab col s3"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
 						<li class="tab col s3"><a href="#test4" class="teal-text">4° Beneficiario</a></li>
@@ -324,7 +323,8 @@
 		$('#fecdui').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: 0 //dias equivalentes a 18 years restados for today
+			max: new Date(), //dias equivalentes a 18 years restados for today
+			selectYears: 50
 		});
 		$('#fecses').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
@@ -359,7 +359,6 @@
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 				$("#idid").val("");
 				$('label').removeClass("active");
-
 
 
 				//iNICIA BLOQUE PARA ANADIR CODIGO SEGUN SE NECESITE *************************************************************************************************
@@ -593,6 +592,7 @@ function prepare(){
         $("textarea").prop('disabled', false);
         $('#modal2').modal('open');
         $("#formulario")[0].reset();
+        $('ul.tabs').tabs('select_tab','test1');
 	}
 
 function addLeadingZeros (n, length)

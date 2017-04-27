@@ -115,12 +115,6 @@
 					<input type="text" name="est" id="est" required>
 					<label for="est">Estado</label>
 				</div>
-				<!-- <div class="input-field col s12">
-				    <select class="" id="solcreid" required  autocomplete="off">
-				    	<option value="0" disabled selected>Seleccionar</option>
-				    </select>
-				    <label for="solcreid">Solicitudes pendientes</label>
-				</div> -->
 				<div class="input-field col s12">
 				    <select class="" id="tipcreid" required  autocomplete="off">
 				    	<option value="0" disabled selected>Seleccionar</option>
