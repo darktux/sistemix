@@ -243,7 +243,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12 m6">	
-					<input id="fecses" name="fecses" type="date" class="datepicker" autofocus="true">
+					<input id="fecses" name="fecses" type="date" class="datepicker" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fecses" >Fecha de sesión</label>
 				</div>
 				<div class="input-field col s12 m6">	
