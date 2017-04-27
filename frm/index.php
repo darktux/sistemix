@@ -38,9 +38,8 @@
                 <li><a class="naso">Gestionar asociado</a></li>            
             </ul>
             <ul id="dropdown-per2" class="dropdown-content">
-                <li><a class="naso">Gestionar asociado</a></li>
-                <li class="divider"></li>
-                <li><a class="saso">Solicitudes pendientes</a></li>
+                <li><a class="saso">Solicitud de asociado</a></li>
+                <li><a class="naso">Gestionar asociado</a></li>    
             </ul>
             <!-- OPCIONES DEL MENU CUENTA -->
             <ul id="dropdown-cue1" class="dropdown-content">

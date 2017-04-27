@@ -7,15 +7,15 @@
 		<div class="row">
 			<div class="input-field col s3"> 
 				<input id="monto" name="monto" type="text" class="validate" required autofocus="true">
-				<label id="lmonto" for="monto">Monto</label>
+				<label id="lmonto" for="monto">Monto ($)</label>
 	        </div>
 	        <div class="input-field col s3"> 
 				<input id="tiempo" name="tiempo" type="text" class="validate" required autofocus="true">
-				<label id="ltiempo" for="tiempo">Tiempo</label>
+				<label id="ltiempo" for="tiempo">Tiempo (Meses)</label>
 	        </div>
 	        <div class="input-field col s3"> 
 				<input id="interes" name="interes" type="text" class="validate" required autofocus="true">
-				<label id="linteres" for="interes">Interes</label>
+				<label id="linteres" for="interes">Interes (%)</label>
 	        </div>
 	         <div class="input-field col s3"> 
 				<button class="waves-effect waves-light btn" type="submit">Calcular</button>
@@ -33,9 +33,9 @@
 				    <tr>
 				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-			            <th data-field="calculos_cuota" data-align="center">Cuota</th>
-			            <th data-field="calculos_amortizacion" data-align="center">Capital</th>
-			            <th data-field="calculos_intereses" data-align="center">Interes</th>
+			            <th data-field="calculos_cuota" data-align="center">Cuota ($)</th>
+			            <th data-field="calculos_amortizacion" data-align="center">Capital ($)</th>
+			            <th data-field="calculos_intereses" data-align="center">Interes ($)</th>
 			            <th data-field="calculos_monto" data-align="center">Monto ($)</th>
 			          
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ****************************************************************************************-->
