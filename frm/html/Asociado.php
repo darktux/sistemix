@@ -266,11 +266,20 @@
 <script type="text/javascript">
 /*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
+		$("#dui").mask("99999999-9",{placeholder:" "});
+		$("#nit").mask("9999-999999-999-9",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
-		$('.datepicker').pickadate({
+		$('#fecnac').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
     		selectYears: true, // Creates a dropdown of 15 years to control year
-			//max: -6570 //dias equivalentes a 18 years restados for today
+			max: -6570, //dias equivalentes a 18 years restados for today
+			selectYears: 80
+		});
+		$('#fecdui').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			max: new Date(), //dias equivalentes a 18 years restados for today
+			selectYears: 50
 		});
   		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
@@ -465,6 +474,7 @@
         	$('select').prop("disabled",false);
         	$('select').material_select();
         	$("textarea").prop('disabled', false);
+        	$("#corr").prop('disabled',true);
         	$('#modal1').modal('open');
         },
 /*TERMINA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/

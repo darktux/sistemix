@@ -177,7 +177,7 @@
                         asociado_fechasesion='".$_POST['fecses']."',
                         asociado_numacta='".$_POST['nacta']."',
                         asociado_numpunto='".$_POST['npunto']."',
-                        asociado_estado='Aprobado'
+                        asociado_estado='Activo'
                     WHERE 
                         asociado_id=".$_POST['id'].";
                 ";

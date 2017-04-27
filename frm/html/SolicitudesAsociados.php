@@ -502,9 +502,8 @@
             $("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
             $("#dui").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
             $("#nit").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
- 
+ 	
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-
 
         	$('label').addClass("active");
         	$("#nom").prop('disabled', true);
