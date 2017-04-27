@@ -307,8 +307,18 @@
 				<div id="credito" class="col s12 white swipeable">
 					<div class="row">
 						<div class="input-field col s12">
+						    <select class="" id="tipcreid" name="tipcreid" required  autocomplete="off">
+						    	<option value="0" disabled selected>Seleccionar</option>
+						    </select>
+						    <label for="tipcreid">Tipos de crédito</label>
+						</div>
+						<div class="input-field col s12">
 							<input type="number" name="mon" id="mon" value='0.00' min="0.00" required>
 							<label for="mon" class="active">Monto del crédito ($)</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="number" name="pla" id="pla" min="0" required>
+							<label for="pla">Plazo del crédito</label>
 						</div>
 						<div class="input-field col s12">
 							<input type="number" name="cuo" id="cuo" value="0.00" min="0.00" step="0.01" required>
@@ -323,10 +333,6 @@
 							<label for="fecpag">Fecha de pago</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="pla" id="pla" min="0" required>
-							<label for="pla">Plazo del crédito</label>
-						</div>
-						<div class="input-field col s12">
 							<input type="date" class="datepicker" name="fecfin" id="fecfin" required>
 							<label for="fecfin">Fecha final</label>
 						</div>
@@ -338,12 +344,7 @@
 						    </select>
 							<label for="est">Estado</label>
 						</div>
-						<div class="input-field col s12">
-						    <select class="" id="tipcreid" name="tipcreid" required  autocomplete="off">
-						    	<option value="0" disabled selected>Seleccionar</option>
-						    </select>
-						    <label for="tipcreid">Tipos de crédito</label>
-						</div>
+						
 					</div>
 				</div>
 
@@ -643,5 +644,8 @@ function ejecutarajax(datos){
         	}
         }
     });
+    function calculoCuota(monto, tiempo, interes){
+    	('#')
+    }
 }
 </script>
