@@ -313,6 +313,8 @@
 <script type="text/javascript">
 /*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
+		$("#dui2").mask("99999999-9",{placeholder:" "});
+		$("#nit2").mask("9999-999999-999-9",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
 		$('#fecnac').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
