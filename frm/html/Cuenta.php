@@ -76,13 +76,13 @@
 					<label for="fecape" class="active">Fecha de apertura</label>
 				</div>
 				<div class="input-field col s12">
-				    <select class="" id="tipcueid" required  autocomplete="off">
+				    <select class="" id="tipcueid" required  autocomplete="off" >
 				    	<option value="0" disabled selected>Seleccionar</option>
 				    </select>
 				    <label for="tipcueid">Tipos de cuenta</label>
 				</div>
 				<div class="input-field col s12">
-					<input type="text" name="cueid" id="cueid" required max="10">
+					<input readonly type="text" name="cueid" id="cueid" >
 					<label for="cueid" class="active">N° de cuenta</label>
 				</div>
 				
@@ -211,7 +211,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("cueid").removeAttribute("readonly");
+				//document.getElementById("cueid").removeAttribute("readonly");
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 			}
@@ -244,22 +244,16 @@
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
-	function getnumber(){
-		
-		$("#cueid").val("01-00-000");
-		
-		/*
-		$.ajax({
-	        type:"post",
-	        url: "php/Cuenta.php",
-	        data:{acc:'getNumeroCuenta'},
-	        success:function(responseText){
-	        	$("#cueid").val(responseText);
-	        }
-	    });
-		*/
-
-	}
+	function getnumber(coraso){
+        $.ajax({
+            type:"post",
+            url: "php/Cuenta.php",
+            data:{acc:'getNumeroCuenta',corasociado:coraso},
+            success:function(responseText){
+                $("#cueid").val(responseText);
+            }
+        });
+    }
 	/*FINALIZA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 
 	/*INICIA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
@@ -358,7 +352,7 @@
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
-		    document.getElementById("cueid").setAttribute("readonly", "");
+		    //document.getElementById("cueid").setAttribute("readonly", "");
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },
@@ -388,7 +382,7 @@
         	$("#asoid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
         	$("#tit").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	$("#tit2").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	$("#cueid").val("00-00-000");
+        	getnumber( JSON.stringify(row.asociado_correlativo).replace(/"/gi,'') );
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },
@@ -424,4 +418,15 @@ function ejecutarajax(datos){
         }
     });
 }
+$("#tipcueid").change(function() {
+        $.ajax({
+            type:"post",
+            url: "php/Cuenta.php",
+            data:{acc:'getNumeroCuenta2',tipcueid:$("#tipcueid").val()},
+            success:function(responseText){
+                var part = $('#cueid').val().split("-")
+                $("#cueid").val(part[0]+'-'+responseText+'-'+part[2]);
+            }
+        });
+    });
 </script>

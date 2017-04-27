@@ -148,9 +148,41 @@
                 break;
 
         case 'getNumeroCuenta':
-                echo "01-".$_POST['tipocuenta']."-";
-                echo mt_rand(100,999);
-                break;
+            $con->consulta("
+                SELECT 
+                    i.institucionsalud_correlativo
+                FROM 
+                    tab_asociado a,
+                    tab_institucion_salud i
+                WHERE
+                    a.asociado_correlativo = '".$_POST['corasociado']."'
+                AND
+                    a.asociado_institucionsaludid=i.institucionsalud_id;
+            ");
+            if ($fila2 = mysql_fetch_row($con->getResultado())) {       
+                echo $fila2[0]."-00-".$_POST['corasociado'];
+            }
+            else{
+                echo "Error al guardar";
+            }
+            break;
+
+        case 'getNumeroCuenta2':
+            $con->consulta("
+                SELECT 
+                    tipocuenta_correlativo 
+                FROM 
+                    tab_tipo_cuenta 
+                WHERE 
+                    tipocuenta_id=".$_POST['tipcueid'].";
+            ");
+            if ($fila2 = mysql_fetch_row($con->getResultado())) {       
+                echo $fila2[0];
+            }
+            else{
+                echo "Error al guardar";
+            }
+            break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
