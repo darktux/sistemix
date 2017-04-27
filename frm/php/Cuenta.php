@@ -8,42 +8,70 @@
 	switch ($_POST['acc']) {
 		case 'set':
                 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-                $con->consulta("INSERT INTO 
-                    ".$nombretabla."(
-                        cuenta_id,
-                        cuenta_monto,
-                        cuenta_fechaapertura,
-                        cuenta_estado,
-                        cuenta_asociadoid,
-                        cuenta_tipocuentaid
+                $con->consulta("BEGIN");
+                try{
+                    $con->consulta("INSERT INTO 
+                        ".$nombretabla."(
+                            cuenta_id,
+                            cuenta_fechaapertura,
+                            cuenta_estado,
+                            cuenta_asociadoid,
+                            cuenta_tipocuentaid
 
-                    ) 
-                    VALUES(
-                        '".$_POST['cueid']."',
-                        '".$_POST['fecape']."',
-                        '".$_POST['est']."',
-                        ".$_POST['asoid'].",
-                        ".$_POST['tipcueid']."
-                    );
-                ");
-                $con->consulta("INSERT INTO 
-                    tab_cuenta_movimiento(
-                        cuentamovimiento_concepto,
-                        cuentamovimiento_fecha,
-                        cuentamovimiento_deposito,
-                        cuentamovimiento_retiro,
-                        cuentamovimiento_saldo,
-                        cuentamovimiento_cuentaid
-                    ) 
-                    VALUES(
-                        'Apertura de la cuenta',
-                        '".date("Y-m-d")."',
-                        '".$_POST['mon']."',
-                        0.00,
-                        '".$_POST['mon']."',
-                        '".$_POST['cueid']."'
-                    );
-                ");
+                        ) 
+                        VALUES(
+                            '".$_POST['cueid']."',
+                            '".$_POST['fecape']."',
+                            '".$_POST['est']."',
+                            ".$_POST['asoid'].",
+                            ".$_POST['tipcueid']."
+                        );
+                    ");
+                    
+                    $con->consulta("INSERT INTO 
+                        tab_cuenta_movimiento(
+                            cuentamovimiento_concepto,
+                            cuentamovimiento_fecha,
+                            cuentamovimiento_deposito,
+                            cuentamovimiento_retiro,
+                            cuentamovimiento_saldo,
+                            cuentamovimiento_cuentaid
+                        ) 
+                        VALUES(
+                            'Apertura de la cuenta',
+                            '".date("Y-m-d")."',
+                            '".$_POST['mon']."',
+                            0.00,
+                            '".$_POST['mon']."',
+                            '".$_POST['cueid']."'
+                        );
+                    ");
+
+                    //Ingreso los autorizados de la cuenta
+                    for ($i=1; $i < 4; $i++) { 
+                        if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
+                            $sql2="
+                            INSERT INTO 
+                                tab_cuenta_autorizados(
+                                    cuentaautorizados_cuentaid,
+                                    cuentaautorizados_nombre,
+                                    cuentaautorizados_dui,
+                                    cuentaautorizados_nit
+                                )
+                            VALUES(
+                                '".$_POST['cueid']."',
+                                '".$_POST['nom'.$i]."',
+                                '".$_POST['dui'.$i]."',
+                                '".$_POST['nit'.$i]."'
+                            )";
+                            $con->consulta($sql2);
+                        }
+                    }
+
+                }catch(Exception $e){
+                    $con->consulta('ROLLBACK');
+                    echo 'Error al guardar: ',$e->getMessage(),"\n";
+                }
                 /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
                 if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
                 break;

@@ -83,7 +83,7 @@
 				</div>
 				<div class="input-field col s12">
 					<input type="text" name="cueid" id="cueid" required max="10">
-					<label for="cueid" class="active"></label>
+					<label for="cueid" class="active">N° de cuenta</label>
 				</div>
 				
 				<div class="input-field col s12">
@@ -98,6 +98,59 @@
 				    	<option value="Cerrada">Cerrada</option>
 				    </select>
 				    <label for="est">Estados</label>
+				</div>
+				<div id="autorizados">
+					<h5>Autorizados para sacar fondos de la cuenta</h5>
+					<div class="col s12">
+						<ul class="tabs">
+							<li class="tab col s4"><a href="#test1" class="teal-text">1° Autorizado</a></li>
+							<li class="tab col s4"><a href="#test2" class="teal-text">2° Autorizado</a></li>
+							<li class="tab col s4"><a href="#test3" class="teal-text">3° Autorizado</a></li>
+						</ul>
+					</div>
+					<br><br>
+					<div class="row" id="test1">
+						<div class="input-field col s12 m12">
+							<input id="nom1" name="nom1" type="text" class="validate" >
+				          	<label for="nom1">Nombre completo</label>
+	    				</div>
+						<div class="input-field col s12 m6"> 
+				          	<input id="dui1" name="dui1" type="text" class="validate" >
+				          	<label for="dui1">DUI</label>
+	    				</div>
+	    				<div class="input-field col s12 m6"> 
+				          	<input id="nit1" name="nit1" type="text" class="validate" >
+				          	<label for="nit1">NIT</label>
+	    				</div>	    			
+	    			</div>
+	    			<div class="row" id="test2">
+						<div class="input-field col s12 m12">
+							<input id="nom2" name="nom2" type="text" class="validate" >
+				          	<label for="nom2">Nombre completo</label>
+	    				</div>
+						<div class="input-field col s12 m6"> 
+				          	<input id="dui2" name="dui2" type="text" class="validate" >
+				          	<label for="dui2">DUI</label>
+	    				</div>
+	    				<div class="input-field col s12 m6"> 
+				          	<input id="nit2" name="nit2" type="text" class="validate" >
+				          	<label for="nit2">NIT</label>
+	    				</div>	    			
+	    			</div>
+	    			<div class="row" id="test3">
+						<div class="input-field col s12 m12">
+							<input id="nom3" name="nom3" type="text" class="validate" >
+				          	<label for="nom3">Nombre completo</label>
+	    				</div>
+						<div class="input-field col s12 m6"> 
+				          	<input id="dui3" name="dui3" type="text" class="validate" >
+				          	<label for="dui3">DUI</label>
+	    				</div>
+	    				<div class="input-field col s12 m6"> 
+				          	<input id="nit3" name="nit3" type="text" class="validate" >
+				          	<label for="nit3">NIT</label>
+	    				</div>	    			
+	    			</div>
 				</div>
 			</div>
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO *****************************************************************************************************************************-->
@@ -114,6 +167,12 @@
 	var idcuenta=0;
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
+		$("#dui1").mask("99999999-9",{placeholder:" "});
+		$("#nit1").mask("9999-999999-999-9",{placeholder:" "});
+		$("#dui2").mask("99999999-9",{placeholder:" "});
+		$("#nit2").mask("9999-999999-999-9",{placeholder:" "});
+		$("#dui3").mask("99999999-9",{placeholder:" "});
+		$("#nit3").mask("9999-999999-999-9",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
 		$('.datepicker').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
@@ -121,7 +180,10 @@
 			max: 1 //dias equivalentes  years restados for today
 		});
 		$('select').material_select('destroy');
-		$('select').material_select();	
+		$('select').material_select();
+		$('ul.tabs').tabs();
+  		$('.indicator').addClass('teal');
+
 	    $.ajax({
 	        type:"post",
 	        url: "php/TipoCuenta.php",
@@ -210,6 +272,15 @@
 	            	mon:$("#mon").val(),
 	            	tipcueid:$("#tipcueid").val(),
 	            	est:$("#est").val(),
+	            	nom1:$("#nom1").val(),
+	            	dui1:$("#dui1").val(),
+	            	nit1:$("#nit1").val(),
+	            	nom2:$("#nom2").val(),
+	            	dui2:$("#dui2").val(),
+	            	nit2:$("#nit2").val(),
+	            	nom3:$("#nom3").val(),
+	            	dui3:$("#dui3").val(),
+	            	nit3:$("#nit3").val(),
 	            	acc:'set'
 	            }
 		}
@@ -220,6 +291,15 @@
 	            	mon:$("#mon").val(),
 	            	tipcueid:$("#tipcueid").val(),
 	            	est:$("#est").val(),
+	            	nom1:$("#nom1").val(),
+	            	dui1:$("#dui1").val(),
+	            	nit1:$("#nit1").val(),
+	            	nom2:$("#nom2").val(),
+	            	dui2:$("#dui2").val(),
+	            	nit2:$("#nit2").val(),
+	            	nom3:$("#nom3").val(),
+	            	dui3:$("#dui3").val(),
+	            	nit3:$("#nit3").val(),
 	            	acc:'upd'
 	            }
 		}
