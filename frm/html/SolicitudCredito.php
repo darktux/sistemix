@@ -196,18 +196,6 @@
 				</div>
 
 	  			<div id="laborales" class="col s12 white swipeable">
-	  				<div class="row">
-						<div class="input-field col s12">
-							<input type="text" name="lugt" id="lugt">
-							<label for="lugt">Lugar de trabajo</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<textarea id="dirt" name="dirt" class="materialize-textarea"></textarea>
-							<label for="dirt">Direcci&oacute;n de trabajo</label>
-						</div>
-					</div>
 					<div class="row">
 						<div class="input-field col s12">
 							<input type="text" name="telt" id="telt">

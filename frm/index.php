@@ -110,6 +110,7 @@
             </div>
         </footer>
         <script src="../js/jquery.js"></script>
+        <script src="../js/jquery.maskedinput.js" type="text/javascript"></script>
         <script src="../js/materialize.js"></script>
         <script src="../js/init.js"></script>
         <script type="text/javascript">
