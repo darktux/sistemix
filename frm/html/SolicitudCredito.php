@@ -367,15 +367,15 @@
 	var idcuenta=0;
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
-		$("#tel").mask("9999-9999");
-		$("#cel").mask("9999-9999");
-		$("#duic").mask("99999999-9");
-		$("#nitc").mask("9999-999999-999-9");
-		$("#telc").mask("9999-9999");
-		$("#celc").mask("9999-9999");
-		$("#telr").mask("9999-9999");
-		$("#celr").mask("9999-9999");
-		$("#telt").mask("9999-9999");
+		$("#tel").mask("9999-9999",{placeholder:" "});
+		$("#cel").mask("9999-9999",{placeholder:" "});
+		$("#duic").mask("99999999-9",{placeholder:" "});
+		$("#nitc").mask("9999-999999-999-9",{placeholder:" "});
+		$("#telc").mask("9999-9999",{placeholder:" "});
+		$("#celc").mask("9999-9999",{placeholder:" "});
+		$("#telr").mask("9999-9999",{placeholder:" "});
+		$("#celr").mask("9999-9999",{placeholder:" "});
+		$("#telt").mask("9999-9999",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
 		$('#fecc').pickadate({
 			selectMonths: true, // Creates a dropdown to control month
@@ -656,5 +656,14 @@ function ejecutarajax(datos){
     function calculoCuota(monto, tiempo, interes){
     	('#')
     }
+    function sumi()
+	{
+		$('#toti').val(parseFloat($('#suel').val())+parseFloat($('#otroi').val()));
+	}
+
+	function sume()
+	{
+		$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
+	}
 }
 </script>
