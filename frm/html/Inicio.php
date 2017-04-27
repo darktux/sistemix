@@ -15,67 +15,7 @@
     <div class="parallax" style="height: 600px;"><img src="../img/fondo6.png" alt="Unsplashed background img 2"></div>
 </div>
 
-<div class="container">
-	<div class="row">
-	<div class="col s12 m6 l4">
-			<div class="card" >
-				<div class="card-image">
-					<img src="../img/ad3.png">
-					<span class="card-title black-text center"><b>Gestionar socios</b></span>
-					<a id="directo-ncre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
-				</div>
-				<div class="card-content">
-					<p>
-						Apertura de un plan de crédito para un socio.
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m6 l4">
-			<div class="card">
-				<div class="card-image">
-					<img src="../img/ad1.png">
-					<span class="card-title black-text center"><b>Gestionar cuentas</b></span>
-					<a id="directo-ncue" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
-				</div>
-				<div class="card-content">
-					<p>
-						Apertura una nueva cuenta para un socio.
-					</p>
-				</div>
-			</div>
-		</div>
-		<!-- <div class="col s12 m6 l3">
-			<div class="card" style="width: 256px;">
-				<div class="card-image">
-					<img src="../img/ad2.png">
-					<span class="card-title black-text center"><b>Movimiento de la cuenta</b></span>
-					<a id="directo-mcue" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
-				</div>
-				<div class="card-content">
-					<p>
-						Consulta de saldos de una cuenta específica de un socio.
-					</p>
-				</div>
-			</div>
-		</div> -->
-		
-		<div class="col s12 m6 l4">
-			<div class="card">
-				<div class="card-image">
-					<img src="../img/ad4.png">
-					<span class="card-title black-text center"><b>Gestionar créditos</b></span>
-					<a id="directo-mcre" class="btn-floating btn-large halfway-fab waves-effecs waves-light teal"><i class="material-icons">add</i></a>
-				</div>
-				<div class="card-content">
-					<p>
-						Consulta y abono a cuenta de crédito de un  socio.
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+
 
 <script type="text/javascript">
 (function($){
