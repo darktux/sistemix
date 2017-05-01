@@ -307,25 +307,25 @@
 				<div id="credito" class="col s12 white swipeable">
 					<div class="row">
 						<div class="input-field col s12">
-						    <select class="" id="tipcreid" name="tipcreid" required  autocomplete="off">
+						    <select class="" id="tipcreid" name="tipcreid" required onchange="calcular()" autocomplete="off">
 						    	<option value="0" disabled selected>Seleccionar</option>
 						    </select>
 						    <label for="tipcreid">Tipos de crédito</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="mon" id="mon" value='0.00' min="0.00" required>
+							<input type="number" name="mon" id="mon" value='0.00' min="0.00" onchange="calcular()" onkeyup="calcular()" required>
 							<label for="mon" class="active">Monto del crédito ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="pla" onkeyup="calcular()" id="pla" min="0" required>
+							<input type="number" name="pla" onchange="calcular()" onkeyup="calcular()"  id="pla" min="0" required>
 							<label for="pla">Plazo del crédito</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="cuo" id="cuo" value="0.00" min="0.00" step="0.01" required>
+							<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
 							<label for="cuo" class="active">Cuota a pagar ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="feccon" onchange="fechaf()" id="feccon" required>
+							<input type="date" class="datepicker" name="feccon" value="" onchange="fechaf()" id="feccon" required>
 							<label for="feccon">Fecha del contrato</label>
 						</div>
 						<div class="input-field col s12">
@@ -333,7 +333,7 @@
 							<label for="fecpag">Fecha de pago</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="fecfin" id="fecfin" readonly="true"  required>
+							<input type="date" class="datepicker teal-text"  name="fecfin" id="fecfin" disabled="true"  required>
 							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
 						</div>
 						<div class="input-field col s12">
@@ -675,34 +675,45 @@ function ejecutarajax(datos){
 }
 function calcular()
 {
-		//alert('hi bitch again');
 
-		 $.ajax({
-	        type:"post",
-	        url: "php/Credito.php",
-	        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
-	        success:function(responseText){
-	        		alert(responseText);
-	        		$('#cuo').val(responseText);     	
-	        }
-	    });
+		if(!$('#mon').val()==0.0&&!$('#pla').val()==0.0&&!$('#tipcreid').val()==0)
+		{ 
+			$.ajax({
+		        type:"post",
+		        url: "php/Credito.php",
+		        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
+		        success:function(responseText){
+		        		//alert(responseText);
+		        		$('#cuo').val(responseText);     	
+		        }
+	    	});
+		}
+		 if(!$('#feccon').val()==''){
+		 	fechaf();
+		 }
 }
 function fechaf()
 {
-	fecha=new Date();
-    tiempo=fecha.getTime();
-    fecc=new Date($('#feccon').val());
+	if(!$('#pla').val()==0.0){
+		//fecha=new Date();
+	   // tiempo=fecha.getTime();
+	    fecc=new Date($('#feccon').val());
+	    $('#feccon').val(fecc.getUTCDate()+"/"+(fecc.getUTCMonth()+1)+"/"+fecc.getUTCFullYear());
+	    day=fecc.getUTCDate();
+	    month=parseInt($('#pla').val())+(fecc.getUTCMonth()+1);
+	    year=fecc.getUTCFullYear();
+	   //alert(day);
+	    while(month>12){
 
-    days=$('#pla').val()*30;
-    tiempo=fecc.getTime();
-    //Calculamos los milisegundos sobre la fecha que hay que sumar o restar...
-    milisegundos=parseInt(days*24*60*60*1000);
-    //Modificamos la fecha actual
-    total=fecha.setTime(tiempo+milisegundos);
-    day=fecha.getDate();
-    month=fecha.getMonth()+1;
-    year=fecha.getFullYear();
-    $('#fecfin').addClass('active');
-    $('#fecfin').val(day+"/"+month+"/"+year);
+	    	month=(month-12);
+	    	year++;
+	    }
+	    //day++;
+	    if(month==2&&day>28){
+	    	day=28;
+	    }
+
+	    $('#fecfin').val(day+"/"+month+"/"+year);
+	}
 }
 </script>
