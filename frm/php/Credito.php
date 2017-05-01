@@ -251,14 +251,18 @@
             # code...
             break;
 
-             case 'getcuota':
-
-                $con->consulta("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['interes']);
-                $i=$con->getResultado();
+            case 'getcuota':
+              
+               $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['credid']);
+                    if ($row = mysql_fetch_row($rs)) {
+                        $i = trim($row[0]);
+                    }
+               // $i=$con->getResultado();
                 $tiempo=$_POST['tiempo'];
                 $monto=$_POST['monto'];
                 $interes=($i/12)/100;
-                   
+               
+                //echo $interes;
                 $constante=pow((1+$interes),$tiempo);
                 $arriba=$constante*$interes;
                 $abajo=$constante-1;

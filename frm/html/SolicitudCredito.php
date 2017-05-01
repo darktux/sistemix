@@ -317,7 +317,7 @@
 							<label for="mon" class="active">Monto del crédito ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="number" name="pla" onkeyup="coutix()" id="pla" min="0" required>
+							<input type="number" name="pla" onkeyup="calcular()" id="pla" min="0" required>
 							<label for="pla">Plazo del crédito</label>
 						</div>
 						<div class="input-field col s12">
@@ -325,7 +325,7 @@
 							<label for="cuo" class="active">Cuota a pagar ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="feccon" id="feccon" required>
+							<input type="date" class="datepicker" name="feccon" onchange="fechaf()" id="feccon" required>
 							<label for="feccon">Fecha del contrato</label>
 						</div>
 						<div class="input-field col s12">
@@ -333,8 +333,8 @@
 							<label for="fecpag">Fecha de pago</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="fecfin" id="fecfin" required>
-							<label for="fecfin">Fecha final</label>
+							<input type="date" class="datepicker" name="fecfin" id="fecfin" readonly="true"  required>
+							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
 						</div>
 						<div class="input-field col s12">
 							<select class="" id="est" name="est">
@@ -485,6 +485,8 @@
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
+	
+
 	function sumi()
 	{
 		//alert('hi bitch');
@@ -496,19 +498,7 @@
 		$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
 	}
 	
-	function cuotix()
-	{
-		alert('hi bitch again');
-
-		 $.ajax({
-	        type:"post",
-	        url: "php/Credito.php",
-	        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
-	        success:function(responseText){
-	        		$('#cuo').val(responseText);      	
-	        }
-	    });
-	}
+	
 
 	function getnumber(){
 		
@@ -682,5 +672,37 @@ function ejecutarajax(datos){
     });
    
    
+}
+function calcular()
+{
+		//alert('hi bitch again');
+
+		 $.ajax({
+	        type:"post",
+	        url: "php/Credito.php",
+	        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
+	        success:function(responseText){
+	        		alert(responseText);
+	        		$('#cuo').val(responseText);     	
+	        }
+	    });
+}
+function fechaf()
+{
+	fecha=new Date();
+    tiempo=fecha.getTime();
+    fecc=new Date($('#feccon').val());
+
+    days=$('#pla').val()*30;
+    tiempo=fecc.getTime();
+    //Calculamos los milisegundos sobre la fecha que hay que sumar o restar...
+    milisegundos=parseInt(days*24*60*60*1000);
+    //Modificamos la fecha actual
+    total=fecha.setTime(tiempo+milisegundos);
+    day=fecha.getDate();
+    month=fecha.getMonth()+1;
+    year=fecha.getFullYear();
+    $('#fecfin').addClass('active');
+    $('#fecfin').val(day+"/"+month+"/"+year);
 }
 </script>
