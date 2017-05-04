@@ -76,7 +76,7 @@
 					<label for="fecape" class="active">Fecha de apertura</label>
 				</div>
 				<div class="input-field col s12">
-				    <select class="" id="tipcueid" required  autocomplete="off" >
+				    <select class="" id="tipcueid" name="tipcueid" required  autocomplete="off" >
 				    	<option value="0" disabled selected>Seleccionar</option>
 				    </select>
 				    <label for="tipcueid">Tipos de cuenta</label>
@@ -184,23 +184,7 @@
 		$('ul.tabs').tabs();
   		$('.indicator').addClass('teal');
 
-	    $.ajax({
-	        type:"post",
-	        url: "php/TipoCuenta.php",
-	        data:{acc:'getjsonselect'},
-	        success:function(responseText){
-	        	var obj = $.parseJSON(responseText);
-	        	$.each(obj, function(i,item){
-	        		var x = document.getElementById("tipcueid");
-	        		var option = document.createElement("option");
-	        		option.text = item.tipocuenta_nombre;
-	        		option.value = item.tipocuenta_id;
-	        		x.add(option);
-	        	});
-	        	$('#tipcueid').material_select('destroy');
-        		$('#tipcueid').material_select();
-	        }
-	    });
+  		cargaTipoCuenta();
 
 	    /*INICIA BLOQUE DE CONFIGURACION DEL MODAL BUSCAR */
 		$('#modal1').modal({
@@ -240,7 +224,7 @@
 			}
 		});
 		/*FINALIZA BLOQUE DE CONFIGURACION DEL MODAL NUEVA CUENTA */
-	});
+	});   
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 
 	/*INICIA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
@@ -336,23 +320,32 @@
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$("#tit").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
-        	$("#tit2").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
-
+        	//Poner al primero de los autorizados
+        	//$("#tit2").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
         	$("#fecape").val(JSON.stringify(row.cuenta_fechaapertura).replace(/"/gi,''));
+        	$("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
         	$("#cueid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-
-        	$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-        	
-            $("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
-
-            $("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
-
-            $("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
+        	//$("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
+        	//$("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
+        	//$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+ 			/*$.ajax({
+		        type:"post",
+		        url: "php/Cuenta.php",
+		        data:{cuentaid:JSON.stringify(row.cuenta_id).replace(/"/gi,''),acc:"getAutorizados"},
+		        success:function(data){
+		        	alert(data);
+		        	var dataJson=eval(data);
+		        	for(var i in dataJson){
+		        		alert(dataJson[i].nombre);
+		        	}
+		        }
+		    });*/
+            
             
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
-		    //document.getElementById("cueid").setAttribute("readonly", "");
+		    document.getElementById("cueid").setAttribute("readonly", "");
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },
@@ -418,6 +411,28 @@ function ejecutarajax(datos){
         }
     });
 }
+
+function cargaTipoCuenta(){
+	$.ajax({
+        type:"post",
+        url: "php/TipoCuenta.php",
+        data:{acc:'getjsonselect'},
+        success:function(responseText){
+        	var obj = $.parseJSON(responseText);
+        	$.each(obj, function(i,item){
+        		var x = document.getElementById("tipcueid");
+        		var option = document.createElement("option");
+        		option.text = item.tipocuenta_nombre;
+        		option.value = item.tipocuenta_id;
+        		x.add(option);
+        	});
+        	$('#tipcueid').material_select('destroy');
+    		$('#tipcueid').material_select();
+	    }
+	});
+}
+
+
 $("#tipcueid").change(function() {
         $.ajax({
             type:"post",

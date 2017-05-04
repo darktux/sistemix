@@ -67,7 +67,7 @@
                             $con->consulta($sql2);
                         }
                     }
-
+                    $con->consulta("COMMIT");
                 }catch(Exception $e){
                     $con->consulta('ROLLBACK');
                     echo 'Error al guardar: ',$e->getMessage(),"\n";
@@ -77,17 +77,45 @@
                 break;
     	case 'upd':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-            $con->consulta("
-                UPDATE 
-                    ".$nombretabla." 
-                SET 
-                    cuenta_fechaapertura='".$_POST['fecape']."',
-                    cuenta_monto='".$_POST['mon']."',
-                    cuenta_tipocuentaid=".$_POST['tipcueid'].",
-                    cuenta_estado='".$_POST['est']."'
-                WHERE 
-                    cuenta_id=".$_POST['id'].";
-            ");
+            $con->consulta("BEGIN");
+            try{
+                $con->consulta("
+                    UPDATE 
+                        ".$nombretabla." 
+                    SET 
+                        cuenta_fechaapertura='".$_POST['fecape']."',
+                        cuenta_monto='".$_POST['mon']."',
+                        cuenta_tipocuentaid=".$_POST['tipcueid'].",
+                        cuenta_estado='".$_POST['est']."'
+                    WHERE 
+                        cuenta_id=".$_POST['id'].";
+                ");
+                //Actualiza los autorizados de la cuenta
+                $con->consulta("DELETE FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['id']."'");
+                for ($i=1; $i < 4; $i++) { 
+                    if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
+                        $sql2="
+                        INSERT INTO 
+                            tab_cuenta_autorizados(
+                                cuentaautorizados_cuentaid,
+                                cuentaautorizados_nombre,
+                                cuentaautorizados_dui,
+                                cuentaautorizados_nit
+                            )
+                        VALUES(
+                            '".$_POST['cueid']."',
+                            '".$_POST['nom'.$i]."',
+                            '".$_POST['dui'.$i]."',
+                            '".$_POST['nit'.$i]."'
+                        )";
+                        $con->consulta($sql2);
+                    }
+                }
+                $con->consulta("COMMIT");
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
@@ -150,7 +178,7 @@
         case 'getNumeroCuenta':
             $con->consulta("
                 SELECT 
-                    i.institucionsalud_correlativo
+                    i.institucionsalud_id
                 FROM 
                     tab_asociado a,
                     tab_institucion_salud i
@@ -183,6 +211,19 @@
                 echo "Error al guardar";
             }
             break;
+
+        /*case 'getAutorizados':
+            $rs=mysql_query("SELECT * FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cuentaid']."'");
+            while ($obj=pg_fetch_object($rs) {
+                $dataut[]=array(
+                    'cuentaid'=>$obj->cuentaautorizados_cuentaid,
+                    'nombre'=>$obj->cuentaautorizados_nombre,
+                    'dui'=>$obj->cuentaautorizados_dui,
+                    'nit'=>$obj->cuentaautorizados_nit
+                );
+            }
+            echo ''.json_encode($dataut).'';
+            break;*/
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
