@@ -108,8 +108,11 @@
                 $abajo=$constante-1;
                 $cuota=round((($monto)*($arriba/$abajo)),2);
                 $con->consulta("DELETE FROM tab_calculo");
-
-                for($i=0;$i<$tiempo;$i++) {       
+                $x0=0;
+                $x1=0;
+                $x2=0;
+                $x3=0;
+                for($i=1;$i<=$tiempo;$i++) {       
                    
                     if($cuota>$monto){
                         $cuota=$monto+round($monto*$interes,2);
@@ -126,29 +129,51 @@
                     $fila[3]=$monto;
                      $con->consulta("INSERT INTO 
                                 tab_calculo (
+                                 calculos_id,
                                 calculos_cuota,
                                 calculos_amortizacion,
                                 calculos_intereses,
                                 calculos_monto
                             ) 
-                            VALUES(
+                            VALUES('".$i."',
                                 ".$cuota.",
                                 ".$amortizacion.",
                                 ".$inter.",
                                 ".$monto."
                                 );
                         ");
-                   // $salida[$i]=$fila;
-                    //$i++;
+                    $x0+=$fila[0];
+                    $x1+=$fila[1];
+                    $x2+=$fila[2];
+                   
                 }
-                //echo json_encode($salida);
+                //$i++;
+                $x3+=$x1;
+                $x3+=$x2;
+                $con->consulta("INSERT INTO 
+                                tab_calculo (
+                                calculos_id,
+                                calculos_cuota,
+                                calculos_amortizacion,
+                                calculos_intereses,
+                                calculos_monto
+                            ) 
+                            VALUES(
+                                'Totales',
+                                ".$x0.",
+                                ".$x1.",
+                                ".$x2.",
+                                ".$x3."
+                                );
+                        ");
             break; 
             case 'calcs':
             $con->consulta("
                 SELECT 
                     * 
                 FROM 
-                    tab_calculo
+                    tab_calculo 
+                ORDER by calculos_correla asc
             ");
             $i=0;$salida=array();
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
