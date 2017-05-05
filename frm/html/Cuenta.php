@@ -265,6 +265,7 @@
 		else{/*DATOS PARA MODIFICAR UN REGISTRO (SON LOS MISMOS QUE PARA CREAR NUEVO PERO AñADIENDO ID Y CAMBIA set A upd) *******************************************/
 	            datos = {
 	            	id:$("#idid").val(),
+	            	cueid:$("#cueid").val(),
 	            	fecape:$("#fecape").val(),
 	            	mon:$("#mon").val(),
 	            	tipcueid:$("#tipcueid").val(),
@@ -325,28 +326,38 @@
         	$("#fecape").val(JSON.stringify(row.cuenta_fechaapertura).replace(/"/gi,''));
         	$("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
         	$("#cueid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-        	//$("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
-        	//$("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
-        	//$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
- 			/*$.ajax({
+        	$("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
+        	$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+        	//Obtengo el monto de apertura
+        	$.ajax({
+        		type: "post",
+        		url: "php/Cuenta.php",
+        		data: {cuentaid:JSON.stringify(row.cuenta_id).replace(/"/gi,''),acc:"getMontoApertura"},
+        		success:function(responseText){
+        			$("#mon").val(responseText);
+        		}
+        	});
+        	//Obtengo los autorizados de la cuenta
+ 			$.ajax({
 		        type:"post",
 		        url: "php/Cuenta.php",
 		        data:{cuentaid:JSON.stringify(row.cuenta_id).replace(/"/gi,''),acc:"getAutorizados"},
-		        success:function(data){
-		        	alert(data);
-		        	var dataJson=eval(data);
+		        success:function(responseText){
+		        	var dataJson=eval(responseText);
 		        	for(var i in dataJson){
-		        		alert(dataJson[i].nombre);
+		        		$("#nom"+(++i)).val(dataJson[--i].nombre);
+		        		$("#dui"+(++i)).val(dataJson[--i].dui);
+		        		$("#nit"+(++i)).val(dataJson[--i].nit);
 		        	}
 		        }
-		    });*/
+		    });
             
             
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
 		    document.getElementById("cueid").setAttribute("readonly", "");
-        	//$('label').addClass("active");
+        	$('label').addClass("active");
         	$('#modal2').modal('open');
         },
 /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/

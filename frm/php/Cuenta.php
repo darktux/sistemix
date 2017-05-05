@@ -38,7 +38,7 @@
                             cuentamovimiento_cuentaid
                         ) 
                         VALUES(
-                            'Apertura de la cuenta',
+                            'Apertura de cuenta',
                             '".date("Y-m-d")."',
                             '".$_POST['mon']."',
                             0.00,
@@ -84,14 +84,13 @@
                         ".$nombretabla." 
                     SET 
                         cuenta_fechaapertura='".$_POST['fecape']."',
-                        cuenta_monto='".$_POST['mon']."',
                         cuenta_tipocuentaid=".$_POST['tipcueid'].",
                         cuenta_estado='".$_POST['est']."'
                     WHERE 
                         cuenta_id=".$_POST['id'].";
                 ");
                 //Actualiza los autorizados de la cuenta
-                $con->consulta("DELETE FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['id']."'");
+                $con->consulta("DELETE FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cueid']."'");
                 for ($i=1; $i < 4; $i++) { 
                     if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
                         $sql2="
@@ -212,9 +211,17 @@
             }
             break;
 
-        /*case 'getAutorizados':
-            $rs=mysql_query("SELECT * FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cuentaid']."'");
-            while ($obj=pg_fetch_object($rs) {
+        case 'getMontoApertura':
+            $con->consulta("SELECT cuentamovimiento_saldo FROM tab_cuenta_movimiento WHERE cuentamovimiento_concepto='Apertura de cuenta' and cuentamovimiento_cuentaid='".$_POST['cuentaid']."' ");
+            if($row = mysql_fetch_row($con->getResultado())){
+                echo $row[0];
+            }
+            break;
+
+        case 'getAutorizados':
+            $sql="SELECT * FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cuentaid']."'";
+            $rs=mysql_query($sql);
+            while ($obj=mysql_fetch_object($rs)){
                 $dataut[]=array(
                     'cuentaid'=>$obj->cuentaautorizados_cuentaid,
                     'nombre'=>$obj->cuentaautorizados_nombre,
@@ -223,7 +230,7 @@
                 );
             }
             echo ''.json_encode($dataut).'';
-            break;*/
+            break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
