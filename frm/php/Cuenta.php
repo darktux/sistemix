@@ -144,7 +144,9 @@
                     WHERE
                         c.cuenta_asociadoid=a.asociado_id
                     AND
-                        c.cuenta_tipocuentaid=t.tipocuenta_id;
+                        c.cuenta_tipocuentaid=t.tipocuenta_id
+                    AND
+                        t.tipocuenta_nombre<>'APORTACIONES';
                 ");
                 $resultadoaux = $con->getResultado();
                 $i=0;$salida=array();
@@ -173,6 +175,54 @@
                 }
                 echo json_encode($salida);
                 break;
+
+        case 'getjsontablaAportacion':
+                $con->consulta("
+                    SELECT 
+                        c.*,
+                        a.asociado_nombre AS cuenta_asociadonombre,
+                        t.tipocuenta_nombre AS cuenta_tipocuentanombre,
+                        c.cuenta_id AS cuenta_saldo
+                    FROM 
+                        tab_cuenta c,
+                        tab_asociado a,
+                        tab_tipo_cuenta t
+                    WHERE
+                        c.cuenta_asociadoid=a.asociado_id
+                    AND
+                        c.cuenta_tipocuentaid=t.tipocuenta_id
+                    AND
+                        t.tipocuenta_nombre='APORTACIONES';
+                ");
+                $resultadoaux = $con->getResultado();
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
+                    $con->consulta("
+                        SELECT 
+                            cuentamovimiento_saldo 
+                        FROM 
+                            tab_cuenta_movimiento 
+                        WHERE
+                            cuentamovimiento_cuentaid='".$fila['cuenta_id']."'
+                        ORDER BY 
+                            cuentamovimiento_id 
+                        DESC 
+                        LIMIT 
+                            1;
+                    ");
+                    if ($fila2 = mysql_fetch_row($con->getResultado())) {       
+                        $fila['cuenta_saldo']=$fila2[0];
+                    }
+                    else{
+                        $fila['cuenta_saldo']='0.00';
+                    }
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
+
+
 
         case 'getNumeroCuenta':
             $con->consulta("

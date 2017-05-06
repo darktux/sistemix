@@ -35,22 +35,26 @@
             <!-- OPCIONES DEL MENU ASOCIADO -->
             <ul id="dropdown-per1" class="dropdown-content">
                 <li><a class="saso">Solicitud de asociado</a></li>
-                <li><a class="naso">Gestionar asociado</a></li>            
+                <li><a class="naso">Gestionar asociado</a></li>  
+                <li class="divider"></li>
+                <li><a class="apor">Aportaciones</a></li>
+                <li><a class="amor">Aportaciones en mora</a></li>
             </ul>
             <ul id="dropdown-per2" class="dropdown-content">
                 <li><a class="saso">Solicitud de asociado</a></li>
-                <li><a class="naso">Gestionar asociado</a></li>    
+                <li><a class="naso">Gestionar asociado</a></li>
+                <li class="divider"></li>
+                <li><a class="apor">Aportaciones</a></li>
+                <li><a class="amor">Aportaciones en mora</a></li> 
             </ul>
             <!-- OPCIONES DEL MENU CUENTA -->
             <ul id="dropdown-cue1" class="dropdown-content">
                 <li><a class="ncue">Gestionar cuenta</a></li>
-                <li><a class="amor">Aportaciones en mora</a></li>
                 <li class="divider"></li>
                 <li><a class="tcue">Tipo de cuenta</a></li>
             </ul>
             <ul id="dropdown-cue2" class="dropdown-content">
                 <li><a class="ncue">Gestionar cuenta</a></li>
-                <li><a class="amor">Aportaciones en mora</a></li>
                 <li class="divider"></li>
                 <li><a class="tcue">Tipo de cuenta</a></li>
             </ul>
@@ -58,16 +62,18 @@
             <ul id="dropdown-cre1" class="dropdown-content">
                 <li><a class="scre">Solicitudes de crédito</a></li>
                 <li><a class="ncre">Gestionar crédito</a></li>
-                <li><a class="cmor">Créditos en mora</a></li>
                 <li class="divider"></li>
+                <li><a class="cmor">Créditos en mora</a></li>
+                
                 <li><a class="tcre">Tipo de crédito</a></li>
                 <li><a class="ccre">Calculadora de crédito</a></li>
             </ul>
             <ul id="dropdown-cre2" class="dropdown-content">
                 <li><a class="scre">Solicitudes de crédito</a></li>
                 <li><a class="ncre">Gestionar crédito</a></li>
-                <li><a class="cmor">Créditos en mora</a></li>
                 <li class="divider"></li>
+                <li><a class="cmor">Créditos en mora</a></li>
+                
                 <li><a class="tcre">Tipo de crédito</a></li>
                 <li><a class="ccre">Calculadora de crédito</a></li>
             </ul>
@@ -123,9 +129,10 @@
             //MENU ASOCIADO
             $(".naso").click(function(){ $("#formularios").load('html/Asociado.php'); });
             $(".saso").click(function(){ $("#formularios").load('html/SolicitudesAsociados.php'); });
+            $(".apor").click(function(){ $("#formularios").load('html/Aportacion.php'); });
+            $(".amor").click(function(){ $("#formularios").load('html/MoraAportaciones.php'); });
             //MENU CUENTA
             $(".ncue").click(function(){ $("#formularios").load('html/Cuenta.php'); });
-            $(".amor").click(function(){ $("#formularios").load('html/MoraAportaciones.php'); });
             $(".tcue").click(function(){ $("#formularios").load('html/TipoCuenta.php'); });
             //MENU CREDITO
             $(".scre").click(function(){ $("#formularios").load('html/SolicitudCredito.php'); });
