@@ -41,6 +41,7 @@
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
 				    	<th data-field="cuenta_id" data-align="center"># Cuenta</th>
 				    	<th data-field="cuenta_asociadonombre" data-align="center">Asociado</th>
+				    	<th data-field="cuenta_asociadodui" data-align="center">DUI</th>
 			            <th data-field="cuenta_saldo" data-align="center">Saldo ($)</th>
 			            <!-- <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th> -->
 			            <th data-field="cuenta_estado" data-align="center">Estado</th>

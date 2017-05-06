@@ -135,6 +135,7 @@
                     SELECT 
                         c.*,
                         a.asociado_nombre AS cuenta_asociadonombre,
+                        a.asociado_dui AS cuenta_asociadodui,
                         t.tipocuenta_nombre AS cuenta_tipocuentanombre,
                         c.cuenta_id AS cuenta_saldo
                     FROM 
