@@ -10,23 +10,8 @@
 		<div class="modal-content" id="modalcontent">
 			<h5>Nueva transacción de aportación</h5><!-- //TITULO DEL MODAL *************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
-			<div class="row">
-				<div class="input-field col s12">
-					<input name="fec" id="fec" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
-					<label for="fec" class="active">Fecha de transacción</label>
-				</div>
-				<div class="input-field col s12">
-					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required autofocus></textarea> -->
-					<select name="con" id="con" multiple>
-						<option value="" disabled>Seleccione...</option>
-					</select>
-					<label for="con">Concepto</label>
-				</div>
-				<div class="input-field col s12">
-					<input type="number" name="sal0" id="sal0" value="1000" readonly>
-					<label for="sal0" class="active">Saldo anterior ($)</label>
-				</div>
-				<div class="row">
+			<!-- <div class="row"> -->
+				<div class="row" hidden>
 					<div class="col s12 m4">
 						<label>Tipo de transacción</label>
 					</div>
@@ -39,16 +24,37 @@
 						<label for="ret1">Retiro</label>
 					</div>
 				    <br>
+				    <br>
 				</div>
-			    <div class="input-field col s12">
-					<input type="number" name="mon" id="mon" min="1.00" step="0.01" required>
-					<label for="mon" class="active">Monto ($)</label>
+			<div class="row">
+				<div class="input-field col s12 m6">
+					<input name="fec" id="fec" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<label for="fec" class="active">Fecha de transacción</label>
 				</div>
-				<div class="input-field col s12">
-					<input type="text" name="sal" id="sal" value="1000" readonly>
-					<label for="sal" class="active">Saldo ($)</label>
+				<div class="input-field col s12 m6">
+					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required autofocus></textarea> -->
+					<select name="con" id="con" multiple onchange="actualizasaldo()">
+						<option value="" disabled>Seleccione...</option>
+					</select>
+					<label for="con">Concepto (Cuota a pagar)</label>
 				</div>
 			</div>
+			<div class="row">
+				<div class="input-field col s12 m4">
+					<input type="number" name="sal0" id="sal0" readonly>
+					<label for="sal0" class="active">Saldo anterior ($)</label>
+				</div>
+				
+			    <div class="input-field col s12 m4">
+					<input type="number" name="mon" id="mon" min="1.00" step="0.01" readonly required>
+					<label for="mon" class="active">Cuota de aportación establecida ($)</label>
+				</div>
+				<div class="input-field col s12 m4">
+					<input type="text" name="sal" id="sal" readonly>
+					<label for="sal" class="active">Nuevo saldo ($)</label>
+				</div>
+			</div>
+			<!-- </div> -->
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO **************************************************************************************************-->
 		</div>
 		<div class="modal-footer">
@@ -88,6 +94,7 @@
 <script type="text/javascript">
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
+		var montoPago=0;
 		$('.tooltipped').tooltip({delay: 50});
 		$('select').material_select();
 		$('.datepicker').pickadate({
@@ -275,21 +282,29 @@
 	        data:{acc:'getMontoAportacion',idcue:idcuenta},
 	        success:function(responseText){
 	        	$("#mon").val(responseText);
+	        	montoPago=responseText;
 	        }
 	    });
 	}
 	/*INICIA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
 	function actualizasaldo(){
+		var cuotas = $('#con option:selected').length;
 		var s0= parseFloat($("#sal0").val());
-		if($("#mon").val()==''){m=0.0;}else{var m= parseFloat($("#mon").val());}
+		if($("#mon").val()==''){
+			m=0.0;
+		}else{
+			var m= parseFloat($("#mon").val());
+		}
+
 		if(document.getElementById("dep1").checked){//deposito
-			$("#sal").val( parseFloat(''+(s0+m)).toFixed(2) );
+			$("#sal").val( parseFloat(''+(s0+(m*cuotas))).toFixed(2) );
 		}
 		else if(document.getElementById("ret1").checked){//retiro
-			$("#sal").val( parseFloat(''+(s0-m)).toFixed(2) );
+			$("#sal").val( parseFloat(''+(s0-(m*cuotas))).toFixed(2) );
 		}
 	}
 	/*FINALIZA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
+
 	/*INICIA FUNCION PARA VALIDAR RETIRO DE CAPITAL */
 	function validarretiro(){
 		if(document.getElementById("ret1").checked){//retiro
