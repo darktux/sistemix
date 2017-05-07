@@ -29,6 +29,33 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
             break;
+        case 'setAportacion':
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
+            $cuotas=$_POST['con'];
+            for ($i=0; $i < count($cuotas); $i++) { 
+                $con->consulta("INSERT INTO 
+                    ".$nombretabla."(
+                        cuentamovimiento_concepto,
+                        cuentamovimiento_fecha,
+                        cuentamovimiento_deposito,
+                        cuentamovimiento_retiro,
+                        cuentamovimiento_saldo,
+                        cuentamovimiento_cuentaid
+                    ) 
+                    VALUES(
+                        '".$cuotas[$i]."',
+                        '".$_POST['fec']."',
+                        ".$_POST['dep'].",
+                        ".$_POST['ret'].",
+                        ".$_POST['sal'].",
+                        '".$_POST['idcue']."'
+                    );
+                ");
+            }
+            
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
+            if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+            break;
     	case 'upd':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("
@@ -97,7 +124,25 @@
             else{
                 echo '0.00';
             }
+            break;
+
+        case 'getMontoAportacion':
+            $con->consulta("
+                SELECT 
+                    tipocuenta_cobromontominimo 
+                FROM 
+                    tab_tipo_cuenta 
+                WHERE
+                    tipocuenta_correlativo='01'
+            ");
+            if ($fila = mysql_fetch_row($con->getResultado())) {       
+                echo $fila[0];
+            }
+            else{
+                echo '0.00';
+            }
             break;           
+     
     }
 	//$con->limpiarConsulta();
     $con->desconectar();

@@ -16,9 +16,10 @@
     ///////////////////////////////////DATOS DE LA BASE DE DATOS//////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Obtengo el monto de aportacion
-    $rs=mysql_query("SELECT tipocuenta_montoapertura FROM tab_tipo_cuenta WHERE tipocuenta_correlativo='01'");
+    $rs=mysql_query("SELECT tipocuenta_montoapertura,tipocuenta_cobromontominimo FROM tab_tipo_cuenta WHERE tipocuenta_correlativo='01'");
     if ($row = mysql_fetch_row($rs)) {
     	$monto = trim($row[0]);
+    	$cuota = trim($row[1]);
     }
     //Obtengo todos los datos del asociado
     $con->consulta("SELECT * FROM tab_asociado WHERE asociado_correlativo='".$corr."'");
@@ -60,7 +61,7 @@
 	$pdf->SetX(30);
 	$pdf->MultiCellBlt(165,5,chr(149),utf8_decode('Aceptar y cumplir con lo dispuesto en sus Estatutos, Ley General de Asociaciones Cooperativas y su Reglamento, así como los acuerdos de resoluciones adoptadas por la Asamblea General de Asociados y del Consejo de Administración'));
 	$pdf->MultiCellBlt(165,5,chr(149),utf8_decode('Pagar la cuota de ingreso de $ '.$monto.' ('.$texto.' dólares de los Estados Unidos)'));
-	$pdf->MultiCellBlt(165,5,chr(149),utf8_decode('Suscribir y pagar por lo menos un  certificado de aportación de $____, al momento de ser aceptado como asociado de la Cooperativa, y continuar aportando para incrementar el Capital Social de la Asociación Cooperativa'));
+	$pdf->MultiCellBlt(165,5,chr(149),utf8_decode('Suscribir y pagar por lo menos un  certificado de aportación de $ '.$cuota.', al momento de ser aceptado como asociado de la Cooperativa, y continuar aportando para incrementar el Capital Social de la Asociación Cooperativa'));
 	
 	$pdf->Ln();
 	$pdf->SetFont('Arial','bu',10);
