@@ -14,6 +14,7 @@
 			    <tr>
 			    	<th data-field="operate" data-align="center" data-formatter="operateFormatter1" data-events="operateEvents">Acciones</th>
 			    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
+			    	<th data-field="asociado_id" data-align="center">Nombre</th>
 		            <th data-field="asociado_nombre" data-align="center">Nombre</th>
 		            <th data-field="asociado_dui" data-align="center">DUI</th>
 		            <th data-field="asociado_nit" data-align="center">NIT</th>
@@ -34,7 +35,7 @@
 	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla3" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
@@ -235,7 +236,7 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s12">			  		
-							<input type="text" name="toti" class='teal-text'  id="toti" disabled="true" value="0.00">
+							<input type="number" name="toti" class='teal-text'  id="toti" readonly="true" value="0.00">
 							<label for="toti" class="active">Total ingresos ($)</label>
 						</div>			    
 					</div>
@@ -259,7 +260,7 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s12">			  		
-							<input type="number" class='teal-text' name="tote" id="tote" value="0.00" disabled="true" min="0.00">
+							<input type="number" class='teal-text' name="tote" id="tote" value="0.00" readonly="true" min="0.00">
 							<label for="tote" class="active">Total egresos</label>
 						</div>			    
 					</div>
@@ -527,9 +528,11 @@
 	    	var formData = new FormData(document.getElementById("formulario"));
 	    	if($("#idid").val() == ""){ 
 	        	formData.append("acc", "set"); 
+	        	alert('sett');
 			}
 			else{
 		    	formData.append("acc", "addsol");
+		    	alert('adsol');
 			}
 			$.ajax({
 	            url: "php/Credito.php",
@@ -629,14 +632,16 @@
 /*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .new': function (e, value, row, index) {
-        	//alert("jajajaja"); /********************************************************************************************************/
+        	 /********************************************************************************************************/
         	$("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
         	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	//$('#lnom').addClass("active");
-        	$('#modal2').modal('open');
         	$('ul.tabs').tabs();
 			$('.indicator').addClass('teal col s2');
-        	//$('ul.tabs').tabs('select_tab', 'personales');
+        	$('ul.tabs').tabs('select_tab', 'personales');
+        	//alert("jajajaja");
+        	$('#modal2').modal('open');
+        	
         	
         },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/

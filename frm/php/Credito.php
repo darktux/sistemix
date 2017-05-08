@@ -238,6 +238,166 @@
             }
             echo ''.json_encode($dataut).'';
             break;
+        case 'getjsontabla2'://no borrar, se utiliza en solicitud de credito. Att Duglas
+
+                $con->consulta("
+                    SELECT 
+                        asociado_id,
+                       asociado_nombre,
+                        asociado_dui, 
+                        asociado_nit
+                       
+                    FROM 
+                        tab_asociado
+                    where
+                        asociado_estado like 'Activo' 
+                ");
+                $resultadoaux = $con->getResultado();
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
+
+            case 'getcuota'://no borrar, se utiliza en solicitud de credito. Att Duglas
+              
+               $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['credid']);
+                    if ($row = mysql_fetch_row($rs)) {
+                        $i = trim($row[0]);
+                    }
+               // $i=$con->getResultado();
+                $tiempo=$_POST['tiempo'];
+                $monto=$_POST['monto'];
+                $interes=($i/12)/100;
+               
+                //echo $interes;
+                $constante=pow((1+$interes),$tiempo);
+                $arriba=$constante*$interes;
+                $abajo=$constante-1;
+                $cuota=round((($monto)*($arriba/$abajo)),2);
+                echo $cuota;
+             break;
+             case 'addsol'://no borrar, se utiliza en solicitud de credito
+
+                
+                 $con->consulta("BEGIN");
+                try{
+                   $con->consulta("INSERT INTO tab_solicitud_credito(
+                        solicitudcredito_sexo,
+                        solicitudcredito_telefonofijo,
+                        solicitudcredito_telefonocelular,
+                        solicitudcredito_jefeinmediato,
+                        solicitudcredito_tiempotrabajo,
+                        solicitudcredito_puesto,
+                        solicitudcredito_telefonotrabajo,
+                        solicitudcredito_nombreconyuge,
+                        solicitudcredito_sexoconyuge,
+                        solicitudcredito_duiconyuge,
+                        solicitudcredito_nitconyuge,
+                        solicitudcredito_fechanacimientoconyuge,
+                        solicitudcredito_profesionoficioconyuge,
+                        solicitudcredito_direccionconyuge,
+                        solicitudcredito_estadocivilconyuge,
+                        solicitudcredito_telefonofijoconyuge,
+                        solicitudcredito_telefonocelularconyuge,
+                        solicitudcredito_lugartrabajoconyuge,
+                        solicitudcredito_direcciontrabajoconyuge,
+                        solicitudcredito_sueldomensual,
+                        solicitudcredito_otrosingresos,
+                        solicitudcredito_totalingresos,
+                        solicitudcredito_gastovida,
+                        solicitudcredito_pagodeudas,
+                        solicitudcredito_otrosegresos,
+                        solicitudcredito_totalegresos,
+                        solicitudcredito_nombrereferencia,
+                        solicitudcredito_direccionreferencia,
+                        solicitudcredito_telefonofijoreferencia,
+                        solicitudcredito_telefonocelularreferencia,
+                        solicitudcredito_lugartrabajoreferencia,
+                        solicitudcredito_direcciontrabajoreferencia,
+                        solicitudcredito_asociadoid) VALUES(
+                        '".$_POST['sex']."',
+                        '".$_POST['tel']."',
+                        '".$_POST['cel']."',
+                        '".$_POST['jefe']."',
+                        '".$_POST['timet']."',
+                        '".$_POST['pues']."',
+                        '".$_POST['telt']."',
+                        '".$_POST['nomc']."',
+                        '".$_POST['sexc']."',
+                        '".$_POST['duic']."',
+                        '".$_POST['nitc']."',
+                        '".$_POST['fecc']."',
+                        '".$_POST['proc']."',
+                        '".$_POST['dirc']."',
+                        '".$_POST['estc']."',
+                        '".$_POST['telc']."',
+                        '".$_POST['celc']."',
+                        '".$_POST['lugc']."',
+                        '".$_POST['dirtc']."',
+                        ".$_POST['suel'].",
+                        ".$_POST['otroi'].",
+                        ".$_POST['toti'].",
+                        ".$_POST['gasv'].",
+                        ".$_POST['pagd'].",
+                        ".$_POST['otroe'].",
+                        ".$_POST['tote'].",
+                        '".$_POST['nomr']."',
+                        '".$_POST['dirr']."',
+                        '".$_POST['telr']."',
+                        '".$_POST['celr']."',
+                        '".$_POST['lugtr']."',
+                        '".$_POST['dirtr']."',
+                        ".$_POST['idid']."
+                        )");
+
+                    $rs = mysql_query("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
+                        if ($row = mysql_fetch_row($rs)) {
+                                $id = trim($row[0]);
+                                $sql="INSERT INTO tab_credito(
+                                credito_monto,
+                                credito_cuota,
+                                credito_fechacontrato,
+                                credito_fechapago,
+                                credito_plazo,
+                                credito_fechafin,
+                                credito_estado,
+                                credito_solicitudcreditoid,
+                                credito_tipocreditoid
+                                ) 
+                                VALUES('".$_POST['mon']."',
+                                        '".$_POST['cuo']."',
+                                        '".$_POST['feccon']."',
+                                        '".$_POST['fecpag']."',
+                                        '".$_POST['pla']."',
+                                        '".$_POST['fecfin']."',
+                                        '".$_POST['est']."',
+                                        '".$id."',
+                                        '".$_POST['tipcreid']."'
+                                )";
+                                //echo $sql;
+                                $con->consulta($sql);
+                            }
+
+                        $con->consulta('COMMIT');
+                 }catch(Exception $e){
+                    $con->consulta('ROLLBACK');
+                    echo 'Error al guardar: hola',$e->getMessage(),"\n";
+                }
+            if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+
+             break;
+             case 'getjsontabla3':// no borrar, se utiliza en solicutd de credito
+            $con->consulta("SELECT asociado_nombre,asociado_dui,credito_monto,credito_estado,tipocredito_nombre FROM tab_asociado, tab_credito, tab_tipo_credito, tab_solicitud_credito WHERE tipocredito_id=credito_tipocreditoid and credito_solicitudcreditoid=solicitudcredito_id and solicitudcredito_asociadoid=asociado_id");
+            $i=0;$salida=array();
+            while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                $salida[$i]=$fila;
+                $i++;
+            }
+            echo json_encode($salida);
+            break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
