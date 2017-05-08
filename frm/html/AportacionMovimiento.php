@@ -1,6 +1,6 @@
 <!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <div class="fixed-action-btn">
-	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta"><i class="large material-icons">add</i></a>
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="cargaSelect()"><i class="large material-icons">add</i></a>
 </div>
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
@@ -33,7 +33,7 @@
 				</div>
 				<div class="input-field col s12 m6">
 					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required autofocus></textarea> -->
-					<select name="con" id="con" multiple onchange="actualizasaldo()">
+					<select name="con[]" id="con" multiple onchange="actualizasaldo()">
 						<option value="" disabled>Seleccione...</option>
 					</select>
 					<label for="con">Concepto (Cuota a pagar)</label>
@@ -71,16 +71,16 @@
 		<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO *******************************************************-->
-			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/CuentaMovimiento.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/CuentaMovimiento.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="12" data-page-list="[3,6,12,24,36,48]">
 			    <thead>
 				    <tr>
 				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-				    	<th data-field="cuentamovimiento_concepto" data-align="center">concepto</th>
-				    	<th data-field="cuentamovimiento_fecha" data-align="center">fecha</th>
+				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto/Aportación con fecha</th>
+				    	<th data-field="cuentamovimiento_fecha" data-align="center">Fecha de pago</th>
 			            <th data-field="cuentamovimiento_deposito" data-align="center">Deposito ($)</th>
-			            <th data-field="cuentamovimiento_retiro" data-align="center">Retiro ($)</th>
-			            <th data-field="cuentamovimiento_saldo" data-align="center">Saldo ($)</th>
+			            <!-- <th data-field="cuentamovimiento_retiro" data-align="center">Retiro ($)</th> -->
+			            <th data-field="cuentamovimiento_saldo" data-align="center">Saldo de aportación ($)</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ****************************************************************************************-->
 				    </tr>
 			    </thead>
@@ -94,7 +94,6 @@
 <script type="text/javascript">
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
-		var montoPago=0;
 		$('.tooltipped').tooltip({delay: 50});
 		$('select').material_select();
 		$('.datepicker').pickadate({
@@ -102,7 +101,6 @@
     		selectYears: true, // Creates a dropdown of 15 years to control year
 			max: true //dias equivalentes  years restados for today
 		});
-		cargaSelect();
 		/*INICIA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 		$('.modal').modal({
 			dismissible: true,
@@ -282,7 +280,6 @@
 	        data:{acc:'getMontoAportacion',idcue:idcuenta},
 	        success:function(responseText){
 	        	$("#mon").val(responseText);
-	        	montoPago=responseText;
 	        }
 	    });
 	}
@@ -320,8 +317,10 @@
 	/*FINALIZA FUNCION PARA VALIDAR RETIRO DE CAPITAL */
 
 	function cargaSelect(){
+		$('select').empty();
 		var dep = $("#con");
 		var ano = (new Date).getFullYear();
+		dep.append("<option value='' disabled>Seleccione...</option>");
 		dep.append("<option value='"+ano+"-01-01'>Enero/"+ano+"</option>");
 		dep.append("<option value='"+ano+"-02-01'>Febrero/"+ano+"</option>");
 		dep.append("<option value='"+ano+"-03-01'>Marzo/"+ano+"</option>");
@@ -335,6 +334,39 @@
 		dep.append("<option value='"+ano+"-11-01'>Noviembre/"+ano+"</option>");
 		dep.append("<option value='"+ano+"-12-01'>Diciembre/"+ano+"</option>");
 		$('select').material_select();
+		consultaAportacionesPagadas();
+	}
+
+	function consultaAportacionesPagadas(){
+		var ano = (new Date).getFullYear();
+		$.ajax({
+	        type:"post",
+	        url: "php/CuentaMovimiento.php",
+	        data:{acc:'getUltimaCuotaPagada',idcue:idcuenta},
+	        success:function(responseText){
+	        	if(responseText=='Apertura de cuenta'){
+	        		alert('Apertura');
+	        	}else{
+	        		var fec = responseText.split("-");//desconpongo la fecha
+	        		var mes = fec[1];//obtengo el ultimo mes pagado
+	        		for (var i = 1; i <= 12; i++) {
+	        			if(i<=parseInt(mes)){
+	        				if(i<10)
+	        					$("#con option[value='"+ano+"-0"+i+"-01']").attr('disabled','disabled');
+	        				else
+	        					$("#con option[value='"+ano+"-"+i+"-01']").attr('disabled','disabled');
+	        			}
+	        				
+	        		}
+	        		
+	        		$('select').material_select();
+    				
+
+    				//$("#con option[value='"+responseText+"']").attr("selected",true);
+    				
+	        	}
+	        }
+	    });
 	}
 	/*INICIA EL BLOQUE DE LOS EVENTOS*/
 	$(".actsal").change(function() { actualizasaldo(); });

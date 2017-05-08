@@ -32,7 +32,13 @@
         case 'setAportacion':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $cuotas=$_POST['con'];
-            for ($i=0; $i < count($cuotas); $i++) { 
+            $numCuotas=count($cuotas);
+            $saldoAnterior=$_POST['sal0'];
+            $saldoNuevo=$_POST['sal'];
+            $diferencia=$saldoNuevo-$saldoAnterior;
+            $repartido=$diferencia/$numCuotas;
+            for ($i=0; $i < $numCuotas; $i++) { 
+                $saldoAnterior=$saldoAnterior+$_POST['dep'];
                 $con->consulta("INSERT INTO 
                     ".$nombretabla."(
                         cuentamovimiento_concepto,
@@ -47,7 +53,7 @@
                         '".$_POST['fec']."',
                         ".$_POST['dep'].",
                         ".$_POST['ret'].",
-                        ".$_POST['sal'].",
+                        ".$saldoAnterior.",
                         '".$_POST['idcue']."'
                     );
                 ");
@@ -56,6 +62,15 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
             break;
+
+        case 'getUltimaCuotaPagada':
+            $sql="SELECT cuentamovimiento_concepto FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcue']."' ORDER BY cuentamovimiento_id DESC";
+            $rs=mysql_query($sql);
+            if($row=mysql_fetch_array($rs)){
+                echo $row[0];
+            }
+            break;
+
     	case 'upd':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("
