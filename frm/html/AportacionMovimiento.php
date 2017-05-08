@@ -1,6 +1,6 @@
 <!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <div class="fixed-action-btn">
-	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="cargaSelect()"><i class="large material-icons">add</i></a>
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="consultaAportacionesPagadas()"><i class="large material-icons">add</i></a>
 </div>
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
@@ -316,8 +316,73 @@
 	}
 	/*FINALIZA FUNCION PARA VALIDAR RETIRO DE CAPITAL */
 
-	function cargaSelect(){
+
+	function consultaAportacionesPagadas(){
+		$.ajax({
+	        type:"post",
+	        url: "php/CuentaMovimiento.php",
+	        data:{acc:'getUltimaCuotaPagada',idcue:idcuenta},
+	        success:function(responseText){
+	        	if(responseText=='Apertura de cuenta'){
+	        		var children = $("tr td")[1].innerHTML;
+	        		var fechaApertura= children.substring(100,110);//Obtengo la fecha de Apertura de cuenta desde la tabla
+	        		var fecape=fechaApertura.split("-");
+	        		var anioApe=fecape[0];
+	        		var mesApe=fecape[1];
+	        		cargaSelect(anioApe,mesApe,fecape[0]);
+
+	        	}else{
+	        		var fec = responseText.split("-");//desconpongo la fecha
+	        		var anio= fec[0];//Obtengo el anio
+	        		var mes = fec[1];//obtengo el ultimo mes pagado
+	        		cargaSelect(anio,mes,fec[0]);
+    				//$("#con option[value='"+responseText+"']").attr("selected",true);
+	        	}
+	        }
+	    });
+	}
+
+	function cargaSelect(anio,mes,aniocons){
+		var meses=["NaN","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 		$('select').empty();
+		var dep = $("#con");
+		dep.append("<option value='' disabled>Seleccione...</option>");
+		var i=1;
+		var j=parseInt(mes);
+		j++;
+		if(j>12)
+			j=1;
+		else
+			j=j;
+
+		while(i<=12){
+			if(j<=parseInt(mes)){
+				anio=parseInt(anio)+1;
+				if(j<10)
+					dep.append("<option value='"+anio+"-0"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
+				else
+					dep.append("<option value='"+anio+"-"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
+				/*if(i<10)
+					$("#con option[value='"+anio+"-0"+i+"-01']").attr('disabled','disabled');
+				else
+					$("#con option[value='"+anio+"-"+i+"-01']").attr('disabled','disabled');*/
+				anio=parseInt(anio)-1;
+			}else{
+				if(j<10)
+					dep.append("<option value='"+aniocons+"-0"+j+"-01'>"+meses[j]+"/"+aniocons+"</option>");
+				else
+					dep.append("<option value='"+aniocons+"-"+j+"-01'>"+meses[j]+"/"+aniocons+"</option>");
+			}
+			if(j>11){
+				j=0;
+				j++;
+			}else{
+				j++;
+			}
+			i++;
+		}
+		$('select').material_select();
+		/*$('select').empty();
 		var dep = $("#con");
 		var ano = (new Date).getFullYear();
 		dep.append("<option value='' disabled>Seleccione...</option>");
@@ -333,65 +398,7 @@
 		dep.append("<option value='"+ano+"-10-01'>Octubre/"+ano+"</option>");
 		dep.append("<option value='"+ano+"-11-01'>Noviembre/"+ano+"</option>");
 		dep.append("<option value='"+ano+"-12-01'>Diciembre/"+ano+"</option>");
-		$('select').material_select();
-		consultaAportacionesPagadas();
-	}
-
-	function consultaAportacionesPagadas(){
-		var meses=["NaN","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-		$.ajax({
-	        type:"post",
-	        url: "php/CuentaMovimiento.php",
-	        data:{acc:'getUltimaCuotaPagada',idcue:idcuenta},
-	        success:function(responseText){
-	        	if(responseText=='Apertura de cuenta'){
-	        		alert('Apertura');
-	        	}else{
-	        		var fec = responseText.split("-");//desconpongo la fecha
-	        		var anio= fec[0];//Obtengo el anio
-	        		var mes = fec[1];//obtengo el ultimo mes pagado
-	        		$('select').empty();
-	        		var dep = $("#con");
-	        		dep.append("<option value='' disabled>Seleccione...</option>");
-	        		var i=1;
-	        		var j=parseInt(mes);
-	        		j++;
-	        		if(j>12)
-	        			j=1;
-	        		else
-	        			j=j;
-
-	        		while(i<=12){
-	        			if(j<=parseInt(mes)){
-	        				anio=parseInt(anio)+1;
-	        				if(j<10)
-	        					dep.append("<option value='"+anio+"-0"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
-	        				else
-	        					dep.append("<option value='"+anio+"-"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
-	        				/*if(i<10)
-	        					$("#con option[value='"+anio+"-0"+i+"-01']").attr('disabled','disabled');
-	        				else
-	        					$("#con option[value='"+anio+"-"+i+"-01']").attr('disabled','disabled');*/
-	        				anio=parseInt(anio)-1;
-	        			}else{
-	        				if(j<10)
-	        					dep.append("<option value='"+fec[0]+"-0"+j+"-01'>"+meses[j]+"/"+fec[0]+"</option>");
-	        				else
-	        					dep.append("<option value='"+fec[0]+"-"+j+"-01'>"+meses[j]+"/"+fec[0]+"</option>");
-	        			}
-	        			if(j>11){
-	        				j=0;
-	        				j++;
-	        			}else{
-	        				j++;
-	        			}
-	        			i++;
-	        		}
-	        		$('select').material_select();
-    				//$("#con option[value='"+responseText+"']").attr("selected",true);
-	        	}
-	        }
-	    });
+		$('select').material_select();*/
 	}
 	/*INICIA EL BLOQUE DE LOS EVENTOS*/
 	$(".actsal").change(function() { actualizasaldo(); });
