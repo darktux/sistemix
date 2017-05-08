@@ -338,7 +338,7 @@
 	}
 
 	function consultaAportacionesPagadas(){
-		var ano = (new Date).getFullYear();
+		var meses=["NaN","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 		$.ajax({
 	        type:"post",
 	        url: "php/CuentaMovimiento.php",
@@ -348,22 +348,47 @@
 	        		alert('Apertura');
 	        	}else{
 	        		var fec = responseText.split("-");//desconpongo la fecha
+	        		var anio= fec[0];//Obtengo el anio
 	        		var mes = fec[1];//obtengo el ultimo mes pagado
-	        		for (var i = 1; i <= 12; i++) {
-	        			if(i<=parseInt(mes)){
-	        				if(i<10)
-	        					$("#con option[value='"+ano+"-0"+i+"-01']").attr('disabled','disabled');
-	        				else
-	        					$("#con option[value='"+ano+"-"+i+"-01']").attr('disabled','disabled');
-	        			}
-	        				
-	        		}
-	        		
-	        		$('select').material_select();
-    				
+	        		$('select').empty();
+	        		var dep = $("#con");
+	        		dep.append("<option value='' disabled>Seleccione...</option>");
+	        		var i=1;
+	        		var j=parseInt(mes);
+	        		j++;
+	        		if(j>12)
+	        			j=1;
+	        		else
+	        			j=j;
 
+	        		while(i<=12){
+	        			if(j<=parseInt(mes)){
+	        				anio=parseInt(anio)+1;
+	        				if(j<10)
+	        					dep.append("<option value='"+anio+"-0"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
+	        				else
+	        					dep.append("<option value='"+anio+"-"+j+"-01'>"+meses[j]+"/"+anio+"</option>");
+	        				/*if(i<10)
+	        					$("#con option[value='"+anio+"-0"+i+"-01']").attr('disabled','disabled');
+	        				else
+	        					$("#con option[value='"+anio+"-"+i+"-01']").attr('disabled','disabled');*/
+	        				anio=parseInt(anio)-1;
+	        			}else{
+	        				if(j<10)
+	        					dep.append("<option value='"+fec[0]+"-0"+j+"-01'>"+meses[j]+"/"+fec[0]+"</option>");
+	        				else
+	        					dep.append("<option value='"+fec[0]+"-"+j+"-01'>"+meses[j]+"/"+fec[0]+"</option>");
+	        			}
+	        			if(j>11){
+	        				j=0;
+	        				j++;
+	        			}else{
+	        				j++;
+	        			}
+	        			i++;
+	        		}
+	        		$('select').material_select();
     				//$("#con option[value='"+responseText+"']").attr("selected",true);
-    				
 	        	}
 	        }
 	    });
