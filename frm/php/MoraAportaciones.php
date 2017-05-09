@@ -31,14 +31,14 @@ require('Conex.php');
 						
 					}
 					$fechaPagada= split("-", $fechaPagada);
-					$jaja=intval($fechaPagada[1]);
+					//$jaja=intval($fechaPagada[1]);
 					$fechaActual= strtotime($fechaHoy);
 					$diferencia = strtotime('-'.intval($fechaPagada[1]).'month',$fechaActual);
 					$diferencia = date('Y-m-d',$diferencia);
 					$diferencia = split('-', $diferencia);
 					$salida[$i]['numcuotas']=$diferencia[1];
 					$morosos[$i]=$salida[$i];
-					$morosos[$i]['numcuotas']=date('Y-m-d',$fechaActual);
+					//$morosos[$i]['numcuotas']=date('Y-m-d',$fechaActual);
 				}
                 $i++;
             }
