@@ -39,7 +39,7 @@
 					<label for="ext">Lugar donde fue extendido el DUI</label>
 				</div>
 				<div class="input-field col s12 m6">	
-					<input id="fecdui" name="fecdui" type="date" class="datepicker" >
+					<input id="fecdui" name="fecdui" type="date" >
 					<label for="fecdui" >Fecha de extensión de DUI</label>
 				</div>
 			</div>
@@ -52,7 +52,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12 m6">	
-					<input id="fecnac" name="fecnac" type="date" class="datepicker" >
+					<input id="fecnac" name="fecnac" type="date" >
 					<label for="fecnac" >Fecha de nacimiento</label>
 				</div>
 				<div class="input-field col s12 m6">	
@@ -243,7 +243,7 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s12 m6">	
-					<input id="fecses" name="fecses" type="date" class="datepicker" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<input id="fecses" name="fecses" type="date" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fecses" >Fecha de sesión</label>
 				</div>
 				<div class="input-field col s12 m6">	
@@ -316,23 +316,9 @@
 		$("#dui2").mask("99999999-9",{placeholder:" "});
 		$("#nit2").mask("9999-999999-999-9",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
-		$('#fecnac').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -6570, //dias equivalentes a 18 years restados for today
-			selectYears: 80
-		});
-		$('#fecdui').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: new Date(), //dias equivalentes a 18 years restados for today
-			selectYears: 50
-		});
-		$('#fecses').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: true //dias equivalentes a 18 years restados for today
-		});
+		// $('#fecnac').mask("9999-99-99",{placeholder:"-"});
+		// $('#fecdui').mask("9999-99-99",{placeholder:"-"});
+		// $('#fecses').mask("9999-99-99",{placeholder:"-"});
 		$('#dir').trigger('autoresize');
   		cargarDepartamentos("dep");
 		cargarMunicipios("dep","mun");
@@ -398,7 +384,6 @@
 /*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
 /*INICIA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
 	function submit2(){
-
 		if($("#idid2").val() == ""){/*DATOS PARA CREAR NUEVO REGISTRO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *************************************************/
 	            datos = {
 	            	corr:$("#corr").val(),
@@ -475,7 +460,7 @@
 	            	acc:'upd'
 	            }
 		}
-		ejecutarajax2(datos);
+		// ejecutarajax2(datos);
     	return false;
 	}
 /*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
