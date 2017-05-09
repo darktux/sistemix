@@ -577,6 +577,16 @@ function prepare(){
         $('#modal2').modal('open');
         $("#formulario")[0].reset();
         $('ul.tabs').tabs('select_tab','test1');
+        $.ajax({
+			type:"post",
+			url: "php/Asociado.php",
+			data:{acc:'getCorr'},
+			success:function(data){
+				var corr=parseInt(data);
+				corr++;
+				$("#corr").val(corr);
+			}
+		});
 	}
 
 function addLeadingZeros (n, length){

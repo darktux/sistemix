@@ -281,6 +281,12 @@
                 }
                 echo json_encode($salida);
                 break;
+        case 'getCorr':
+            $rs=mysql_query("SELECT MAX(asociado_correlativo) as corr FROM tab_asociado");
+            if($row=mysql_fetch_array($rs)){
+                echo $row['corr'];
+            }
+            break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
