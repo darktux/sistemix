@@ -460,7 +460,7 @@
 	            	acc:'upd'
 	            }
 		}
-		// ejecutarajax2(datos);
+		 ejecutarajax2(datos);
     	return false;
 	}
 /*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
