@@ -185,7 +185,7 @@
 	);
 	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
-	function operateFormatter(value, row, index) {
+	/*function operateFormatter(value, row, index) {
         return [
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
@@ -197,44 +197,44 @@
                 '<i class="material-icons">info</i>',
             '</a>'
         ].join('');
-    }
+    }*/
 	/*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	/*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
-    window.operateEvents = {
-		/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .edit': function (e, value, row, index) {
-        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-            $("#idid").val(JSON.stringify(row.capital_id).replace(/"/gi,''));
-            $("#ani").val(JSON.stringify(row.capital_anio).replace(/"/gi,''));
-            $("#fec").val(JSON.stringify(row.capital_fec).replace(/"/gi,''));
-            $("#con").val(JSON.stringify(row.capital_concepto).replace(/"/gi,''));
-            $("#dep").val(JSON.stringify(row.capital_deposito).replace(/"/gi,''));
-            $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
-            $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
-        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-        	$('label').addClass("active");
-        	$('#modal1').modal('open');
-        },
-		/*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-		/*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .remove': function (e, value, row, index) {
-        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS*************************************/
-            if(confirm("Realmente desea eliminar el registro del capital "+JSON.stringify(row.capital_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
-            	datos = {
-	            	id:JSON.stringify(row.tipocuenta_id).replace(/"/gi,''),
-	            	acc:'del'
-	            }
-	            ejecutarajax(datos);
-            }
-            /*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-        },
-		/*FINALIZA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-		/*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .view': function (e, value, row, index) {
-        	alert("sdfkhkj"); /********************************************************************************************************/          
-        }
-		/*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-    };
+  //   window.operateEvents = {
+		// /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+  //       'click .edit': function (e, value, row, index) {
+  //       	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+  //           $("#idid").val(JSON.stringify(row.capital_id).replace(/"/gi,''));
+  //           $("#ani").val(JSON.stringify(row.capital_anio).replace(/"/gi,''));
+  //           $("#fec").val(JSON.stringify(row.capital_fec).replace(/"/gi,''));
+  //           $("#con").val(JSON.stringify(row.capital_concepto).replace(/"/gi,''));
+  //           $("#dep").val(JSON.stringify(row.capital_deposito).replace(/"/gi,''));
+  //           $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
+  //           $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
+  //       	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+  //       	$('label').addClass("active");
+  //       	$('#modal1').modal('open');
+  //       },
+		// /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+		// INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)
+  //       'click .remove': function (e, value, row, index) {
+  //       	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS*************************************/
+  //           if(confirm("Realmente desea eliminar el registro del capital "+JSON.stringify(row.capital_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
+  //           	datos = {
+	 //            	id:JSON.stringify(row.tipocuenta_id).replace(/"/gi,''),
+	 //            	acc:'del'
+	 //            }
+	 //            ejecutarajax(datos);
+  //           }
+  //           /*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+  //       },
+		// /*FINALIZA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+		// /*INICIA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+  //       'click .view': function (e, value, row, index) {
+  //       	alert("sdfkhkj"); /********************************************************************************************************/          
+  //       }
+		// /*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+  //   };
 	/*FINALIZA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	/*INICIA EL BLOQUE DE LA FUNCION AJAX*/
 	function ejecutarajax(datos){

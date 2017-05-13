@@ -115,10 +115,10 @@
 				<h5>Beneficiarios</h5>
 				<div class="col s12">
 					<ul class="tabs">
-						<li class="tab col s3"><a href="#test1" class="teal-text">1° Beneficiario</a></li>
-						<li class="tab col s3"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
-						<li class="tab col s3"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
-						<li class="tab col s3"><a href="#test4" class="teal-text">4° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test1" id="t1" class="teal-text">1° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test2" id="t2" class="teal-text">2° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test3" id="t3" class="teal-text">3° Beneficiario</a></li>
+						<li class="tab col s3"><a href="#test4" id="t4" class="teal-text">4° Beneficiario</a></li>
 					</ul>
 				</div>
 				<br><br>
@@ -326,6 +326,69 @@
    		$('select').material_select();
    		$('ul.tabs').tabs();
   		$('.indicator').addClass('teal');
+  		$('#por1').blur(function(){
+  			var p1=$('#por1').val();
+  			var res=100-p1;
+  			if(res==100){
+  				$('#por2').val("0");
+  				$('#por3').val("0");
+  				$('#por4').val("0");	
+  			}else{
+  				$('#por2').val(res);
+  				$('#por3').val("0");
+  				$('#por4').val("0");
+  			}
+  			
+  		});
+  		$('#por2').blur(function(){
+  			var p1=$('#por1').val();
+  			var p2=$('#por2').val();
+  			var res=100-p1-p2;
+  			//var abs=Math.abs(res);
+  			if(res==0){
+  				$('#por3').val("0");
+  				$('#por4').val("0");	
+  			}
+  			if(res>0){
+  				$('#por3').val(abs);
+  				$('#por4').val("0");
+  			}
+  			if(res<0){
+  				alert("Los porcentajes deben sumar 100%");
+  				$('#por2').val(100-p1);
+  			}
+  			
+  		});
+  		$('#por3').blur(function(){
+  			var p1=$('#por1').val();
+  			var p2=$('#por2').val();
+  			var p3=$('#por3').val();
+  			var res=100-p1-p2-p3;
+  			var abs=Math.abs(res);
+  			if(res==0){
+  				$('#por4').val("0");	
+  			}
+  			if(res>0){
+  				$('#por4').val(abs);
+  			}
+  			
+  		});
+  		$('#por4').blur(function(){
+  			var p1=$('#por1').val();
+  			var p2=$('#por2').val();
+  			var p3=$('#por3').val();
+  			var p4=$('#por4').val();
+  			var res=100-p1-p2-p3-p4;
+  			var p4rec=100-p1-p2-p3;
+  			var abs=Math.abs(p4rec);
+  			if(res==0){
+  				
+  			}else{
+  				alert("Los porcentajes deben sumar 100%");
+  				$('#por4').val(p4rec);
+  			}
+  			
+  		});
   		//$("#dui").mask("99999999-9"); // Formato del DUI
 		//$("#nit").mask("9999-999999-999-9"); // Formato del NIT
 /*INICIA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
