@@ -5,84 +5,98 @@
     $nombretabla = 'tab_credito_movimiento';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
     if(isset($_GET['idcre'])){$_POST['idcre']=$_GET['idcre'];}
+    date_default_timezone_set('AMERICA/EL_SALVADOR');
 	switch ($_POST['acc']) {
 		case 'set':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
-            $con->consulta("INSERT INTO 
-                ".$nombretabla."(
-                    creditomovimiento_concepto,
-                    creditomovimiento_fecha,
-                    creditomovimiento_deposito,
-                    creditomovimiento_retiro,
-                    creditomovimiento_interes,
-                    creditomovimiento_capital,
-                    creditomovimiento_saldo,
-                    creditomovimiento_creditoid,
-                    creditomovimiento_sigfechapago
-                ) 
-                VALUES(
-                    '".$_POST['con']."',
-                    '".$_POST['fec']."',
-                    ".$_POST['mon'].",
-                    0.00,
-                    ".$_POST['int'].",
-                    ".$_POST['cap'].",
-                    ".$_POST['sal'].",
-                    ".$_POST['idcre'].",
-                    DATE_ADD('".$_POST['fechaactu']."',INTERVAL 30 DAY)
-                );
-            ");
-
-
-
-            $con->consulta("INSERT INTO 
-                tab_capital(
-                    capital_anio,
-                    capital_fecha,
-                    capital_concepto,
-                    capital_deposito,
-                    capital_retiro,
-                    capital_saldo,
-                    capital_sucursalid
-                ) 
-                VALUES(
-                    '".date("Y")."',
-                    '".date("Y-m-d")."',
-                    'Pago de capital prestamo # ".$_POST['idcre']."',
-                    ".$_POST['cap'].",
-                    0.00,
-                    ".$_POST['cap'].",
-                    ".$_POST['sal'].",                      //escribir el verdadero saldo sumando la cifra al saldo actual
-                    '1'
-                );
-            ");
-
-
-            $con->consulta("INSERT INTO 
-                tab_capital(
-                    capital_anio,
-                    capital_fecha,
-                    capital_concepto,
-                    capital_deposito,
-                    capital_retiro,
-                    capital_saldo,
-                    capital_sucursalid
-                ) 
-                VALUES(
-                    '".date("Y")."',
-                    '".date("Y-m-d")."',
-                    'Pago de interes prestamo # ".$_POST['idcre']."',
-                    ".$_POST['cap'].",
-                    0.00,
-                    ".$_POST['cap'].",
-                    ".$_POST['sal'].",                      //escribir el verdadero saldo sumando la cifra al saldo actual
-                    '1'
-                );
-            ");
-
-
-
-
+            $con->consulta("COMMIT");
+            try{ 
+                $con->consulta("INSERT INTO 
+                    ".$nombretabla."(
+                        creditomovimiento_concepto,
+                        creditomovimiento_fecha,
+                        creditomovimiento_deposito,
+                        creditomovimiento_retiro,
+                        creditomovimiento_interes,
+                        creditomovimiento_capital,
+                        creditomovimiento_saldo,
+                        creditomovimiento_creditoid,
+                        creditomovimiento_sigfechapago
+                    ) 
+                    VALUES(
+                        '".$_POST['con']."',
+                        '".$_POST['fec']."',
+                        ".$_POST['mon'].",
+                        0.00,
+                        ".$_POST['int'].",
+                        ".$_POST['cap'].",
+                        ".$_POST['sal'].",
+                        ".$_POST['idcre'].",
+                        DATE_ADD('".$_POST['fechaactu']."',INTERVAL 30 DAY)
+                    );
+                ");
+                $saldo_capital=0.00;
+                $con->consulta("
+                    SELECT 
+                        capital_saldo     
+                    FROM 
+                        tab_capital
+                    ORDER BY 
+                        capital_id 
+                    DESC 
+                    LIMIT 
+                        1;
+                ");
+                if ($fila = mysql_fetch_row($con->getResultado())) {       
+                    $saldo_capital = $fila[0];
+                }
+                $con->consulta("INSERT INTO 
+                    tab_capital(
+                        capital_anio,
+                        capital_fecha,
+                        capital_concepto,
+                        capital_deposito,
+                        capital_retiro,
+                        capital_saldo,
+                        capital_sucursalid
+                    ) 
+                    VALUES(
+                        '".date("Y")."',
+                        '".date("Y-m-d")."',
+                        'Pago de capital prestamo # ".$_POST['idcre']."',
+                        ".$_POST['cap'].",
+                        0.00,
+                        ".($saldo_capital+$_POST['cap']).",
+                        '1'
+                    );
+                ");
+                if(($_POST['int']+0.0)>0.00){
+                    $con->consulta("INSERT INTO 
+                        tab_capital(
+                            capital_anio,
+                            capital_fecha,
+                            capital_concepto,
+                            capital_deposito,
+                            capital_retiro,
+                            capital_saldo,
+                            capital_sucursalid
+                        ) 
+                        VALUES(
+                            '".date("Y")."',
+                            '".date("Y-m-d")."',
+                            'Pago de interes prestamo # ".$_POST['idcre']."',
+                            ".$_POST['int'].",
+                            0.00,
+                            ".($saldo_capital+$_POST['int']+$_POST['cap']).",
+                            '1'
+                        );
+                    ");
+                }
+                $con->consulta('COMMIT');
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
             break;
