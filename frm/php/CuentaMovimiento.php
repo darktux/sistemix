@@ -115,6 +115,8 @@
             $i=0;$salida=array();
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
                 $salida[$i]=$fila;
+                $fechaConcepto=$salida[$i]['cuentamovimiento_concepto'];
+                $salida[$i]['cuentamovimiento_concepto']=getConcepto($fechaConcepto);
                 $i++;
             }
             echo json_encode($salida);
@@ -161,4 +163,55 @@
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
+
+
+
+    function getConcepto($fechaConcepto){
+        $vector=split('-', $fechaConcepto);
+        $mes=$vector[1];
+        switch ($mes) {
+            case '01':
+                $mes='Enero/'.$vector[0];
+                break;
+            case '02':
+                $mes='Febrero/'.$vector[0];
+                break;
+            case '03':
+                $mes='Marzo/'.$vector[0];
+                break;
+            case '04':
+                $mes='Abril/'.$vector[0];
+                break;
+            case '05':
+                $mes='Mayo/'.$vector[0];
+                break;
+            case '06':
+                $mes='Junio/'.$vector[0];
+                break;
+            case '07':
+                $mes='Julio/'.$vector[0];
+                break;
+            case '08':
+                $mes='Agosto/'.$vector[0];
+                break;
+            case '09':
+                $mes='Septiembre/'.$vector[0];
+                break;
+            case '10':
+                $mes='Octubre/'.$vector[0];
+                break;
+            case '11':
+                $mes='Noviembre/'.$vector[0];
+                break;
+            case '12':
+                $mes='Diciembre/'.$vector[0];
+                break;
+            
+            default:
+                $mes=$fechaConcepto;
+                break;
+        }
+            
+        return $mes;
+    }
 ?>

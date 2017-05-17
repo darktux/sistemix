@@ -74,9 +74,9 @@
 			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/CuentaMovimiento.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="12" data-page-list="[3,6,12,24,36,48]">
 			    <thead>
 				    <tr>
-				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
+				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto/Aportación con fecha</th>
+				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto</th>
 				    	<th data-field="cuentamovimiento_fecha" data-align="center">Fecha de pago</th>
 			            <th data-field="cuentamovimiento_deposito" data-align="center">Deposito ($)</th>
 			            <!-- <th data-field="cuentamovimiento_retiro" data-align="center">Retiro ($)</th> -->
@@ -185,36 +185,20 @@
 	);
 	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
-	/*function operateFormatter(value, row, index) {
+	function operateFormatter(value, row, index) {
         return [
-            '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
-                '<i class="material-icons">mode_edit</i>',
-            '</a>&nbsp;',
-            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
-                '<i class="material-icons">delete</i>',
-            '</a>',
-            '&nbsp;<a class="view ml10" href="javascript:void(0)" title="Ver más">',
-                '<i class="material-icons">info</i>',
-            '</a>'
+            '<a class="print ml10" href="javascript:void(0)" title="Modificar">',
+                '<i class="material-icons">print</i>',
+            '</a>&nbsp;'
         ].join('');
-    }*/
+    }
 	/*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	/*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
-  //   window.operateEvents = {
-		// /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-  //       'click .edit': function (e, value, row, index) {
-  //       	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-  //           $("#idid").val(JSON.stringify(row.capital_id).replace(/"/gi,''));
-  //           $("#ani").val(JSON.stringify(row.capital_anio).replace(/"/gi,''));
-  //           $("#fec").val(JSON.stringify(row.capital_fec).replace(/"/gi,''));
-  //           $("#con").val(JSON.stringify(row.capital_concepto).replace(/"/gi,''));
-  //           $("#dep").val(JSON.stringify(row.capital_deposito).replace(/"/gi,''));
-  //           $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
-  //           $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
-  //       	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-  //       	$('label').addClass("active");
-  //       	$('#modal1').modal('open');
-  //       },
+    window.operateEvents = {
+		/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .print': function (e, value, row, index) {
+        	window.open('html/ReciboAportacion.php?idc='+idcuenta+'&idm='+JSON.stringify(row.cuentamovimiento_id).replace(/"/gi,''),'_blank');
+        }
 		// /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 		// INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)
   //       'click .remove': function (e, value, row, index) {
@@ -234,7 +218,7 @@
   //       	alert("sdfkhkj"); /********************************************************************************************************/          
   //       }
 		// /*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-  //   };
+    };
 	/*FINALIZA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	/*INICIA EL BLOQUE DE LA FUNCION AJAX*/
 	function ejecutarajax(datos){

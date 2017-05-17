@@ -28,7 +28,6 @@ require('Conex.php');
 					}else{
 						//Obtengo el numero de cuotas que no ha pagado
 						$fechaPagada= $salida[$i]['ultima_fechapagada'];
-						
 					}
 					$fechaPagada= split("-", $fechaPagada);
 					//$jaja=intval($fechaPagada[1]);
