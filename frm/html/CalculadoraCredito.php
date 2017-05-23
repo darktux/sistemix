@@ -33,7 +33,7 @@
 				    <tr>
 				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-				    	<th data-field="calculos_id" data-align="center"># Cuota</th>
+				    	<th data-field="calculos_id" data-align="center">Fecha || Cuota #</th>
 			            <th data-field="calculos_cuota" data-align="center">Cuota Mensual ($)</th>
 			            <th data-field="calculos_amortizacion" data-align="center">Amortización ($)</th>
 			            <th data-field="calculos_intereses" data-align="center">Intereses ($)</th>

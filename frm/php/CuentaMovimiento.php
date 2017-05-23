@@ -64,10 +64,10 @@
             break;
 
         case 'getUltimaCuotaPagada':
-            $sql="SELECT cuentamovimiento_concepto FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcue']."' ORDER BY cuentamovimiento_id DESC";
+            $sql="SELECT cuentamovimiento_concepto, cuentamovimiento_fecha FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcue']."' ORDER BY cuentamovimiento_id DESC";
             $rs=mysql_query($sql);
             if($row=mysql_fetch_array($rs)){
-                echo $row[0];
+                echo $row[0].'/'.$row[1];
             }
             break;
 
@@ -107,7 +107,7 @@
                 FROM 
                     ".$nombretabla."
                 WHERE
-                    cuentamovimiento_cuentaid='".$_POST['idcue']."'
+                    cuentamovimiento_cuentaid='".$_POST['idcue']."' and cuentamovimiento_concepto <> 'Apertura de cuenta'
                 ORDER BY 
                     cuentamovimiento_id 
                 DESC;
@@ -150,7 +150,7 @@
                 FROM 
                     tab_tipo_cuenta 
                 WHERE
-                    tipocuenta_correlativo='01'
+                    tipocuenta_correlativo='01' 
             ");
             if ($fila = mysql_fetch_row($con->getResultado())) {       
                 echo $fila[0];

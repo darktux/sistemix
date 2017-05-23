@@ -28,7 +28,7 @@
 				</div>
 			<div class="row">
 				<div class="input-field col s12 m6">
-					<input name="fec" id="fec" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<input name="fec" id="fec" type="date" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fec" class="active">Fecha de transacción</label>
 				</div>
 				<div class="input-field col s12 m6">
@@ -46,7 +46,7 @@
 				</div>
 				
 			    <div class="input-field col s12 m4">
-					<input type="number" name="mon" id="mon" min="1.00" step="0.01" readonly required>
+					<input type="number" name="mon" id="mon" min="1.00" step="0.01"  required>
 					<label for="mon" class="active">Cuota de aportación establecida ($)</label>
 				</div>
 				<div class="input-field col s12 m4">
@@ -307,16 +307,19 @@
 	        url: "php/CuentaMovimiento.php",
 	        data:{acc:'getUltimaCuotaPagada',idcue:idcuenta},
 	        success:function(responseText){
-	        	if(responseText=='Apertura de cuenta'){
-	        		var children = $("tr td")[1].innerHTML;
-	        		var fechaApertura= children.substring(100,110);//Obtengo la fecha de Apertura de cuenta desde la tabla
-	        		var fecape=fechaApertura.split("-");
+	        	var aux=responseText.split("/");
+	        	if(aux[0]=='Apertura de cuenta'){
+	        		//var children = $("tr td")[1].innerHTML;
+	        		//var fechaApertura= children.substring(100,110);//Obtengo la fecha de Apertura de cuenta desde la tabla
+	        		var fecape=aux[1].split("-");
 	        		var anioApe=fecape[0];
 	        		var mesApe=fecape[1];
+	        		
 	        		cargaSelect(anioApe,mesApe,fecape[0]);
 
 	        	}else{
-	        		var fec = responseText.split("-");//desconpongo la fecha
+	        		alert(aux[0]);
+	        		var fec = aux[0].split("-");//desconpongo la fecha
 	        		var anio= fec[0];//Obtengo el anio
 	        		var mes = fec[1];//obtengo el ultimo mes pagado
 	        		cargaSelect(anio,mes,fec[0]);

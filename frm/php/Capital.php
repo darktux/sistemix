@@ -2,6 +2,7 @@
 	require('Conex.php');
 	$con= new Conex();
 	$con->conectar();
+    date_default_timezone_set('America/El_Salvador'); 
     $nombretabla = 'tab_capital';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
 	switch ($_POST['acc']) {
@@ -102,7 +103,8 @@
                 $tiempo=$_POST['tiempo'];
                 $monto=$_POST['monto'];
                 $interes=($_POST['interes']/12)/100;
-               
+                $fecm=date("m");
+                $fecy=date("Y");
                 $constante=pow((1+$interes),$tiempo);
                 $arriba=$constante*$interes;
                 $abajo=$constante-1;
@@ -135,7 +137,7 @@
                                 calculos_intereses,
                                 calculos_monto
                             ) 
-                            VALUES('".$i."',
+                            VALUES('".getConcepto($fecm,$fecy)." || Cuota #".$i."',
                                 ".$cuota.",
                                 ".$amortizacion.",
                                 ".$inter.",
@@ -145,7 +147,15 @@
                     $x0+=$fila[0];
                     $x1+=$fila[1];
                     $x2+=$fila[2];
-                   
+                   if($fecm==12)
+                   {
+                        $fecm=1;
+                        $fecy++;
+                   }
+                   else
+                   {
+                        $fecm++;
+                   }
                 }
                 //$i++;
                 $x3+=$x1;
@@ -182,6 +192,49 @@
             }
             echo json_encode($salida);
             break;         
+    }
+     function getConcepto($mes, $anio){
+       
+        switch ($mes) {
+            case '01':
+                $mes='Ene/'.$anio;
+                break;
+            case '02':
+                $mes='Feb/'.$anio;
+                break;
+            case '03':
+                $mes='Mar/'.$anio;
+                break;
+            case '04':
+                $mes='Abr/'.$anio;
+                break;
+            case '05':
+                $mes='May/'.$anio;
+                break;
+            case '06':
+                $mes='Jun/'.$anio;
+                break;
+            case '07':
+                $mes='Jul/'.$anio;
+                break;
+            case '08':
+                $mes='Ago/'.$anio;
+                break;
+            case '09':
+                $mes='Sep/'.$anio;
+                break;
+            case '10':
+                $mes='Oct/'.$anio;
+                break;
+            case '11':
+                $mes='Nov/'.$anio;
+                break;
+            case '12':
+                $mes='Dic/'.$anio;
+                break;
+        }
+            
+        return $mes;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();

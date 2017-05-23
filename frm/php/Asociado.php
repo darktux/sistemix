@@ -193,7 +193,7 @@
                 $sql3="INSERT INTO tab_cuenta(cuenta_id,cuenta_fechaapertura,cuenta_estado,cuenta_asociadoid,cuenta_tipocuentaid) VALUES('01-01-".$_POST['corr']."','".$_POST['fecses']."','Activada','".$_POST['id']."','".$tipocuentaid."')";
                 $con->consulta($sql3);
                 //Se ingresa el movimiento correspondiente a la apertura
-                $con->consulta("INSERT INTO tab_cuenta_movimiento(cuentamovimiento_concepto,cuentamovimiento_fecha,cuentamovimiento_deposito,cuentamovimiento_saldo,cuentamovimiento_cuentaid) VALUES ('Apertura de cuenta','".$_POST['fecses']."','".$monto."','".$monto."','01-01-".$_POST['corr']."')");
+                $con->consulta("INSERT INTO tab_cuenta_movimiento(cuentamovimiento_concepto,cuentamovimiento_fecha,cuentamovimiento_deposito,cuentamovimiento_saldo,cuentamovimiento_cuentaid) VALUES ('Apertura de cuenta','".$_POST['fecses']."','".$monto."','0','01-01-".$_POST['corr']."')");
                 
                 $con->consulta('COMMIT');
             }catch(Exception $e){
