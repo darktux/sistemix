@@ -318,7 +318,7 @@
 	        		cargaSelect(anioApe,mesApe,fecape[0]);
 
 	        	}else{
-	        		alert(aux[0]);
+	        		//alert(aux[0]);
 	        		var fec = aux[0].split("-");//desconpongo la fecha
 	        		var anio= fec[0];//Obtengo el anio
 	        		var mes = fec[1];//obtengo el ultimo mes pagado

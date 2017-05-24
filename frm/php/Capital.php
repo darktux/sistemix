@@ -103,8 +103,10 @@
                 $tiempo=$_POST['tiempo'];
                 $monto=$_POST['monto'];
                 $interes=($_POST['interes']/12)/100;
-                $fecm=date("m");
-                $fecy=date("Y");
+               // $fecc=date()
+                list($fecy,$fecm,$fecd) = split('[/.-]', $_POST['fec']);
+               // $fecm=date("m");
+                //$fecy=date("Y");
                 $constante=pow((1+$interes),$tiempo);
                 $arriba=$constante*$interes;
                 $abajo=$constante-1;
@@ -137,7 +139,7 @@
                                 calculos_intereses,
                                 calculos_monto
                             ) 
-                            VALUES('".getConcepto($fecm,$fecy)." || Cuota #".$i."',
+                            VALUES('".getConcepto($fecd,$fecm,$fecy)." || Cuota #".$i."',
                                 ".$cuota.",
                                 ".$amortizacion.",
                                 ".$inter.",
@@ -193,44 +195,64 @@
             echo json_encode($salida);
             break;         
     }
-     function getConcepto($mes, $anio){
+     function getConcepto($dia, $mes, $anio){
        
+       $mes++;
+       if($mes>12){
+            $mes=1;
+            $anio++;
+       }
         switch ($mes) {
             case '01':
-                $mes='Ene/'.$anio;
+                $mes=$dia.'/Ene/'.$anio;
                 break;
             case '02':
-                $mes='Feb/'.$anio;
+                if($dia>28){
+                    $dia=28;
+                }
+                $mes=$dia.'/Feb/'.$anio;
                 break;
             case '03':
-                $mes='Mar/'.$anio;
+                $mes=$dia.'/Mar/'.$anio;
                 break;
             case '04':
-                $mes='Abr/'.$anio;
+                if($dia>30){
+                    $dia=30;
+                }
+                $mes=$dia.'/Abr/'.$anio;
                 break;
             case '05':
-                $mes='May/'.$anio;
+                $mes=$dia.'/May/'.$anio;
                 break;
             case '06':
-                $mes='Jun/'.$anio;
+                if($dia>30){
+                    $dia=30;
+                }
+                $mes=$dia.'/Jun/'.$anio;
                 break;
             case '07':
-                $mes='Jul/'.$anio;
+                $mes=$dia.'/Jul/'.$anio;
                 break;
             case '08':
-                $mes='Ago/'.$anio;
+                $mes=$dia.'/Ago/'.$anio;
                 break;
             case '09':
-                $mes='Sep/'.$anio;
+                if($dia>30){
+                    $dia=30;
+                }
+                $mes=$dia.'/Sep/'.$anio;
                 break;
             case '10':
-                $mes='Oct/'.$anio;
+                $mes=$dia.'/Oct/'.$anio;
                 break;
             case '11':
-                $mes='Nov/'.$anio;
+                if($dia>30){
+                    $dia=30;
+                }
+                $mes=$dia.'/Nov/'.$anio;
                 break;
             case '12':
-                $mes='Dic/'.$anio;
+                $mes=$dia.'/Dic/'.$anio;
                 break;
         }
             

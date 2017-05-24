@@ -6,19 +6,23 @@
 	<br>
 	<form id="formulario">
 		<div class="row">
-			<div class="input-field col s3"> 
+			<div class="input-field col s2"> 
 				<input id="monto" name="monto" type="number" class="validate" min="1.00" step="0.01" required autofocus="true">
 				<label id="lmonto" for="monto">Monto ($)</label>
 	        </div>
-	        <div class="input-field col s3"> 
+	        <div class="input-field col s2"> 
 				<input id="tiempo" name="tiempo" type="number" class="validate" required autofocus="true">
 				<label id="ltiempo" for="tiempo">Tiempo (Meses)</label>
 	        </div>
-	        <div class="input-field col s3"> 
+	        <div class="input-field col s2"> 
 				<input id="interes" name="interes" type="number" class="validate" required min="1.00" max="100.00" step="0.01" autofocus="true">
 				<label id="linteres" for="interes">Interes anual (%)</label>
 	        </div>
-	         <div class="input-field col s3"> 
+	        <div class="input-field col s2"> 
+				<input id="fec" name="fec" type="date" class="datepicker" required  autofocus="true">
+				<label id="lfec" for="fec">Fecha inicio</label>
+	        </div>
+	         <div class="input-field col s2"> 
 				<button class="waves-effect waves-light btn" type="submit">Calcular</button>
 				<input type="hidden" name="acc" value="calc">
 	        </div>
@@ -51,7 +55,12 @@
 <!-- FINALIZA EL BLOQUE DE LA TABLA -->
 <!-- INICIA EL BLOQUE JAVASCRIPT -->
 <script type="text/javascript">
-
+$('#fec').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+    		selectYears: true, // Creates a dropdown of 15 years to control year
+			//max: true, //dias equivalentes a 18 years restados for today
+			selectYears: 10
+		});
 
 	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
 	$("#formulario").on(
