@@ -603,6 +603,22 @@
             //$("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
 
             //$("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
+            	$.ajax({
+				type:"post",
+				url: "php/Asociado.php",
+				data:{acc:'busBen',idasociado: JSON.stringify(row.asociado_id).replace(/"/gi,'')},
+				success:function(data){
+					var obj = $.parseJSON(data);
+					var ii=0;
+					$.each(obj,function(i,item){
+						ii++;						
+						$("#nom"+ii).val(item.beneficiario_nombre);
+						$("#par"+ii).val(item.beneficiario_parentezco);
+						$("#por"+ii).val(item.beneficiario_porcentaje);
+						$("#dir"+ii).val(item.beneficiario_direccion);
+					});
+				}
+			});
             
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');

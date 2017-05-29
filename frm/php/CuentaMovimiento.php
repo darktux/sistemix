@@ -41,6 +41,7 @@
                 $saldoAnterior=$saldoAnterior+$_POST['dep'];
                 $con->consulta("INSERT INTO 
                     ".$nombretabla."(
+                        cuentamovimiento_comprobante,
                         cuentamovimiento_concepto,
                         cuentamovimiento_fecha,
                         cuentamovimiento_deposito,
@@ -49,6 +50,7 @@
                         cuentamovimiento_cuentaid
                     ) 
                     VALUES(
+                        '".$_POST['compro']."',
                         '".$cuotas[$i]."',
                         '".$_POST['fec']."',
                         ".$_POST['dep'].",

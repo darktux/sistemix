@@ -28,31 +28,39 @@
 				</div>
 			<div class="row">
 				<div class="input-field col s12 m6">
+					<input type="number" name="sal0" id="sal0" readonly>
+					<label for="sal0" class="active">Saldo anterior ($)</label>
+				</div>
+				
+				<div class="input-field col s12 m6">
+					<input type="text" name="sal" id="sal" readonly>
+					<label for="sal" class="active">Nuevo saldo ($)</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m3">
 					<input name="fec" id="fec" type="date" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fec" class="active">Fecha de transacción</label>
 				</div>
-				<div class="input-field col s12 m6">
+				<div class="input-field col s12 m3">
+					<input type="text" name="compro" id="compro" maxlength="20">
+					<label for="compro" class="active">Nº Comprobante</label>
+				</div>
+				<div class="input-field col s12 m4">
 					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required autofocus></textarea> -->
 					<select name="con[]" id="con" multiple onchange="actualizasaldo()">
 						<option value="" disabled>Seleccione...</option>
 					</select>
 					<label for="con">Concepto (Cuota a pagar)</label>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12 m4">
-					<input type="number" name="sal0" id="sal0" readonly>
-					<label for="sal0" class="active">Saldo anterior ($)</label>
+				
+
+			    <div class="input-field col s12 m2">
+					<input type="number" name="mon" id="mon" min="1.00" step="0.01"  required>
+					<label for="mon" class="active">Monto aportación ($)</label>
 				</div>
 				
-			    <div class="input-field col s12 m4">
-					<input type="number" name="mon" id="mon" min="1.00" step="0.01"  required>
-					<label for="mon" class="active">Cuota de aportación establecida ($)</label>
-				</div>
-				<div class="input-field col s12 m4">
-					<input type="text" name="sal" id="sal" readonly>
-					<label for="sal" class="active">Nuevo saldo ($)</label>
-				</div>
+				
 			</div>
 			<!-- </div> -->
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO **************************************************************************************************-->
@@ -76,11 +84,11 @@
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
-				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto</th>
+				    	<th data-field="cuentamovimiento_comprobante" data-align="center">Nº Comprobante</th> 
 				    	<th data-field="cuentamovimiento_fecha" data-align="center">Fecha de pago</th>
-			            <th data-field="cuentamovimiento_deposito" data-align="center">Deposito ($)</th>
-			            <!-- <th data-field="cuentamovimiento_retiro" data-align="center">Retiro ($)</th> -->
-			            <th data-field="cuentamovimiento_saldo" data-align="center">Saldo de aportación ($)</th>
+				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto</th>
+			            <th data-field="cuentamovimiento_deposito" data-align="center">Monto($)</th>  
+			            <th data-field="cuentamovimiento_saldo" data-align="center">Saldo ($)</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ****************************************************************************************-->
 				    </tr>
 			    </thead>
@@ -315,7 +323,7 @@
 	        		var anioApe=fecape[0];
 	        		var mesApe=fecape[1];
 	        		
-	        		cargaSelect(anioApe,mesApe,fecape[0]);
+	        		cargaSelect(anioApe,mesApe-1,fecape[0]);
 
 	        	}else{
 	        		//alert(aux[0]);
