@@ -91,6 +91,49 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
+            case 'edi':
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
+            $con->consulta("
+                UPDATE 
+                    ".$nombretabla." 
+                SET 
+                    cuentamovimiento_fecha='".$_POST['fec']."',
+                    cuentamovimiento_comprobante='".$_POST['compro']."',
+                    cuentamovimiento_deposito=".$_POST['dep'].",
+                    cuentamovimiento_saldo=".$_POST['sal']."
+                WHERE 
+                    cuentamovimiento_id=".$_POST['id'].";
+            ");
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
+            if($con->getResultado()){
+               
+                 $con->consulta("select cuentamovimiento_id, cuentamovimiento_deposito, cuentamovimiento_saldo from tab_cuenta_movimiento where cuentamovimiento_cuentaid in (select cuentamovimiento_cuentaid from tab_cuenta_movimiento where cuentamovimiento_id=".$_POST['id'].") and cuentamovimiento_saldo > 0 ORDER by cuentamovimiento_id ASC");
+                 $i=0;
+                 $salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                        $salida[$i]=$fila;
+                        $i++;
+                    }
+
+                for($x=1;$x<$i;$x++){
+                    $sal=floatval($salida[$x]['cuentamovimiento_deposito'])+floatval($salida[$x-1]['cuentamovimiento_saldo']);
+                    $salida[$x]['cuentamovimiento_saldo']=$sal;
+                   // echo $sal;
+                     $con->consulta("
+                        UPDATE 
+                            ".$nombretabla." 
+                        SET 
+                            cuentamovimiento_saldo=".$sal."
+                            
+                        WHERE 
+                            cuentamovimiento_id=".floatval($salida[$x]['cuentamovimiento_id']).";
+                    ");
+                     $con->getResultado();
+                }
+
+                 echo "Registro modificado.";
+            }else{echo "Error al modificar.";}
+            break;
         case 'del':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
             $con->consulta("

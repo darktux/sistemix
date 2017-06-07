@@ -1,6 +1,7 @@
 <!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <div class="fixed-action-btn">
-	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="consultaAportacionesPagadas()"><i class="large material-icons">add</i></a>
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="consultaAportacionesPagadas();getsaldo();
+				getMonto();"><i class="large material-icons">add</i></a>
 </div>
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
@@ -48,7 +49,7 @@
 				</div>
 				<div class="input-field col s12 m4">
 					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required autofocus></textarea> -->
-					<select name="con[]" id="con" multiple onchange="actualizasaldo()">
+					<select name="con[]" id="con" multiple onchange="actualizasaldo()" onselect="actualizasaldo()">
 						<option value="" disabled>Seleccione...</option>
 					</select>
 					<label for="con">Concepto (Cuota a pagar)</label>
@@ -60,7 +61,7 @@
 					<label for="mon" class="active">Monto aportación ($)</label>
 				</div>
 				
-				
+				<input type="hidden" name="help" id="help" value="0">
 			</div>
 			<!-- </div> -->
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO **************************************************************************************************-->
@@ -83,7 +84,8 @@
 			    <thead>
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
-				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
+				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*
+				    	<th data-field="cuentamovimiento_id" hidden="true" data-align="center">id</th> -->
 				    	<th data-field="cuentamovimiento_comprobante" data-align="center">Nº Comprobante</th> 
 				    	<th data-field="cuentamovimiento_fecha" data-align="center">Fecha de pago</th>
 				    	<th data-field="cuentamovimiento_concepto" data-align="center">Concepto</th>
@@ -120,9 +122,8 @@
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
 				document.getElementById("con").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
-				$("#mon").val("");
-				getsaldo();
-				getMonto();
+				//$("#mon").val("");
+				
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 				$("#idid").val("");
@@ -133,6 +134,7 @@
 			}
 			
 		});
+
 		/*FINALIZA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 		$('#tabla1').bootstrapTable('refresh',{url:'php/CuentaMovimiento.php?acc=getjsontabla&idcue='+idcuenta+''});
 		document.getElementById('titulo2').innerHTML='Movimiento de la cuenta # '+idcuenta;
@@ -164,7 +166,7 @@
 				}
 				else{
 			    	formData.append("id", $("#idid").val());
-			    	formData.append("acc", "upd");
+			    	formData.append("acc", "edi");
 				}
 				$.ajax({
 		            url: "php/CuentaMovimiento.php",
@@ -197,6 +199,9 @@
         return [
             '<a class="print ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">print</i>',
+            '</a>&nbsp;',
+            '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+                '<i class="material-icons">mode_edit</i>',
             '</a>&nbsp;'
         ].join('');
     }
@@ -206,6 +211,28 @@
 		/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .print': function (e, value, row, index) {
         	window.open('html/ReciboAportacion.php?idc='+idcuenta+'&idm='+JSON.stringify(row.cuentamovimiento_id).replace(/"/gi,''),'_blank');
+        }, 
+
+		/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .edit': function (e, value, row, index) {
+        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+            $("#idid").val(JSON.stringify(row.cuentamovimiento_id).replace(/"/gi,''));
+            $("#compro").val(JSON.stringify(row.cuentamovimiento_comprobante).replace(/"/gi,''));
+           $("#fec").val(JSON.stringify(row.cuentamovimiento_fecha).replace(/"/gi,''));
+           $('select').empty();
+				var dep = $("#con");
+	           dep.append("<option>"+JSON.stringify(row.cuentamovimiento_concepto)+"</option>");
+           $('select').material_select();
+           //$("#con").val(JSON.stringify(row.cuentamovimiento_concepto).replace(/"/gi,''));
+           $("#mon").val(JSON.stringify(row.cuentamovimiento_deposito).replace(/"/gi,''));
+            $("#help").val(JSON.stringify(row.cuentamovimiento_deposito).replace(/"/gi,''));
+           // $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
+            //$("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
+        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+        	//$('label').addClass("active");
+        	$('#modal1').modal('open');
+        	getsaldo();
+        	
         }
 		// /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 		// INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)
@@ -277,12 +304,13 @@
 	}
 	/*INICIA FUNCION PARA ACTUALIZAR SALDO DE CAPITAL */
 	function actualizasaldo(){
+		//var auxi = parseFloat(JSON.stringify(row.cuentamovimiento_deposito));
 		var cuotas = $('#con option:selected').length;
 		var s0= parseFloat($("#sal0").val());
 		if($("#mon").val()==''){
-			m=0.0;
+			m=0.0-parseFloat($("#help").val());
 		}else{
-			var m= parseFloat($("#mon").val());
+			var m= parseFloat($("#mon").val())-parseFloat($("#help").val());
 		}
 
 		if(document.getElementById("dep1").checked){//deposito
@@ -315,6 +343,7 @@
 	        url: "php/CuentaMovimiento.php",
 	        data:{acc:'getUltimaCuotaPagada',idcue:idcuenta},
 	        success:function(responseText){
+	        	//alert(responseText);
 	        	var aux=responseText.split("/");
 	        	if(aux[0]=='Apertura de cuenta'){
 	        		//var children = $("tr td")[1].innerHTML;
@@ -344,7 +373,10 @@
 		dep.append("<option value='' disabled>Seleccione...</option>");
 		var i=1;
 		var j=parseInt(mes);
-		j++;
+		
+			j++;
+		
+		
 		if(j>12)
 			j=1;
 		else
