@@ -197,7 +197,7 @@
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	function operateFormatter(value, row, index) {
         return [
-            '<a class="print ml10" href="javascript:void(0)" title="Modificar">',
+            '<a class="print ml10" href="javascript:void(0)" title="imprimir">',
                 '<i class="material-icons">print</i>',
             '</a>&nbsp;',
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',

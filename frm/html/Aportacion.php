@@ -3,6 +3,9 @@
 <div class="container">
 	<h4 class="center teal-text">Aportación</h4>
 	<div class="row">
+		<a class="print ml10" href="html/reporteGeneralAportaciones.php" target="_blank" title="imprimir"><i class="material-icons">print</i>Imprimir reporte general</a>
+	</div>
+	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
 			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontablaAportacion"lick-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
@@ -39,6 +42,9 @@
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
+        	'<a class="print ml10" href="javascript:void(0)" title="imprimir">',
+                '<i class="material-icons">print</i>',
+            '</a>&nbsp;',
         	'&nbsp;<a class="move ml10" href="javascript:void(0)" title="Transacción">',
                 '<i class="material-icons">compare_arrows</i>',
             '</a>'
@@ -48,6 +54,10 @@
 
 	/*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
+    	'click .print': function (e, value, row, index) {
+    		idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
+        	window.open('html/reporteAportaciones.php?idc='+idcuenta,'_blank');
+        }, 
         'click .move': function (e, value, row, index) {
         	idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
         	$("#formularios").load('html/AportacionMovimiento.php');

@@ -1,6 +1,8 @@
 <?php
 include_once('../../fpdf181/fpdf.php');
 //echo 'holaaaaaaa';
+date_default_timezone_set('America/El_Salvador');
+$loc_es=setlocale(LC_TIME,'es_ES.UTF-8','es_Es','es');
 class PDF extends FPDF
 {
     protected $B = 0;
@@ -82,7 +84,8 @@ function SetStyle($tag, $enable)
         //echo 'footer';
         $this->SetY(-15);
         $this->SetFont('Arial','I',8);
-        $this->Cell(0,10,utf8_decode('Página ').$this->PageNo(),0,0,'C');
+        $this->Cell(0,10,utf8_decode('Fecha de Impresión: ').iconv('ISO-8859-1', 'UTF-8', strftime('%A %d de %B de %Y', time())),0,0,'L');
+        $this->Cell(0,10,utf8_decode(' Página ').$this->PageNo().'/{nb}',0,0,'R');
     }
  
     function Header()
@@ -97,8 +100,8 @@ function SetStyle($tag, $enable)
 
         //$this->Cell(40,5,'',0,0,'C',$this->Image('../../img/logoInsafocop.jpeg', 188, 7, 17));
         $this->Ln(7);
-        $this->SetFont('Arial','B',8);
-        $this->Cell(195,8,'CONTRATO DE APERTURA DE CUENTA DE AHORRO EN U.S. DOLARES',0,0,'C');
+        $this->SetFont('Arial','B',10);
+        $this->Cell(195,8,'REPORTE DE APORTACIONES',0,0,'C');
         $this->Ln(7);
         //$this->Cell(195,8,'AHORRO A LA VISTA',0,0,'C');
 
@@ -115,20 +118,6 @@ function SetStyle($tag, $enable)
  
    
  
-   /* function datos($datos){
- 
-        $this->SetXY(90,105);
-        $this->SetFont('Arial','',12);
-        foreach($datos as $columna)
-        {
-            $this->Cell(65,7,utf8_decode($columna['tipocuenta_id']),'TRB',2,'L' );
-            $this->Cell(65,7,utf8_decode($columna['tipocuenta_nombre']),'TRB',2,'L' );
-            
-        }
-    }
- */
-    //El método tabla integra a los métodos cabecera y datos
-   
  
 }//fin clase PDF
 //echo 'exitoooooooo';
