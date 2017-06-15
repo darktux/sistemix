@@ -39,6 +39,7 @@
                 <li class="divider"></li>
                 <li><a class="apor">Aportaciones</a></li>
                 <li><a class="amor">Aportaciones en mora</a></li>
+                <li><a class="cuoi" href="html/reporteCuotaIngreso.php" target="_blank">Reporte de Cuotas de Ingreso</a></li>
             </ul>
             <ul id="dropdown-per2" class="dropdown-content">
                 <li><a class="saso">Solicitud de asociado</a></li>
@@ -46,6 +47,7 @@
                 <li class="divider"></li>
                 <li><a class="apor">Aportaciones</a></li>
                 <li><a class="amor">Aportaciones en mora</a></li> 
+                <li><a class="cuoi" href="html/reporteCuotaIngreso.php" target="_blank">Reporte de Cuotas de Ingreso</a></li>
             </ul>
             <!-- OPCIONES DEL MENU CUENTA -->
             <ul id="dropdown-cue1" class="dropdown-content">
@@ -131,6 +133,7 @@
             $(".saso").click(function(){ $("#formularios").load('html/SolicitudesAsociados.php'); });
             $(".apor").click(function(){ $("#formularios").load('html/Aportacion.php'); });
             $(".amor").click(function(){ $("#formularios").load('html/MoraAportaciones.php'); });
+            // $(".cuoi").click(function(){ $("#formularios").load('html/reporteCuotaIngreso.php'); });
             //MENU CUENTA
             $(".ncue").click(function(){ $("#formularios").load('html/Cuenta.php'); });
             $(".tcue").click(function(){ $("#formularios").load('html/TipoCuenta.php'); });

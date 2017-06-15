@@ -242,19 +242,28 @@
 				</div>    				
 			</div>
 			<div class="row">
-				<div class="input-field col s12 m6">	
+				<div class="input-field col s12 m4">	
 					<input id="fecses" name="fecses" type="date" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
 					<label for="fecses" >Fecha de sesión</label>
 				</div>
-				<div class="input-field col s12 m6">	
+				<div class="input-field col s12 m4">	
 					<input id="nacta" name="nacta" type="number" min="0">
 					<label for="nacta" class="active" >N° de acta</label>
 				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s12">	
+				<div class="input-field col s12 m4">	
 					<input id="npunto" name="npunto" type="text">
 					<label for="npunto" >N° de punto</label>
+				</div>
+			</div>
+			<div class="row">
+				
+				<div class="input-field col s12 m6">	
+					<input id="ncompro" name="ncompro" type="text">
+					<label for="ncompro" >N° de comprobante</label>
+				</div>
+				<div class="input-field col s12 m6">	
+					<input id="cuota" name="cuota" type="text">
+					<label for="cuota" >Cuota de ingreso ($)</label>
 				</div>
 			</div>
 			
@@ -438,6 +447,8 @@
 	            	fecses:$("#fecses").val(),
 	            	nacta:$("#nacta").val(),
 	            	npunto:$("#npunto").val(),
+	            	ncompro:$("#ncompro").val(),
+	            	cuota:$("#cuota").val(),
 	            	acc:'upd2'
 	            }
 		}

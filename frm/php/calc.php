@@ -101,7 +101,7 @@ function SetStyle($tag, $enable)
         //$this->Cell(40,5,'',0,0,'C',$this->Image('../../img/logoInsafocop.jpeg', 188, 7, 17));
         $this->Ln(7);
         $this->SetFont('Arial','B',10);
-        $this->Cell(195,8,'REPORTE DE APORTACIONES',0,0,'C');
+        $this->Cell(195,8,utf8_decode('TABLA DE AMORTIZACIÓN  DE CRÉDITO'),0,0,'C');
         $this->Ln(7);
         //$this->Cell(195,8,'AHORRO A LA VISTA',0,0,'C');
 

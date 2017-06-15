@@ -204,6 +204,31 @@
 						<label for="dir4" >Dirección</label>
 					</div>
     			</div>
+    			<div class="row">
+					<div class="input-field col s12 m4">	
+						<input id="fecses" name="fecses" type="date" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+						<label for="fecses" >Fecha de sesión</label>
+					</div>
+					<div class="input-field col s12 m4">	
+						<input id="nacta" name="nacta" type="number" min="0">
+						<label for="nacta" class="active" >N° de acta</label>
+					</div>
+					<div class="input-field col s12 m4">	
+						<input id="npunto" name="npunto" type="text">
+						<label for="npunto" >N° de punto</label>
+					</div>
+				</div>
+				<div class="row">
+					
+					<div class="input-field col s12 m6">	
+						<input id="ncompro" name="ncompro" type="text">
+						<label for="ncompro" >N° de comprobante</label>
+					</div>
+					<div class="input-field col s12 m6">	
+						<input id="cuota" name="cuota" type="text">
+						<label for="cuota" >Cuota de ingreso ($)</label>
+					</div>
+				</div>
     			<!-- <div class="divider"></div> -->
 			</div>
 
@@ -363,6 +388,11 @@
 	            	par4:$("#par4").val(),
 	            	por4:$("#por4").val(),
 	            	dir4:$("#dir4").val(),
+	            	fecses:$("#fecses").val(),
+	            	nacta:$("#nacta").val(),
+	            	npunto:$("#npunto").val(),
+	            	ncompro:$("#ncompro").val(),
+	            	cuota:$("#cuota").val(),
 	            	acc:'set'
 	            }
 		}
@@ -401,6 +431,11 @@
 	            	par4:$("#par4").val(),
 	            	por4:$("#por4").val(),
 	            	dir4:$("#dir4").val(),
+	            	fecses:$("#fecses").val(),
+	            	nacta:$("#nacta").val(),
+	            	npunto:$("#npunto").val(),
+	            	ncompro:$("#ncompro").val(),
+	            	cuota:$("#cuota").val(),
 	            	acc:'upd'
 	            }
 		}
@@ -466,7 +501,22 @@
 					});
 				}
 			});
-
+        	$("#fecses").val(JSON.stringify(row.asociado_fechasesion).replace(/"/gi,''));
+	        $("#nacta").val(JSON.stringify(row.asociado_numacta).replace(/"/gi,''));
+	       	$("#npunto").val(JSON.stringify(row.asociado_numpunto).replace(/"/gi,''));
+	       	$.ajax({
+				type:"post",
+				url: "php/Asociado.php",
+				data:{acc:'busAux',idasociado: JSON.stringify(row.asociado_correlativo).replace(/"/gi,'')},
+				success:function(data){
+					var obj = $.parseJSON(data);
+					$.each(obj,function(i,item){						
+						 $("#ncompro").val(item.cuentamovimiento_comprobante);
+						 $("#cuota").val(item.cuentamovimiento_deposito);
+						
+					});
+				}
+			});
 
         	$('label').addClass("active");
         	$("input").prop('disabled', false);

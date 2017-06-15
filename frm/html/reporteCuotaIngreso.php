@@ -2,7 +2,7 @@
 	require("../../fpdf181/fpdf.php");
 	require("../php/Conex.php");
 	require_once("../php/funciones.php"); 
-	include_once('../php/pdfAportacion.php');
+	include_once('../php/ingreso.php');
 	$con= new Conex();
 	$con->conectar();
     date_default_timezone_set('America/El_Salvador');
@@ -29,7 +29,8 @@
                         c.*,
                         a.asociado_nombre AS cuenta_asociadonombre,
                         t.tipocuenta_nombre AS cuenta_tipocuentanombre,
-                        c.cuenta_id AS cuenta_saldo
+                        c.cuenta_id AS cuenta_saldo,
+                        c.cuenta_id AS auxiliar
                     FROM 
                         tab_cuenta c,
                         tab_asociado a,
@@ -39,26 +40,26 @@
                     AND
                         c.cuenta_tipocuentaid=t.tipocuenta_id
                     AND
-                        t.tipocuenta_nombre='APORTACIONES';
+                        t.tipocuenta_nombre='APORTACIONES' 
+                    ORDER BY c.cuenta_id;
                 ");
                 $resultadoaux = $con->getResultado();
                 $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
                     $con->consulta("
                         SELECT 
-                            cuentamovimiento_saldo 
+                            cuentamovimiento_deposito, cuentamovimiento_comprobante
                         FROM 
                             tab_cuenta_movimiento 
                         WHERE
                             cuentamovimiento_cuentaid='".$fila['cuenta_id']."'
-                        ORDER BY 
-                            cuentamovimiento_id 
-                        DESC 
-                        LIMIT 
-                            1;
+                        AND
+                            cuentamovimiento_concepto='Apertura de cuenta'
+                       ;
                     ");
                     if ($fila2 = mysql_fetch_row($con->getResultado())) {       
                         $fila['cuenta_saldo']=$fila2[0];
+                        $fila['auxiliar']=$fila2[1];
                     }
                     else{
                         $fila['cuenta_saldo']='0.00';
@@ -68,11 +69,12 @@
                 }
    // $i=0;
 
-    $pdf->SetFont('Arial','B',10);
+    $pdf->SetFont('Arial','B',9);
     $pdf->Cell(10,5,utf8_decode('Nº'),1,0, 'C');
-    $pdf->Cell(25,5,utf8_decode('Nº CUENTA'),1,0, 'C');
-    $pdf->Cell(125,5,utf8_decode('ASOCIADO'),1,0, 'C');
-    $pdf->Cell(30,5,'APORTADO ($)',1,0, 'C');
+    $pdf->Cell(20,5,utf8_decode('Nº CUENTA'),1,0, 'C');
+    $pdf->Cell(100,5,utf8_decode('ASOCIADO'),1,0, 'C');
+    $pdf->Cell(35,5,utf8_decode('Nº COMPROBANTE'),1,0, 'C');
+    $pdf->Cell(25,5,'CUOTA ($)',1,0, 'C');
     
     $pdf->Ln();
 
@@ -81,19 +83,21 @@
         $cuenta = trim($salida[$x]['cuenta_id']);
         $asociado = trim($salida[$x]['cuenta_asociadonombre']);
         $monto = trim($salida[$x]['cuenta_saldo']);
+        $compro = trim($salida[$x]['auxiliar']);
    
-            $pdf->SetFont('Arial','',10);
+            $pdf->SetFont('Arial','',8);
             $pdf->Cell(10,5,$x+1,1,0, 'C');
-        	$pdf->Cell(25,5,utf8_decode($cuenta),1,0, 'C');
-        	$pdf->Cell(125,5,utf8_decode($asociado),1,0, 'J');
-            $pdf->Cell(30,5,utf8_decode($monto),1,0, 'C');
+        	$pdf->Cell(20,5,utf8_decode($cuenta),1,0, 'C');
+        	$pdf->Cell(100,5,utf8_decode($asociado),1,0, 'J');
+            $pdf->Cell(35,5,utf8_decode($compro),1,0, 'C');
+            $pdf->Cell(25,5,utf8_decode($monto),1,0, 'C');
             $pdf->Ln();
             $tmonto+=$monto;
         
     }
-     $pdf->SetFont('Arial','B',10);
-    $pdf->Cell(160,5,'Total de Aportaciones ($): ',1,0, 'R');
-    $pdf->Cell(30,5,utf8_decode($tmonto),1,0, 'C');
+     $pdf->SetFont('Arial','B',9);
+    $pdf->Cell(165,5,'TOTAL DE CUOTAS DE INGRESO ($): ',1,0, 'R');
+    $pdf->Cell(25,5,utf8_decode($tmonto),1,0, 'C');
    // Footer();
    // $pdf->SetY(-30);
         //Arial italic 8

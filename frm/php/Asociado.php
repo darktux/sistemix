@@ -124,6 +124,9 @@
 					asociado_profesionoficio='".$_POST['prouof']."',
 					asociado_ingresomes='".$_POST['ingmen']."',
 					asociado_institucionsaludid='".$_POST['inst']."',
+                    asociado_fechasesion='".$_POST['fecses']."',
+                    asociado_numacta='".$_POST['nacta']."',
+                    asociado_numpunto='".$_POST['npunto']."',
 					asociado_sucursalid='1'
                 WHERE 
                     asociado_id=".$_POST['id'].";
@@ -159,6 +162,10 @@
                         
                     }
                 }
+                $sql4="UPDATE tab_cuenta_movimiento set cuentamovimiento_comprobante='".$_POST['ncompro']."',
+                        cuentamovimiento_deposito='".$_POST['cuota']."' WHERE cuentamovimiento_cuentaid='01-01-".$_POST['corr']."' and cuentamovimiento_concepto='Apertura de cuenta'";
+                $con->consulta($sql4);
+
                 $con->consulta('COMMIT');
             }catch(Exception $e){
                 $con->consulta('ROLLBACK');
@@ -193,7 +200,7 @@
                 $sql3="INSERT INTO tab_cuenta(cuenta_id,cuenta_fechaapertura,cuenta_estado,cuenta_asociadoid,cuenta_tipocuentaid) VALUES('01-01-".$_POST['corr']."','".$_POST['fecses']."','Activada','".$_POST['id']."','".$tipocuentaid."')";
                 $con->consulta($sql3);
                 //Se ingresa el movimiento correspondiente a la apertura
-                $con->consulta("INSERT INTO tab_cuenta_movimiento(cuentamovimiento_concepto,cuentamovimiento_fecha,cuentamovimiento_deposito,cuentamovimiento_saldo,cuentamovimiento_cuentaid) VALUES ('Apertura de cuenta','".$_POST['fecses']."','".$monto."','0','01-01-".$_POST['corr']."')");
+                $con->consulta("INSERT INTO tab_cuenta_movimiento(cuentamovimiento_comprobante,cuentamovimiento_concepto,cuentamovimiento_fecha,cuentamovimiento_deposito,cuentamovimiento_saldo,cuentamovimiento_cuentaid) VALUES ('".$_POST['ncompro']."','Apertura de cuenta','".$_POST['fecses']."','".$_POST['cuota']."','0','01-01-".$_POST['corr']."')");
                 
                 $con->consulta('COMMIT');
             }catch(Exception $e){
@@ -287,6 +294,15 @@
                 echo $row['corr'];
             }
             break;
+       case 'busAux':
+                $con->consulta("SELECT * FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='01-01-".$_POST['idasociado']."' and cuentamovimiento_concepto='Apertura de cuenta'");
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();

@@ -25,7 +25,15 @@
 	         <div class="input-field col s2"> 
 				<button class="waves-effect waves-light btn" type="submit">Calcular</button>
 				<input type="hidden" name="acc" value="calc">
+				
 	        </div>
+	        <div class="input-field col s2" id="oculto" hidden="true"> 
+				
+				<a   class="print ml10 btn" href="html/reporteCalculadora.php" target="_blank" title="imprimir">
+                	<i class="material-icons">print</i> 
+           		</a>
+	        </div>
+	        
 		</div>	
 	</form>
 	<div class="row">
@@ -85,7 +93,8 @@ $('#fec').pickadate({
 		        			//alert(responseText);
 		        			//$("#formulario")[0].reset();
 			        		$('#tabla1').bootstrapTable('refresh',{url:'php/Capital.php?acc=calcs'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
-			        		document.getElementById("buscar1").focus();
+			        		//document.getElementById("buscar1").focus();
+			        		$('#oculto').show();
 							$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
 		        		//}
 		        		//else{
