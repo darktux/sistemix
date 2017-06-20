@@ -5,7 +5,7 @@
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
 <div id="modal1" class="modal modal-fixed-footer">
-	<form class="col s12" id="formulario" onsubmit="return submit1();">
+	<form class="col s12" id="formulario">
 		<input id="idid" type="hidden" value="">
 		<div class="modal-content" id="modalcontent">
 			<h5>Nuevo tipo de crédito</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->

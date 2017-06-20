@@ -1,7 +1,10 @@
 <!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <div class="fixed-action-btn">
-	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Nueva transacción de cuenta" onclick="consultaAportacionesPagadas();getsaldo();
+	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="left" data-tooltip="Nueva transacción de cuenta" onclick="consultaAportacionesPagadas();getsaldo();
 				getMonto();"><i class="large material-icons">add</i></a>
+	<!-- <ul>
+		<li><a href="#modalAportacionV" class="btn-floating cyan tooltipped" data-position="top" data-tooltip="Aportación voluntaria"><i class="material-icons">add_circle</i></a></li>
+	</ul> -->
 </div>
 <!-- FINALIZA EL BLOQUE DEL BOTON PARA EL MODAL -->
 <!-- INICIA EL BLOQUE DEL MODAL -->
@@ -57,7 +60,7 @@
 				
 
 			    <div class="input-field col s12 m2">
-					<input type="number" name="mon" id="mon" min="1.00" step="0.01"  required>
+					<input type="number" name="mon" id="mon" min="0.00" step="0.01"  required>
 					<label for="mon" class="active">Monto aportación ($)</label>
 				</div>
 				
@@ -73,6 +76,57 @@
 	</form>
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL -->
+<div class="modal modal-fixed-footer" id="modalAportacionV">
+	<form id="formAportacionV">
+		<div class="modal-content" id="modalcontent">
+			<h5>Aportación Voluntaria</h5>
+			<div class="row">
+				<div class="input-field col s12 m6">
+					<input type="number" name="vsal0" id="vsal0" readonly>
+					<label for="vsal0" class="active">Saldo anterior ($)</label>
+				</div>
+				
+				<div class="input-field col s12 m6">
+					<input type="text" name="vsal" id="vsal" readonly>
+					<label for="vsal" class="active">Nuevo saldo ($)</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m3">
+					<input name="fec" id="fec" type="date" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<label for="fec" class="active">Fecha de transacción</label>
+				</div>
+				<div class="input-field col s12 m3">
+					<input type="text" name="compro" id="compro" maxlength="20">
+					<label for="compro" class="active">Nº Comprobante</label>
+				</div>
+				<div class="input-field col s12 m4">
+					<input type="date" id="vcon" name="vcon" required></input>
+					<!-- <select name="con[]" id="con" multiple onchange="actualizasaldo()" onselect="actualizasaldo()">
+						<option value="" disabled>Seleccione...</option>
+					</select> -->
+					<label for="vcon" class="active">Concepto (Cuota a pagar)</label>
+				</div>
+				
+
+			    <div class="input-field col s12 m2">
+					<input type="number" name="vmon" id="vmon" min="0.00" step="0.01"  required>
+					<label for="vmon" class="active">Monto aportación ($)</label>
+				</div>
+				
+				<input type="hidden" name="help" id="help" value="0">
+			</div>
+			<!-- </div> -->
+			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO **************************************************************************************************-->
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+		</div>
+	</form>
+</div>
+
+
 <!-- INICIA EL BLOQUE LA TABLA -->
 <div class="container">
 	<h4 class="center teal-text" id="titulo2">Movimiento de la cuenta</h4>

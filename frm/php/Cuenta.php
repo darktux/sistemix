@@ -225,24 +225,24 @@
 
 
 
-        case 'getNumeroCuenta':
-            $con->consulta("
-                SELECT 
-                    i.institucionsalud_id
-                FROM 
-                    tab_asociado a,
-                    tab_institucion_salud i
-                WHERE
-                    a.asociado_correlativo = '".$_POST['corasociado']."'
-                AND
-                    a.asociado_institucionsaludid=i.institucionsalud_id;
-            ");
-            if ($fila2 = mysql_fetch_row($con->getResultado())) {       
-                echo $fila2[0]."-00-".$_POST['corasociado'];
-            }
-            else{
-                echo "Error al guardar";
-            }
+        case 'getNumeroCuenta'://Utilizar la sucursal en el futuro
+            // $con->consulta("
+            //     SELECT 
+            //         i.institucionsalud_id
+            //     FROM 
+            //         tab_asociado a,
+            //         tab_institucion_salud i
+            //     WHERE
+            //         a.asociado_correlativo = '".$_POST['corasociado']."'
+            //     AND
+            //         a.asociado_institucionsaludid=i.institucionsalud_id;
+            // ");
+           // if ($fila2 = mysql_fetch_row($con->getResultado())) {       
+                echo "01-00-".$_POST['corasociado'];
+            // }
+            // else{
+            //     echo "Error al guardar";
+            // }
             break;
 
         case 'getNumeroCuenta2':

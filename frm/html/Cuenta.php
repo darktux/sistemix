@@ -101,12 +101,12 @@
 				    <label for="est">Estados</label>
 				</div>
 				<div id="autorizados">
-					<h5>Autorizados para sacar fondos de la cuenta</h5>
+					<h5>Beneficiarios</h5>
 					<div class="col s12">
 						<ul class="tabs">
-							<li class="tab col s4"><a href="#test1" class="teal-text">1° Autorizado</a></li>
-							<li class="tab col s4"><a href="#test2" class="teal-text">2° Autorizado</a></li>
-							<li class="tab col s4"><a href="#test3" class="teal-text">3° Autorizado</a></li>
+							<li class="tab col s4"><a href="#test1" class="teal-text">1° Beneficiario</a></li>
+							<li class="tab col s4"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
+							<li class="tab col s4"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
 						</ul>
 					</div>
 					<br><br>
