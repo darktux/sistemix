@@ -399,7 +399,7 @@
 	        success:function(responseText){
 	        	//alert(responseText);
 	        	var aux=responseText.split("/");
-	        	if(aux[0]=='Apertura de cuenta'){
+	        	if(aux[0]=='Apertura de cuenta'||aux[0]=='Voluntaria'){
 	        		//var children = $("tr td")[1].innerHTML;
 	        		//var fechaApertura= children.substring(100,110);//Obtengo la fecha de Apertura de cuenta desde la tabla
 	        		var fecape=aux[1].split("-");
@@ -424,7 +424,7 @@
 		var meses=["NaN","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
 		$('select').empty();
 		var dep = $("#con");
-		dep.append("<option value='' disabled>Seleccione...</option>");
+		dep.append("<option value='Voluntaria' >Aportación Voluntaria</option>");
 		var i=1;
 		var j=parseInt(mes);
 		
