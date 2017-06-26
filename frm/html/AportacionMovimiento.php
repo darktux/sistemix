@@ -399,7 +399,7 @@
 	        success:function(responseText){
 	        	//alert(responseText);
 	        	var aux=responseText.split("/");
-	        	if(aux[0]=='Apertura de cuenta'||aux[0]=='Voluntaria'){
+	        	if(aux[0]=='Apertura de cuenta'){
 	        		//var children = $("tr td")[1].innerHTML;
 	        		//var fechaApertura= children.substring(100,110);//Obtengo la fecha de Apertura de cuenta desde la tabla
 	        		var fecape=aux[1].split("-");
@@ -409,11 +409,25 @@
 	        		cargaSelect(anioApe,mesApe-1,fecape[0]);
 
 	        	}else{
-	        		//alert(aux[0]);
-	        		var fec = aux[0].split("-");//desconpongo la fecha
-	        		var anio= fec[0];//Obtengo el anio
-	        		var mes = fec[1];//obtengo el ultimo mes pagado
-	        		cargaSelect(anio,mes,fec[0]);
+	        		/*//alert(aux[0]);
+	        		if (aux[0]=='Voluntaria')
+	        		{
+		        		$.ajax({
+					        type:"post",
+					        url: "php/CuentaMovimiento.php",
+					        data:{acc:'getUltimaCuotaPagada2',idcue:idcuenta},
+					        success:function(responseText){
+
+					        }
+					    });
+		        	}
+		        	else
+		        	{*/
+		        		var fec = aux[0].split("-");//desconpongo la fecha
+		        		var anio= fec[0];//Obtengo el anio
+		        		var mes = fec[1];//obtengo el ultimo mes pagado
+		        		cargaSelect(anio,mes,fec[0]);
+		        	
     				//$("#con option[value='"+responseText+"']").attr("selected",true);
 	        	}
 	        }

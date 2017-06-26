@@ -66,12 +66,14 @@
             break;
 
         case 'getUltimaCuotaPagada':
-            $sql="SELECT cuentamovimiento_concepto, cuentamovimiento_fecha FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcue']."' ORDER BY cuentamovimiento_id DESC";
+            $sql="SELECT cuentamovimiento_concepto, cuentamovimiento_fecha FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcue']."' and cuentamovimiento_concepto NOT LIKE 'Volun%' ORDER BY cuentamovimiento_id DESC";
             $rs=mysql_query($sql);
             if($row=mysql_fetch_array($rs)){
                 echo $row[0].'/'.$row[1];
             }
             break;
+
+         
 
     	case 'upd':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
