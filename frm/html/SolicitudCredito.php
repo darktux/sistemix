@@ -545,20 +545,20 @@
     }
 /*FINALIZA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
-	function operateFormatter2(value, row, index) {
-        return [
-        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
-                '<i class="material-icons">mode_edit</i>',
-            '</a>',
-            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
-                '<i class="material-icons">delete</i>',
-            '</a>',
-            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
-                '<i class="material-icons">print</i>',
-            '</a>',
+	// function operateFormatter2(value, row, index) {
+ //        return [
+ //        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+ //                '<i class="material-icons">mode_edit</i>',
+ //            '</a>',
+ //            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+ //                '<i class="material-icons">delete</i>',
+ //            '</a>',
+ //            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
+ //                '<i class="material-icons">print</i>',
+ //            '</a>',
             
-        ].join('');
-    }
+ //        ].join('');
+ //    }
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
