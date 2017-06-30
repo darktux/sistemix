@@ -334,7 +334,7 @@
 							<label for="fecpag" class="active">Fecha de pago</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="teal-text"  name="fecfin" id="fecfin" disabled="true"  required>
+							<input type="date" name="fecfin" id="fecfin" readonly  required>
 							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
 						</div>
 						<div class="input-field col s12">
@@ -509,7 +509,6 @@
 			}
 			else{
 		    	formData.append("acc", "addsol");
-		    	alert('adsol');
 			}
 			$.ajax({
 	            url: "php/Credito.php",
@@ -524,7 +523,7 @@
 	        			$('.modal').modal('close');
 	        			alert(responseText);
 	        			$("#formulario")[0].reset();
-		        		$('#tabla2').bootstrapTable('refresh',{url:'php/Credito.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+		        		$('#tabla2').bootstrapTable('refresh',{url:'php/Credito.php?acc=getjsontabla3'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
 		        		document.getElementById("buscar1").focus();
 						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
 	        		}
@@ -608,13 +607,13 @@
 /*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .remove': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
-            if(confirm("Realmente desea eliminar el registro de la cuenta "+JSON.stringify(row.cuenta_id).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
+            if(confirm("Realmente desea eliminar el registro de solicitud de crédito de "+JSON.stringify(row.asociado_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
             	datos = {
 	            	id:JSON.stringify(row.cuenta_id).replace(/"/gi,''),
 	            	acc:'del'
 	            }
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
-	            ejecutarajax(datos);
+	           // ejecutarajax(datos);
             }
         },
 /*FINALIZA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
@@ -659,8 +658,8 @@ function ejecutarajax(datos){
         		$('.modal').modal('close');
         		alert(responseText);
         		$("#formulario")[0].reset();
-        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
-        		$('#tabla2').bootstrapTable('refresh',{url:'php/Cuenta.php?acc=getjsontabla'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+        		$('#tabla1').bootstrapTable('refresh',{url:'php/Asociado.php?acc=getjsontabla2'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+        		$('#tabla2').bootstrapTable('refresh',{url:'php/Cuenta.php?acc=getjsontabla3'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
         		document.getElementById("buscar1").focus();
 				$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
         	}
@@ -697,11 +696,11 @@ function fechaf()
 		//fecha=new Date();
 	   // tiempo=fecha.getTime();
 	    fecc=new Date($('#feccon').val());
-	    $('#feccon').val(fecc.getUTCDate()+"/"+(fecc.getUTCMonth()+1)+"/"+fecc.getUTCFullYear());
+	    //$('#feccon').val(fecc.getUTCDate()+"/"+(fecc.getUTCMonth()+1)+"/"+fecc.getUTCFullYear());
 	    day=fecc.getUTCDate();
 	    month=parseInt($('#pla').val())+(fecc.getUTCMonth()+1);
 	    year=fecc.getUTCFullYear();
-	   //alert(day);
+	
 	    while(month>12){
 
 	    	month=(month-12);
@@ -712,7 +711,13 @@ function fechaf()
 	    	day=28;
 	    }
 
-	    $('#fecfin').val(day+"/"+month+"/"+year);
+	    month = month.toString();
+	    day = day.toString();
+
+	    if (month.length < 2) month = '0' + month;
+  		if (day.length < 2) day = '0' + day;
+  		
+  		$('#fecfin').val(year+"-"+month+"-"+day);
 	}
 }
 </script>
