@@ -38,7 +38,7 @@
 			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla3" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
-				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
+				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th> -->
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
 				    	<th data-field="asociado_nombre" data-align="center">Asociado</th>
 			            <th data-field="asociado_dui" data-align="center">DUI</th>
@@ -545,20 +545,20 @@
     }
 /*FINALIZA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
-	// function operateFormatter2(value, row, index) {
- //        return [
- //        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
- //                '<i class="material-icons">mode_edit</i>',
- //            '</a>',
- //            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
- //                '<i class="material-icons">delete</i>',
- //            '</a>',
- //            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
- //                '<i class="material-icons">print</i>',
- //            '</a>',
+	function operateFormatter2(value, row, index) {
+        return [
+        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+                '<i class="material-icons">mode_edit</i>',
+            '</a>',
+            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+                '<i class="material-icons">delete</i>',
+            '</a>',
+            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
+                '<i class="material-icons">print</i>',
+            '</a>',
             
- //        ].join('');
- //    }
+        ].join('');
+    }
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
