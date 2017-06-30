@@ -12,7 +12,7 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
 			<div class="row">
 				<div class="input-field col s12">
-					<input name="fec" id="fec" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<input name="fec" id="fec" type="date" required>
 					<label for="fec" class="active">Fecha de transacción</label>
 				</div>
 				<div class="input-field col s12">
@@ -86,11 +86,6 @@
 	/*INICIA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
-		$('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: true //dias equivalentes  years restados for today
-		});
 		/*INICIA BLOQUE DE CONFIGURACION DE VENTANA MODAL */
 		$('.modal').modal({
 			dismissible: true,

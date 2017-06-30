@@ -73,7 +73,7 @@
 					<label for="tit2">Co-titular de la cuenta</label>
 				</div>
 				<div class="input-field col s12">
-					<input name="fecape" id="fecape" type="date" class="datepicker" required value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<input name="fecape" id="fecape" type="date" required>
 					<label for="fecape" class="active">Fecha de apertura</label>
 				</div>
 				<div class="input-field col s12">
@@ -175,11 +175,7 @@
 		$("#dui3").mask("99999999-9",{placeholder:" "});
 		$("#nit3").mask("9999-999999-999-9",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
-		$('.datepicker').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: 1 //dias equivalentes  years restados for today
-		});
+		
 		$('select').material_select('destroy');
 		$('select').material_select();
 		$('ul.tabs').tabs();

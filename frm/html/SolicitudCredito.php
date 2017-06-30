@@ -130,8 +130,8 @@
 					</div>
 					<div class="row">
 						<div class="input-field col s12">	
-							<input id="fecc" name="fecc" type="date" class="datepicker" >
-							<label for="fecc" class="">Fecha de nacimiento conyugue</label>
+							<input id="fecc" name="fecc" type="date" >
+							<label for="fecc" class="active">Fecha de nacimiento conyugue</label>
 						</div>
 					</div>
 					<div class="row">
@@ -326,15 +326,15 @@
 							<label for="cuo" class="active">Cuota a pagar ($)</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="feccon" value="" onchange="fechaf()" id="feccon" required>
-							<label for="feccon">Fecha del contrato</label>
+							<input type="date" name="feccon" onchange="fechaf()" id="feccon" required>
+							<label for="feccon" class="active">Fecha del contrato</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker" name="fecpag" id="fecpag" required>
-							<label for="fecpag">Fecha de pago</label>
+							<input type="date" name="fecpag" id="fecpag" required>
+							<label for="fecpag" class="active">Fecha de pago</label>
 						</div>
 						<div class="input-field col s12">
-							<input type="date" class="datepicker teal-text"  name="fecfin" id="fecfin" disabled="true"  required>
+							<input type="date" class="teal-text"  name="fecfin" id="fecfin" disabled="true"  required>
 							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
 						</div>
 						<div class="input-field col s12">
@@ -378,30 +378,7 @@
 		$("#celr").mask("9999-9999",{placeholder:" "});
 		$("#telt").mask("9999-9999",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
-		$('#fecc').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: -6570, //dias equivalentes a 18 years restados for today
-			selectYears: 80
-		});
-		$('#feccon').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			max: true, //dias equivalentes a 18 years restados for today
-			selectYears: 10
-		});
-		$('#fecpag').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: false, // Creates a dropdown of 15 years to control year
-			max: 0, //dias equivalentes a 18 years restados for today
-		});
-		$('#fecfin').pickadate({
-			selectMonths: true, // Creates a dropdown to control month
-    		selectYears: true, // Creates a dropdown of 15 years to control year
-			min: 1, //un dia despues de hoy
-			max: 0, //dias equivalentes a 18 years restados for today
-			selectYears: 80
-		});
+		
 		$('select').material_select('destroy');
 		$('select').material_select();
 		//
