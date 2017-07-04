@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontabla"lick-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Cuenta.php?acc=getjsontabla" lick-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
@@ -43,7 +43,7 @@
 				    	<th data-field="cuenta_asociadonombre" data-align="center">Asociado</th>
 				    	<th data-field="cuenta_asociadodui" data-align="center">DUI</th>
 			            <th data-field="cuenta_saldo" data-align="center">Saldo ($)</th>
-			            <!-- <th data-field="cuenta_fechaapertura" data-align="center">Fecha de apertura</th> -->
+			            <!-- <th data-field="cuenta_fechaapertura" hidden="false"  data-align="center">Fecha de apertura</th> -->
 			            <th data-field="cuenta_estado" data-align="center">Estado</th>
 			            <th data-field="cuenta_tipocuentanombre" data-align="center">Tipo de cuenta</th>
 			            <!-- FINALIZAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->
@@ -104,52 +104,67 @@
 					<h5>Beneficiarios</h5>
 					<div class="col s12">
 						<ul class="tabs">
-							<li class="tab col s4"><a href="#test1" class="teal-text">1° Beneficiario</a></li>
-							<li class="tab col s4"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
-							<li class="tab col s4"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
+							<li class="tab col s3"><a href="#test1" class="teal-text">1° Beneficiario</a></li>
+							<li class="tab col s3"><a href="#test2" class="teal-text">2° Beneficiario</a></li>
+							<li class="tab col s3"><a href="#test3" class="teal-text">3° Beneficiario</a></li>
+							<li class="tab col s3"><a href="#test4" class="teal-text">4° Beneficiario</a></li>
 						</ul>
 					</div>
 					<br><br>
 					<div class="row" id="test1">
 						<div class="input-field col s12 m12">
-							<input id="nom1" name="nom1" type="text" class="validate" >
-				          	<label for="nom1">Nombre completo</label>
+							<input id="nom1" name="nom1" disabled="true"  type="text" class="teal-text"  >
+				          	<label for="nom1" class="active">Nombre completo</label>
 	    				</div>
 						<div class="input-field col s12 m6"> 
-				          	<input id="dui1" name="dui1" type="text" class="validate" >
-				          	<label for="dui1">DUI</label>
+				          	<input id="dui1" name="dui1" type="text" disabled="true" class="teal-text" >
+				          	<label for="dui1" class="active">Parentezco</label>
 	    				</div>
 	    				<div class="input-field col s12 m6"> 
-				          	<input id="nit1" name="nit1" type="text" class="validate" >
-				          	<label for="nit1">NIT</label>
+				          	<input id="nit1" name="nit1" type="text" disabled="true" class="teal-text">
+				          	<label for="nit1" class="active">Dirección</label>
 	    				</div>	    			
 	    			</div>
 	    			<div class="row" id="test2">
 						<div class="input-field col s12 m12">
-							<input id="nom2" name="nom2" type="text" class="validate" >
-				          	<label for="nom2">Nombre completo</label>
+							<input id="nom2" name="nom2" type="text" disabled="true" class="teal-text" >
+				          	<label for="nom2" class="active">Nombre completo</label>
 	    				</div>
 						<div class="input-field col s12 m6"> 
-				          	<input id="dui2" name="dui2" type="text" class="validate" >
-				          	<label for="dui2">DUI</label>
+				          	<input id="dui2" name="dui2" type="text" disabled="true" class="teal-text" >
+				          	<label for="dui2" class="active">Parentezco</label>
 	    				</div>
 	    				<div class="input-field col s12 m6"> 
-				          	<input id="nit2" name="nit2" type="text" class="validate" >
-				          	<label for="nit2">NIT</label>
+				          	<input id="nit2" name="nit2" type="text" disabled="true" class="teal-text" >
+				          	<label for="nit2" class="active">Dirección</label>
 	    				</div>	    			
 	    			</div>
 	    			<div class="row" id="test3">
 						<div class="input-field col s12 m12">
-							<input id="nom3" name="nom3" type="text" class="validate" >
-				          	<label for="nom3">Nombre completo</label>
+							<input id="nom3" name="nom3" type="text" disabled="true" class="teal-text" >
+				          	<label for="nom3" class="active">Nombre completo</label>
 	    				</div>
 						<div class="input-field col s12 m6"> 
-				          	<input id="dui3" name="dui3" type="text" class="validate" >
-				          	<label for="dui3">DUI</label>
+				          	<input id="dui3" name="dui3" type="text" disabled="true" class="teal-text" >
+				          	<label for="dui3" class="active">Parentezco</label>
 	    				</div>
 	    				<div class="input-field col s12 m6"> 
-				          	<input id="nit3" name="nit3" type="text" class="validate" >
-				          	<label for="nit3">NIT</label>
+				          	<input id="nit3" name="nit3" type="text" disabled="true" class="teal-text"" >
+				          	<label for="nit3" class="active">Dirección</label>
+	    				</div>	    			
+	    			</div>
+	    			<div class="row" id="test4">
+						<div class="input-field col s12 m12">
+							<input id="nom4" name="nom4" type="text" disabled="true" class="teal-text" >
+				          	<label for="nom4" class="active">Nombre completo</label>
+	    				</div>
+						<div class="input-field col s12 m6"> 
+				          	<input id="dui4" name="dui4" type="text" disabled="true" class="teal-text">
+				          	<label for="dui4" class="active">Parentezco</label>
+	    				</div>
+	    				<div class="input-field col s12 m6"> 
+				          	<input id="nit4" name="nit4" type="text" readonly="true" class="teal-text" >
+				          	<label for="nit4" class="active" >Dirección</label>
 	    				</div>	    			
 	    			</div>
 				</div>
@@ -338,7 +353,7 @@
  			$.ajax({
 		        type:"post",
 		        url: "php/Cuenta.php",
-		        data:{cuentaid:JSON.stringify(row.cuenta_id).replace(/"/gi,''),acc:"getAutorizados"},
+		        data:{cuentaid:JSON.stringify(row.cuenta_asociadoid).replace(/"/gi,''),acc:"getAutorizados"},
 		        success:function(responseText){
 		        	var dataJson=eval(responseText);
 		        	for(var i in dataJson){
@@ -384,6 +399,19 @@
         	$("#tit").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	$("#tit2").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	getnumber( JSON.stringify(row.asociado_correlativo).replace(/"/gi,'') );
+        	$.ajax({
+		        type:"post",
+		        url: "php/Cuenta.php",
+		        data:{cuentaid:JSON.stringify(row.asociado_id).replace(/"/gi,''),acc:"getAutorizados"},
+		        success:function(responseText){
+		        	var dataJson=eval(responseText);
+		        	for(var i in dataJson){
+		        		$("#nom"+(++i)).val(dataJson[--i].nombre);
+		        		$("#dui"+(++i)).val(dataJson[--i].dui);
+		        		$("#nit"+(++i)).val(dataJson[--i].nit);
+		        	}
+		        }
+		    });
         	//$('label').addClass("active");
         	$('#modal2').modal('open');
         },

@@ -78,6 +78,7 @@
     	case 'upd':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             $con->consulta("BEGIN");
+            //echo $_POST['id'];
             try{
                 $con->consulta("
                     UPDATE 
@@ -87,7 +88,7 @@
                         cuenta_tipocuentaid=".$_POST['tipcueid'].",
                         cuenta_estado='".$_POST['est']."'
                     WHERE 
-                        cuenta_id=".$_POST['id'].";
+                        cuenta_id='".$_POST['id']."';
                 ");
                 //Actualiza los autorizados de la cuenta
                 $con->consulta("DELETE FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cueid']."'");
@@ -270,14 +271,13 @@
             break;
 
         case 'getAutorizados':
-            $sql="SELECT * FROM tab_cuenta_autorizados WHERE cuentaautorizados_cuentaid='".$_POST['cuentaid']."'";
+            $sql="SELECT * FROM tab_beneficiario WHERE beneficiario_asociadoid='".$_POST['cuentaid']."'";
             $rs=mysql_query($sql);
             while ($obj=mysql_fetch_object($rs)){
                 $dataut[]=array(
-                    'cuentaid'=>$obj->cuentaautorizados_cuentaid,
-                    'nombre'=>$obj->cuentaautorizados_nombre,
-                    'dui'=>$obj->cuentaautorizados_dui,
-                    'nit'=>$obj->cuentaautorizados_nit
+                    'nombre'=>$obj->beneficiario_nombre,
+                    'dui'=>$obj->beneficiario_parentezco,
+                    'nit'=>$obj->beneficiario_direccion
                 );
             }
             echo ''.json_encode($dataut).'';
