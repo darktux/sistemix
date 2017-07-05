@@ -7,9 +7,7 @@
                     <img src="../img/logo.jpg" width="200" class="circle z-depth-5" style="border-style: solid;border-width: 3px;border-color: #80cbc4;">
                 </div>       
             </div>
-            <div class="row center">
-            	<h5 class="header center white-text text-lighten-2"><b>Accesos directos</b></h5>
-            </div>
+            
         </div>
     </div>
     <div class="parallax" style="height: 600px;"><img src="../img/fondo6.png" alt="Unsplashed background img 2"></div>

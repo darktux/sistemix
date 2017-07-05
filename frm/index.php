@@ -1,3 +1,13 @@
+<?php
+    if(session_status() !== PHP_SESSION_ACTIVE){session_start();}
+    if($_SESSION['01us01']!="1"){//deja entrar si es activo fijo
+        echo'
+            <script type="text/javascript">
+                window.location="../login.php";
+            </script>
+        ';
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -20,7 +30,7 @@
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-cue1">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-cre1">Crédito<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button white-text" href="#!" data-activates="dropdown-con1">Configuración<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="white-text loou" >Logout</a></li>
+                    <li><a class="white-text loou" onclick="cierraSesion()">Cerrar sesión</a></li>
                 </ul>
                 <!-- MENU COMPRIMIDO -->
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -29,7 +39,7 @@
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown-cue2">Cuenta<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown-cre2">Crédito<i class="material-icons right">arrow_drop_down</i></a></li>
                     <li><a class="dropdown-button" href="#!" data-activates="dropdown-con2">Configuración<i class="material-icons right">arrow_drop_down</i></a></li>
-                    <li><a class="loou" >Logout</a></li>
+                    <li><a class="loou" onclick="cierraSesion()">Cerrar sesión</a></li>
                 </ul>
             </div>
             <!-- OPCIONES DEL MENU ASOCIADO -->
@@ -81,14 +91,16 @@
             </ul>
             <!-- OPCIONES DEL MENU SESION -->
             <ul id="dropdown-con1" class="dropdown-content">
-                <li><a class="csuc">Sucursal</a></li>
+                <!-- <li><a class="csuc">Sucursal</a></li> -->
+                <li><a class="cusu">Usuarios</a></li>
                 <li><a class="ccap">Capital</a></li>
                 <li><a class="cids">Instituciones de salud</a></li>
                 <li class="divider"></li>
                 <li><a class="acde">Acerca de</a></li>
             </ul>
             <ul id="dropdown-con2" class="dropdown-content">
-                <li><a class="csuc">Sucursal</a></li>
+                <!-- <li><a class="csuc">Sucursal</a></li> -->
+                <li><a class="cusu">Usuarios</a></li>
                 <li><a class="ccap">Capital</a></li>
                 <li><a class="cids">Instituciones de salud</a></li>
                 <li class="divider"></li>
@@ -145,12 +157,25 @@
             $(".tcre").click(function(){ $("#formularios").load('html/TipoCredito.php'); });
             $(".ccre").click(function(){ $("#formularios").load('html/CalculadoraCredito.php'); });
             //MENU CONFIGURACION
-            $(".csuc").click(function(){ $("#formularios").load('html/Sucursal.php'); });
+            // $(".csuc").click(function(){ $("#formularios").load('html/Sucursal.php'); });
+            $(".cusu").click(function(){ $("#formularios").load('html/usuarios.php'); });
             $(".ccap").click(function(){ $("#formularios").load('html/Capital.php'); });
             $(".cids").click(function(){ $("#formularios").load('html/InstitucionesSalud.php'); });
             $(".acde").click(function(){ $("#formularios").load('html/AcercaDe.php'); });
             //BOTON CERRAR SESION
-            $(".loou").click(function(){ window.location.href = "../"; });
+            function cierraSesion(){
+                $.ajax({
+                    url: "php/datos.php",
+                    type: "post",
+                    data:{acc:"logout"},
+                    success:function(responseText){
+                        if(responseText=="done"){
+                            location.href="../login.php";
+                        }
+                    }
+                });
+            }
+            //$(".loou").click(function(){ window.location.href = "../"; });
         </script>
     </body>
 </html>
