@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-07-2017 a las 03:34:04
+-- Tiempo de generación: 05-07-2017 a las 05:25:15
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -1211,6 +1211,30 @@ INSERT INTO `tab_tipo_cuenta` (`tipocuenta_id`, `tipocuenta_correlativo`, `tipoc
 (21, '03', 'AHORRO A LA VISTA', 2.5, 10, 1, 5),
 (22, '04', 'CO-AGESALITO', 2.5, 10, 1, 5);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tab_usuario`
+--
+
+CREATE TABLE `tab_usuario` (
+  `usuario_id` int(11) NOT NULL,
+  `usuario_nombre` varchar(200) NOT NULL,
+  `usuario_usu` varchar(100) NOT NULL,
+  `usuario_pass` varchar(50) NOT NULL,
+  `usuario_sucursalid` int(11) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tab_usuario`
+--
+
+INSERT INTO `tab_usuario` (`usuario_id`, `usuario_nombre`, `usuario_usu`, `usuario_pass`, `usuario_sucursalid`) VALUES
+(1, 'Administrador', 'admin', 'ec04321e2c7bf2e0b01bac41896796b19f22a244', 1),
+(2, 'Milagro del Carmen Ventura Rivera', 'mventura', 'af1c35fb42171b98f9080b5d0b3e2ef9ee78a101', 1),
+(4, 'David Ernesto Moreira Hernández', 'dmoreira', 'ecb1ffad15449391a3d25cf46f4aa60309e02db2', 1),
+(5, 'Martha María Ceron de Martínez', 'mceron', '2eec69bc4ac3597d955d8685a6f698bdb9373f88', 1);
+
 --
 -- Índices para tablas volcadas
 --
@@ -1319,6 +1343,12 @@ ALTER TABLE `tab_tipo_cuenta`
   ADD UNIQUE KEY `tipocuenta_correlativo` (`tipocuenta_correlativo`);
 
 --
+-- Indices de la tabla `tab_usuario`
+--
+ALTER TABLE `tab_usuario`
+  ADD PRIMARY KEY (`usuario_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -1377,6 +1407,11 @@ ALTER TABLE `tab_tipo_credito`
 --
 ALTER TABLE `tab_tipo_cuenta`
   MODIFY `tipocuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+--
+-- AUTO_INCREMENT de la tabla `tab_usuario`
+--
+ALTER TABLE `tab_usuario`
+  MODIFY `usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Restricciones para tablas volcadas
 --
