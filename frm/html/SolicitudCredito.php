@@ -9,12 +9,12 @@
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content" id="modalcontent">
 		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
-		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla2" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
+		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla2" data-click-to-select="false"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
 		    <thead>
 			    <tr>
 			    	<th data-field="operate" data-align="center" data-formatter="operateFormatter1" data-events="operateEvents">Acciones</th>
 			    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
-			    	<th data-field="asociado_id" data-align="center">Nombre</th>
+			    	<th data-field="asociado_id" data-align="center">ID</th>
 		            <th data-field="asociado_nombre" data-align="center">Nombre</th>
 		            <th data-field="asociado_dui" data-align="center">DUI</th>
 		            <th data-field="asociado_nit" data-align="center">NIT</th>
@@ -24,8 +24,8 @@
 		</table>
 	</div>
 	<div class="modal-footer">
-		<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-		<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+<!-- 		<button class="waves-effect waves-light btn" type="submit">Guardar</button>
+ -->		<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
 	</div>
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL BUSCAR -->
@@ -35,10 +35,10 @@
 	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla3" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla2" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla3" data-click-to-select="false"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
-				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th> -->
+				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*******************-->
 				    	<th data-field="asociado_nombre" data-align="center">Asociado</th>
 			            <th data-field="asociado_dui" data-align="center">DUI</th>
@@ -58,6 +58,7 @@
 <div id="modal2" class="modal modal-fixed-footer">
 	<form class="col s12" id="formulario">
 		<input id="idid" name="idid" type="hidden" value="">
+		
 		<div class="modal-content" id="modalcontent">
 			<h5>Nueva solicitud de crédito</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
@@ -68,8 +69,8 @@
 				    <li class="tab col s2 active"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales"><i class="material-icons">person</i> </a></li>
 				    <li class="tab col s2 " ><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" ><i class="material-icons">people</i> </a></li>
 				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales"><i class="material-icons">domain</i> </a></li>
-				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias Personales" href="#referencias"><i class="material-icons">people_outline</i> </a></li>
-				    <li class="tab col s2"><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito"><i class="material-icons">monetization_on</i> </a></li>
+				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias" href="#referencias"><i class="material-icons">people_outline</i> </a></li>
+				    <li class="tab col s2 "><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito"><i class="material-icons">monetization_on</i> </a></li>
 	  			</ul>
 				
 				<div id="personales" class="col s12 white swipeable">
@@ -267,6 +268,11 @@
 	  			</div>
 	  			
 	  			<div id="referencias" class="col s12 white swipeable">
+
+
+
+	  			Referencia personal
+
 	  				<div class="row">
 						<div class="input-field col s12"> 
 				          	<input id="nomr" name="nomr" type="text" class="validate">
@@ -303,7 +309,57 @@
 							<label for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
 						</div>
 					</div>
+
+
+
+
+					Referencia laboral
+
+
+					<div class="row">
+						<div class="input-field col s12"> 
+				          	<input id="nomrlab" name="nomrlab" type="text" class="validate">
+				          	<label for="nomrlab">Nombre referencia</label>
+        				</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea id="dirrlab" name="dirrlab" class="materialize-textarea"></textarea>
+							<label for="dirrlab">Direcci&oacute;n de referencia</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<input type="text" name="telrlab" id="telrlab">
+							<label for="telrlab">Tel&eacute;fono fijo de referencia</label>
+					</div>
+					</div>
+					<div class22="row">
+						<div class="input-field col s12">
+							<input type="text" name="celrlab" id="celrlab">
+							<label for="celrlab">Celular de referencia</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea id="lugtrlab" name="lugtrlab" class="materialize-textarea"></textarea>
+							<label for="lugtrlab">Lugar de trabajo de referencia</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<textarea id="dirtrlab" name="dirtrlab" class="materialize-textarea"></textarea>
+							<label for="dirtrlab">Direcci&oacute;n de trabajo de referencia</label>
+						</div>
+					</div>
+
+
 	  			</div>
+
+
+
+
+
 	  			
 				<div id="credito" class="col s12 white swipeable">
 					<div class="row">
@@ -319,7 +375,7 @@
 						</div>
 						<div class="input-field col s12">
 							<input type="number" name="pla" onchange="calcular()" onkeyup="calcular()"  id="pla" min="0" required>
-							<label for="pla">Plazo del crédito</label>
+							<label for="pla">Plazo del crédito (Meses)</label>
 						</div>
 						<div class="input-field col s12">
 							<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
@@ -339,9 +395,11 @@
 						</div>
 						<div class="input-field col s12">
 							<select class="" id="est" name="est">
-								<option value="En espera" selected>En espera</option>
-								<option value="Aprobado">Aprobado</option>
-								<option value="Rechazado">Rechazado</option>
+								<option value="0" disabled >Seleccionar</option>
+								<option value="En espera">En espera</option>
+						    	<option value="Activo">Activo</option>
+						    	<option value="Congelado">Congelado</option>
+						    	<option value="Cerrado">Cerrado</option>
 						    </select>
 							<label for="est">Estado</label>
 						</div>
@@ -363,6 +421,68 @@
 	</form>
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL NUEVA CUENTA-->
+
+
+<!-- MODAL APROBACION DE ASOCIADO -->
+<div id="modal3" class="modal modal-fixed-footer">
+	<form class="col s12" id="formulario22" onsubmit="return submit22();">
+		<input id="selfid" name="selfid" type="hidden" value="">
+		<input id="cremon1" name="cremon1" type="hidden" value="">
+		<input id="creid1" name="creid1" type="hidden" value="">
+		<div class="modal-content" id="modalcontent">
+
+
+
+			<h5>Aprobación del crédito</h5><!-- //TITULO DEL MODAL *************************************************************************************************-->
+			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
+			<div class="row">
+				<div class="input-field col s12"> 
+		          <input id="nomaprob" name="nomaprob" type="text" class="validate" disabled>
+		          <label class="active" for="nomaprob">Nombre completo</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12 m6"> 
+			         <input id="duiaprob" name="duiaprob" type="text"  minlength="10" maxlength="10" disabled>
+			         <label class="active" for="duiaprob">DUI</label>
+				</div>
+				<div class="input-field col s12 m6"> 
+			         <input id="nitaprob" name="nitaprob" type="text"  minlength="17" maxlength="17" disabled>
+			         <label class="active" for="nitaprob">NIT</label>
+				</div>    				
+			</div>
+			<div class="row">
+					<div class="input-field col s6 m4">	
+					<input id="nrefcre" name="nrefcre" type="number" min="0">
+					<label for="nrefcre" >N° de referencia del crédito</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s4 m4">	
+					<input id="fecses" name="fecses" type="date" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<label class="active" for="fecses" >Fecha de sesión</label>
+				</div>
+				<div class="input-field col s4 m4">	
+					<input id="nacta" name="nacta" type="number" min="0">
+					<label for="nacta" >N° de acta</label>
+				</div>
+				<div class="input-field col s4 m4">	
+					<input id="npunto" name="npunto" type="text">
+					<label for="npunto" >N° de punto</label>
+				</div>
+			</div>
+			
+			<!-- TERMINAN ELEMENTOS DEL FORMULARIO ********************************************************************************************************************************************************-->
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+		</div>
+	</form>
+</div>
+<!-- TERMINA EL BLOQUE DEL MODAL -->
+
+
 <!-- INICIA EL BLOQUE JAVASCRIPT -->
 <script type="text/javascript">
 	var idcuenta=0;
@@ -376,6 +496,8 @@
 		$("#celc").mask("9999-9999",{placeholder:" "});
 		$("#telr").mask("9999-9999",{placeholder:" "});
 		$("#celr").mask("9999-9999",{placeholder:" "});
+		$("#telrlab").mask("9999-9999",{placeholder:" "});
+		$("#celrlab").mask("9999-9999",{placeholder:" "});
 		$("#telt").mask("9999-9999",{placeholder:" "});
 		$('.tooltipped').tooltip({delay: 50});
 		
@@ -383,23 +505,7 @@
 		$('select').material_select();
 		//
 
-	    $.ajax({
-	        type:"post",
-	        url: "php/TipoCuenta.php",
-	        data:{acc:'getjsonselect'},
-	        success:function(responseText){
-	        	var obj = $.parseJSON(responseText);
-	        	$.each(obj, function(i,item){
-	        		var x = document.getElementById("tipcueid");
-	        		var option = document.createElement("option");
-	        		option.text = item.tipocuenta_nombre;
-	        		option.value = item.tipocuenta_id;
-	        		x.add(option);
-	        	});
-	        	$('#tipcueid').material_select('destroy');
-        		$('#tipcueid').material_select();
-	        }
-	    });
+
 
 	    /*INICIA BLOQUE DE CONFIGURACION DEL MODAL BUSCAR */
 		$('#modal1').modal({
@@ -410,7 +516,7 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("cueid").removeAttribute("readonly");
+				//document.getElementById("cueid").removeAttribute("readonly");
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 			}
@@ -431,7 +537,7 @@
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
 				$("#idid").val("");
 				//iNICIA BLOQUE PARA ANADIR CODIGO SEGUN SE NECESITE *************************************************************************************************
-				$("#tipcueid").val("Activada");
+				$("#tipcreid").val("Activada");
 		        $('select').material_select('destroy');
 		    	$('select').material_select();
 				//FINALIZA BLOQUE ANADIR CODIGO SEGUN SE NECESITE******************************************************************************************************
@@ -439,6 +545,23 @@
 			}
 		});
 		//CARGA EL SELECT CON LOS TIPOS DE CREDITO
+		/*INICIA BLOQUE DE CONFIGURACION DEL MODAL ACTIVAR */
+		$('#modal3').modal({
+			dismissible: true,
+			opacity: .5,
+			inDuration: 300,
+			outDuration: 200,
+			startingTop: '4%',
+			endingTop: '10%',
+			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
+				//document.getElementById("cueid").removeAttribute("readonly");
+				document.getElementById("nrefcre").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL ****************************************************************************/
+
+			},
+			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
+			}
+		});
+		/*FINALIZA BLOQUE DE CONFIGURACION DEL MODAL ACTIVAR */
 		$.ajax({
 	        type:"post",
 	        url: "php/TipoCredito.php",
@@ -480,7 +603,7 @@
 
 	function getnumber(){
 		
-		$("#cueid").val("01-");
+		//$("#cueid").val("01-");
 		
 		/*
 		$.ajax({
@@ -496,20 +619,16 @@
 	}
 	/*FINALIZA FUNCION GETNUMBER PARA ACTUALIZAR NUMEROS DE CUENTA */
 
-	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
+	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR*/
 	$("#formulario").on(
 		"submit", 
 		function(e){
 	    	e.preventDefault();
 	    	var f = $(this);
 	    	var formData = new FormData(document.getElementById("formulario"));
-	    	if($("#idid").val() == ""){ 
-	        	formData.append("acc", "set"); 
-	        	alert('sett');
-			}
-			else{
-		    	formData.append("acc", "addsol");
-			}
+	
+	       	formData.append("acc", "addsol");
+	
 			$.ajax({
 	            url: "php/Credito.php",
 	            type: "post",
@@ -534,7 +653,42 @@
 	        });
 		}	
 	);
-	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
+	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR */
+	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA ACTIVAR EL CREDIITO */
+	$("#formulario22").on(
+		"submit", 
+		function(e){
+	    	e.preventDefault();
+	    	var f = $(this);
+	    	var formData = new FormData(document.getElementById("formulario22"));
+		    
+		    formData.append("acc", "active");
+			
+			$.ajax({
+	            url: "php/Credito.php",
+	            type: "post",
+	            dataType: "html",
+	            data: formData,
+	            cache: false,
+	            contentType: false,
+	     		processData: false,
+	        	success:function(responseText){
+	        		if(/Registro/.test(responseText)){
+	        			$('.modal').modal('close');
+	        			alert(responseText);
+	        			$("#formulario22")[0].reset();
+		        		$('#tabla2').bootstrapTable('refresh',{url:'php/Credito.php?acc=getjsontabla3'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+		        		document.getElementById("buscar1").focus();
+						$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+	        		}
+	        		else{
+	        			alert(responseText);
+		        	}
+	    	    }
+	        });
+		}	
+	);
+	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA ACTIVAR EL CREDITO */
 	/*INICIA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 	function operateFormatter1(value, row, index) {
         return [
@@ -565,43 +719,21 @@
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-        	$("#formulario")[0].reset();
-        	$("#tit").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	//$("#tit2").val(JSON.stringify(row.cuenta_asociadonombre).replace(/"/gi,''));
-
-        	//$("#fecape").val(JSON.stringify(row.cuenta_fechaapertura).replace(/"/gi,''));
-        	//$("#cueid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-
-        	//$("#idid").val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-        	
-            //$("#mon").val(JSON.stringify(row.cuenta_monto).replace(/"/gi,''));
-
-            //$("#tipcueid").val(JSON.stringify(row.cuenta_tipocuentaid).replace(/"/gi,''));
-
-            //$("#est").val(JSON.stringify(row.cuenta_estado).replace(/"/gi,''));
-            	$.ajax({
-				type:"post",
-				url: "php/Asociado.php",
-				data:{acc:'busBen',idasociado: JSON.stringify(row.asociado_id).replace(/"/gi,'')},
-				success:function(data){
-					var obj = $.parseJSON(data);
-					var ii=0;
-					$.each(obj,function(i,item){
-						ii++;						
-						$("#nom"+ii).val(item.beneficiario_nombre);
-						$("#par"+ii).val(item.beneficiario_parentezco);
-						$("#por"+ii).val(item.beneficiario_porcentaje);
-						$("#dir"+ii).val(item.beneficiario_direccion);
-					});
-				}
-			});
+        	$("#formulario22")[0].reset();
+        	$("#selfid").val(JSON.stringify(row.solicitudcredito_id).replace(/"/gi,''));
+        	$("#cremon1").val(JSON.stringify(row.credito_monto).replace(/"/gi,''));
+        	$("#creid1").val(JSON.stringify(row.credito_id).replace(/"/gi,''));
+        	$("#nomaprob").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+        	$("#duiaprob").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
+        	$("#nitaprob").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
+           
             
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
 		    //document.getElementById("cueid").setAttribute("readonly", "");
         	//$('label').addClass("active");
-        	$('#modal2').modal('open');
+        	$('#modal3').modal('open');
         },
 /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
@@ -609,9 +741,27 @@
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
             if(confirm("Realmente desea eliminar el registro de solicitud de crédito de "+JSON.stringify(row.asociado_nombre).replace(/"/gi,''))){ /* CAMBIAR FRASE SEGUN LO QUE SE VA A ELIMINAR*/
             	datos = {
-	            	id:JSON.stringify(row.cuenta_id).replace(/"/gi,''),
-	            	acc:'del'
+	            	selfid2:JSON.stringify(row.solicitudcredito_id).replace(/"/gi,''),
+	            	creid2:JSON.stringify(row.credito_id).replace(/"/gi,''),
+	            	acc:'delsol'
 	            }
+	            $.ajax({
+			        type:"post",
+			        url: "php/Credito.php",/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR *****************************************************************************/
+			        data:datos,
+			        success:function(responseText){
+			        	if(/Registro/.test(responseText)){
+			        		$('.modal').modal('close');
+			        		alert(responseText);
+			        		$('#tabla2').bootstrapTable('refresh',{url:'php/Credito.php?acc=getjsontabla3'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
+			        		document.getElementById("buscar1").focus();
+							$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+			        	}
+			        	else{
+			        		alert(responseText);
+			        	}
+			        }
+			    });
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***********************************************/
 	           // ejecutarajax(datos);
             }

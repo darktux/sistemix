@@ -129,7 +129,6 @@
         /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
             break;       
-
 		case 'getjsontabla':
                 $con->consulta("
                     SELECT 
@@ -149,14 +148,16 @@
                     AND
                         s.solicitudcredito_asociadoid=a.asociado_id
                     AND
-                        c.credito_tipocreditoid=t.tipocredito_id;
+                        c.credito_tipocreditoid=t.tipocredito_id
+                    AND 
+                        c.credito_estado='Activo';
                 ");
                 $resultadoaux = $con->getResultado();
                 $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
                     $con->consulta("
                         SELECT 
-                            creditomovimiento_saldo,creditomovimiento_sigfechapago
+                            creditomovimiento_saldo,creditomovimiento_fecha
                         FROM 
                             tab_credito_movimiento 
                         WHERE
@@ -279,79 +280,104 @@
                 $cuota=round((($monto)*($arriba/$abajo)),2);
                 echo $cuota;
              break;
-             case 'addsol'://no borrar, se utiliza en solicitud de credito
 
-                
-                 $con->consulta("BEGIN");
+             case 'addsol'://no borrar, se utiliza en solicitud de credito
+                $con->consulta("BEGIN");
                 try{
-                   $con->consulta("INSERT INTO tab_solicitud_credito(
-                        solicitudcredito_sexo,
-                        solicitudcredito_telefonofijo,
-                        solicitudcredito_telefonocelular,
-                        solicitudcredito_jefeinmediato,
-                        solicitudcredito_tiempotrabajo,
-                        solicitudcredito_puesto,
-                        solicitudcredito_telefonotrabajo,
-                        solicitudcredito_nombreconyuge,
-                        solicitudcredito_sexoconyuge,
-                        solicitudcredito_duiconyuge,
-                        solicitudcredito_nitconyuge,
-                        solicitudcredito_fechanacimientoconyuge,
-                        solicitudcredito_profesionoficioconyuge,
-                        solicitudcredito_direccionconyuge,
-                        solicitudcredito_estadocivilconyuge,
-                        solicitudcredito_telefonofijoconyuge,
-                        solicitudcredito_telefonocelularconyuge,
-                        solicitudcredito_lugartrabajoconyuge,
-                        solicitudcredito_direcciontrabajoconyuge,
-                        solicitudcredito_sueldomensual,
-                        solicitudcredito_otrosingresos,
-                        solicitudcredito_totalingresos,
-                        solicitudcredito_gastovida,
-                        solicitudcredito_pagodeudas,
-                        solicitudcredito_otrosegresos,
-                        solicitudcredito_totalegresos,
-                        solicitudcredito_nombrereferencia,
-                        solicitudcredito_direccionreferencia,
-                        solicitudcredito_telefonofijoreferencia,
-                        solicitudcredito_telefonocelularreferencia,
-                        solicitudcredito_lugartrabajoreferencia,
-                        solicitudcredito_direcciontrabajoreferencia,
-                        solicitudcredito_asociadoid) VALUES(
-                        '".$_POST['sex']."',
-                        '".$_POST['tel']."',
-                        '".$_POST['cel']."',
-                        '".$_POST['jefe']."',
-                        '".$_POST['timet']."',
-                        '".$_POST['pues']."',
-                        '".$_POST['telt']."',
-                        '".$_POST['nomc']."',
-                        '".$_POST['sexc']."',
-                        '".$_POST['duic']."',
-                        '".$_POST['nitc']."',
-                        '".$_POST['fecc']."',
-                        '".$_POST['proc']."',
-                        '".$_POST['dirc']."',
-                        '".$_POST['estc']."',
-                        '".$_POST['telc']."',
-                        '".$_POST['celc']."',
-                        '".$_POST['lugc']."',
-                        '".$_POST['dirtc']."',
-                        ".$_POST['suel'].",
-                        ".$_POST['otroi'].",
-                        ".$_POST['toti'].",
-                        ".$_POST['gasv'].",
-                        ".$_POST['pagd'].",
-                        ".$_POST['otroe'].",
-                        ".$_POST['tote'].",
-                        '".$_POST['nomr']."',
-                        '".$_POST['dirr']."',
-                        '".$_POST['telr']."',
-                        '".$_POST['celr']."',
-                        '".$_POST['lugtr']."',
-                        '".$_POST['dirtr']."',
-                        ".$_POST['idid']."
-                        )");
+                    $con->consulta(
+                        "
+                            INSERT INTO 
+                                tab_solicitud_credito(
+                                    solicitudcredito_sexo,
+                                    solicitudcredito_telefonofijo,
+                                    solicitudcredito_telefonocelular,
+                                    solicitudcredito_jefeinmediato,
+                                    solicitudcredito_tiempotrabajo,
+                                    solicitudcredito_puesto,
+                                    solicitudcredito_telefonotrabajo,
+                                    solicitudcredito_nombreconyuge,
+                                    solicitudcredito_sexoconyuge,
+                                    solicitudcredito_duiconyuge,
+                                    solicitudcredito_nitconyuge,
+                                    solicitudcredito_fechanacimientoconyuge,
+                                    solicitudcredito_profesionoficioconyuge,
+                                    solicitudcredito_direccionconyuge,
+                                    solicitudcredito_estadocivilconyuge,
+                                    solicitudcredito_telefonofijoconyuge,
+                                    solicitudcredito_telefonocelularconyuge,
+                                    solicitudcredito_lugartrabajoconyuge,
+                                    solicitudcredito_direcciontrabajoconyuge,
+                                    solicitudcredito_sueldomensual,
+                                    solicitudcredito_otrosingresos,
+                                    solicitudcredito_totalingresos,
+                                    solicitudcredito_gastovida,
+                                    solicitudcredito_pagodeudas,
+                                    solicitudcredito_otrosegresos,
+                                    solicitudcredito_totalegresos,
+
+                                    solicitudcredito_nombrereferencia,
+                                    solicitudcredito_direccionreferencia,
+                                    solicitudcredito_telefonofijoreferencia,
+                                    solicitudcredito_telefonocelularreferencia,
+                                    solicitudcredito_lugartrabajoreferencia,
+                                    solicitudcredito_direcciontrabajoreferencia,
+                                    
+                                    solicitudcredito_nombrereferencia_laboral, 
+                                    solicitudcredito_direccionreferencia_laboral, 
+                                    solicitudcredito_telefonofijoreferencia_laboral, 
+                                    solicitudcredito_telefonocelularreferencia_laboral, 
+                                    solicitudcredito_lugartrabajoreferencia_laboral, 
+                                    solicitudcredito_direcciontrabajoreferencia_laboral, 
+
+                                    solicitudcredito_asociadoid
+                                ) 
+                            VALUES
+                                (
+                                    '".$_POST['sex']."',
+                                    '".$_POST['tel']."',
+                                    '".$_POST['cel']."',
+                                    '".$_POST['jefe']."',
+                                    '".$_POST['timet']."',
+                                    '".$_POST['pues']."',
+                                    '".$_POST['telt']."',
+                                    '".$_POST['nomc']."',
+                                    '".$_POST['sexc']."',
+                                    '".$_POST['duic']."',
+                                    '".$_POST['nitc']."',
+                                    '".$_POST['fecc']."',
+                                    '".$_POST['proc']."',
+                                    '".$_POST['dirc']."',
+                                    '".$_POST['estc']."',
+                                    '".$_POST['telc']."',
+                                    '".$_POST['celc']."',
+                                    '".$_POST['lugc']."',
+                                    '".$_POST['dirtc']."',
+                                    ".$_POST['suel'].",
+                                    ".$_POST['otroi'].",
+                                    ".$_POST['toti'].",
+                                    ".$_POST['gasv'].",
+                                    ".$_POST['pagd'].",
+                                    ".$_POST['otroe'].",
+                                    ".$_POST['tote'].",
+                                    
+                                    '".$_POST['nomr']."',
+                                    '".$_POST['dirr']."',
+                                    '".$_POST['telr']."',
+                                    '".$_POST['celr']."',
+                                    '".$_POST['lugtr']."',
+                                    '".$_POST['dirtr']."',
+
+                                    '".$_POST['nomrlab']."',
+                                    '".$_POST['dirrlab']."',
+                                    '".$_POST['telrlab']."',
+                                    '".$_POST['celrlab']."',
+                                    '".$_POST['lugtrlab']."',
+                                    '".$_POST['dirtrlab']."',
+
+                                    ".$_POST['idid']."
+                                )
+                        "
+                    );
 
                     $rs = mysql_query("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
                         if ($row = mysql_fetch_row($rs)) {
@@ -382,15 +408,125 @@
                             }
 
                         $con->consulta('COMMIT');
-                 }catch(Exception $e){
+                }catch(Exception $e){
                     $con->consulta('ROLLBACK');
                     echo 'Error al guardar: hola',$e->getMessage(),"\n";
                 }
-            if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+                if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
+                break;
 
-             break;
-             case 'getjsontabla3':// no borrar, se utiliza en solicutd de credito
-            $con->consulta("SELECT asociado_nombre,asociado_dui,credito_monto,credito_estado,tipocredito_nombre FROM tab_asociado, tab_credito, tab_tipo_credito, tab_solicitud_credito WHERE tipocredito_id=credito_tipocreditoid and credito_solicitudcreditoid=solicitudcredito_id and solicitudcredito_asociadoid=asociado_id");
+            case 'active':
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+                $con->consulta("BEGIN");
+                try{
+                    $con->consulta(
+                        "
+                            UPDATE 
+                                tab_solicitud_credito 
+                            SET 
+                                solicitudcredito_fechasesion ='".$_POST['fecses']."',
+                                solicitudcredito_numacta =".$_POST['nacta'].",
+                                solicitudcredito_numpunto ='".$_POST['npunto']."',
+                                solicitudcredito_numrefcre ='".$_POST['nrefcre']."'
+                            WHERE 
+                                solicitudcredito_id=".$_POST['selfid'].";
+                        "
+                    );
+
+                    $con->consulta(
+                        "
+                            UPDATE 
+                                tab_credito 
+                            SET 
+                                credito_estado = 'Activo'
+                            WHERE 
+                                credito_id=".$_POST['creid1'].";
+                        "
+                    );
+                    
+                    
+                    $con->consulta(
+                        "
+                            INSERT INTO
+                                tab_credito_movimiento(
+                                    creditomovimiento_concepto,
+                                    creditomovimiento_fecha,
+                                    creditomovimiento_deposito,
+                                    creditomovimiento_retiro,
+                                    creditomovimiento_interes,
+                                    creditomovimiento_capital,
+                                    creditomovimiento_saldo,
+                                    creditomovimiento_creditoid  
+                                )
+                            VALUES
+                                (
+                                    'Registro inicial del credito',
+                                    '".$_POST['fecses']."',
+                                    0.00,
+                                    ".$_POST['cremon1'].",
+                                    0.00,
+                                    0.00,
+                                    ".$_POST['cremon1'].",
+                                    ".$_POST['creid1']."
+                                );
+                        "
+                    );
+
+                    
+                    $con->consulta("COMMIT");
+                }catch(Exception $e){
+                    $con->consulta('ROLLBACK');
+                    echo 'Error al guardar: ',$e->getMessage(),"\n";
+                }
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
+            break;
+
+            case 'delsol':
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+                $con->consulta("
+                    DELETE FROM 
+                        ".$nombretabla." 
+                    WHERE 
+                        credito_id='".$_POST['creid2']."';
+                ");
+                $con->consulta("
+                    DELETE FROM 
+                        tab_solicitud_credito 
+                    WHERE 
+                        solicitudcredito_id='".$_POST['selfid2']."';
+                ");
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+                if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
+                break;  
+
+            case 'getjsontabla3':// no borrar, se utiliza en solicutd de credito
+                $con->consulta(
+                    "
+                        SELECT 
+                            solicitudcredito_id,
+                            asociado_nombre,
+                            asociado_dui,
+                            asociado_nit,
+                            credito_id,
+                            credito_monto,
+                            credito_estado,
+                            tipocredito_nombre 
+                        FROM 
+                            tab_asociado, 
+                            tab_credito, 
+                            tab_tipo_credito, 
+                            tab_solicitud_credito 
+                        WHERE 
+                            tipocredito_id=credito_tipocreditoid 
+                        and 
+                            credito_solicitudcreditoid=solicitudcredito_id 
+                        and 
+                            solicitudcredito_asociadoid=asociado_id
+                        and 
+                            credito_estado != 'Activo';
+                    "
+                );
             $i=0;$salida=array();
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
                 $salida[$i]=$fila;

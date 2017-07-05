@@ -95,7 +95,7 @@ $('#fec').pickadate({
 			        		$('#tabla1').bootstrapTable('refresh',{url:'php/Capital.php?acc=calcs'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
 			        		//document.getElementById("buscar1").focus();
 			        		$('#oculto').show();
-							$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
+							//$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
 		        		//}
 		        		//else{
 		        		//	alert('este'+responseText);

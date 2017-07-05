@@ -5,7 +5,7 @@
     date_default_timezone_set('America/El_Salvador'); 
     $nombretabla = 'tab_capital';/*CAMBIAR EL NOMBRE DE LA TABLA SEGUN LA BASE DE DATOS****************************************/
     if(isset($_GET['acc'])){$_POST['acc']=$_GET['acc'];}
-	switch ($_POST['acc']) {
+	switch ($_POST['acc']){
 		case 'set':
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("INSERT INTO 
@@ -96,6 +96,7 @@
                 echo '0.00';
             }
             break; 
+
             case 'calc':
                 $i=0;
                 $salida=array();
@@ -131,72 +132,80 @@
                     $fila[1]=$amortizacion;
                     $fila[2]=$inter;
                     $fila[3]=$monto;
-                     $con->consulta("INSERT INTO 
-                                tab_calculo (
-                                 calculos_id,
-                                calculos_cuota,
-                                calculos_amortizacion,
-                                calculos_intereses,
-                                calculos_monto
-                            ) 
-                            VALUES('".getConcepto($fecd,$fecm,$fecy)." || Cuota #".$i."',
-                                ".$cuota.",
-                                ".$amortizacion.",
-                                ".$inter.",
-                                ".$monto."
-                                );
-                        ");
-                    $x0+=$fila[0];
-                    $x1+=$fila[1];
-                    $x2+=$fila[2];
-                   if($fecm==12)
-                   {
-                        $fecm=1;
-                        $fecy++;
-                   }
-                   else
-                   {
-                        $fecm++;
-                   }
-                }
-                //$i++;
-                $x3+=$x1;
-                $x3+=$x2;
-                $con->consulta("INSERT INTO 
-                                tab_calculo (
+                    $con->consulta("
+                        INSERT INTO 
+                            tab_calculo (
                                 calculos_id,
                                 calculos_cuota,
                                 calculos_amortizacion,
                                 calculos_intereses,
                                 calculos_monto
                             ) 
-                            VALUES(
-                                'Totales',
-                                ".$x0.",
-                                ".$x1.",
-                                ".$x2.",
-                                ".$x3."
-                                );
-                        ");
-            break; 
+                        VALUES(
+                            '".getConcepto($fecd,$fecm,$fecy)." || Cuota #".$i."',
+                            ".$cuota.",
+                            ".$amortizacion.",
+                            ".$inter.",
+                            ".$monto."
+                        );
+                    ");
+                    $x0+=$fila[0];
+                    $x1+=$fila[1];
+                    $x2+=$fila[2];
+                    if($fecm==12)
+                    {
+                        $fecm=1;
+                        $fecy++;
+                    }
+                    else
+                    {
+                        $fecm++;
+                    }
+                }
+                //$i++;
+                $x3+=$x1;
+                $x3+=$x2;
+                $con->consulta("
+                    INSERT INTO 
+                        tab_calculo (
+                        calculos_id,
+                        calculos_cuota,
+                        calculos_amortizacion,
+                        calculos_intereses,
+                        calculos_monto
+                    ) 
+                    VALUES(
+                        'Totales',
+                        ".$x0.",
+                        ".$x1.",
+                        ".$x2.",
+                        ".$x3."
+                    );
+                ");
+                break; 
+
             case 'calcs':
-            $con->consulta("
-                SELECT 
-                    * 
-                FROM 
-                    tab_calculo 
-                ORDER by calculos_correla asc
-            ");
-            $i=0;$salida=array();
-            while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
-                $salida[$i]=$fila;
-                $i++;
-            }
-            echo json_encode($salida);
-            break;         
+                $con->consulta(
+                    "
+                        SELECT 
+                            * 
+                        FROM 
+                            tab_calculo 
+                        ORDER by 
+                            calculos_correla 
+                        asc
+                    ";
+                );
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+                break;         
     }
-     function getConcepto($dia, $mes, $anio){
-       
+
+    function getConcepto($dia, $mes, $anio){
        $mes++;
        if($mes>12){
             $mes=1;
@@ -254,8 +263,7 @@
             case '12':
                 $mes=$dia.'/Dic/'.$anio;
                 break;
-        }
-            
+        }   
         return $mes;
     }
 	//$con->limpiarConsulta();

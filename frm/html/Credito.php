@@ -1,10 +1,11 @@
+<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 <!-- INICIA EL BLOQUE LA TABLA -->
 <div class="container">
 	<h4 class="center teal-text">Credito</h4>
 	<div class="row">
 		<div class="col s12">
 			<!-- MODIFICAR LA data-url SEGUN SEA EL CASO DEL FORMULARIO QUE SE ESTE TRABAJANDO -->
-			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla"lick-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
+			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla" click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
 				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter2" data-events="operateEvents">Acciones</th>
@@ -72,11 +73,10 @@
 				</div>
 				<div class="input-field col s12">
 				    <select class="" id="est" required  autocomplete="off">
-				    	<option value="0" disabled >Seleccionar</option>
-				    	<option value="En espera" selected>En espera</option>
-				    	<option value="Activada" selected>Activo</option>
-				    	<option value="Congelada">Congelado</option>
-				    	<option value="Cerrada">Cerrado</option>
+				    	<option value="En espera">En espera</option>
+				    	<option value="Activo">Activo</option>
+				    	<option value="Congelado">Congelado</option>
+				    	<option value="Cerrado">Cerrado</option>
 				    </select>
 				    <label for="est" class="noactive">Estados</label>
 				</div>
