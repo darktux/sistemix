@@ -19,22 +19,33 @@
 				<label id="linteres" for="interes">Interes anual (%)</label>
 	        </div>
 	        <div class="input-field col s2"> 
-				<input id="fec" name="fec" type="date" class="datepicker" required  autofocus="true">
-				<label id="lfec" for="fec">Fecha inicio</label>
+				<input  name="fec" type="date"  required  autofocus="true">
+				<label id="lfec" class="active" for="fec">Fecha inicio</label>
 	        </div>
 	         <div class="input-field col s2"> 
 				<button class="waves-effect waves-light btn" type="submit">Calcular</button>
 				<input type="hidden" name="acc" value="calc">
 				
 	        </div>
-	        <div class="input-field col s2" id="oculto" hidden="true"> 
-				
-				<a   class="print ml10 btn" href="html/reporteCalculadora.php" target="_blank" title="imprimir">
-                	<i class="material-icons">print</i> 
-           		</a>
-	        </div>
+	       
 	        
 		</div>	
+		 <div class="row">
+		    <div class="col s12">
+		      <div class="row" id="oculto" hidden="true">
+		        <div class="input-field col s6">
+		          <i class="material-icons prefix teal-text">person_pin</i>
+		          <input type="text" id="autocomplete-input" class="autocomplete">
+		          <label for="autocomplete-input">Asociado</label>
+		        </div>
+		        <div class="input-field col s2" > 
+					<button  class="print ml10 btn" onclick="imprimirReporte()" title="imprimir">
+	                	<i class="material-icons">print</i> 
+	           		</button>
+	        	</div>
+		      </div>
+		    </div>
+		  </div>
 	</form>
 	<div class="row">
 		<link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
@@ -95,16 +106,30 @@ $('#fec').pickadate({
 			        		$('#tabla1').bootstrapTable('refresh',{url:'php/Capital.php?acc=calcs'});/*CAMBIAR LA RUTA DE ACUERDO AL FORMULARIO A TRABAJAR ************/
 			        		//document.getElementById("buscar1").focus();
 			        		$('#oculto').show();
-							//$('html,body').animate({scrollTop:$("#buscar1").offset().top},{duration:"slow"});
-		        		//}
-		        		//else{
-		        		//	alert('este'+responseText);
-			        	//}
+			        		llenarAutocomplete(responseText);
 		    	    }
 		        });
 		}	
 	);
 	/*FINALIZA LA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
-	
+	function llenarAutocomplete(responseText)
+	{
+		
+		var aux= $.parseJSON(responseText);
+		obj = {};
+		for (var i = 0; i < aux.length; i++) {
+	         console.log(aux[i].asociado_nombre);
+	         obj[aux[i].asociado_nombre] = null; 
+		}
+					      
+		$('input.autocomplete').autocomplete({
+	          data: obj,
+	          limit: 5, // The max amount of results that can be shown at once. Default: Infinity.
+		 });
+	}
+	function imprimirReporte()
+	{ 
+		window.open('html/reporteCalculadora.php?idc='+$('#autocomplete-input').val()+'&mon='+$('#monto').val()+'&pla='+$('#tiempo').val()+'&int='+$('#interes').val(),'_blank');
+	}
 	/*FINALIZA EL BLOQUE DE LOS EVENTOS*/
 </script>

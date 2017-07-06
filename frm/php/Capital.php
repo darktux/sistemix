@@ -182,6 +182,24 @@
                         ".$x3."
                     );
                 ");
+
+                 $con->consulta(
+                    "
+                        SELECT 
+                            asociado_nombre
+                        FROM 
+                            tab_asociado
+                        WHERE
+                            asociado_estado LIKE 'Activo' 
+                    "
+                );
+                $i=0;$salida=array();
+                while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                    $salida[$i]=$fila;
+                    $i++;
+                }
+                echo json_encode($salida);
+
                 break; 
 
             case 'calcs':
@@ -194,7 +212,7 @@
                         ORDER by 
                             calculos_correla 
                         asc
-                    ";
+                    "
                 );
                 $i=0;$salida=array();
                 while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       

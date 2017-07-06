@@ -8,12 +8,13 @@
     date_default_timezone_set('America/El_Salvador');
     $loc_es=setlocale(LC_TIME,'es_ES.UTF-8','es_Es','es');
     $idc=$_GET['idc'];
+    $mon=$_GET['mon'];
+    $pla=$_GET['pla'];
+    $int=$_GET['int'];
   //  $idm=$_GET['idm'];
 
     //Obtengo el correlativo del socio
-    $v=split('-', $idc);
-    $corr=$v[2];
-    $tmonto=0;
+   
     
     //$pdf2 = new PDF();
     $pdf = new PDF();
@@ -40,8 +41,16 @@
                     $i++;
                 }
    // $i=0;
-
+  
+   
+  
     $pdf->SetFont('Arial','B',10);
+    $pdf->Cell(150,5,utf8_decode("ASOCIADO:  ".$idc),0,0, 'L');
+    $pdf->Ln();
+    $pdf->Cell(50,5,utf8_decode("MONTO: $".$mon),0,0, 'L');
+    $pdf->Cell(50,5,utf8_decode("PLAZO: ".$pla.' MESES'),0,0, 'L');
+    $pdf->Cell(50,5,utf8_decode("INTERÉS: ".$int."%"),0,0, 'L');
+    $pdf->Ln(6);
     $pdf->Cell(45,5,utf8_decode('Fecha || Cuota #'),1,0, 'C');
     $pdf->Cell(35,5,utf8_decode('Cuota Mensual ($)'),1,0, 'C');
     $pdf->Cell(35,5,utf8_decode('Amortización ($)'),1,0, 'C');
