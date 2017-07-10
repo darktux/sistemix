@@ -1,5 +1,5 @@
 
-<!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL BUSCAR -->
+<!-- INICIA EL BLOQUE DEL BOTON PARA EL MODAL BUSCAR --> 
 <div class="fixed-action-btn">
 	<a class="modal-trigger btn-floating waves-effect waves-light btn-large cyan darken-1 tooltipped" href="#modal1" data-position="top" data-tooltip="Buscar asociado"><i class="large material-icons">search</i></a>
 </div>
@@ -8,7 +8,7 @@
 <link href="../css/bootstrap-table.css" type="text/css" rel="stylesheet" media="screen,projection"/> 
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content" id="modalcontent">
-		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL **********************************************************************************************************-->
+		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************-->
 		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla2" data-click-to-select="false"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
 		    <thead>
 			    <tr>
@@ -18,14 +18,13 @@
 		            <th data-field="asociado_nombre" data-align="center">Nombre</th>
 		            <th data-field="asociado_dui" data-align="center">DUI</th>
 		            <th data-field="asociado_nit" data-align="center">NIT</th>
-		            <!-- FINALIZAN ELEMENTOS DE LA TABLA ************************************************************************************************************-->
+		            <!-- FINALIZAN ELEMENTOS DE LA TABLA *********************************************************************************************-->
 			    </tr>
 		    </thead>
 		</table>
 	</div>
 	<div class="modal-footer">
-<!-- 		<button class="waves-effect waves-light btn" type="submit">Guardar</button>
- -->		<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+	<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
 	</div>
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL BUSCAR -->
@@ -692,7 +691,7 @@
 	/*INICIA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 	function operateFormatter1(value, row, index) {
         return [
-            '<a class="new ml10" href="javascript:void(0)" title="Nueva solicitud de crédito">',
+            '<a class="new ml10" href="javascript:void(0)" target="_blank" title="Nueva solicitud de crédito">',
                 '<i class="material-icons">add</i>',
             '</a>'
         ].join('');
@@ -776,14 +775,18 @@
 /*INICIA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .new': function (e, value, row, index) {
         	 /********************************************************************************************************/
-        	$("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
-        	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
-        	//$('#lnom').addClass("active");
-        	$('ul.tabs').tabs();
-			$('.indicator').addClass('teal col s2');
-        	$('ul.tabs').tabs('select_tab', 'personales');
-        	//alert("jajajaja");
-        	$('#modal2').modal('open');
+        	var id=JSON.stringify(row.asociado_id).replace(/"/gi,'');
+        	var name=JSON.stringify(row.asociado_nombre).replace(/"/gi,'');
+        	window.open("html/datosSC.php?id="+id+"&name="+name, '_blank');
+        	$('#modal1').modal('close');
+   //      	$("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));
+   //      	$("#nom").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
+   //      	//$('#lnom').addClass("active");
+   //      	$('ul.tabs').tabs();
+			// $('.indicator').addClass('teal col s2');
+   //      	$('ul.tabs').tabs('select_tab', 'personales');
+   //      	//alert("jajajaja");
+   //      	$('#modal2').modal('open');
         	
         	
         },
