@@ -329,7 +329,8 @@
                                     solicitudcredito_lugartrabajoreferencia_laboral, 
                                     solicitudcredito_direcciontrabajoreferencia_laboral, 
 
-                                    solicitudcredito_asociadoid
+                                    solicitudcredito_asociadoid,
+                                    solicitudcredito_tipopago
                                 ) 
                             VALUES
                                 (
@@ -374,7 +375,8 @@
                                     '".$_POST['lugtrlab']."',
                                     '".$_POST['dirtrlab']."',
 
-                                    ".$_POST['idid']."
+                                    '".$_POST['idid']."',
+                                    '".$_POST['tippag']."'
                                 )
                         "
                     );

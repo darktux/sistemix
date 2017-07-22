@@ -26,6 +26,7 @@
 				    <li class="tab col s2 " ><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" ><i class="material-icons">people</i> </a></li>
 				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales"><i class="material-icons">domain</i> </a></li>
 				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias" href="#referencias"><i class="material-icons">people_outline</i> </a></li>
+				    <li class="tab col s2 "><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Co-deudores" href="#codeudor"><i class="material-icons">device_hub</i> </a></li>
 				    <li class="tab col s2 "><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito"><i class="material-icons">monetization_on</i> </a></li>
 	  			</ul>
 				
@@ -338,6 +339,21 @@
 							<input type="date" name="fecfin" id="fecfin" readonly  required>
 							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
 						</div>
+						<div class="row">
+							<div class="input-field col s3">
+								<label for="tippag">Tipo de Pago</label> 
+							</div>
+							<div class="input-field inline col s3">
+									<input class="with-gap" name="tippag" type="radio" id="vent" value="01" checked />
+									<label for="vent">Ventanilla</label> 	
+							</div>
+							<div class="input-field inline col s3">
+									<input class="with-gap" name="tippag" type="radio" id="plan" value="02" />	
+									<label for="plan">Planilla</label>
+							</div>
+							<br><br><br>
+						</div>
+						<br><br>
 						<div class="input-field col s12">
 							<select class="" id="est" name="est">
 								<option value="0" disabled >Seleccionar</option>
