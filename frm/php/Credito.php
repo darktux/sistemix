@@ -407,6 +407,70 @@
                                 )";
                                 //echo $sql;
                                 $con->consulta($sql);
+
+                                //Agrego codeudores
+                                $sql = "INSERT INTO tab_codeudor(
+                                codeudor_nombre, 
+                                codeudor_dui,
+                                codeudor_nit,
+                                codeudor_edad,
+                                codeudor_profesionuoficio,
+                                codeudor_direccion,
+                                codeudor_estadocivil,
+                                codeudor_telefono,
+                                codeudor_celular,
+                                codeudor_jefeinmediato,
+                                codeudor_tiempotrabajo,
+                                codeudor_puesto,
+                                codeudor_salario,
+                                codeudor_telefonotrabajo,
+                                codeudor_email,
+                                codeudor_otrosingresos,
+                                codeudor_gastovida,
+                                codeudor_pagodeudas,
+                                codeudor_otrosegresos,
+                                codeudor_nombreref1,
+                                codeudor_direccionref1,
+                                codeudor_telefonoref1,
+                                codeudor_celularref1,
+                                codeudor_lugartrabajoref1,
+                                codeudor_nombreref2,
+                                codeudor_direccionref2,
+                                codeudor_telefonoref2,
+                                codeudor_celularref2,
+                                codeudor_lugartrabajoref2) 
+                                VALUES (
+                                '".$_POST['nomco']."',
+                                '".$_POST['duico']."',
+                                '".$_POST['nitco']."',
+                                '".$_POST['edadco']."',
+                                '".$_POST['prouofco']."',
+                                '".$_POST['dirco']."',
+                                '".$_POST['estcco']."',
+                                '".$_POST['telco']."',
+                                '".$_POST['celco']."',
+                                '".$_POST['nomjefeco']."',
+                                '".$_POST['tietraco']."',
+                                '".$_POST['puestoco']."',
+                                '".$_POST['suelmenco']."',
+                                '".$_POST['teltraco']."',
+                                '".$_POST['emailco']."',
+                                '".$_POST['otringco']."',
+                                '".$_POST['gastvidco']."',
+                                '".$_POST['pagdeuco']."',
+                                '".$_POST['otregrco']."',
+                                '".$_POST['nomrco1']."',
+                                '".$_POST['dirrco1']."',
+                                '".$_POST['telrco1']."',
+                                '".$_POST['celrco1']."',
+                                '".$_POST['lugtrco1']."',
+                                '".$_POST['nomrco2']."',
+                                '".$_POST['dirrco2']."',
+                                '".$_POST['telrco2']."',
+                                '".$_POST['celrco2']."',
+                                '".$_POST['lugtrco2']."'
+                                )";
+                                $con->consulta($sql);
                             }
 
                         $con->consulta('COMMIT');
