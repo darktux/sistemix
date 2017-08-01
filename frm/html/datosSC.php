@@ -340,34 +340,34 @@
 					<div class="row">
 						<h6 class="center"><strong>Ingresos</strong></h6>
 						<div class="input-field col s4"> 
-				          	<input id="suelmenco" name="suelmenco" type="number" value="0.00" min="0.00">
+				          	<input id="suelmenco" name="suelmenco" onkeyup="sumi2()" type="number" value="0.00" min="0.00">
 				          	<label for="suelmenco">Sueldo mensual ($)</label>
         				</div>
         				<div class="input-field col s4"> 
-				          	<input id="otringco" name="otringco" type="number" value="0.00" min="0.00">
+				          	<input id="otringco" name="otringco" onchange="sumi2()" type="number" value="0.00" min="0.00">
 				          	<label for="otringco">Otros ingresos ($)</label>
         				</div>
         				<div class="input-field col s4"> 
-				          	<input id="totingco" name="totingco" type="text" type="number" value="0.00" min="0.00">
+				          	<input id="totingco" name="totingco" type="text" type="number" value="0.00" min="0.00" readonly>
 				          	<label for="totingco">Total ingresos ($)</label>
         				</div>
 					</div>
 					<div class="row">
 						<h6 class="center"><strong>Egresos</strong></h6>
 						<div class="input-field col s3"> 
-				          	<input id="gastvidco" name="gastvidco" type="number" value="0.00" min="0.00">
+				          	<input id="gastvidco" name="gastvidco" onchange="sume2()" type="number" value="0.00" min="0.00">
 				          	<label for="gastvidco">Gasto de vida ($)</label>
         				</div>
         				<div class="input-field col s3"> 
-				          	<input id="pagdeuco" name="pagdeuco" type="number" value="0.00" min="0.00">
+				          	<input id="pagdeuco" name="pagdeuco" onchange="sume2()" type="number" value="0.00" min="0.00">
 				          	<label for="pagdeuco">Pago de deudas ($)</label>
         				</div>
         				<div class="input-field col s3"> 
-				          	<input id="otregrco" name="otregrco" type="number" value="0.00" min="0.00">
+				          	<input id="otregrco" name="otregrco" onchange="sume2()" type="number" value="0.00" min="0.00">
 				          	<label for="otregrco">Otros egresos ($)</label>
         				</div>
         				<div class="input-field col s3"> 
-				          	<input id="totegrco" name="totegrco" type="number" value="0.00" min="0.00">
+				          	<input id="totegrco" name="totegrco" type="number" value="0.00" min="0.00" readonly>
 				          	<label for="totegrco">Total egresos ($)</label>
         				</div>
 					</div>
@@ -664,6 +664,17 @@
 		function sume()
 		{
 			$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
+		}
+
+		function sumi2()
+		{
+			//alert('hi bitch');
+			$('#totingco').val(parseFloat($('#suelmenco').val())+parseFloat($('#otringco').val()));
+		}
+
+		function sume2()
+		{
+			$('#totegrco').val(parseFloat($('#gastvidco').val())+parseFloat($('#pagdeuco').val())+parseFloat($('#otregrco').val()));
 		}
 
 
