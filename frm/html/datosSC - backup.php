@@ -31,36 +31,34 @@
 	  			</ul>
 				
 				<div id="personales" class="col s12 white swipeable">
-					<form id="formPersonales">
-						<div class="row">
-							<div class="input-field col s6"> 
-					          <input id="nom" name="nom" type="text" value="<?php echo $_GET['name']; ?>" readonly>
-					          <label id="lnom" class="active"  for="nom">Nombre completo</label>
-	        				</div>
-							<div class="input-field col s1">
-								<label for="sex">Sexo</label> 
-							</div>
-							<div class="input-field inline col s2">
-									<input class="with-gap" name="sex" type="radio" id="mas" value="M" checked />
-									<label for="mas">Masculino</label> 	
-							</div>
-							<div class="input-field inline col s3">
-									<input class="with-gap" name="sex" type="radio" id="fem" value="F" />	
-									<label for="fem">Femenino</label>
-							</div>
-						</div>	
-						<div class="row">
-							<div class="input-field col s6">
-								<input type="text" name="tel" id="tel" >
-								<label for="tel">Tel&eacute;fono fijo</label>
-							</div>
-							<div class="input-field col s6">
-								<input type="text" name="cel" id="cel" >
-								<label for="cel">Tel&eacute;fono celular</label>
-							</div>
+					<div class="row">
+						<div class="input-field col s6"> 
+				          <input id="nom" name="nom" type="text" value="<?php echo $_GET['name']; ?>" readonly>
+				          <label id="lnom" class="active"  for="nom">Nombre completo</label>
+        				</div>
+						<div class="input-field col s1">
+							<label for="sex">Sexo</label> 
 						</div>
-						<button class="waves-effect waves-light btn" type="submit">Siguiente (1/6)</button>	
-					</form>				
+						<div class="input-field inline col s2">
+								<input class="with-gap" name="sex" type="radio" id="mas" value="M" checked />
+								<label for="mas">Masculino</label> 	
+						</div>
+						<div class="input-field inline col s3">
+								<input class="with-gap" name="sex" type="radio" id="fem" value="F" />	
+								<label for="fem">Femenino</label>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="input-field col s6">
+							<input type="text" name="tel" id="tel" >
+							<label for="tel">Tel&eacute;fono fijo</label>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" name="cel" id="cel" >
+							<label for="cel">Tel&eacute;fono celular</label>
+						</div>
+					</div>
+					<button class="btn">Siguiente</button>					
 				</div>
 
 				<div id="familiares" class="col s12 white swipeable">
@@ -556,26 +554,6 @@
 	        		$('#tipcreid').material_select();
 		        }
 		    });
-		});
-
-
-		//Envio de formularios
-		$("#formPersonales").on("submit",function(e){
-			e.preventDefault();
-			var formData = new FormData(document.getElementById("formPersonales"));
-			formData.append("acc", "addsol");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(responseText){
-					alert(responseText);
-				}
-			});
 		});
 
 

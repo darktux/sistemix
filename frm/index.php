@@ -115,13 +115,7 @@
                         <h5 class="white-text">COAGESALUD de R.L.</h5>
                         <p class="grey-text text-lighten-4">Asociación Cooperativa de Ahorro y Crédito de Empleados del Ministerio de Salud Región Paracentral de Responsabilidad Limitada</p>
                     </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Configuración</h5>
-                        <ul>
-                            <li><a class="white-text csuc" >Sucursal</a></li>
-                            <li><a class="white-text ccap" >Capital</a></li>
-                        </ul>
-                    </div>
+            
                     <div class="col l3 s12">
                         <h5 class="white-text acde">Acerca de</h5>
                     </div>
