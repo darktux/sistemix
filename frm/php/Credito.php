@@ -571,13 +571,16 @@
                     "
                         SELECT 
                             solicitudcredito_id,
+                            solicitudcredito_tipopago,
+                            asociado_correlativo,
                             asociado_nombre,
                             asociado_dui,
                             asociado_nit,
                             credito_id,
                             credito_monto,
                             credito_estado,
-                            tipocredito_nombre 
+                            tipocredito_nombre,
+                            tipocredito_correlativo 
                         FROM 
                             tab_asociado, 
                             tab_credito, 

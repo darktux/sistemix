@@ -9,7 +9,7 @@
 <div id="modal1" class="modal modal-fixed-footer">
 	<div class="modal-content" id="modalcontent">
 		<h5>Buscar asociado</h5><!-- //TITULO DEL MODAL *************************************************************************************-->
-		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla2" data-click-to-select="false"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="3" data-page-list="[3,5,8,10,20,50,100]">
+		<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/Credito.php?acc=getjsontabla2" data-click-to-select="false"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,10,25,50,100]">
 		    <thead>
 			    <tr>
 			    	<th data-field="operate" data-align="center" data-formatter="operateFormatter1" data-events="operateEvents">Acciones</th>
@@ -57,7 +57,7 @@
 
 
 <!-- MODAL APROBACION DE ASOCIADO -->
-<div id="modal3" class="modal modal-fixed-footer">
+<div id="modal3" class="modal modal-fixed-footer"> 
 	<form class="col s12" id="formulario22" onsubmit="return submit22();">
 		<input id="selfid" name="selfid" type="hidden" value="">
 		<input id="cremon1" name="cremon1" type="hidden" value="">
@@ -86,7 +86,7 @@
 			</div>
 			<div class="row">
 					<div class="input-field col s6 m4">	
-					<input id="nrefcre" name="nrefcre" type="number" min="0">
+					<input id="nrefcre" name="nrefcre" type="text" readonly>
 					<label for="nrefcre" >N° de referencia del crédito</label>
 				</div>
 			</div>
@@ -234,13 +234,16 @@
         	$("#nomaprob").val(JSON.stringify(row.asociado_nombre).replace(/"/gi,''));
         	$("#duiaprob").val(JSON.stringify(row.asociado_dui).replace(/"/gi,''));
         	$("#nitaprob").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
-           
-            
+        
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$('select').material_select('destroy');
 		    $('select').material_select();
-		    //document.getElementById("cueid").setAttribute("readonly", "");
-        	//$('label').addClass("active");
+
+		    corrAso = JSON.stringify(row.asociado_correlativo).replace(/"/gi,'');
+		    corrTipCre = JSON.stringify(row.tipocredito_correlativo).replace(/"/gi,'');
+		    venOpla = JSON.stringify(row.solicitudcredito_tipopago).replace(/"/gi,'');
+		    $("#nrefcre").val(corrAso+"-"+corrTipCre+"-"+venOpla);
+
         	$('#modal3').modal('open');
         },
 /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
