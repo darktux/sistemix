@@ -541,8 +541,8 @@
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
 	function operateFormatter(value, row, index) {
         return [
-            '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
-                '<i class="material-icons">mode_edit</i>',
+            '<a class="aprob ml10" href="javascript:void(0)" title="Aprobar">',
+                '<i class="material-icons">check</i>',
             '</a>&nbsp;',
             '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
                 '<i class="material-icons">print</i>',
@@ -553,7 +553,7 @@
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .edit': function (e, value, row, index) {
+        'click .aprob': function (e, value, row, index) {
 
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
             $("#idid").val(JSON.stringify(row.asociado_id).replace(/"/gi,''));

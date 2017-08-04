@@ -200,7 +200,7 @@
 	/*INICIA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 	function operateFormatter1(value, row, index) {
         return [
-            '<a class="new ml10" href="javascript:void(0)" target="_blank" title="Nueva solicitud de crédito">',
+            '<a class="new ml10" href="javascript:void(0)" title="Nueva solicitud de crédito">',
                 '<i class="material-icons">add</i>',
             '</a>'
         ].join('');
@@ -209,7 +209,10 @@
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
-        	'&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+        	'&nbsp;<a class="aprob ml10" href="javascript:void(0)" title="Aprobar">',
+                '<i class="material-icons">check</i>',
+            '</a>',
+            '&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
             '</a>',
             '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
@@ -224,8 +227,8 @@
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
-/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
-        'click .edit': function (e, value, row, index) {
+/*INICIA ACCION DEL BOTON APROBAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .aprob': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
         	$("#formulario22")[0].reset();
         	$("#selfid").val(JSON.stringify(row.solicitudcredito_id).replace(/"/gi,''));
@@ -245,6 +248,12 @@
 		    $("#nrefcre").val(corrAso+"-"+corrTipCre+"-"+venOpla);
 
         	$('#modal3').modal('open');
+        },
+/*FINALIZA ACCION DEL BOTON APROBAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+        'click .edit': function (e, value, row, index) {
+        	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
+        	
         },
 /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
