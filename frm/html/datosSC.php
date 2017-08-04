@@ -31,7 +31,7 @@
 				<div id="personales" class="col s12 white swipeable">
 					<h3 class="flow-text center">Datos Personales</h3>
 					<form id="formPersonales">
-						<input id="idid" name="idid" type="hidden" value="<?php echo $_GET['id']; ?>">
+						<input id="idid" name="idid" type="hidden" value="<?php echo $_GET['idasol']; ?>">
 						<div class="row">
 							<div class="input-field col s6"> 
 					          <input id="nom" name="nom" type="text" value="<?php echo $_GET['name']; ?>" readonly>
@@ -52,11 +52,11 @@
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="text" name="tel" id="tel" >
-								<label for="tel">Tel&eacute;fono fijo</label>
+								<label class="inventado" for="tel">Tel&eacute;fono fijo</label>
 							</div>
 							<div class="input-field col s6">
 								<input type="text" name="cel" id="cel" required>
-								<label for="cel">Tel&eacute;fono celular</label>
+								<label class="inventado" for="cel">Tel&eacute;fono celular</label>
 							</div>
 						</div>
 						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (1/6)</button>	
@@ -69,7 +69,7 @@
 						<div class="row">
 							<div class="input-field col s6"> 
 					          <input id="nomc" name="nomc" type="text" class="validate" >
-					          <label for="nomc">Nombre cónyuge</label>
+					          <label class="inventado" for="nomc">Nombre cónyuge</label>
 	        				</div>
 							<div class="input-field col s1">
 								<label for="sexc">Sexo cónyuge</label> 
@@ -90,11 +90,11 @@
 							</div>
 							<div class="input-field col s3"> 
 						         <input id="duic" name="duic" type="text"  minlength="10" maxlength="10">
-						         <label for="duic">DUI cónyuge</label>
+						         <label class="inventado" for="duic">DUI cónyuge</label>
 	        				</div>
 							<div class="input-field col s3">
 								<input type="text" name="nitc" id="nitc" >
-								<label for="nitc">NIT cónyuge</label>
+								<label class="inventado" for="nitc">NIT cónyuge</label>
 							</div>
 							<div class="input-field col s3">
 								<select class="" id="estc" name="estc">
@@ -110,29 +110,29 @@
 						<div class="row">
 							<div class="input-field col s3">
 								<input type="text" name="telc" id="telc" >
-								<label for="telc">Tel&eacute;fono fijo cónyuge</label>
+								<label class="inventado" for="telc">Tel&eacute;fono fijo cónyuge</label>
 							</div>
 							<div class="input-field col s3">
 								<input type="text" name="celc" id="celc" >
-								<label for="celc">Tel&eacute;fono celular cónyuge</label>
+								<label class="inventado" for="celc">Tel&eacute;fono celular cónyuge</label>
 							</div>
 						    <div class="input-field col s3">
 								<input type="text" name="proc" id="proc" >
-								<label for="proc">Profesi&oacute;n u oficio cónyuge</label>
+								<label class="inventado" for="proc">Profesi&oacute;n u oficio cónyuge</label>
 							</div>
 							<div class="input-field col s3">
 								<textarea id="dirc" name="dirc" class="materialize-textarea"></textarea>
-								<label for="dirc">Direcci&oacute;n cónyuge</label>
+								<label class="inventado" for="dirc">Direcci&oacute;n cónyuge</label>
 						    </div>
 						</div>	
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="text" name="lugc" id="lugc">
-								<label for="lugc">Lugar de trabajo cónyuge</label>
+								<label class="inventado" for="lugc">Lugar de trabajo cónyuge</label>
 							</div>
 							<div class="input-field col s6">			  		
 					          	<input type="text" id="dirtc" name="dirtc"></input>
-					          	<label for="dirtc">Direcci&oacute;n de trabajo cónyuge</label>
+					          	<label class="inventado" for="dirtc">Direcci&oacute;n de trabajo cónyuge</label>
 						    </div>			    
 						</div>
 						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (2/6)</button>
@@ -145,19 +145,19 @@
 						<div class="row">
 							<div class="input-field col s3">
 								<input type="text" name="telt" id="telt">
-								<label for="telt">Tel&eacute;fono de trabajo</label>
+								<label class="inventado" for="telt">Tel&eacute;fono de trabajo</label>
 							</div>
 							<div class="input-field col s3">
 								<input type="text" name="jefe" id="jefe">
-								<label for="jefe">Nombre de jefe inmediato</label>
+								<label class="inventado" for="jefe">Nombre de jefe inmediato</label>
 							</div>
 							<div class="input-field col s3">
 								<input type="text" id="pues" name="pues"></input>
-								<label for="pues">Puesto de trabajo</label>
+								<label class="inventado" for="pues">Puesto de trabajo</label>
 							</div>
 							<div class="input-field col s3">
 								<input type="text" name="timet" id="timet">
-								<label for="timet">Tiempo de trabajo</label>
+								<label class="inventado" for="timet">Tiempo de trabajo</label>
 							</div>
 						</div>
 						<div class="row">
@@ -205,31 +205,31 @@
 		  				<div class="row">
 							<div class="input-field col s6"> 
 					          	<input id="nomr" name="nomr" type="text" class="validate">
-					          	<label for="nomr">Nombre referencia</label>
+					          	<label class="inventado" for="nomr">Nombre referencia</label>
 	        				</div>
 							<div class="input-field col s6">
 								<input type="text" id="dirr" name="dirr"></input>
-								<label for="dirr">Direcci&oacute;n de referencia</label>
+								<label class="inventado" for="dirr">Direcci&oacute;n de referencia</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="text" name="telr" id="telr">
-								<label for="telr">Tel&eacute;fono fijo de referencia</label>
+								<label class="inventado" for="telr">Tel&eacute;fono fijo de referencia</label>
 							</div>
 							<div class="input-field col s6">
 								<input type="text" name="celr" id="celr">
-								<label for="celr">Celular de referencia</label>
+								<label class="inventado" for="celr">Celular de referencia</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="text" id="lugtr" name="lugtr"></input>
-								<label for="lugtr">Lugar de trabajo de referencia</label>
+								<label class="inventado" for="lugtr">Lugar de trabajo de referencia</label>
 							</div>
 							<div class="input-field col s6">
 								<input type="text" id="dirtr" name="dirtr"></input>
-								<label for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
+								<label class="inventado" for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
 							</div>
 						</div>
 
@@ -238,31 +238,31 @@
 						<div class="row">
 							<div class="input-field col s6"> 
 					          	<input id="nomrlab" name="nomrlab" type="text" class="validate">
-					          	<label for="nomrlab">Nombre referencia</label>
+					          	<label class="inventado" for="nomrlab">Nombre referencia</label>
 	        				</div>
 							<div class="input-field col s6">
 								<input type="text" id="dirrlab" name="dirrlab"></input>
-								<label for="dirrlab">Direcci&oacute;n de referencia</label>
+								<label class="inventado" for="dirrlab">Direcci&oacute;n de referencia</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
 								<input type="text" name="telrlab" id="telrlab">
-								<label for="telrlab">Tel&eacute;fono fijo de referencia</label>
+								<label class="inventado" for="telrlab">Tel&eacute;fono fijo de referencia</label>
 							</div>
 							<div class="input-field col s6">
 								<input type="text" name="celrlab" id="celrlab">
-								<label for="celrlab">Celular de referencia</label>
+								<label class="inventado" for="celrlab">Celular de referencia</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
 								<textarea id="lugtrlab" name="lugtrlab" class="materialize-textarea"></textarea>
-								<label for="lugtrlab">Lugar de trabajo de referencia</label>
+								<label class="inventado" for="lugtrlab">Lugar de trabajo de referencia</label>
 							</div>
 							<div class="input-field col s6">
 								<textarea id="dirtrlab" name="dirtrlab" class="materialize-textarea"></textarea>
-								<label for="dirtrlab">Direcci&oacute;n de trabajo de referencia</label>
+								<label class="inventado" for="dirtrlab">Direcci&oacute;n de trabajo de referencia</label>
 							</div>
 						</div>
 						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (4/6)</button>
@@ -285,10 +285,10 @@
 							</div>
 							<div class="input-field col s3">
 								<input type="number" name="pla" onchange="calcular()" onkeyup="calcular()"  id="pla" min="0" required>
-								<label for="pla">Plazo del crédito (Meses)</label>
+								<label class="inventado" for="pla">Plazo del crédito (Meses)</label>
 							</div>
 							<div class="input-field col s3">
-								<input type="text" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00">
+								<input type="text" name="cuo" class="teal-text" id="cuo" readonly value="0.00">
 								<label for="cuo" class="active">Cuota a pagar ($)</label>
 							</div>
 						</div>
@@ -313,7 +313,7 @@
 								<label for="tippag">Tipo de Pago</label> 
 							</div>
 							<div class="input-field inline col s2">
-								<input class="with-gap" name="tippag" type="radio" id="vent" value="01" checked />
+								<input class="with-gap" name="tippag" type="radio" id="vent" value="01"/>
 								<label for="vent">Ventanilla</label> 	
 							</div>
 							<div class="input-field inline col s2">
@@ -540,7 +540,7 @@
 			</div>
 			<div class="modal-footer">
 				<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-				<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="getCodeudores();">Cancelar</button>
+				<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
 			</div>
 		</form>
 	</div>
@@ -600,6 +600,114 @@
 	        		$('#tipcreid').material_select();
 		        }
 		    });
+
+
+			var idsolcrejs = "no";
+			<?php if( isset( $_GET['idsolcre'] ) ){ echo "idsolcrejs = ' ".$_GET['idsolcre']." '  ;"; } ?>
+			if(idsolcrejs!="no"){
+
+				$.ajax({
+			        type:"post",
+			        url: "../php/datosSC.php",
+			        data:{acc:'getforedit',idsolcre:idsolcrejs},
+			        success:function(responseText){
+			        	
+			        	var obj = $.parseJSON(responseText);
+			        	$.each(obj, function(i,item){
+
+
+			        		//console.log(item);
+
+			        		$('.inventado').addClass('active');
+
+			        		//PANTALLA 1
+			        		$('#idsol').val(item[0]);
+			        		if(item[1]=="M"){
+			        			$('#mas').prop("checked", true);
+			        		}else{
+			        			if(item[1]=="F"){
+			        				$('#fem').prop("checked", true);
+			        			}
+			        		}
+			        		$('#tel').val(item[2]);
+			        		$('#cel').val(item[3]);
+
+
+			        		//PANTALLA 2
+			        		$('#nomc').val(item[9]);
+			        		if(item[10]=="M"){
+			        			$('#masc').prop("checked", true);
+			        		}else{
+			        			if(item[10]=="F"){
+			        				$('#femc').prop("checked", true);
+			        			}
+			        		}
+			        		$('#fecc').val(item[13]);
+			        		$('#duic').val(item[11]);
+			        		$('#nitc').val(item[12]);
+			        		$('#estc').val(item[16]);
+			        		
+							$('#telc').val(item[17]);
+							$('#celc').val(item[18]);
+							$('#proc').val(item[14]);
+							$('#dirc').val(item[15]);
+							$('#lugc').val(item[19]);
+							$('#dirtc').val(item[20]);
+
+							//PANTALLA 3
+							$('#telt').val(item[8]);
+							$('#jefe').val(item[5]);
+							$('#pues').val(item[7]);
+							$('#timet').val(item[6]);
+							$('#suel').val(item[21]);
+							$('#otroi').val(item[22]);
+							$('#toti').val(item[23]);
+							$('#gasv').val(item[24]);
+							$('#pagd').val(item[25]);
+							$('#otroe').val(item[26]);
+							$('#tote').val(item[27]);
+
+							//PANTALLA 4
+							$('#nomr').val(item[28]);
+							$('#dirr').val(item[29]);
+							$('#telr').val(item[30]);
+							$('#celr').val(item[31]);
+							$('#lugtr').val(item[32]);
+							$('#dirtr').val(item[33]);
+							$('#nomrlab').val(item[34]);
+							$('#dirrlab').val(item[35]);
+							$('#telrlab').val(item[36]);
+							$('#celrlab').val(item[37]);
+							$('#lugtrlab').val(item[38]);
+							$('#dirtrlab').val(item[39]);
+
+							//PANTALLA 5
+							$('#tipcreid').val(item[56]);
+							$('#mon').val(item[47]);
+							$('#pla').val(item[51]);
+							calcular();
+							$('#feccon').val(item[49]);
+							$('#fecpag').val(item[50]);
+							$('#fecfin').val(item[52]);
+							if(item[44]=="01"){
+			        			$('#vent').prop("checked", true);
+			        		}else{
+			        			if(item[44]=="02"){
+			        				$('#plan').prop("checked", true);
+			        			}
+			        		}
+							$('#est').val(item[53]);
+
+
+							
+			        	});
+			        	$('select').material_select('destroy');
+						$('select').material_select();
+			        }
+			    });
+
+			}
+
 		});
 
 

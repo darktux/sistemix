@@ -9,14 +9,20 @@
 		case 'set':
             //Datos a guardar
             break;
-        case 'getjsontabla':
+        case 'getforedit':
             $con->consulta("
                 SELECT 
-                   *
+                   s.*,c.*,t.tipocredito_id
                 FROM 
-                    ".$nombretabla."
+                    `tab_solicitud_credito` s,
+                    `tab_credito` c,
+                    `tab_tipo_credito` t                    
                 WHERE 
-                    solicitudcredito_id = '".$_POST['idsol']."'
+                    solicitudcredito_id = ".$_POST['idsolcre']."
+                AND
+                    c.credito_solicitudcreditoid = s.solicitudcredito_id
+                AND 
+                    c.credito_solicitudcreditoid = t.tipocredito_id
                 ;
             ");
             $salida=array();         
