@@ -10,8 +10,8 @@
 	<link rel="shortcut icon" type="imgage/png" href="../../img/logos/logo.png">
 </head>
 <body>
-	<form class="container col s12" id="formulario">
-		<input id="idid" name="idid" type="hidden" value="<?php echo $_GET['id']; ?>">
+		
+		<input id="idsol" type="hidden" value="">
 		
 		<div class="teal" id="">
 			<br>
@@ -20,18 +20,18 @@
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) *****************************************************************-->
 			<span id="top"></span>
 			<div class="row">
-				<ul id="tabs-swipe-demo" class="tabs swipeable">
-					
-				    <li class="tab col s2 active"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales" onclick="verbtnGuardar(0);"><i class="material-icons">person</i> </a></li>
-				    <li class="tab col s2" ><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" onclick="verbtnGuardar(0);"><i class="material-icons">people</i> </a></li>
-				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales" onclick="verbtnGuardar(0);"><i class="material-icons">domain</i> </a></li>
-				    <li class="tab col s2 "><a class=" teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias" href="#referencias" onclick="verbtnGuardar(0);"><i class="material-icons">people_outline</i> </a></li>
-				    <li class="tab col s2 "><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Co-deudores" href="#codeudor" onclick="verbtnGuardar(0);"><i class="material-icons">device_hub</i> </a></li>
-				    <li class="tab col s2 "><a  class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito" onclick="verbtnGuardar(1);"><i class="material-icons">monetization_on</i> </a></li>
+				<ul class="tabs swipeable">
+				    <li class="tab col s2 active"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Personales" href="#personales" ><i class="material-icons">person</i> </a></li>
+				    <li class="tab col s2" ><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Familiares" href="#familiares" ><i class="material-icons">people</i> </a></li>
+				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos Laborales" href="#laborales" ><i class="material-icons">domain</i> </a></li>
+				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Referencias" href="#referencias" ><i class="material-icons">people_outline</i> </a></li>
+				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Co-deudores" href="#codeudor" ><i class="material-icons">device_hub</i> </a></li>
+				    <li class="tab col s2"><a class="teal-text waves-effect waves-teal tooltipped" data-tooltip="Datos del Crédito" href="#credito" ><i class="material-icons">monetization_on</i> </a></li>
 	  			</ul>
 				
 				<div id="personales" class="col s12 white swipeable">
 					<form id="formPersonales">
+						<input id="idid" name="idid" type="hidden" value="<?php echo $_GET['id']; ?>">
 						<div class="row">
 							<div class="input-field col s6"> 
 					          <input id="nom" name="nom" type="text" value="<?php echo $_GET['name']; ?>" readonly>
@@ -41,11 +41,11 @@
 								<label for="sex">Sexo</label> 
 							</div>
 							<div class="input-field inline col s2">
-									<input class="with-gap" name="sex" type="radio" id="mas" value="M" checked />
+									<input class="with-gap" name="sex" type="radio" id="mas" value="M" required>
 									<label for="mas">Masculino</label> 	
 							</div>
 							<div class="input-field inline col s3">
-									<input class="with-gap" name="sex" type="radio" id="fem" value="F" />	
+									<input class="with-gap" name="sex" type="radio" id="fem" value="F" required>	
 									<label for="fem">Femenino</label>
 							</div>
 						</div>	
@@ -55,7 +55,7 @@
 								<label for="tel">Tel&eacute;fono fijo</label>
 							</div>
 							<div class="input-field col s6">
-								<input type="text" name="cel" id="cel" >
+								<input type="text" name="cel" id="cel" required>
 								<label for="cel">Tel&eacute;fono celular</label>
 							</div>
 						</div>
@@ -64,130 +64,136 @@
 				</div>
 
 				<div id="familiares" class="col s12 white swipeable">
-					<div class="row">
-						<div class="input-field col s6"> 
-				          <input id="nomc" name="nomc" type="text" class="validate" >
-				          <label for="nomc">Nombre conyugue</label>
-        				</div>
-						<div class="input-field col s1">
-							<label for="sexc">Sexo conyugue</label> 
+					<form id="formFamiliares">
+						<div class="row">
+							<div class="input-field col s6"> 
+					          <input id="nomc" name="nomc" type="text" class="validate" >
+					          <label for="nomc">Nombre conyugue</label>
+	        				</div>
+							<div class="input-field col s1">
+								<label for="sexc">Sexo conyugue</label> 
+							</div>
+							<div class="input-field inline col s2">
+									<input class="with-gap" name="sexc" type="radio" id="masc" value="M" />
+									<label for="masc">Masculino</label> 	
+							</div>
+							<div class="input-field inline col s3">
+									<input class="with-gap" name="sexc" type="radio" id="femc" value="F" />	
+									<label for="femc">Femenino</label>
+							</div>
 						</div>
-						<div class="input-field inline col s2">
-								<input class="with-gap" name="sexc" type="radio" id="masc" checked />
-								<label for="masc">Masculino</label> 	
+						<div class="row">
+							<div class="input-field col s3">	
+								<input id="fecc" name="fecc" type="date" >
+								<label for="fecc" class="active">Fecha de nacimiento conyugue</label>
+							</div>
+							<div class="input-field col s3"> 
+						         <input id="duic" name="duic" type="text"  minlength="10" maxlength="10">
+						         <label for="duic">DUI conyugue</label>
+	        				</div>
+							<div class="input-field col s3">
+								<input type="text" name="nitc" id="nitc" >
+								<label for="nitc">NIT conyugue</label>
+							</div>
+							<div class="input-field col s3">
+								<select class="" id="estc" name="estc">
+									<option value="Soltero/a">Soltero/a</option>
+									<option value="Casado/a" selected>Casado/a</option>
+									<option value="Acompañado/a">Acompañado/a</option>
+									<option value="Viudo/a">Viudo/a</option>
+									<option value="Divorciado/a">Divorciado/a</option>
+							    </select>
+								<label for="estc">Estado civil conyugue</label>
+							</div>
 						</div>
-						<div class="input-field inline col s3">
-								<input class="with-gap" name="sexc" type="radio" id="femc"  />	
-								<label for="femc">Femenino</label>
+						<div class="row">
+							<div class="input-field col s3">
+								<input type="text" name="telc" id="telc" >
+								<label for="telc">Tel&eacute;fono fijo conyugue</label>
+							</div>
+							<div class="input-field col s3">
+								<input type="text" name="celc" id="celc" >
+								<label for="celc">Tel&eacute;fono celular conyugue</label>
+							</div>
+						    <div class="input-field col s3">
+								<input type="text" name="proc" id="proc" >
+								<label for="proc">Profesi&oacute;n u oficio conyugue</label>
+							</div>
+							<div class="input-field col s3">
+								<textarea id="dirc" name="dirc" class="materialize-textarea"></textarea>
+								<label for="dirc">Direcci&oacute;n conyugue</label>
+						    </div>
+						</div>	
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="text" name="lugc" id="lugc">
+								<label for="lugc">Lugar de trabajo conyugue</label>
+							</div>
+							<div class="input-field col s6">			  		
+					          	<input type="text" id="dirtc" name="dirtc"></input>
+					          	<label for="dirtc">Direcci&oacute;n de trabajo conyugue</label>
+						    </div>			    
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s3">	
-							<input id="fecc" name="fecc" type="date" >
-							<label for="fecc" class="active">Fecha de nacimiento conyugue</label>
-						</div>
-						<div class="input-field col s3"> 
-					         <input id="duic" name="duic" type="text"  minlength="10" maxlength="10">
-					         <label for="duic">DUI conyugue</label>
-        				</div>
-						<div class="input-field col s3">
-							<input type="text" name="nitc" id="nitc" >
-							<label for="nitc">NIT conyugue</label>
-						</div>
-						<div class="input-field col s3">
-							<select class="" id="estc" name="estc">
-								<option value="Soltero/a">Soltero/a</option>
-								<option value="Casado/a" selected>Casado/a</option>
-								<option value="Acompañado/a">Acompañado/a</option>
-								<option value="Viudo/a">Viudo/a</option>
-								<option value="Divorciado/a">Divorciado/a</option>
-						    </select>
-							<label for="estc">Estado civil conyugue</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s3">
-							<input type="text" name="telc" id="telc" >
-							<label for="telc">Tel&eacute;fono fijo conyugue</label>
-						</div>
-						<div class="input-field col s3">
-							<input type="text" name="celc" id="celc" >
-							<label for="celc">Tel&eacute;fono celular conyugue</label>
-						</div>
-					    <div class="input-field col s3">
-							<input type="text" name="proc" id="proc" >
-							<label for="proc">Profesi&oacute;n u oficio conyugue</label>
-						</div>
-						<div class="input-field col s3">
-							<textarea id="dirc" name="dirc" class="materialize-textarea"></textarea>
-							<label for="dirc">Direcci&oacute;n conyugue</label>
-					    </div>
-					</div>	
-					<div class="row">
-						<div class="input-field col s6">
-							<input type="text" name="lugc" id="lugc">
-							<label for="lugc">Lugar de trabajo conyugue</label>
-						</div>
-						<div class="input-field col s6">			  		
-				          	<input type="text" id="dirtc" name="dirtc"></input>
-				          	<label for="dirtc">Direcci&oacute;n de trabajo conyugue</label>
-					    </div>			    
-					</div>	
+						<button class="waves-effect waves-light btn" type="submit">Siguiente (2/6)</button>
+					</form>
 				</div>
 
 	  			<div id="laborales" class="col s12 white swipeable">
-					<div class="row">
-						<div class="input-field col s3">
-							<input type="text" name="telt" id="telt">
-							<label for="telt">Tel&eacute;fono de trabajo</label>
+		  			<form id="formLaborales">
+						<div class="row">
+							<div class="input-field col s3">
+								<input type="text" name="telt" id="telt">
+								<label for="telt">Tel&eacute;fono de trabajo</label>
+							</div>
+							<div class="input-field col s3">
+								<input type="text" name="jefe" id="jefe">
+								<label for="jefe">Nombre de jefe inmediato</label>
+							</div>
+							<div class="input-field col s3">
+								<input type="text" id="pues" name="pues"></input>
+								<label for="pues">Puesto de trabajo</label>
+							</div>
+							<div class="input-field col s3">
+								<input type="text" name="timet" id="timet">
+								<label for="timet">Tiempo de trabajo</label>
+							</div>
 						</div>
-						<div class="input-field col s3">
-							<input type="text" name="jefe" id="jefe">
-							<label for="jefe">Nombre de jefe inmediato</label>
+						<div class="row">
+							<h6 class="center"><strong>Ingresos</strong></h6>
+							<div class="input-field col s4">			  		
+								<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00">
+								<label for="suel" class="active">Sueldo mensual ($)</label>
+							</div>
+							<div class="input-field col s4">			  		
+								<input type="number" value="0.00" name="otroi" id="otroi" onchange="sumi()" min="0.00" >
+								<label class="active" for="otroi">Otros ingresos ($)</label>
+							</div>
+							<div class="input-field col s4">			  		
+								<input type="number" name="toti" class='teal-text'  id="toti" readonly="true" value="0.00">
+								<label for="toti" class="active">Total ingresos ($)</label>
+							</div>			    
 						</div>
-						<div class="input-field col s3">
-							<input type="text" id="pues" name="pues"></input>
-							<label for="pues">Puesto de trabajo</label>
+						<div class="row">
+							<h6 class="center"><strong>Egresos</strong></h6>
+							<div class="input-field col s3">			  		
+								<input type="number" name="gasv" id="gasv" onchange="sume()" value="0.00" min="0.00">
+								<label for="gasv" class="active">Gasto vida</label>
+							</div>
+							<div class="input-field col s3">			  		
+								<input type="number" name="pagd" id="pagd" onchange="sume()" value='0.00' min="0.00">
+								<label for="pagd" class="active">Pago de deudas</label>
+							</div>
+							<div class="input-field col s3">			  		
+								<input type="number" name="otroe" id="otroe" onchange="sume()" value="0.0" min="0.00">
+								<label for="otroe" class="active">Otros egresos</label>
+							</div>
+							<div class="input-field col s3">			  		
+								<input type="number" class='teal-text' name="tote" id="tote" value="0.00" readonly="true" min="0.00">
+								<label for="tote" class="active">Total egresos</label>
+							</div>			    
 						</div>
-						<div class="input-field col s3">
-							<input type="text" name="timet" id="timet">
-							<label for="timet">Tiempo de trabajo</label>
-						</div>
-					</div>
-					<div class="row">
-						<h6 class="center"><strong>Ingresos</strong></h6>
-						<div class="input-field col s4">			  		
-							<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00">
-							<label for="suel" class="active">Sueldo mensual ($)</label>
-						</div>
-						<div class="input-field col s4">			  		
-							<input type="number" value="0.00" name="otroi" id="otroi" onchange="sumi()" min="0.00" >
-							<label class="active" for="otroi">Otros ingresos ($)</label>
-						</div>
-						<div class="input-field col s4">			  		
-							<input type="number" name="toti" class='teal-text'  id="toti" readonly="true" value="0.00">
-							<label for="toti" class="active">Total ingresos ($)</label>
-						</div>			    
-					</div>
-					<div class="row">
-						<h6 class="center"><strong>Egresos</strong></h6>
-						<div class="input-field col s3">			  		
-							<input type="number" name="gasv" id="gasv" onchange="sume()" value="0.00" min="0.00">
-							<label for="gasv" class="active">Gasto vida</label>
-						</div>
-						<div class="input-field col s3">			  		
-							<input type="number" name="pagd" id="pagd" onchange="sume()" value='0.00' min="0.00">
-							<label for="pagd" class="active">Pago de deudas</label>
-						</div>
-						<div class="input-field col s3">			  		
-							<input type="number" name="otroe" id="otroe" onchange="sume()" value="0.0" min="0.00">
-							<label for="otroe" class="active">Otros egresos</label>
-						</div>
-						<div class="input-field col s3">			  		
-							<input type="number" class='teal-text' name="tote" id="tote" value="0.00" readonly="true" min="0.00">
-							<label for="tote" class="active">Total egresos</label>
-						</div>			    
-					</div>
+						<button class="waves-effect waves-light btn" type="submit">Siguiente (3/6)</button>
+					</form>
 	  			</div>
 	  			
 	  			<div id="referencias" class="col s12 white swipeable">
@@ -499,7 +505,7 @@
 			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
 			<button class="modal-action modal-close waves-effect waves-light btn-flat" onclick="window.close()" type="reset">Cancelar</button>
 		</div>
-	</form>
+	
 		
 
 
@@ -563,7 +569,7 @@
 		$("#formPersonales").on("submit",function(e){
 			e.preventDefault();
 			var formData = new FormData(document.getElementById("formPersonales"));
-			formData.append("acc", "addsol");
+			formData.append("acc", "addsol1");
 			$.ajax({
 				url: "../php/Credito.php",
 				type: "post",
@@ -572,8 +578,60 @@
 				cache: false,
 				contentType: false,
 				processData: false,
-				success:function(responseText){
-					alert(responseText);
+				success:function(data){
+					//if(data.localeCompare("OK")){
+					var dataJson = eval(data);
+					if(dataJson[0].est=="OK"){
+						$("#idsol").val(dataJson[0].idsol);
+						$('ul.tabs').tabs('select_tab', 'familiares');
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+		$("#formFamiliares").on("submit",function(e){
+			e.preventDefault();
+			var formData = new FormData(document.getElementById("formFamiliares"));
+			formData.append("idsol",$("#idsol").val());
+			formData.append("acc", "addsol2");
+			$.ajax({
+				url: "../php/Credito.php",
+				type: "post",
+				dataType: "html",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:function(data){
+					if(data.localeCompare("OK")){
+						$('ul.tabs').tabs('select_tab', 'laborales');
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+		$("#formLaborales").on("submit",function(e){
+			e.preventDefault();
+			var formData = new FormData(document.getElementById("formLaborales"));
+			formData.append("idsol",$("#idsol").val());
+			formData.append("acc", "addsol3");
+			$.ajax({
+				url: "../php/Credito.php",
+				type: "post",
+				dataType: "html",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:function(data){
+					alert(data);
+					if(data.localeCompare("OK")){
+						$('ul.tabs').tabs('select_tab', 'referencias');
+					}else{
+						alert(data);
+					}
 				}
 			});
 		});
@@ -582,36 +640,36 @@
 
 
 
-		$("#formulario").on(
-			"submit", 
-			function(e){
-		    	e.preventDefault();
-		    	var f = $(this);
-		    	var formData = new FormData(document.getElementById("formulario"));
+		// $("#formulario").on(
+		// 	"submit", 
+		// 	function(e){
+		//     	e.preventDefault();
+		//     	var f = $(this);
+		//     	var formData = new FormData(document.getElementById("formulario"));
 		
-		       	formData.append("acc", "addsol");
+		//        	formData.append("acc", "addsol");
 		
-				$.ajax({
-		            url: "../php/Credito.php",
-		            type: "post",
-		            dataType: "html",
-		            data: formData,
-		            cache: false,
-		            contentType: false,
-		     		processData: false,
-		        	success:function(responseText){
-		        		if(/Registro/.test(responseText)){
-		        			alert(responseText);
-		        			$("#formulario")[0].reset();
-		        			window.close();
-		        		}
-		        		else{
-		        			alert(responseText);
-			        	}
-		    	    }
-		        });
-			}	
-		);
+		// 		$.ajax({
+		//             url: "../php/Credito.php",
+		//             type: "post",
+		//             dataType: "html",
+		//             data: formData,
+		//             cache: false,
+		//             contentType: false,
+		//      		processData: false,
+		//         	success:function(responseText){
+		//         		if(/Registro/.test(responseText)){
+		//         			alert(responseText);
+		//         			$("#formulario")[0].reset();
+		//         			window.close();
+		//         		}
+		//         		else{
+		//         			alert(responseText);
+		// 	        	}
+		//     	    }
+		//         });
+		// 	}	
+		// );
 
 
 

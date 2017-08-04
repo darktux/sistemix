@@ -1,4 +1,6 @@
 ALTER TABLE `tab_solicitud_credito` ADD COLUMN `solicitudcredito_tipopago` varchar(2) NOT NULL;
+ALTER TABLE `tab_solicitud_credito` ADD `solicitudcredito_estado` INT NOT NULL AFTER `solicitudcredito_tipopago`;
+
 
 CREATE TABLE `tab_codeudor` (
   `codeudor_id` int(11) NOT NULL,

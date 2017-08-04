@@ -119,14 +119,14 @@
 			if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
     		break;
         case 'del':
-        /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             $con->consulta("
                 DELETE FROM 
                     ".$nombretabla." 
                 WHERE 
                     credito_id='".$_POST['id']."';
             ");
-        /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
             if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
             break;       
 		case 'getjsontabla':
@@ -240,81 +240,228 @@
             echo ''.json_encode($dataut).'';
             break;
         case 'getjsontabla2'://no borrar, se utiliza en solicitud de credito. Att Duglas
-
-                $con->consulta("
-                    SELECT 
-                        asociado_id,
-                       asociado_nombre,
-                        asociado_dui, 
-                        asociado_nit
+            $con->consulta("
+                SELECT 
+                    asociado_id,
+                    asociado_nombre,
+                    asociado_dui, 
+                    asociado_nit
                        
-                    FROM 
-                        tab_asociado
-                    where
-                        asociado_estado like 'Activo' 
-                ");
-                $resultadoaux = $con->getResultado();
-                $i=0;$salida=array();
-                while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
-                    $salida[$i]=$fila;
-                    $i++;
-                }
-                echo json_encode($salida);
-                break;
+                FROM 
+                    tab_asociado
+                where
+                    asociado_estado like 'Activo' 
+            ");
+            $resultadoaux = $con->getResultado();
+            $i=0;$salida=array();
+            while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
+                $salida[$i]=$fila;
+                $i++;
+            }
+            echo json_encode($salida);
+            break;
 
-            case 'getcuota'://no borrar, se utiliza en solicitud de credito. Att Duglas
+        case 'getcuota'://no borrar, se utiliza en solicitud de credito. Att Duglas
+            $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['credid']);
+            if ($row = mysql_fetch_row($rs)) {
+                $i = trim($row[0]);
+            }
+            // $i=$con->getResultado();
+            $tiempo=$_POST['tiempo'];
+            $monto=$_POST['monto'];
+            $interes=($i/12)/100;
               
-               $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['credid']);
-                    if ($row = mysql_fetch_row($rs)) {
-                        $i = trim($row[0]);
-                    }
-               // $i=$con->getResultado();
-                $tiempo=$_POST['tiempo'];
-                $monto=$_POST['monto'];
-                $interes=($i/12)/100;
-               
-                //echo $interes;
-                $constante=pow((1+$interes),$tiempo);
-                $arriba=$constante*$interes;
-                $abajo=$constante-1;
-                $cuota=round((($monto)*($arriba/$abajo)),2);
-                echo $cuota;
-             break;
+            //echo $interes;
+            $constante=pow((1+$interes),$tiempo);
+            $arriba=$constante*$interes;
+            $abajo=$constante-1;
+            $cuota=round((($monto)*($arriba/$abajo)),2);
+            echo $cuota;
+            break;
 
-             // case 'addsol'://no borrar, se utiliza en solicitud de credito
-             //    $con->consulta("BEGIN");
-             //    try{
-             //        $con->consulta(
-             //            "
-             //                INSERT INTO 
-             //                    tab_solicitud_credito(
-             //                        solicitudcredito_sexo,
-             //                        solicitudcredito_telefonofijo,
-             //                        solicitudcredito_telefonocelular,
-             //                        solicitudcredito_jefeinmediato,
-             //                        solicitudcredito_tiempotrabajo,
-             //                        solicitudcredito_puesto,
-             //                        solicitudcredito_telefonotrabajo,
-             //                        solicitudcredito_nombreconyuge,
-             //                        solicitudcredito_sexoconyuge,
-             //                        solicitudcredito_duiconyuge,
-             //                        solicitudcredito_nitconyuge,
-             //                        solicitudcredito_fechanacimientoconyuge,
-             //                        solicitudcredito_profesionoficioconyuge,
-             //                        solicitudcredito_direccionconyuge,
-             //                        solicitudcredito_estadocivilconyuge,
-             //                        solicitudcredito_telefonofijoconyuge,
-             //                        solicitudcredito_telefonocelularconyuge,
-             //                        solicitudcredito_lugartrabajoconyuge,
-             //                        solicitudcredito_direcciontrabajoconyuge,
-             //                        solicitudcredito_sueldomensual,
-             //                        solicitudcredito_otrosingresos,
-             //                        solicitudcredito_totalingresos,
-             //                        solicitudcredito_gastovida,
-             //                        solicitudcredito_pagodeudas,
-             //                        solicitudcredito_otrosegresos,
-             //                        solicitudcredito_totalegresos,
+        case 'active':
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            $con->consulta("BEGIN");
+            try{
+                $con->consulta(
+                    "
+                    UPDATE 
+                        tab_solicitud_credito 
+                    SET 
+                        solicitudcredito_fechasesion ='".$_POST['fecses']."',
+                        solicitudcredito_numacta =".$_POST['nacta'].",
+                        solicitudcredito_numpunto ='".$_POST['npunto']."',
+                        solicitudcredito_numrefcre ='".$_POST['nrefcre']."'
+                    WHERE 
+                        solicitudcredito_id=".$_POST['selfid'].";
+                        "
+                    );
 
+                $con->consulta(
+                    "
+                        UPDATE 
+                            tab_credito 
+                        SET 
+                            credito_estado = 'Activo'
+                        WHERE 
+                            credito_id=".$_POST['creid1'].";
+                    "
+                );
+                    
+                    
+                $con->consulta(
+                    "
+                        INSERT INTO
+                            tab_credito_movimiento(
+                                creditomovimiento_concepto,
+                                creditomovimiento_fecha,
+                                creditomovimiento_deposito,
+                                creditomovimiento_retiro,
+                                creditomovimiento_interes,
+                                creditomovimiento_capital,
+                                creditomovimiento_saldo,
+                                creditomovimiento_creditoid  
+                            )
+                        VALUES
+                            (
+                                'Registro inicial del credito',
+                                '".$_POST['fecses']."',
+                                0.00,
+                                ".$_POST['cremon1'].",
+                                0.00,
+                                0.00,
+                                ".$_POST['cremon1'].",
+                                ".$_POST['creid1']."
+                            );
+                    "
+                );
+
+                    
+                $con->consulta("COMMIT");
+            }catch(Exception $e){
+                $con->consulta('ROLLBACK');
+                echo 'Error al guardar: ',$e->getMessage(),"\n";
+            }
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
+            break;
+
+        case 'delsol':
+            /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            $con->consulta("
+                DELETE FROM 
+                    ".$nombretabla." 
+                    WHERE 
+                    credito_id='".$_POST['creid2']."';
+                ");
+            $con->consulta("
+                DELETE FROM 
+                    tab_solicitud_credito 
+                WHERE 
+                    solicitudcredito_id='".$_POST['selfid2']."';
+                ");
+                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
+            if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
+            break;  
+
+        case 'getjsontabla3':// no borrar, se utiliza en solicutd de credito
+            $con->consulta(
+                "
+                    SELECT 
+                        solicitudcredito_id,
+                        solicitudcredito_tipopago,
+                        asociado_correlativo,
+                        asociado_nombre,
+                        asociado_dui,
+                        asociado_nit,
+                        credito_id,
+                        credito_monto,
+                        credito_estado,
+                        tipocredito_nombre,
+                        tipocredito_correlativo 
+                    FROM 
+                        tab_asociado, 
+                        tab_credito, 
+                        tab_tipo_credito, 
+                        tab_solicitud_credito 
+                    WHERE 
+                        tipocredito_id=credito_tipocreditoid 
+                    and 
+                        credito_solicitudcreditoid=solicitudcredito_id 
+                    and 
+                        solicitudcredito_asociadoid=asociado_id
+                    and 
+                        credito_estado != 'Activo';
+                "
+            );
+            $i=0;$salida=array();
+            while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                $salida[$i]=$fila;
+                $i++;
+            }
+            echo json_encode($salida);
+            break;
+
+        case 'addsol1': //no borrar, se utiliza en solicitud de credito
+            $con->consulta("INSERT INTO tab_solicitud_credito(
+                solicitudcredito_sexo,
+                solicitudcredito_telefonofijo,
+                solicitudcredito_telefonocelular,
+                solicitudcredito_asociadoid,
+                solicitudcredito_estado) VALUES(
+                '".$_POST['sex']."',
+                '".$_POST['tel']."',
+                '".$_POST['cel']."',
+                '".$_POST['idid']."',
+                '0'
+                )");//0=solicitud NO terminda, 1=solicitud completa
+            $datos=array();
+            $con->consulta("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
+            if ($row = mysql_fetch_row($con->getResultado()))
+                $id = trim($row[0]);
+            $datos[] = array(
+                'idsol'=>$id,
+                'est'=>'OK'
+            );
+            if($con->getResultado()){echo json_encode($datos);} else{echo "Error al guardar";}
+            break;
+        case 'addsol2': //no borrar, se utiliza en solicitud de credito
+            $sql = "UPDATE tab_solicitud_credito SET
+                solicitudcredito_nombreconyuge='".$_POST['nomc']."',
+                solicitudcredito_sexoconyuge='".$_POST['sexc']."',
+                solicitudcredito_duiconyuge='".$_POST['duic']."',
+                solicitudcredito_nitconyuge='".$_POST['nitc']."',
+                solicitudcredito_fechanacimientoconyuge='".$_POST['fecc']."',
+                solicitudcredito_profesionoficioconyuge='".$_POST['proc']."',
+                solicitudcredito_direccionconyuge='".$_POST['dirc']."',
+                solicitudcredito_estadocivilconyuge='".$_POST['estc']."',
+                solicitudcredito_telefonofijoconyuge='".$_POST['telc']."',
+                solicitudcredito_telefonocelularconyuge='".$_POST['celc']."',
+                solicitudcredito_lugartrabajoconyuge='".$_POST['lugc']."',
+                solicitudcredito_direcciontrabajoconyuge='".$_POST['dirtc']."'
+                WHERE solicitudcredito_id='".$_POST['idsol']."'";
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}            
+            break;
+        case 'addsol3': //no borrar, se utiliza en solicitud de credito
+            // $sql = "UPDATE tab_solicitud_credito SET
+            //     solicitudcredito_telefonotrabajo='".$_POST['telt']."',
+            //     solicitudcredito_jefeinmediato='".$_POST['jefe']."',
+            //     solicitudcredito_puesto='".$_POST['pues']."',
+            //     solicitudcredito_tiempotrabajo='".$_POST['timet']."',
+            //     solicitudcredito_sueldomensual='".$_POST['suel']."',
+            //     solicitudcredito_otrosingresos='".$_POST['otroi']."',
+            //     solicitudcredito_totalingresos='".$_POST['toti']."',
+            //     solicitudcredito_gastovida='".$_POST['gasv']."',
+            //     solicitudcredito_pagodeudas='".$_POST['pagd']."',
+            //     solicitudcredito_otrosegresos='".$_POST['otroe']."',
+            //     solicitudcredito_totalegresos='".$_POST['tote']."' ";
+            // $con->consulta($sql);
+            // if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}
+            break;
+    }
+	//$con->limpiarConsulta();
+    $con->desconectar();
              //                        solicitudcredito_nombrereferencia,
              //                        solicitudcredito_direccionreferencia,
              //                        solicitudcredito_telefonofijoreferencia,
@@ -333,33 +480,14 @@
              //                        solicitudcredito_tipopago
              //                    ) 
              //                VALUES
-             //                    (
-             //                        '".$_POST['sex']."',
-             //                        '".$_POST['tel']."',
-             //                        '".$_POST['cel']."',
-             //                        '".$_POST['jefe']."',
-             //                        '".$_POST['timet']."',
-             //                        '".$_POST['pues']."',
-             //                        '".$_POST['telt']."',
-             //                        '".$_POST['nomc']."',
-             //                        '".$_POST['sexc']."',
-             //                        '".$_POST['duic']."',
-             //                        '".$_POST['nitc']."',
-             //                        '".$_POST['fecc']."',
-             //                        '".$_POST['proc']."',
-             //                        '".$_POST['dirc']."',
-             //                        '".$_POST['estc']."',
-             //                        '".$_POST['telc']."',
-             //                        '".$_POST['celc']."',
-             //                        '".$_POST['lugc']."',
-             //                        '".$_POST['dirtc']."',
-             //                        ".$_POST['suel'].",
-             //                        ".$_POST['otroi'].",
-             //                        ".$_POST['toti'].",
-             //                        ".$_POST['gasv'].",
-             //                        ".$_POST['pagd'].",
-             //                        ".$_POST['otroe'].",
-             //                        ".$_POST['tote'].",
+             //                 
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
+             //                        ".$_POST[''].",
                                     
              //                        '".$_POST['nomr']."',
              //                        '".$_POST['dirr']."',
@@ -375,7 +503,7 @@
              //                        '".$_POST['lugtrlab']."',
              //                        '".$_POST['dirtrlab']."',
 
-             //                        '".$_POST['idid']."',
+             //                        
              //                        '".$_POST['tippag']."'
              //                    )
              //            "
@@ -480,130 +608,5 @@
              //    }
              //    if($con->getResultado()){echo "Registro guardado";} else{echo "Error al guardar";}
              //    break;
-
-            case 'active':
-                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-                $con->consulta("BEGIN");
-                try{
-                    $con->consulta(
-                        "
-                            UPDATE 
-                                tab_solicitud_credito 
-                            SET 
-                                solicitudcredito_fechasesion ='".$_POST['fecses']."',
-                                solicitudcredito_numacta =".$_POST['nacta'].",
-                                solicitudcredito_numpunto ='".$_POST['npunto']."',
-                                solicitudcredito_numrefcre ='".$_POST['nrefcre']."'
-                            WHERE 
-                                solicitudcredito_id=".$_POST['selfid'].";
-                        "
-                    );
-
-                    $con->consulta(
-                        "
-                            UPDATE 
-                                tab_credito 
-                            SET 
-                                credito_estado = 'Activo'
-                            WHERE 
-                                credito_id=".$_POST['creid1'].";
-                        "
-                    );
-                    
-                    
-                    $con->consulta(
-                        "
-                            INSERT INTO
-                                tab_credito_movimiento(
-                                    creditomovimiento_concepto,
-                                    creditomovimiento_fecha,
-                                    creditomovimiento_deposito,
-                                    creditomovimiento_retiro,
-                                    creditomovimiento_interes,
-                                    creditomovimiento_capital,
-                                    creditomovimiento_saldo,
-                                    creditomovimiento_creditoid  
-                                )
-                            VALUES
-                                (
-                                    'Registro inicial del credito',
-                                    '".$_POST['fecses']."',
-                                    0.00,
-                                    ".$_POST['cremon1'].",
-                                    0.00,
-                                    0.00,
-                                    ".$_POST['cremon1'].",
-                                    ".$_POST['creid1']."
-                                );
-                        "
-                    );
-
-                    
-                    $con->consulta("COMMIT");
-                }catch(Exception $e){
-                    $con->consulta('ROLLBACK');
-                    echo 'Error al guardar: ',$e->getMessage(),"\n";
-                }
-                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-            if($con->getResultado()){echo "Registro modificado.";}else{echo "Error al modificar.";}
-            break;
-
-            case 'delsol':
-                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-                $con->consulta("
-                    DELETE FROM 
-                        ".$nombretabla." 
-                    WHERE 
-                        credito_id='".$_POST['creid2']."';
-                ");
-                $con->consulta("
-                    DELETE FROM 
-                        tab_solicitud_credito 
-                    WHERE 
-                        solicitudcredito_id='".$_POST['selfid2']."';
-                ");
-                /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS********************************************************************************/
-                if($con->getResultado()){echo "Registro eliminado";}else{echo "Error al eliminar";}
-                break;  
-
-            case 'getjsontabla3':// no borrar, se utiliza en solicutd de credito
-                $con->consulta(
-                    "
-                        SELECT 
-                            solicitudcredito_id,
-                            solicitudcredito_tipopago,
-                            asociado_correlativo,
-                            asociado_nombre,
-                            asociado_dui,
-                            asociado_nit,
-                            credito_id,
-                            credito_monto,
-                            credito_estado,
-                            tipocredito_nombre,
-                            tipocredito_correlativo 
-                        FROM 
-                            tab_asociado, 
-                            tab_credito, 
-                            tab_tipo_credito, 
-                            tab_solicitud_credito 
-                        WHERE 
-                            tipocredito_id=credito_tipocreditoid 
-                        and 
-                            credito_solicitudcreditoid=solicitudcredito_id 
-                        and 
-                            solicitudcredito_asociadoid=asociado_id
-                        and 
-                            credito_estado != 'Activo';
-                    "
-                );
-            $i=0;$salida=array();
-            while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
-                $salida[$i]=$fila;
-                $i++;
-            }
-            echo json_encode($salida);
-            break;
-    }
-	//$con->limpiarConsulta();
-    $con->desconectar();
 ?>
+
