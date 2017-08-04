@@ -8,17 +8,12 @@ require('Conex.php');
 
 	switch ($_POST['acc']) {
 		case 'getjsontabla':
-			$sql='SELECT asociado_id,asociado_nombre,asociado_dui,cuentamovimiento_fecha, MAX(str_to_date(cuentamovimiento_concepto,"%Y-%m-%d")) as ultima_fechapagada,asociado_numpunto as numcuotas
-					FROM tab_asociado,tab_cuenta_movimiento,tab_cuenta 
-					WHERE asociado_id=cuenta_asociadoid 
-						and cuentamovimiento_cuentaid=cuenta_id 
-						and asociado_estado="Activo"
-                        GROUP BY asociado_nombre';
+			$sql='SELECT asociado_id,asociado_nombre,asociado_dui from tab_asociado';
 			$con->consulta($sql);
 			$i=0;
 			$salida=array();
 			$morosos=array();
-			$fechaHoy=date('Y-m-d');
+			//$fechaHoy=date('Y-m-d');
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {
                 $salida[$i]=$fila;
 				if($salida[$i]['ultima_fechapagada']<$fechaHoy){
