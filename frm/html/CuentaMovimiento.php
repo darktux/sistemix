@@ -10,42 +10,57 @@
 		<div class="modal-content" id="modalcontent">
 			<h5>Nueva transacción de cuenta</h5><!-- //TITULO DEL MODAL *************************************************************************************-->
 			<!-- INICIAN ELEMENTOS DEL FORMULARIO (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR) ****************************************************-->
-			<div class="row">
-				<div class="input-field col s12">
-					<input name="fec" id="fec" type="date" required>
-					<label for="fec" class="active">Fecha de transacción</label>
-				</div>
-				<div class="input-field col s12">
-					<textarea id="con" name="con" class="materialize-textarea" required></textarea>
-					<label for="con">Concepto</label>
-				</div>
-				<div class="input-field col s12">
-					<input type="number" name="sal0" id="sal0" value="1000" readonly>
-					<label for="sal0" class="active">Saldo anterior ($)</label>
-				</div>
-				<div class="row">
-					<div class="col s12 m4">
-						<label>Tipo de transacción</label>
+			<!-- <div class="row"> -->
+				<div class="row col s12" id="transa">
+					<div class="col s3 m3">
+						<label>Tipo de transacción: </label>
 					</div>
-					<div class="input-field col s12 m4">
-				    	<input type="radio" name="tiptra" id="dep1" class="with-gap actsal" required/>
+					<div class="input-field col s4 m3">
+				    	<input type="radio" name="tiptra" id="dep1" class="with-gap actsal" required />
 				    	<label for="dep1">Depósito</label>
 					</div>
-					<div class="input-field col s12 m4">
-				    	<input type="radio" name="tiptra" id="ret1" class="with-gap actsal" required/>
-				    	<label for="ret1">Retiro</label>
-				    </div>
+					<div class="input-field col s4 m3">
+						<input type="radio" name="tiptra" id="ret1" class="with-gap actsal" required/>
+						<label for="ret1">Retiro</label>
+					</div>
 				    <br>
+				    <br><br>
 				</div>
-			    <div class="input-field col s12">
-					<input type="number" name="mon" id="mon" min="1.00" step="0.01" required>
-					<label for="mon" class="active">Monto ($)</label>
+			<div class="row">
+				<div class="input-field col s12 m6">
+					<input type="number" name="sal0" id="sal0" readonly>
+					<label for="sal0" class="active">Saldo anterior ($)</label>
 				</div>
-				<div class="input-field col s12">
-					<input type="text" name="sal" id="sal" value="1000" readonly>
-					<label for="sal" class="active">Saldo ($)</label>
+				
+				<div class="input-field col s12 m6">
+					<input type="text" name="sal" id="sal" readonly>
+					<label for="sal" class="active">Nuevo saldo ($)</label>
 				</div>
 			</div>
+			<div class="row">
+				<div class="input-field col s12 m3">
+					<input name="fec" id="fec" type="date" required  >
+					<label for="fec" class="active">Fecha de transacción</label>
+				</div>
+				<div class="input-field col s12 m3">
+					<input type="text" name="compro" id="compro" autofocus maxlength="20">
+					<label for="compro" class="active" >Nº Comprobante</label>
+				</div>
+				<div class="input-field col s12 m4">
+					<!-- <textarea id="con" name="con" class="materialize-textarea" placeholder="Ejemplo: enero/2017" required ></textarea> -->
+					<textarea id="con" name="con" class="textarea" style="height: 40px; margin-top: 10px"></textarea>
+					<label for="con" class="active">Concepto:</label>
+				</div>
+				
+
+			    <div class="input-field col s12 m2">
+					<input type="number" name="mon" id="mon" min="0.00" step="0.01" value="0.0"  required>
+					<label for="mon" class="active">Monto ($)</label>
+				</div>
+				
+				<input type="hidden" name="help" id="help" value="0">
+			</div>
+			<!-- </div> -->
 			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO **************************************************************************************************-->
 		</div>
 		<div class="modal-footer">
@@ -65,8 +80,9 @@
 			<table id="tabla1" data-toggle="table" class="table table-striped table-hover"  data-url="php/CuentaMovimiento.php?acc=getjsontabla" data-click-to-select="true"  data-show-refresh="true" data-search="true" data-pagination="true" data-page-size="5" data-page-list="[5,8,10,20,50,100]">
 			    <thead>
 				    <tr>
-				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
+				    	<th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th>
 				    	<!-- INICIA ELEMENTOS DE LA TABLA (CAMBIAR DEPENDIENDO DEL FORMULARIO A TRABAJAR, USAR NOMBRES DE CAMPOS SEGUN BASE DE DATOS)*-->
+				    	<th data-field="cuentamovimiento_comprobante" data-align="center"># comprobante</th>
 				    	<th data-field="cuentamovimiento_concepto" data-align="center">concepto</th>
 				    	<th data-field="cuentamovimiento_fecha" data-align="center">fecha</th>
 			            <th data-field="cuentamovimiento_deposito" data-align="center">Deposito ($)</th>
@@ -95,9 +111,9 @@
 			startingTop: '4%',
 			endingTop: '10%',
 			ready: function(modal, trigger){/*FUNCION QUE SE ACTIVA CUANDO SE ABRE EL MODAL */
-				document.getElementById("con").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
+				//document.getElementById("con").focus();/*ID DEL PRIMER ELEMENTO DEL MODAL *************************************************************/
 				$('#modalcontent').animate({scrollTop:0},{duration:"slow"});
-				$("#mon").val("");
+				//$("#mon").val("");
 				getsaldo();
 			},
 			complete: function() {/*FUNCION QUE SE ACTIVA CUANDO SE CIERRA EL MODAL*/
@@ -136,7 +152,7 @@
 				}
 				else{
 			    	formData.append("id", $("#idid").val());
-			    	formData.append("acc", "upd");
+			    	formData.append("acc", "edi");
 				}
 				$.ajax({
 		            url: "php/CuentaMovimiento.php",
@@ -170,12 +186,8 @@
             '<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
                 '<i class="material-icons">mode_edit</i>',
             '</a>&nbsp;',
-            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
-                '<i class="material-icons">delete</i>',
-            '</a>',
-            '&nbsp;<a class="view ml10" href="javascript:void(0)" title="Ver más">',
-                '<i class="material-icons">info</i>',
-            '</a>'
+            
+            
         ].join('');
     }
 	/*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
@@ -184,14 +196,32 @@
 		/*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
-            $("#idid").val(JSON.stringify(row.capital_id).replace(/"/gi,''));
+           /*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+            $("#idid").val(JSON.stringify(row.cuentamovimiento_id).replace(/"/gi,''));
+            $("#compro").val(JSON.stringify(row.cuentamovimiento_comprobante).replace(/"/gi,''));
+           $("#fec").val(JSON.stringify(row.cuentamovimiento_fecha).replace(/"/gi,''));
+           $('#con').val(JSON.stringify(row.cuentamovimiento_concepto).replace(/"/gi,''));
+          // $('select').material_select();
+           //$("#con").val(JSON.stringify(row.cuentamovimiento_concepto).replace(/"/gi,''));
+           if (JSON.stringify(row.cuentamovimiento_deposito).replace(/"/gi,'')=="0") {
+
+           		$("#mon").val(JSON.stringify(row.cuentamovimiento_retiro).replace(/"/gi,''));
+           		$("#ret1").prop("checked", true);
+           }else{
+
+           		$("#mon").val(JSON.stringify(row.cuentamovimiento_deposito).replace(/"/gi,''));
+           		$("#dep1").prop("checked", true);
+           }
+           
+           /* $("#idid").val(JSON.stringify(row.capital_id).replace(/"/gi,''));
             $("#ani").val(JSON.stringify(row.capital_anio).replace(/"/gi,''));
             $("#fec").val(JSON.stringify(row.capital_fec).replace(/"/gi,''));
             $("#con").val(JSON.stringify(row.capital_concepto).replace(/"/gi,''));
             $("#dep").val(JSON.stringify(row.capital_deposito).replace(/"/gi,''));
             $("#ret").val(JSON.stringify(row.capital_retiro).replace(/"/gi,''));
-            $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));
+            $("#sal").val(JSON.stringify(row.capital_saldo).replace(/"/gi,''));*/
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS************************************/
+        	//$("#dep1").enabled("true");
         	$('label').addClass("active");
         	$('#modal1').modal('open');
         },

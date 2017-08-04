@@ -10,6 +10,7 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("INSERT INTO 
                 ".$nombretabla."(
+                    cuentamovimiento_comprobante,
                     cuentamovimiento_concepto,
                     cuentamovimiento_fecha,
                     cuentamovimiento_deposito,
@@ -18,6 +19,7 @@
                     cuentamovimiento_cuentaid
                 ) 
                 VALUES(
+                    '".$_POST['compro']."',
                     '".$_POST['con']."',
                     '".$_POST['fec']."',
                     ".$_POST['dep'].",
@@ -102,6 +104,7 @@
                     cuentamovimiento_fecha='".$_POST['fec']."',
                     cuentamovimiento_comprobante='".$_POST['compro']."',
                     cuentamovimiento_deposito=".$_POST['dep'].",
+                    cuentamovimiento_retiro=".$_POST['ret'].",
                     cuentamovimiento_saldo=".$_POST['sal']."
                 WHERE 
                     cuentamovimiento_id=".$_POST['id'].";
@@ -109,7 +112,7 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS************************************************************/
             if($con->getResultado()){
                
-                 $con->consulta("select cuentamovimiento_id, cuentamovimiento_deposito, cuentamovimiento_saldo from tab_cuenta_movimiento where cuentamovimiento_cuentaid in (select cuentamovimiento_cuentaid from tab_cuenta_movimiento where cuentamovimiento_id=".$_POST['id'].") and cuentamovimiento_saldo > 0 ORDER by cuentamovimiento_id ASC");
+                 $con->consulta("select cuentamovimiento_id, cuentamovimiento_deposito, cuentamovimiento_retiro, cuentamovimiento_saldo from tab_cuenta_movimiento where cuentamovimiento_cuentaid in (select cuentamovimiento_cuentaid from tab_cuenta_movimiento where cuentamovimiento_id=".$_POST['id'].") and cuentamovimiento_saldo > 0 ORDER by cuentamovimiento_id ASC");
                  $i=0;
                  $salida=array();
                 while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
@@ -118,7 +121,7 @@
                     }
 
                 for($x=1;$x<$i;$x++){
-                    $sal=floatval($salida[$x]['cuentamovimiento_deposito'])+floatval($salida[$x-1]['cuentamovimiento_saldo']);
+                    $sal=(floatval($salida[$x]['cuentamovimiento_deposito'])-floatval($salida[$x]['cuentamovimiento_retiro']))+floatval($salida[$x-1]['cuentamovimiento_saldo']);
                     $salida[$x]['cuentamovimiento_saldo']=$sal;
                    // echo $sal;
                      $con->consulta("
