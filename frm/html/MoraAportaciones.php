@@ -7,11 +7,10 @@
 			    <thead>
 				    <tr>
 				    	<!-- <th data-field="operate" data-align="center" data-formatter="operateFormatter" data-events="operateEvents">Acciones</th> -->
+			            <th data-field="asociado_correlativo" data-align="center">Asociado</th>
 			            <th data-field="asociado_nombre" data-align="center">Asociado</th>
-			            <th data-field="asociado_dui" data-align="center">DUI</th>
-			            <th data-field="ultima_fechapagada" data-align="center">Última cuota pagada</th>
-			            <th data-field="cuentamovimiento_fecha" data-align="center">Cuota pagada el día</th>
-			            <th data-field="numcuotas" data-align="center">Cuotas en mora</th>
+			            <th data-field="Mora" data-align="center">Días de Mora</th>
+			           
 				    </tr>
 			    </thead>
 			</table>
