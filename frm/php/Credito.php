@@ -262,7 +262,7 @@
             break;
 
         case 'getcuota'://no borrar, se utiliza en solicitud de credito. Att Duglas
-            $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id=".$_POST['credid']);
+            $rs = mysql_query("SELECT tipocredito_interes FROM  tab_tipo_credito WHERE tipocredito_id='".$_POST['credid']."'");
             if ($row = mysql_fetch_row($rs)) {
                 $i = trim($row[0]);
             }
@@ -479,104 +479,122 @@
             $con->consulta($sql);
             if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;
+        case 'addsol5': //no borrar, se utiliza en soliditud de credito
+            $sql = "UPDATE tab_solicitud_credito SET
+                solicitudcredito_tipopago='".$_POST['tippag']."'
+                WHERE solicitudcredito_id='".$_POST['idsol']."' ";
+            $con->consulta($sql);
+            $sql="INSERT INTO tab_credito(
+                credito_monto,
+                credito_cuota,
+                credito_fechacontrato,
+                credito_fechapago,
+                credito_plazo,
+                credito_fechafin,
+                credito_estado,
+                credito_solicitudcreditoid,
+                credito_tipocreditoid
+                ) 
+                VALUES('".$_POST['mon']."',
+                    '".$_POST['cuo']."',
+                    '".$_POST['feccon']."',
+                    '".$_POST['fecpag']."',
+                    '".$_POST['pla']."',
+                    '".$_POST['fecfin']."',
+                    '".$_POST['est']."',
+                    '".$_POST['idsol']."',
+                    '".$_POST['tipcreid']."'
+            )";
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
+            break;
+        case 'addsol6': //no borrar, se utiliza en solicitud de credito
+           $sql = "INSERT INTO tab_codeudor(
+                codeudor_nombre, 
+                codeudor_dui,
+                codeudor_nit,
+                codeudor_edad,
+                codeudor_profesionuoficio,
+                codeudor_direccion,
+                codeudor_estadocivil,
+                codeudor_telefono,
+                codeudor_celular,
+                codeudor_jefeinmediato,
+                codeudor_tiempotrabajo,
+                codeudor_puesto,
+                codeudor_salario,
+                codeudor_telefonotrabajo,
+                codeudor_email,
+                codeudor_otrosingresos,
+                codeudor_gastovida,
+                codeudor_pagodeudas,
+                codeudor_otrosegresos,
+                codeudor_nombreref1,
+                codeudor_direccionref1,
+                codeudor_telefonoref1,
+                codeudor_celularref1,
+                codeudor_lugartrabajoref1,
+                codeudor_nombreref2,
+                codeudor_direccionref2,
+                codeudor_telefonoref2,
+                codeudor_celularref2,
+                codeudor_lugartrabajoref2,
+                codeudor_idsolicitudcredito) 
+                VALUES (
+                '".$_POST['nomco']."',
+                '".$_POST['duico']."',
+                '".$_POST['nitco']."',
+                '".$_POST['edadco']."',
+                '".$_POST['prouofco']."',
+                '".$_POST['dirco']."',
+                '".$_POST['estcco']."',
+                '".$_POST['telco']."',
+                '".$_POST['celco']."',
+                '".$_POST['nomjefeco']."',
+                '".$_POST['tietraco']."',
+                '".$_POST['puestoco']."',
+                '".$_POST['suelmenco']."',
+                '".$_POST['teltraco']."',
+                '".$_POST['emailco']."',
+                '".$_POST['otringco']."',
+                '".$_POST['gastvidco']."',
+                '".$_POST['pagdeuco']."',
+                '".$_POST['otregrco']."',
+                '".$_POST['nomrco1']."',
+                '".$_POST['dirrco1']."',
+                '".$_POST['telrco1']."',
+                '".$_POST['celrco1']."',
+                '".$_POST['lugtrco1']."',
+                '".$_POST['nomrco2']."',
+                '".$_POST['dirrco2']."',
+                '".$_POST['telrco2']."',
+                '".$_POST['celrco2']."',
+                '".$_POST['lugtrco2']."',
+                '".$_POST['idsol']."'
+            )";
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
+            break;
+
+        case 'getCodeudores':
+            $con->consulta("SELECT * FROM tab_codeudor WHERE codeudor_idsolicitudcredito='".$_POST['idsol']."'");
+            $i=0;$salida=array();
+            while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
+                $salida[$i]=$fila;
+                $i++;
+            }
+            echo json_encode($salida);
+            break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
-             //                        solicitudcredito_tipopago
-             //                        '".$_POST['tippag']."'
-   
              //        $rs = mysql_query("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
              //            if ($row = mysql_fetch_row($rs)) {
              //                    $id = trim($row[0]);
-             //                    $sql="INSERT INTO tab_credito(
-             //                    credito_monto,
-             //                    credito_cuota,
-             //                    credito_fechacontrato,
-             //                    credito_fechapago,
-             //                    credito_plazo,
-             //                    credito_fechafin,
-             //                    credito_estado,
-             //                    credito_solicitudcreditoid,
-             //                    credito_tipocreditoid
-             //                    ) 
-             //                    VALUES('".$_POST['mon']."',
-             //                            '".$_POST['cuo']."',
-             //                            '".$_POST['feccon']."',
-             //                            '".$_POST['fecpag']."',
-             //                            '".$_POST['pla']."',
-             //                            '".$_POST['fecfin']."',
-             //                            '".$_POST['est']."',
-             //                            '".$id."',
-             //                            '".$_POST['tipcreid']."'
-             //                    )";
-             //                    //echo $sql;
-             //                    $con->consulta($sql);
+            
 
              //                    //Agrego codeudores
-             //                    $sql = "INSERT INTO tab_codeudor(
-             //                    codeudor_nombre, 
-             //                    codeudor_dui,
-             //                    codeudor_nit,
-             //                    codeudor_edad,
-             //                    codeudor_profesionuoficio,
-             //                    codeudor_direccion,
-             //                    codeudor_estadocivil,
-             //                    codeudor_telefono,
-             //                    codeudor_celular,
-             //                    codeudor_jefeinmediato,
-             //                    codeudor_tiempotrabajo,
-             //                    codeudor_puesto,
-             //                    codeudor_salario,
-             //                    codeudor_telefonotrabajo,
-             //                    codeudor_email,
-             //                    codeudor_otrosingresos,
-             //                    codeudor_gastovida,
-             //                    codeudor_pagodeudas,
-             //                    codeudor_otrosegresos,
-             //                    codeudor_nombreref1,
-             //                    codeudor_direccionref1,
-             //                    codeudor_telefonoref1,
-             //                    codeudor_celularref1,
-             //                    codeudor_lugartrabajoref1,
-             //                    codeudor_nombreref2,
-             //                    codeudor_direccionref2,
-             //                    codeudor_telefonoref2,
-             //                    codeudor_celularref2,
-             //                    codeudor_lugartrabajoref2) 
-             //                    VALUES (
-             //                    '".$_POST['nomco']."',
-             //                    '".$_POST['duico']."',
-             //                    '".$_POST['nitco']."',
-             //                    '".$_POST['edadco']."',
-             //                    '".$_POST['prouofco']."',
-             //                    '".$_POST['dirco']."',
-             //                    '".$_POST['estcco']."',
-             //                    '".$_POST['telco']."',
-             //                    '".$_POST['celco']."',
-             //                    '".$_POST['nomjefeco']."',
-             //                    '".$_POST['tietraco']."',
-             //                    '".$_POST['puestoco']."',
-             //                    '".$_POST['suelmenco']."',
-             //                    '".$_POST['teltraco']."',
-             //                    '".$_POST['emailco']."',
-             //                    '".$_POST['otringco']."',
-             //                    '".$_POST['gastvidco']."',
-             //                    '".$_POST['pagdeuco']."',
-             //                    '".$_POST['otregrco']."',
-             //                    '".$_POST['nomrco1']."',
-             //                    '".$_POST['dirrco1']."',
-             //                    '".$_POST['telrco1']."',
-             //                    '".$_POST['celrco1']."',
-             //                    '".$_POST['lugtrco1']."',
-             //                    '".$_POST['nomrco2']."',
-             //                    '".$_POST['dirrco2']."',
-             //                    '".$_POST['telrco2']."',
-             //                    '".$_POST['celrco2']."',
-             //                    '".$_POST['lugtrco2']."'
-             //                    )";
-             //                    $con->consulta($sql);
-             //                }
-
+             
              //            $con->consulta('COMMIT');
              //    }catch(Exception $e){
              //        $con->consulta('ROLLBACK');
