@@ -357,7 +357,7 @@
 						<input type="text" id="nomcod4" class="col s5">
 						<a href="#modalCodeudor" class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
 					</div>
-					<button class="waves-effect waves-light btn" type="submit">Guardar Todo (6/6) </button>
+					<button class="waves-effect waves-light btn" onclick="finalizar()">Guardar Todo (6/6) </button>
 	  			</div>
 			
 	  		</div>
@@ -827,6 +827,17 @@
 					$("#nomcod2").val(dataJson[1].codeudor_nombre);
 					$("#nomcod3").val(dataJson[2].codeudor_nombre);
 					$("#nomcod4").val(dataJson[3].codeudor_nombre);
+				}
+			});
+		}
+
+		function finalizar(){
+			$.ajax({
+				url: "../php/Credito.php",
+				type: "post",
+				data: {acc:"fin",idsol:$("#idsol").val()},
+				success:function(responseText){
+					alert(responseText);
 				}
 			});
 		}

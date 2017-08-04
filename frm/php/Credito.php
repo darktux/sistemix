@@ -576,7 +576,7 @@
             if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;
 
-        case 'obtenerCodeudores':
+        case 'obtenerCodeudores'://no borrar, se utiliza en solicitud de credito
             $sql = "SELECT codeudor_id,codeudor_nombre FROM tab_codeudor WHERE codeudor_idsolicitudcredito='".$_POST['idsol']."'";
             $con->consulta($sql);
             $i=0;$salida=array();
@@ -585,6 +585,12 @@
                 $i++;
             }
             echo json_encode($salida);
+            break;
+
+        case 'fin':
+            $sql = "UPDATE tab_solicitud_credito SET solicitudcredito_estado=1 WHERE solicitudcredito_id=".$_POST['idsol'];
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;
     }
 	//$con->limpiarConsulta();
