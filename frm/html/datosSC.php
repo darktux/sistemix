@@ -288,7 +288,7 @@
 								<label for="pla">Plazo del crédito (Meses)</label>
 							</div>
 							<div class="input-field col s3">
-								<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
+								<input type="text" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00">
 								<label for="cuo" class="active">Cuota a pagar ($)</label>
 							</div>
 						</div>
@@ -731,7 +731,6 @@
 				processData: false,
 				success:function(data){
 					if(data.localeCompare("OK")){
-						alert("entra");
 						getCodeudores();
 					}else{
 						alert(data);
