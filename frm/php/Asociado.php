@@ -137,7 +137,7 @@
 
                 $con->consulta($sql2);
                 $con->consulta($sql1);
-
+                echo $sql1;
                 for ($i=1; $i < 5; $i++) { 
                     if( strcmp( $_POST['nom'.$i] ,"")!=0 ){
                         $sql3="
@@ -162,8 +162,7 @@
                         
                     }
                 }
-                $sql4="UPDATE tab_cuenta_movimiento set cuentamovimiento_comprobante='".$_POST['ncompro']."',
-                        cuentamovimiento_deposito='".$_POST['cuota']."' WHERE cuentamovimiento_cuentaid='01-01-".$_POST['corr']."' and cuentamovimiento_concepto='Apertura de cuenta'";
+                $sql4="UPDATE tab_cuenta_movimiento set cuentamovimiento_comprobante='".$_POST['ncompro']."', cuentamovimiento_fecha='".$_POST['fecses']."', cuentamovimiento_deposito='".$_POST['cuota']."' WHERE cuentamovimiento_cuentaid='01-01-".$_POST['corr']."' and cuentamovimiento_concepto='Apertura de cuenta'";
                 $con->consulta($sql4);
 
                 $con->consulta('COMMIT');
