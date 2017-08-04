@@ -438,10 +438,10 @@
                 solicitudcredito_telefonofijoconyuge='".$_POST['telc']."',
                 solicitudcredito_telefonocelularconyuge='".$_POST['celc']."',
                 solicitudcredito_lugartrabajoconyuge='".$_POST['lugc']."',
-                solicitudcredito_direcciontrabajoconyuge='".$_POST['dirtc']."'
+                solicitudcredito_direcciontrabajoconyuge='".$_POST['dirtc']."' 
                 WHERE solicitudcredito_id='".$_POST['idsol']."'";
             $con->consulta($sql);
-            if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}            
+            //if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}            
             break;
         case 'addsol3': //no borrar, se utiliza en solicitud de credito
             // $sql = "UPDATE tab_solicitud_credito SET

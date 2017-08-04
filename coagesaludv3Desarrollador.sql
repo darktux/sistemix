@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-07-2017 a las 22:55:17
+-- Tiempo de generación: 04-08-2017 a las 01:18:03
 -- Versión del servidor: 5.7.17-log
 -- Versión de PHP: 5.6.30
 
@@ -367,31 +367,10 @@ CREATE TABLE `tab_calculo` (
 --
 
 INSERT INTO `tab_calculo` (`calculos_correla`, `calculos_id`, `calculos_cuota`, `calculos_amortizacion`, `calculos_intereses`, `calculos_monto`) VALUES
-(1549, '15/Jul/2017 || Cuota #1', 26.44, 16.44, 10, 483.56),
-(1550, '15/Ago/2017 || Cuota #2', 26.44, 16.77, 9.67, 466.79),
-(1551, '15/Sep/2017 || Cuota #3', 26.44, 17.1, 9.34, 449.69),
-(1552, '15/Oct/2017 || Cuota #4', 26.44, 17.45, 8.99, 432.24),
-(1553, '15/Nov/2017 || Cuota #5', 26.44, 17.8, 8.64, 414.44),
-(1554, '15/Dic/2017 || Cuota #6', 26.44, 18.15, 8.29, 396.29),
-(1555, '15/Ene/2018 || Cuota #7', 26.44, 18.51, 7.93, 377.78),
-(1556, '15/Feb/2018 || Cuota #8', 26.44, 18.88, 7.56, 358.9),
-(1557, '15/Mar/2018 || Cuota #9', 26.44, 19.26, 7.18, 339.64),
-(1558, '15/Abr/2018 || Cuota #10', 26.44, 19.65, 6.79, 319.99),
-(1559, '15/May/2018 || Cuota #11', 26.44, 20.04, 6.4, 299.95),
-(1560, '15/Jun/2018 || Cuota #12', 26.44, 20.44, 6, 279.51),
-(1561, '15/Jul/2018 || Cuota #13', 26.44, 20.85, 5.59, 258.66),
-(1562, '15/Ago/2018 || Cuota #14', 26.44, 21.27, 5.17, 237.39),
-(1563, '15/Sep/2018 || Cuota #15', 26.44, 21.69, 4.75, 215.7),
-(1564, '15/Oct/2018 || Cuota #16', 26.44, 22.13, 4.31, 193.57),
-(1565, '15/Nov/2018 || Cuota #17', 26.44, 22.57, 3.87, 171),
-(1566, '15/Dic/2018 || Cuota #18', 26.44, 23.02, 3.42, 147.98),
-(1567, '15/Ene/2019 || Cuota #19', 26.44, 23.48, 2.96, 124.5),
-(1568, '15/Feb/2019 || Cuota #20', 26.44, 23.95, 2.49, 100.55),
-(1569, '15/Mar/2019 || Cuota #21', 26.44, 24.43, 2.01, 76.12),
-(1570, '15/Abr/2019 || Cuota #22', 26.44, 24.92, 1.52, 51.2),
-(1571, '15/May/2019 || Cuota #23', 26.44, 25.42, 1.02, 25.78),
-(1572, '15/Jun/2019 || Cuota #24', 26.3, 25.78, 0.52, 0),
-(1573, 'Totales', 634.42, 500, 134.42, 634.42);
+(1582, '02/Sep/2017 || Cuota #1', 168.34, 165.84, 2.5, 334.16),
+(1583, '02/Oct/2017 || Cuota #2', 168.34, 166.67, 1.67, 167.49),
+(1584, '02/Nov/2017 || Cuota #3', 168.33, 167.49, 0.84, 0),
+(1585, 'Totales', 505.01, 500, 5.01, 505.01);
 
 -- --------------------------------------------------------
 
@@ -450,6 +429,13 @@ CREATE TABLE `tab_codeudor` (
   `codeudor_lugartrabajoref2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tab_codeudor`
+--
+
+INSERT INTO `tab_codeudor` (`codeudor_id`, `codeudor_nombre`, `codeudor_dui`, `codeudor_nit`, `codeudor_edad`, `codeudor_profesionuoficio`, `codeudor_direccion`, `codeudor_estadocivil`, `codeudor_telefono`, `codeudor_celular`, `codeudor_no`, `codeudor_jefeinmediato`, `codeudor_tiempotrabajo`, `codeudor_puesto`, `codeudor_salario`, `codeudor_telefonotrabajo`, `codeudor_email`, `codeudor_otrosingresos`, `codeudor_gastovida`, `codeudor_pagodeudas`, `codeudor_otrosegresos`, `codeudor_nombreref1`, `codeudor_direccionref1`, `codeudor_telefonoref1`, `codeudor_celularref1`, `codeudor_lugartrabajoref1`, `codeudor_nombreref2`, `codeudor_direccionref2`, `codeudor_telefonoref2`, `codeudor_celularref2`, `codeudor_lugartrabajoref2`) VALUES
+(1, 'Codeudor', '08128379-1', '9234-309223-236-4', 45, 'asdhkjsdfs', 'skdgfsdhfjksd', 'Casado/a', '', '2342-3423', '', 'dfsfsd', '3fe', 'sdfsd', 500, '1231-2312', 'annfa@gmal.com', 250, 100, 2, 8, 'asdasda', 'xvxcvxcv', '1232-4234', '2343-2432', 'cxvxv', '23sdgsdgs', 'fhgvbnb', '3457-9865', '4567-8987', 'fbgjfgcv');
+
 -- --------------------------------------------------------
 
 --
@@ -489,7 +475,8 @@ CREATE TABLE `tab_credito` (
 INSERT INTO `tab_credito` (`credito_id`, `credito_monto`, `credito_cuota`, `credito_fechacontrato`, `credito_fechapago`, `credito_plazo`, `credito_fechafin`, `credito_estado`, `credito_solicitudcreditoid`, `credito_tipocreditoid`) VALUES
 (1, 500, 0, '2017-11-24', '2017-06-30', 1, '2017-12-24', 'En espera', 1, 1),
 (2, 800, 0, '2017-07-29', '2017-06-20', 36, '2020-07-29', 'En espera', 2, 1),
-(3, 500, 0, '2017-07-03', '2017-07-28', 12, '2018-07-03', 'En espera', 3, 1);
+(3, 500, 0, '2017-07-03', '2017-07-28', 12, '2018-07-03', 'En espera', 3, 1),
+(4, 100, 0, '2017-08-01', '2017-08-28', 5, '2018-01-01', 'En espera', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -1087,7 +1074,8 @@ INSERT INTO `tab_cuenta_movimiento` (`cuentamovimiento_id`, `cuentamovimiento_co
 (433, '5555', 'Voluntaria', '2017-02-02', 100, 0, 345, '01-01-002'),
 (434, NULL, 'Prueba', '2017-06-29', 23.56, 0, 48.56, '2-02-058'),
 (435, NULL, 'Apertura de cuenta', '2017-07-04', 500, 0, 500, '01-02-002'),
-(436, NULL, 'prueba de sistema', '2017-07-04', 100, 0, 600, '01-02-002');
+(436, NULL, 'prueba de sistema', '2017-07-04', 100, 0, 600, '01-02-002'),
+(437, NULL, 'pa la leche', '2017-07-27', 0, 150, 450, '01-02-002');
 
 -- --------------------------------------------------------
 
@@ -1162,17 +1150,27 @@ CREATE TABLE `tab_solicitud_credito` (
   `solicitudcredito_fechasesion` date NOT NULL,
   `solicitudcredito_numacta` int(11) NOT NULL,
   `solicitudcredito_numpunto` varchar(10) NOT NULL,
-  `solicitudcredito_tipopago` varchar(2) NOT NULL
+  `solicitudcredito_tipopago` varchar(2) NOT NULL,
+  `solicitudcredito_estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `tab_solicitud_credito`
 --
 
-INSERT INTO `tab_solicitud_credito` (`solicitudcredito_id`, `solicitudcredito_sexo`, `solicitudcredito_telefonofijo`, `solicitudcredito_telefonocelular`, `solicitudcredito_direcciontrabajo`, `solicitudcredito_jefeinmediato`, `solicitudcredito_tiempotrabajo`, `solicitudcredito_puesto`, `solicitudcredito_telefonotrabajo`, `solicitudcredito_nombreconyuge`, `solicitudcredito_sexoconyuge`, `solicitudcredito_duiconyuge`, `solicitudcredito_nitconyuge`, `solicitudcredito_fechanacimientoconyuge`, `solicitudcredito_profesionoficioconyuge`, `solicitudcredito_direccionconyuge`, `solicitudcredito_estadocivilconyuge`, `solicitudcredito_telefonofijoconyuge`, `solicitudcredito_telefonocelularconyuge`, `solicitudcredito_lugartrabajoconyuge`, `solicitudcredito_direcciontrabajoconyuge`, `solicitudcredito_sueldomensual`, `solicitudcredito_otrosingresos`, `solicitudcredito_totalingresos`, `solicitudcredito_gastovida`, `solicitudcredito_pagodeudas`, `solicitudcredito_otrosegresos`, `solicitudcredito_totalegresos`, `solicitudcredito_nombrereferencia`, `solicitudcredito_direccionreferencia`, `solicitudcredito_telefonofijoreferencia`, `solicitudcredito_telefonocelularreferencia`, `solicitudcredito_lugartrabajoreferencia`, `solicitudcredito_direcciontrabajoreferencia`, `solicitudcredito_nombrereferencia_laboral`, `solicitudcredito_direccionreferencia_laboral`, `solicitudcredito_telefonofijoreferencia_laboral`, `solicitudcredito_telefonocelularreferencia_laboral`, `solicitudcredito_lugartrabajoreferencia_laboral`, `solicitudcredito_direcciontrabajoreferencia_laboral`, `solicitudcredito_asociadoid`, `solicitudcredito_fechasesion`, `solicitudcredito_numacta`, `solicitudcredito_numpunto`, `solicitudcredito_tipopago`) VALUES
-(1, 'F', '2323-2323', '2323-2323', '', 'hghgjh', '3 meses', 'hkjhkkj', '2323-2323', 'asdasda', 'o', '12121212-1', '1212-121212-121-2', '1977-12-12', 'sdasda', 'sdsadad', 'Casado/a', '2312-3123', '1231-3212', 'dfsfdsfds', 'sdfsfs', 500, 200, 700, 100, 100, 0, 200, 'jklsajdlajsda', 'lkjsldalsdj', '1232-3232', '3232-3232', 'dvxdvs', 'asdasdsd', '', '', '', '', '', '', 15, '0000-00-00', 0, '', ''),
-(2, 'F', '1212-3123', '1231-2312', '', '2hkbhgujh', '5 años', 'vjbnb', '2345-7890', 'asdada', 'o', '12121212-1', '2222-222222-222-2', '1888-12-12', 'nlknkjnlknk', 'ugjhkjnknk', 'Casado/a', '2345-6789', '4567-8909', 'nkkk', 'nkjnkjnkj', 456, 67, 523, 56, 77, 9, 142, 'cxcvbljb', 'hjbnmnbhjn', '4567-8987', '2345-6789', 'mnbhjb,mnnb', 'ncfgvb,bhjhb', '', '', '', '', '', '', 16, '0000-00-00', 0, '', ''),
-(3, 'M', '', '', '', '', '', '', '', '', 'o', '', '', '0000-00-00', '', '', 'Casado/a', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 18, '0000-00-00', 0, '', '');
+INSERT INTO `tab_solicitud_credito` (`solicitudcredito_id`, `solicitudcredito_sexo`, `solicitudcredito_telefonofijo`, `solicitudcredito_telefonocelular`, `solicitudcredito_direcciontrabajo`, `solicitudcredito_jefeinmediato`, `solicitudcredito_tiempotrabajo`, `solicitudcredito_puesto`, `solicitudcredito_telefonotrabajo`, `solicitudcredito_nombreconyuge`, `solicitudcredito_sexoconyuge`, `solicitudcredito_duiconyuge`, `solicitudcredito_nitconyuge`, `solicitudcredito_fechanacimientoconyuge`, `solicitudcredito_profesionoficioconyuge`, `solicitudcredito_direccionconyuge`, `solicitudcredito_estadocivilconyuge`, `solicitudcredito_telefonofijoconyuge`, `solicitudcredito_telefonocelularconyuge`, `solicitudcredito_lugartrabajoconyuge`, `solicitudcredito_direcciontrabajoconyuge`, `solicitudcredito_sueldomensual`, `solicitudcredito_otrosingresos`, `solicitudcredito_totalingresos`, `solicitudcredito_gastovida`, `solicitudcredito_pagodeudas`, `solicitudcredito_otrosegresos`, `solicitudcredito_totalegresos`, `solicitudcredito_nombrereferencia`, `solicitudcredito_direccionreferencia`, `solicitudcredito_telefonofijoreferencia`, `solicitudcredito_telefonocelularreferencia`, `solicitudcredito_lugartrabajoreferencia`, `solicitudcredito_direcciontrabajoreferencia`, `solicitudcredito_nombrereferencia_laboral`, `solicitudcredito_direccionreferencia_laboral`, `solicitudcredito_telefonofijoreferencia_laboral`, `solicitudcredito_telefonocelularreferencia_laboral`, `solicitudcredito_lugartrabajoreferencia_laboral`, `solicitudcredito_direcciontrabajoreferencia_laboral`, `solicitudcredito_asociadoid`, `solicitudcredito_fechasesion`, `solicitudcredito_numacta`, `solicitudcredito_numpunto`, `solicitudcredito_tipopago`, `solicitudcredito_estado`) VALUES
+(1, 'F', '2323-2323', '2323-2323', '', 'hghgjh', '3 meses', 'hkjhkkj', '2323-2323', 'asdasda', 'o', '12121212-1', '1212-121212-121-2', '1977-12-12', 'sdasda', 'sdsadad', 'Casado/a', '2312-3123', '1231-3212', 'dfsfdsfds', 'sdfsfs', 500, 200, 700, 100, 100, 0, 200, 'jklsajdlajsda', 'lkjsldalsdj', '1232-3232', '3232-3232', 'dvxdvs', 'asdasdsd', '', '', '', '', '', '', 15, '0000-00-00', 0, '', '02', 0),
+(2, 'F', '1212-3123', '1231-2312', '', '2hkbhgujh', '5 años', 'vjbnb', '2345-7890', 'asdada', 'o', '12121212-1', '2222-222222-222-2', '1888-12-12', 'nlknkjnlknk', 'ugjhkjnknk', 'Casado/a', '2345-6789', '4567-8909', 'nkkk', 'nkjnkjnkj', 456, 67, 523, 56, 77, 9, 142, 'cxcvbljb', 'hjbnmnbhjn', '4567-8987', '2345-6789', 'mnbhjb,mnnb', 'ncfgvb,bhjhb', '', '', '', '', '', '', 16, '0000-00-00', 0, '', '01', 0),
+(3, 'M', '', '', '', '', '', '', '', '', 'o', '', '', '0000-00-00', '', '', 'Casado/a', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 18, '0000-00-00', 0, '', '02', 0),
+(4, 'M', '2372-7272', '7778-2828', '', 'bkjsdmxnkjvs', '3 meses', 'b,md ,nvxckd', '3424-3324', 'Beatriz Aguirre', 'o', '09239423-4', '2349-234923-942-3', '2017-08-01', 'Docente', 'kjashdnnmvbcas fh fjkah uhsdua sgasdhk', 'Casado/a', '2342-3423', '4234-2342', 'kkjsdhjansdha', 'kjsfkjasjdnasd', 450, 150, 600, 125, 25, 20, 170, 'nasajsd', 'jsndsjk', '2343-5232', '3456-7896', 'hhjhgkb', 'bnbmjkb', 'dfishfshu', 'sudfsiufisd', '1234-4323', '4432-4434', 'bmnn,ghjhkj', 'hjbjhbbvnb', 29, '0000-00-00', 0, '', '01', 0),
+(5, 'F', '2345-6789', '7654-3345', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 17, '0000-00-00', 0, '', '', 0),
+(6, 'F', '2345-6765', '7654-3234', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 18, '0000-00-00', 0, '', '', 0),
+(7, 'F', '2345-6789', '7890-9878', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0),
+(8, 'F', '2345-6789', '7890-9878', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0),
+(9, 'F', '2345-6789', '7890-9878', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0),
+(10, 'F', '2345-6789', '7890-9878', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0),
+(11, 'F', '1111-1111', '1111-1111', '', '', '', '', '', '', '', '', '', '0000-00-00', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0),
+(12, 'F', '2345-6765', '1111-2321', '', '', '', '', '', 'jajajajajja', 'o', '11111111-1', '2222-222222-222-2', '1988-12-12', 'xbcgbv', 'xcbvcb ', 'Casado/a', '2343-4543', '3454-3345', 'cbvb', 'vbvb', 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', 19, '0000-00-00', 0, '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -1410,7 +1408,7 @@ ALTER TABLE `tab_asociado`
 -- AUTO_INCREMENT de la tabla `tab_calculo`
 --
 ALTER TABLE `tab_calculo`
-  MODIFY `calculos_correla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1574;
+  MODIFY `calculos_correla` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1586;
 --
 -- AUTO_INCREMENT de la tabla `tab_capital`
 --
@@ -1420,12 +1418,12 @@ ALTER TABLE `tab_capital`
 -- AUTO_INCREMENT de la tabla `tab_codeudor`
 --
 ALTER TABLE `tab_codeudor`
-  MODIFY `codeudor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codeudor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito`
 --
 ALTER TABLE `tab_credito`
-  MODIFY `credito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `credito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tab_credito_movimiento`
 --
@@ -1435,7 +1433,7 @@ ALTER TABLE `tab_credito_movimiento`
 -- AUTO_INCREMENT de la tabla `tab_cuenta_movimiento`
 --
 ALTER TABLE `tab_cuenta_movimiento`
-  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=437;
+  MODIFY `cuentamovimiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=438;
 --
 -- AUTO_INCREMENT de la tabla `tab_institucion_salud`
 --
@@ -1445,7 +1443,7 @@ ALTER TABLE `tab_institucion_salud`
 -- AUTO_INCREMENT de la tabla `tab_solicitud_credito`
 --
 ALTER TABLE `tab_solicitud_credito`
-  MODIFY `solicitudcredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `solicitudcredito_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `tab_sucursal`
 --
