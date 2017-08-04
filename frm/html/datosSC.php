@@ -288,8 +288,8 @@
 								<label for="pla">Plazo del crédito (Meses)</label>
 							</div>
 							<div class="input-field col s3">
-								<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
-								<label for="cuo" class="active">Cuota a pagar ($)</label>
+								<input type="text" name="cuo" class="teal-text" id="cuo" readonly>
+								<label id="labcuo" for="cuo">Cuota a pagar ($)</label>
 							</div>
 						</div>
 							
@@ -766,7 +766,8 @@
 			        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
 			        success:function(responseText){
 			        		//alert(responseText);
-			        		$('#cuo').val(responseText);     	
+			        		$('#cuo').val(responseText);
+			        		$('#labcuo').addClass('active');
 			        }
 		    	});
 			}

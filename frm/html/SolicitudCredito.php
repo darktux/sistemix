@@ -253,7 +253,10 @@
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-        	
+        	var id=JSON.stringify(row.asociado_id).replace(/"/gi,'');
+        	var name=JSON.stringify(row.asociado_nombre).replace(/"/gi,'');
+        	window.open("html/datosSC.php?id="+id+"&name="+name, '_blank');
+        	$('#modal1').modal('close');
         },
 /*FINALIZA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON ELIMINAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
@@ -295,14 +298,11 @@
 /*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .new': function (e, value, row, index) {
-        	 /********************************************************************************************************/
+        	/********************************************************************************************************/
         	var id=JSON.stringify(row.asociado_id).replace(/"/gi,'');
         	var name=JSON.stringify(row.asociado_nombre).replace(/"/gi,'');
         	window.open("html/datosSC.php?id="+id+"&name="+name, '_blank');
         	$('#modal1').modal('close');
-   
-        	
-        	
         },
 /*FINALIZA ACCION DEL BOTON NUEVA CUENTA (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON IMPRIMIR CONNTRATO (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
