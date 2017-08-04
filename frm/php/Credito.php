@@ -441,74 +441,50 @@
                 solicitudcredito_direcciontrabajoconyuge='".$_POST['dirtc']."' 
                 WHERE solicitudcredito_id='".$_POST['idsol']."'";
             $con->consulta($sql);
-            //if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}            
+            if($con->getResultado()){echo "OK";}else{echo "Error al guardar";}            
             break;
         case 'addsol3': //no borrar, se utiliza en solicitud de credito
-            // $sql = "UPDATE tab_solicitud_credito SET
-            //     solicitudcredito_telefonotrabajo='".$_POST['telt']."',
-            //     solicitudcredito_jefeinmediato='".$_POST['jefe']."',
-            //     solicitudcredito_puesto='".$_POST['pues']."',
-            //     solicitudcredito_tiempotrabajo='".$_POST['timet']."',
-            //     solicitudcredito_sueldomensual='".$_POST['suel']."',
-            //     solicitudcredito_otrosingresos='".$_POST['otroi']."',
-            //     solicitudcredito_totalingresos='".$_POST['toti']."',
-            //     solicitudcredito_gastovida='".$_POST['gasv']."',
-            //     solicitudcredito_pagodeudas='".$_POST['pagd']."',
-            //     solicitudcredito_otrosegresos='".$_POST['otroe']."',
-            //     solicitudcredito_totalegresos='".$_POST['tote']."' ";
-            // $con->consulta($sql);
-            // if($con->getResultado()){echo "OK"} else{echo "Error al guardar";}
+            $sql = "UPDATE tab_solicitud_credito SET
+                solicitudcredito_telefonotrabajo='".$_POST['telt']."',
+                solicitudcredito_jefeinmediato='".$_POST['jefe']."',
+                solicitudcredito_puesto='".$_POST['pues']."',
+                solicitudcredito_tiempotrabajo='".$_POST['timet']."',
+                solicitudcredito_sueldomensual='".$_POST['suel']."',
+                solicitudcredito_otrosingresos='".$_POST['otroi']."',
+                solicitudcredito_totalingresos='".$_POST['toti']."',
+                solicitudcredito_gastovida='".$_POST['gasv']."',
+                solicitudcredito_pagodeudas='".$_POST['pagd']."',
+                solicitudcredito_otrosegresos='".$_POST['otroe']."',
+                solicitudcredito_totalegresos='".$_POST['tote']."'
+                WHERE solicitudcredito_id='".$_POST['idsol']."' ";
+
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
+            break;
+        case 'addsol4': //no borrar, se utiliza en solicitud de credito
+            $sql = "UPDATE tab_solicitud_credito SET
+                solicitudcredito_nombrereferencia='".$_POST['nomr']."',
+                solicitudcredito_direccionreferencia='".$_POST['dirr']."',
+                solicitudcredito_telefonofijoreferencia='".$_POST['telr']."',
+                solicitudcredito_telefonocelularreferencia='".$_POST['celr']."',
+                solicitudcredito_lugartrabajoreferencia='".$_POST['lugtr']."',
+                solicitudcredito_direcciontrabajoreferencia='".$_POST['dirtr']."',
+                solicitudcredito_nombrereferencia_laboral='".$_POST['nomrlab']."',
+                solicitudcredito_direccionreferencia_laboral='".$_POST['dirrlab']."',
+                solicitudcredito_telefonofijoreferencia_laboral='".$_POST['telrlab']."',
+                solicitudcredito_telefonocelularreferencia_laboral='".$_POST['celrlab']."',
+                solicitudcredito_lugartrabajoreferencia_laboral='".$_POST['lugtrlab']."',
+                solicitudcredito_direcciontrabajoreferencia_laboral='".$_POST['dirtrlab']."'
+                WHERE solicitudcredito_id='".$_POST['idsol']."' ";
+            $con->consulta($sql);
+            if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
-             //                        solicitudcredito_nombrereferencia,
-             //                        solicitudcredito_direccionreferencia,
-             //                        solicitudcredito_telefonofijoreferencia,
-             //                        solicitudcredito_telefonocelularreferencia,
-             //                        solicitudcredito_lugartrabajoreferencia,
-             //                        solicitudcredito_direcciontrabajoreferencia,
-                                    
-             //                        solicitudcredito_nombrereferencia_laboral, 
-             //                        solicitudcredito_direccionreferencia_laboral, 
-             //                        solicitudcredito_telefonofijoreferencia_laboral, 
-             //                        solicitudcredito_telefonocelularreferencia_laboral, 
-             //                        solicitudcredito_lugartrabajoreferencia_laboral, 
-             //                        solicitudcredito_direcciontrabajoreferencia_laboral, 
-
-             //                        solicitudcredito_asociadoid,
              //                        solicitudcredito_tipopago
-             //                    ) 
-             //                VALUES
-             //                 
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-             //                        ".$_POST[''].",
-                                    
-             //                        '".$_POST['nomr']."',
-             //                        '".$_POST['dirr']."',
-             //                        '".$_POST['telr']."',
-             //                        '".$_POST['celr']."',
-             //                        '".$_POST['lugtr']."',
-             //                        '".$_POST['dirtr']."',
-
-             //                        '".$_POST['nomrlab']."',
-             //                        '".$_POST['dirrlab']."',
-             //                        '".$_POST['telrlab']."',
-             //                        '".$_POST['celrlab']."',
-             //                        '".$_POST['lugtrlab']."',
-             //                        '".$_POST['dirtrlab']."',
-
-             //                        
              //                        '".$_POST['tippag']."'
-             //                    )
-             //            "
-             //        );
-
+   
              //        $rs = mysql_query("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
              //            if ($row = mysql_fetch_row($rs)) {
              //                    $id = trim($row[0]);

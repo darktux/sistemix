@@ -10,7 +10,6 @@
 	<link rel="shortcut icon" type="imgage/png" href="../../img/logos/logo.png">
 </head>
 <body>
-		
 		<input id="idsol" type="hidden" value="">
 		
 		<div class="teal" id="">
@@ -59,7 +58,7 @@
 								<label for="cel">Tel&eacute;fono celular</label>
 							</div>
 						</div>
-						<button class="waves-effect waves-light btn" type="submit">Siguiente (1/6)</button>	
+						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (1/6)</button>	
 					</form>				
 				</div>
 
@@ -134,7 +133,7 @@
 					          	<label for="dirtc">Direcci&oacute;n de trabajo conyugue</label>
 						    </div>			    
 						</div>
-						<button class="waves-effect waves-light btn" type="submit">Siguiente (2/6)</button>
+						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (2/6)</button>
 					</form>
 				</div>
 
@@ -192,78 +191,176 @@
 								<label for="tote" class="active">Total egresos</label>
 							</div>			    
 						</div>
-						<button class="waves-effect waves-light btn" type="submit">Siguiente (3/6)</button>
+						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (3/6)</button>
 					</form>
 	  			</div>
 	  			
 	  			<div id="referencias" class="col s12 white swipeable">
-					<h6 class="flow-text center teal white-text">Referencia personal</h6>
-	  				<div class="row">
-						<div class="input-field col s6"> 
-				          	<input id="nomr" name="nomr" type="text" class="validate">
-				          	<label for="nomr">Nombre referencia</label>
-        				</div>
-						<div class="input-field col s6">
-							<input type="text" id="dirr" name="dirr"></input>
-							<label for="dirr">Direcci&oacute;n de referencia</label>
+		  			<form id="formReferencias">
+						<h6 class="flow-text center teal white-text">Referencia personal</h6>
+		  				<div class="row">
+							<div class="input-field col s6"> 
+					          	<input id="nomr" name="nomr" type="text" class="validate">
+					          	<label for="nomr">Nombre referencia</label>
+	        				</div>
+							<div class="input-field col s6">
+								<input type="text" id="dirr" name="dirr"></input>
+								<label for="dirr">Direcci&oacute;n de referencia</label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<input type="text" name="telr" id="telr">
-							<label for="telr">Tel&eacute;fono fijo de referencia</label>
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="text" name="telr" id="telr">
+								<label for="telr">Tel&eacute;fono fijo de referencia</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="text" name="celr" id="celr">
+								<label for="celr">Celular de referencia</label>
+							</div>
 						</div>
-						<div class="input-field col s6">
-							<input type="text" name="celr" id="celr">
-							<label for="celr">Celular de referencia</label>
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="text" id="lugtr" name="lugtr"></input>
+								<label for="lugtr">Lugar de trabajo de referencia</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="text" id="dirtr" name="dirtr"></input>
+								<label for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<input type="text" id="lugtr" name="lugtr"></input>
-							<label for="lugtr">Lugar de trabajo de referencia</label>
-						</div>
-						<div class="input-field col s6">
-							<input type="text" id="dirtr" name="dirtr"></input>
-							<label for="dirtr">Direcci&oacute;n de trabajo de referencia</label>
-						</div>
-					</div>
 
 
-					<h6 class="flow-text center teal white-text">Referencia laboral</h6>
-					<div class="row">
-						<div class="input-field col s6"> 
-				          	<input id="nomrlab" name="nomrlab" type="text" class="validate">
-				          	<label for="nomrlab">Nombre referencia</label>
-        				</div>
-						<div class="input-field col s6">
-							<input type="text" id="dirrlab" name="dirrlab"></input>
-							<label for="dirrlab">Direcci&oacute;n de referencia</label>
+						<h6 class="flow-text center teal white-text">Referencia laboral</h6>
+						<div class="row">
+							<div class="input-field col s6"> 
+					          	<input id="nomrlab" name="nomrlab" type="text" class="validate">
+					          	<label for="nomrlab">Nombre referencia</label>
+	        				</div>
+							<div class="input-field col s6">
+								<input type="text" id="dirrlab" name="dirrlab"></input>
+								<label for="dirrlab">Direcci&oacute;n de referencia</label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<input type="text" name="telrlab" id="telrlab">
-							<label for="telrlab">Tel&eacute;fono fijo de referencia</label>
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="text" name="telrlab" id="telrlab">
+								<label for="telrlab">Tel&eacute;fono fijo de referencia</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="text" name="celrlab" id="celrlab">
+								<label for="celrlab">Celular de referencia</label>
+							</div>
 						</div>
-						<div class="input-field col s6">
-							<input type="text" name="celrlab" id="celrlab">
-							<label for="celrlab">Celular de referencia</label>
+						<div class="row">
+							<div class="input-field col s6">
+								<textarea id="lugtrlab" name="lugtrlab" class="materialize-textarea"></textarea>
+								<label for="lugtrlab">Lugar de trabajo de referencia</label>
+							</div>
+							<div class="input-field col s6">
+								<textarea id="dirtrlab" name="dirtrlab" class="materialize-textarea"></textarea>
+								<label for="dirtrlab">Direcci&oacute;n de trabajo de referencia</label>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<textarea id="lugtrlab" name="lugtrlab" class="materialize-textarea"></textarea>
-							<label for="lugtrlab">Lugar de trabajo de referencia</label>
-						</div>
-						<div class="input-field col s6">
-							<textarea id="dirtrlab" name="dirtrlab" class="materialize-textarea"></textarea>
-							<label for="dirtrlab">Direcci&oacute;n de trabajo de referencia</label>
-						</div>
-					</div>
+						<button class="waves-effect waves-light btn" type="submit">Guardar y Continuar (4/6)</button>
+		  			</form>
 	  			</div>
 
 	  			<div id="codeudor" class="col s12 white swipeable">
+	  				<div class="row">
+	  					<input type="hidden" id="idcod1">
+						<input type="text" id="nomcod1" class="col s4">
+						<a class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+					</div>
+					<div class="row">
+	  					<input type="hidden" id="idcod2">
+						<input type="text" id="nomcod2" class="col s4">
+						<a class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+					</div>
+					<div class="row">
+	  					<input type="hidden" id="idcod3">
+						<input type="text" id="nomcod3" class="col s4">
+						<a class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+					</div>
+					<div class="row">
+	  					<input type="hidden" id="idcod4">
+						<input type="text" id="nomcod4" class="col s4">
+						<a class="waves-effect waves-light btn"><i class="material-icons">add</i></a>
+					</div>
+	  			</div>
+
+				<div id="credito" class="col s12 white swipeable">
+					<div class="row">
+						<div class="input-field col s3">
+						    <select class="" id="tipcreid" name="tipcreid" required onchange="calcular()" autocomplete="off">
+						    	<option value="0" disabled selected>Seleccionar</option>
+						    </select>
+						    <label for="tipcreid">Tipos de crédito</label>
+						</div>
+						<div class="input-field col s3">
+							<input type="number" name="mon" id="mon" value='0.00' min="0.00" onchange="calcular()" onkeyup="calcular()" required>
+							<label for="mon" class="active">Monto del crédito ($)</label>
+						</div>
+						<div class="input-field col s3">
+							<input type="number" name="pla" onchange="calcular()" onkeyup="calcular()"  id="pla" min="0" required>
+							<label for="pla">Plazo del crédito (Meses)</label>
+						</div>
+						<div class="input-field col s3">
+							<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
+							<label for="cuo" class="active">Cuota a pagar ($)</label>
+						</div>
+					</div>
+						
+					<div class="row">
+						<div class="input-field col s4">
+							<input type="date" name="feccon" onchange="fechaf()" id="feccon" required>
+							<label for="feccon" class="active">Fecha del contrato</label>
+						</div>
+						<div class="input-field col s4">
+							<input type="date" name="fecpag" id="fecpag" required>
+							<label for="fecpag" class="active">Fecha de pago</label>
+						</div>
+						<div class="input-field col s4">
+							<input type="date" name="fecfin" id="fecfin" readonly  required>
+							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s2">
+							<label for="tippag">Tipo de Pago</label> 
+						</div>
+						<div class="input-field inline col s2">
+							<input class="with-gap" name="tippag" type="radio" id="vent" value="01" checked />
+							<label for="vent">Ventanilla</label> 	
+						</div>
+						<div class="input-field inline col s2">
+							<input class="with-gap" name="tippag" type="radio" id="plan" value="02" />	
+							<label for="plan">Planilla</label>
+						</div>
+						<div class="input-field col s6">
+								<select class="" id="est" name="est">
+									<option value="0" disabled >Seleccionar</option>
+									<option value="En espera">En espera</option>
+							    	<option value="Activo">Activo</option>
+							    	<option value="Congelado">Congelado</option>
+							    	<option value="Cerrado">Cerrado</option>
+							    </select>
+								<label for="est">Estado</label>
+							</div>
+					</div>
+				</div>
+			
+	  		</div>
+			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO *****************************************************************************************************************************-->
+		</div>
+		<div class="modal-footer" id="botonera">
+			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" onclick="window.close()" type="reset">Cancelar</button>
+		</div>
+
+
+
+	<div class="modal">
 					<h6 class="flow-text center teal white-text">Datos Personales del Codeudor</h6>
 	  				<div class="row">
 						<div class="input-field col s3"> 
@@ -434,77 +531,7 @@
 							<label for="dirrco2">Dirección actual</label>
 						</div>
 					</div>
-	  			</div>
-
-				<div id="credito" class="col s12 white swipeable">
-					<div class="row">
-						<div class="input-field col s3">
-						    <select class="" id="tipcreid" name="tipcreid" required onchange="calcular()" autocomplete="off">
-						    	<option value="0" disabled selected>Seleccionar</option>
-						    </select>
-						    <label for="tipcreid">Tipos de crédito</label>
-						</div>
-						<div class="input-field col s3">
-							<input type="number" name="mon" id="mon" value='0.00' min="0.00" onchange="calcular()" onkeyup="calcular()" required>
-							<label for="mon" class="active">Monto del crédito ($)</label>
-						</div>
-						<div class="input-field col s3">
-							<input type="number" name="pla" onchange="calcular()" onkeyup="calcular()"  id="pla" min="0" required>
-							<label for="pla">Plazo del crédito (Meses)</label>
-						</div>
-						<div class="input-field col s3">
-							<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
-							<label for="cuo" class="active">Cuota a pagar ($)</label>
-						</div>
-					</div>
-						
-					<div class="row">
-						<div class="input-field col s4">
-							<input type="date" name="feccon" onchange="fechaf()" id="feccon" required>
-							<label for="feccon" class="active">Fecha del contrato</label>
-						</div>
-						<div class="input-field col s4">
-							<input type="date" name="fecpag" id="fecpag" required>
-							<label for="fecpag" class="active">Fecha de pago</label>
-						</div>
-						<div class="input-field col s4">
-							<input type="date" name="fecfin" id="fecfin" readonly  required>
-							<label for="fecfin" class="active">Fecha aproximada de finalización del crédito</label>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="input-field col s2">
-							<label for="tippag">Tipo de Pago</label> 
-						</div>
-						<div class="input-field inline col s2">
-							<input class="with-gap" name="tippag" type="radio" id="vent" value="01" checked />
-							<label for="vent">Ventanilla</label> 	
-						</div>
-						<div class="input-field inline col s2">
-							<input class="with-gap" name="tippag" type="radio" id="plan" value="02" />	
-							<label for="plan">Planilla</label>
-						</div>
-						<div class="input-field col s6">
-								<select class="" id="est" name="est">
-									<option value="0" disabled >Seleccionar</option>
-									<option value="En espera">En espera</option>
-							    	<option value="Activo">Activo</option>
-							    	<option value="Congelado">Congelado</option>
-							    	<option value="Cerrado">Cerrado</option>
-							    </select>
-								<label for="est">Estado</label>
-							</div>
-					</div>
-				</div>
-
-	  		</div>
-			<!-- FINALIZAN ELEMENTOS DEL FORMULARIO *****************************************************************************************************************************-->
-		</div>
-		<div class="modal-footer" id="botonera">
-			<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-			<button class="modal-action modal-close waves-effect waves-light btn-flat" onclick="window.close()" type="reset">Cancelar</button>
-		</div>
+	</div>
 	
 		
 
@@ -626,9 +653,30 @@
 				contentType: false,
 				processData: false,
 				success:function(data){
-					alert(data);
 					if(data.localeCompare("OK")){
 						$('ul.tabs').tabs('select_tab', 'referencias');
+					}else{
+						alert(data);
+					}
+				}
+			});
+		});
+		$("#formReferencias").on("submit",function(e){
+			e.preventDefault();
+			var formData = new FormData(document.getElementById("formReferencias"));
+			formData.append("idsol",$("#idsol").val());
+			formData.append("acc", "addsol4");
+			$.ajax({
+				url: "../php/Credito.php",
+				type: "post",
+				dataType: "html",
+				data: formData,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success:function(data){
+					if(data.localeCompare("OK")){
+						$('ul.tabs').tabs('select_tab', 'codeudor');
 					}else{
 						alert(data);
 					}
