@@ -288,8 +288,8 @@
 								<label for="pla">Plazo del crédito (Meses)</label>
 							</div>
 							<div class="input-field col s3">
-								<input type="text" name="cuo" class="teal-text" id="cuo" readonly>
-								<label id="labcuo" for="cuo">Cuota a pagar ($)</label>
+								<input type="number" name="cuo" class="teal-text" id="cuo" disabled="true" value="0.00" min="0.00" step="0.01" required>
+								<label for="cuo" class="active">Cuota a pagar ($)</label>
 							</div>
 						</div>
 							
@@ -540,7 +540,7 @@
 			</div>
 			<div class="modal-footer">
 				<button class="waves-effect waves-light btn" type="submit">Guardar</button>
-				<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+				<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset" onclick="getCodeudores();">Cancelar</button>
 			</div>
 		</form>
 	</div>
@@ -575,10 +575,10 @@
 			$("#telrco2").mask("9999-9999",{placeholder:" "});
 			$("#celrco2").mask("9999-9999",{placeholder:" "});
 			$('.tooltipped').tooltip({delay: 50});
-			
+			$('.modal').modal();
 			$('select').material_select('destroy');
 			$('select').material_select();
-			$('.modal').modal();
+
 			//$("#botonera").hide();
 
 			$.ajax({
@@ -731,23 +731,8 @@
 				processData: false,
 				success:function(data){
 					if(data.localeCompare("OK")){
-						$.ajax({
-							url: "../php/Credito.php",
-							type: "post",
-							dataType: "html",
-							data: {acc:"getCodeudores",idsol:$("#idsol").val()},
-							cache: false,
-							contentType: false,
-							processData: false,
-							success:function(responseText){
-								alert(responseText);
-								var obj = $.parseJSON(responseText);
-					        	$.each(obj, function(i,item){
-					        		//console.log(item.tipocredito_id);
-					        		//console.log(item.tipocredito_nombre);
-					        	});
-							}
-						});
+						alert("entra");
+						getCodeudores();
 					}else{
 						alert(data);
 					}
@@ -766,8 +751,7 @@
 			        data:{acc:'getcuota', monto:$('#mon').val(), tiempo:$('#pla').val(), credid:$('#tipcreid').val()},
 			        success:function(responseText){
 			        		//alert(responseText);
-			        		$('#cuo').val(responseText);
-			        		$('#labcuo').addClass('active');
+			        		$('#cuo').val(responseText);     	
 			        }
 		    	});
 			}
@@ -831,6 +815,21 @@
 		function sume2()
 		{
 			$('#totegrco').val(parseFloat($('#gastvidco').val())+parseFloat($('#pagdeuco').val())+parseFloat($('#otregrco').val()));
+		}
+
+		function getCodeudores(){
+			$.ajax({
+				url: "../php/Credito.php",
+				type: "post",
+				data: {acc:"obtenerCodeudores",idsol:$("#idsol").val()},
+				success:function(responseText){
+					var dataJson=eval(responseText);	
+					$("#nomcod1").val(dataJson[0].codeudor_nombre);
+					$("#nomcod2").val(dataJson[1].codeudor_nombre);
+					$("#nomcod3").val(dataJson[2].codeudor_nombre);
+					$("#nomcod4").val(dataJson[3].codeudor_nombre);
+				}
+			});
 		}
 
 

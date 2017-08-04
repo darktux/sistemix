@@ -576,8 +576,9 @@
             if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;
 
-        case 'getCodeudores':
-            $con->consulta("SELECT * FROM tab_codeudor WHERE codeudor_idsolicitudcredito='".$_POST['idsol']."'");
+        case 'obtenerCodeudores':
+            $sql = "SELECT codeudor_id,codeudor_nombre FROM tab_codeudor WHERE codeudor_idsolicitudcredito='".$_POST['idsol']."'";
+            $con->consulta($sql);
             $i=0;$salida=array();
             while ($fila = mysql_fetch_array($con->getResultado(), MYSQL_ASSOC)) {       
                 $salida[$i]=$fila;
