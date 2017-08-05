@@ -92,15 +92,15 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s4 m4">	
-					<input id="fecses" name="fecses" type="date" autofocus="true" value="<?php date_default_timezone_set('America/El_Salvador'); echo date("Y-m-d");?>">
+					<input id="fecses" name="fecses" type="date" autofocus="true" required>
 					<label class="active" for="fecses" >Fecha de sesión</label>
 				</div>
 				<div class="input-field col s4 m4">	
-					<input id="nacta" name="nacta" type="number" min="0">
+					<input id="nacta" name="nacta" type="number" min="0" required>
 					<label for="nacta" >N° de acta</label>
 				</div>
 				<div class="input-field col s4 m4">	
-					<input id="npunto" name="npunto" type="text">
+					<input id="npunto" name="npunto" type="text" required>
 					<label for="npunto" >N° de punto</label>
 				</div>
 			</div>
@@ -208,21 +208,37 @@
 /*FINALIZA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
-        return [
-        	'&nbsp;<a class="aprob ml10" href="javascript:void(0)" title="Aprobar">',
-                '<i class="material-icons">check</i>',
-            '</a>',
-            '&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
-                '<i class="material-icons">mode_edit</i>',
-            '</a>',
-            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
-                '<i class="material-icons">delete</i>',
-            '</a>',
-            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
-                '<i class="material-icons">print</i>',
-            '</a>',
-            
-        ].join('');
+		var estado = JSON.stringify(row.solicitudcredito_estado).replace(/"/gi,'');
+		if(estado=="0"){//0 = Solicitud Incompleta, 1 = Solicitud Completa
+			return [
+	            '&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+	                '<i class="material-icons">mode_edit</i>',
+	            '</a>',
+	            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+	                '<i class="material-icons">delete</i>',
+	            '</a>',
+	            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
+	                '<i class="material-icons">print</i>',
+	            '</a>',
+        	].join('');
+		}else{
+			return [
+	        	'&nbsp;<a class="aprob ml10" href="javascript:void(0)" title="Aprobar">',
+	                '<i class="material-icons">check</i>',
+	            '</a>',
+	            '&nbsp;<a class="edit ml10" href="javascript:void(0)" title="Modificar">',
+	                '<i class="material-icons">mode_edit</i>',
+	            '</a>',
+	            '&nbsp;<a class="remove ml10" href="javascript:void(0)" title="Eliminar">',
+	                '<i class="material-icons">delete</i>',
+	            '</a>',
+	            '&nbsp;<a class="imprimir ml10" href="javascript:void(0)" title="Imprimir">',
+	                '<i class="material-icons">print</i>',
+	            '</a>',
+        	].join('');
+
+		}
+        
     }
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/

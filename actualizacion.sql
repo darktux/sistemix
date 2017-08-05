@@ -1,5 +1,7 @@
 ALTER TABLE `tab_solicitud_credito` ADD COLUMN `solicitudcredito_tipopago` varchar(2) NOT NULL;
 ALTER TABLE `tab_solicitud_credito` ADD `solicitudcredito_estado` INT NOT NULL AFTER `solicitudcredito_tipopago`;
+ALTER TABLE `tab_solicitud_credito` ADD `solicitudcredito_numrefcre` VARCHAR(10) NOT NULL AFTER `solicitudcredito_estado`;
+ALTER TABLE `tab_credito_movimiento` ADD `creditomovimiento_concepto` VARCHAR(200) NOT NULL AFTER `creditomovimiento_id`;
 
 
 CREATE TABLE `tab_codeudor` (

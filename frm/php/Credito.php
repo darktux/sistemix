@@ -370,6 +370,7 @@
                     SELECT 
                         solicitudcredito_id,
                         solicitudcredito_tipopago,
+                        solicitudcredito_estado,
                         asociado_correlativo,
                         asociado_nombre,
                         asociado_dui,
@@ -578,7 +579,7 @@
             )";
             $con->consulta($sql);
             if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
-            break;
+            break; 
 
         case 'obtenerCodeudores'://no borrar, se utiliza en solicitud de credito
             $sql = "SELECT codeudor_id,codeudor_nombre FROM tab_codeudor WHERE codeudor_idsolicitudcredito='".$_POST['idsol']."'";
