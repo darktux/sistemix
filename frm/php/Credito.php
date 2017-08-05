@@ -419,6 +419,20 @@
             $con->consulta("SELECT MAX(solicitudcredito_id) AS id FROM tab_solicitud_credito");
             if ($row = mysql_fetch_row($con->getResultado()))
                 $id = trim($row[0]);
+            $sql="INSERT INTO tab_credito(
+                credito_monto,
+                credito_cuota,
+                credito_estado,
+                credito_solicitudcreditoid,
+                credito_tipocreditoid
+                ) 
+                VALUES('0',
+                    '0',
+                    'Incompleto',
+                    '".$id."',
+                    '1'
+            )";
+            $con->consulta($sql);
             $datos[] = array(
                 'idsol'=>$id,
                 'est'=>'OK'
@@ -484,27 +498,17 @@
                 solicitudcredito_tipopago='".$_POST['tippag']."'
                 WHERE solicitudcredito_id='".$_POST['idsol']."' ";
             $con->consulta($sql);
-            $sql="INSERT INTO tab_credito(
-                credito_monto,
-                credito_cuota,
-                credito_fechacontrato,
-                credito_fechapago,
-                credito_plazo,
-                credito_fechafin,
-                credito_estado,
-                credito_solicitudcreditoid,
-                credito_tipocreditoid
-                ) 
-                VALUES('".$_POST['mon']."',
-                    '".$_POST['cuo']."',
-                    '".$_POST['feccon']."',
-                    '".$_POST['fecpag']."',
-                    '".$_POST['pla']."',
-                    '".$_POST['fecfin']."',
-                    '".$_POST['est']."',
-                    '".$_POST['idsol']."',
-                    '".$_POST['tipcreid']."'
-            )";
+            $sql="UPDATE tab_credito SET
+                credito_monto='".$_POST['mon']."',
+                credito_cuota='".$_POST['cuo']."',
+                credito_fechacontrato='".$_POST['feccon']."',
+                credito_fechapago='".$_POST['fecpag']."',
+                credito_plazo='".$_POST['pla']."',
+                credito_fechafin='".$_POST['fecfin']."',
+                credito_estado='".$_POST['est']."',
+                credito_tipocreditoid='".$_POST['tipcreid']."'
+                WHERE credito_solicitudcreditoid='".$_POST['idsol']."'";
+                
             $con->consulta($sql);
             if($con->getResultado()){echo "OK";} else{echo "Error al guardar";}
             break;

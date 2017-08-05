@@ -144,7 +144,7 @@
 		  			<form id="formLaborales">
 						<div class="row">
 							<div class="input-field col s3">
-								<input type="text" name="telt" id="telt">
+								<input type="text" name="telt" id="telt" required>
 								<label class="inventado" for="telt">Tel&eacute;fono de trabajo</label>
 							</div>
 							<div class="input-field col s3">
@@ -163,7 +163,7 @@
 						<div class="row">
 							<h6 class="center"><strong>Ingresos</strong></h6>
 							<div class="input-field col s4">			  		
-								<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00">
+								<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00" required>
 								<label for="suel" class="active">Sueldo mensual ($)</label>
 							</div>
 							<div class="input-field col s4">			  		
@@ -714,137 +714,149 @@
 		//Envio de formularios
 		$("#formPersonales").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formPersonales"));
-			formData.append("acc", "addsol1");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					//if(data.localeCompare("OK")){
-					var dataJson = eval(data);
-					if(dataJson[0].est=="OK"){
-						$("#idsol").val(dataJson[0].idsol);
-						$('ul.tabs').tabs('select_tab', 'familiares');
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formPersonales"));
+				formData.append("acc", "addsol1");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						//if(data.localeCompare("OK")){
+						var dataJson = eval(data);
+						if(dataJson[0].est=="OK"){
+							$("#idsol").val(dataJson[0].idsol);
+							$('ul.tabs').tabs('select_tab', 'familiares');
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$("#formFamiliares").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formFamiliares"));
-			formData.append("idsol",$("#idsol").val());
-			formData.append("acc", "addsol2");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					if(data.localeCompare("OK")){
-						$('ul.tabs').tabs('select_tab', 'laborales');
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formFamiliares"));
+				formData.append("idsol",$("#idsol").val());
+				formData.append("acc", "addsol2");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						if(data.localeCompare("OK")){
+							$('ul.tabs').tabs('select_tab', 'laborales');
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$("#formLaborales").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formLaborales"));
-			formData.append("idsol",$("#idsol").val());
-			formData.append("acc", "addsol3");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					if(data.localeCompare("OK")){
-						$('ul.tabs').tabs('select_tab', 'referencias');
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formLaborales"));
+				formData.append("idsol",$("#idsol").val());
+				formData.append("acc", "addsol3");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						if(data.localeCompare("OK")){
+							$('ul.tabs').tabs('select_tab', 'referencias');
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$("#formReferencias").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formReferencias"));
-			formData.append("idsol",$("#idsol").val());
-			formData.append("acc", "addsol4");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					if(data.localeCompare("OK")){
-						$('ul.tabs').tabs('select_tab', 'credito');
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formReferencias"));
+				formData.append("idsol",$("#idsol").val());
+				formData.append("acc", "addsol4");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						if(data.localeCompare("OK")){
+							$('ul.tabs').tabs('select_tab', 'credito');
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$("#formCredito").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formCredito"));
-			formData.append("idsol",$("#idsol").val());
-			formData.append("acc", "addsol5");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					if(data.localeCompare("OK")){
-						$('ul.tabs').tabs('select_tab', 'codeudor');
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formCredito"));
+				formData.append("idsol",$("#idsol").val());
+				formData.append("acc", "addsol5");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						if(data.localeCompare("OK")){
+							$('ul.tabs').tabs('select_tab', 'codeudor');
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 		$("#formCodeudor").on("submit",function(e){
 			e.preventDefault();
-			var formData = new FormData(document.getElementById("formCodeudor"));
-			formData.append("idsol",$("#idsol").val());
-			formData.append("acc", "addsol6");
-			$.ajax({
-				url: "../php/Credito.php",
-				type: "post",
-				dataType: "html",
-				data: formData,
-				cache: false,
-				contentType: false,
-				processData: false,
-				success:function(data){
-					if(data.localeCompare("OK")){
-						getCodeudores();
-					}else{
-						alert(data);
+			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+				var formData = new FormData(document.getElementById("formCodeudor"));
+				formData.append("idsol",$("#idsol").val());
+				formData.append("acc", "addsol6");
+				$.ajax({
+					url: "../php/Credito.php",
+					type: "post",
+					dataType: "html",
+					data: formData,
+					cache: false,
+					contentType: false,
+					processData: false,
+					success:function(data){
+						if(data.localeCompare("OK")){
+							getCodeudores();
+						}else{
+							alert(data);
+						}
 					}
-				}
-			});
+				});
+			}
 		});
 
 
@@ -945,7 +957,12 @@
 				type: "post",
 				data: {acc:"fin",idsol:$("#idsol").val()},
 				success:function(responseText){
-					alert(responseText);
+					if(responseText.localeCompare("OK")){
+						alert("Guardado exitosamente");
+						window.close();
+					}else{
+						alert(responseText);
+					}
 				}
 			});
 		}
