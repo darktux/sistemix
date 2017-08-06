@@ -706,6 +706,19 @@
 			        }
 			    });
 
+			    $.ajax({
+			        type:"post",
+			        url: "../php/datosSC.php",
+			        data:{acc:'getcodeudores',idsolcre:idsolcrejs},
+			        success:function(responseText){
+			        	var obj = $.parseJSON(responseText);
+			        	$.each(obj, function(i,item){
+			        		$('#nomcod'+(i+1)).val(item[0]);
+			        		$('#idcod'+(i+1)).val(item[1]);
+			        	});
+			        }
+			    });
+
 			}
 
 		});

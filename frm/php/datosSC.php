@@ -32,6 +32,27 @@
                           
             echo json_encode($salida);
             break;
+
+        case 'getcodeudores':
+            $con->consulta("
+                SELECT 
+                   codeudor_nombre,codeudor_id
+                FROM 
+                    `tab_codeudor`                    
+                WHERE 
+                    codeudor_idsolicitudcredito = ".$_POST['idsolcre']."
+                ;
+            ");
+            $salida=array();   
+            $i=0;      
+            while ($fila = mysql_fetch_row($con->getResultado())) {       
+                $salida[$i]=$fila;
+                $i++;
+            }
+                          
+            echo json_encode($salida);
+            break;
+
     }
 	//$con->limpiarConsulta();
     $con->desconectar();
