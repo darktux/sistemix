@@ -27,29 +27,32 @@
 </div>
 
 <div class="modal modal-fixed-footer" id="modallibreta">
-	<div class="modal-content" id="modalcontent">
-		<h5 align="center">Imprimir en Libreta</h5>
-		<form id="formLibreta">
-			<div class="container">
-				<div class="input-field col s12">
-					<input type="number" name="num" id="num" min="0" max="57" class="validate">
-					<label for="num">Digite el último correlativo impreso</label>
+	<form id="formLibreta">
+		<div class="modal-content" id="modalcontent">
+			<h5 align="center">Imprimir en Libreta</h5>
+			
+				<input type="hidden" name="idcm" id="idcm">
+				<div class="container">
+					<div class="input-field col s12">
+						<input type="number" name="num" id="num" min="0" max="56" class="validate">
+						<label for="num">Digite el último correlativo impreso</label>
+					</div>
 				</div>
-			</div>
-			<div class="container">
-				<div class="card-panel grey darken-4 white-text">
-					<i class="material-icons">warning</i>
-					<strong>Información</strong>
-					<p>Digite 0 si imprime en una nueva libreta</p>
-					<p>El máximo valor que el sistema puede imprimir es 57 registros</p>
+				<div class="container">
+					<div class="card-panel grey darken-4 white-text">
+						<i class="material-icons">warning</i>
+						<strong>Información</strong>
+						<p>Digite 0 si imprime en una nueva libreta</p>
+						<p>El máximo valor que el sistema puede imprimir es 57 registros, por lo cual el numero maximo que puede ingresar es 56</p>
+					</div>
 				</div>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button class="waves-effect waves-light btn" type="submit">Imprimir</button>
-		<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
-	</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-light btn" type="submit">Imprimir</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+		</div>
+	</form>
 </div>
 
 <script src="../js/bootstrap-table.js"></script>
@@ -71,13 +74,16 @@
 		function(e){
 	    	e.preventDefault();
 	    	var formData = new FormData(document.getElementById("formLibreta"));
-		    formData.append("idcm",JSON.stringify(row.cuenta_id).replace(/"/gi,''));
 	    	$.ajax({
 	    		type: "post",
 	    		url: "php/printlibreta.php",
 	    		data: formData,
+	    		cache: false,
+	            contentType: false,
+	     		processData: false,
 	    		success:function(responseText){
-
+	    			$('#modallibreta').modal('close');
+	    			$("#formLibreta")[0].reset();
 	    		}
 	    	});
 	    }
@@ -103,8 +109,8 @@
     window.operateEvents = {
 
         'click .libreta': function (e, value, row, index) {
+        	$('#idcm').val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
         	$('#modallibreta').modal('open');
-        	//window.open('php/printlibreta.php?idcm='+JSON.stringify(row.cuenta_id).replace(/"/gi,''),'_blank');
         }, 
 
     	'click .print': function (e, value, row, index) {

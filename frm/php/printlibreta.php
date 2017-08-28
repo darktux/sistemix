@@ -18,7 +18,7 @@
 	    $printer -> setJustification(Printer::JUSTIFY_RIGHT);
 	    $i=0;
 
-	    for($m=0;$m<$_POST['f'];$m++){
+	    for($m=0;$m<$_POST['num'];$m++){
 	    	$printer -> text("\n");
 	    	$i++;
 	    }
