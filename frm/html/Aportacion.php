@@ -25,6 +25,33 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal modal-fixed-footer" id="modallibreta">
+	<div class="modal-content" id="modalcontent">
+		<h5 align="center">Imprimir en Libreta</h5>
+		<form id="formLibreta">
+			<div class="container">
+				<div class="input-field col s12">
+					<input type="number" name="num" id="num" min="0" max="57" class="validate">
+					<label for="num">Digite el último correlativo impreso</label>
+				</div>
+			</div>
+			<div class="container">
+				<div class="card-panel grey darken-4 white-text">
+					<i class="material-icons">warning</i>
+					<strong>Información</strong>
+					<p>Digite 0 si imprime en una nueva libreta</p>
+					<p>El máximo valor que el sistema puede imprimir es 57 registros</p>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button class="waves-effect waves-light btn" type="submit">Imprimir</button>
+		<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+	</div>
+</div>
+
 <script src="../js/bootstrap-table.js"></script>
 <!-- FINALIZA EL BLOQUE DE LA TABLA -->
 
@@ -35,9 +62,26 @@
 	$(document).ready(function(){
 		$('.tooltipped').tooltip({delay: 50});
   		$('.indicator').addClass('teal');
+  		$('.modal').modal();
 		/*FINALIZA BLOQUE DE CONFIGURACION DEL MODAL NUEVA CUENTA */
 	});   
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
+	$("#formLibreta").on(
+		"submit",
+		function(e){
+	    	e.preventDefault();
+	    	var formData = new FormData(document.getElementById("formLibreta"));
+		    formData.append("idcm",JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+	    	$.ajax({
+	    		type: "post",
+	    		url: "php/printlibreta.php",
+	    		data: formData,
+	    		success:function(responseText){
+
+	    		}
+	    	});
+	    }
+	);
 
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
@@ -59,14 +103,8 @@
     window.operateEvents = {
 
         'click .libreta': function (e, value, row, index) {
-
-
-        	window.open('php/printlibreta.php?idcm='+JSON.stringify(row.cuenta_id).replace(/"/gi,''),'_blank');
-
-
-
-
-
+        	$('#modallibreta').modal('open');
+        	//window.open('php/printlibreta.php?idcm='+JSON.stringify(row.cuenta_id).replace(/"/gi,''),'_blank');
         }, 
 
     	'click .print': function (e, value, row, index) {
