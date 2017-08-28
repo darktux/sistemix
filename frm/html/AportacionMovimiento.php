@@ -57,8 +57,6 @@
 					</select>
 					<label for="con">Concepto (Cuota a pagar)</label>
 				</div>
-				
-
 			    <div class="input-field col s12 m2">
 					<input type="number" name="mon" id="mon" min="0.00" step="0.01"  required>
 					<label for="mon" class="active">Monto aportación ($)</label>
@@ -439,12 +437,11 @@
 		$('select').empty();
 		var dep = $("#con");
 		dep.append("<option value='Voluntaria' >Aportación Voluntaria</option>");
+		dep.append("<option value='Dividendos' >Asignar Dividendo</option>");
+		//Carga 1 año para pagar aportaciones
 		var i=1;
 		var j=parseInt(mes);
-		
-			j++;
-		
-		
+		j++;	
 		if(j>12)
 			j=1;
 		else
