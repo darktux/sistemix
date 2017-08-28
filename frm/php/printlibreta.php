@@ -23,7 +23,7 @@
 	    	$i++;
 	    }
 
-	    $rs=mysql_query("SELECT cuentamovimiento_fecha, cuentamovimiento_comprobante, cuentamovimiento_retiro, cuentamovimiento_deposito, cuentamovimiento_saldo, cuentamovimiento_id FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcm']."' AND cuentamovimiento_impreso=0;");
+	    $rs=mysql_query("SELECT cuentamovimiento_fecha, cuentamovimiento_comprobante, cuentamovimiento_retiro, cuentamovimiento_deposito, cuentamovimiento_saldo, cuentamovimiento_id FROM tab_cuenta_movimiento WHERE cuentamovimiento_cuentaid='".$_POST['idcm']."' AND cuentamovimiento_impreso=0 AND cuentamovimiento_concepto not like 'Apertura de cuenta';");
 	    
 
 	    while($row = mysql_fetch_row($rs)) {
