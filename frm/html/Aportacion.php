@@ -42,6 +42,9 @@
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
+        	'<a class="libreta ml10" href="javascript:void(0)" title="imprimir libreta">',
+                '<i class="material-icons">library_books</i>',
+            '</a>&nbsp;',
         	'<a class="print ml10" href="javascript:void(0)" title="imprimir">',
                 '<i class="material-icons">print</i>',
             '</a>&nbsp;',
@@ -54,15 +57,28 @@
 
 	/*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
+
+        'click .libreta': function (e, value, row, index) {
+
+
+        	window.open('php/printlibreta.php?idcm='+JSON.stringify(row.cuenta_id).replace(/"/gi,''),'_blank');
+
+
+
+
+
+        }, 
+
     	'click .print': function (e, value, row, index) {
     		idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
         	window.open('html/reporteAportaciones.php?idc='+idcuenta,'_blank');
         }, 
+
         'click .move': function (e, value, row, index) {
         	idcuenta=JSON.stringify(row.cuenta_id).replace(/"/gi,'');
         	$("#formularios").load('html/AportacionMovimiento.php');
         }
-	/*FINALIZA ACCION DEL BOTON VIEW (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
+
     };
 
 </script>
