@@ -45,6 +45,7 @@
 						<p>Digite 0 si imprime en una nueva libreta</p>
 						<p>El máximo valor que el sistema puede imprimir es 57 registros, por lo cual el numero maximo que puede ingresar es 56</p>
 					</div>
+					<a class="btn tooltipped" data-tooltip="Imprime los datos personales al reverso de la libreta" onclick="printReverso()">Imprimir reverso de libreta</a>
 				</div>
 			
 		</div>
@@ -88,6 +89,18 @@
 	    	});
 	    }
 	);
+
+	function printReverso(){
+		$.ajax({
+	    	type: "post",
+	    	url: "php/printreverso.php",
+	   		data: {idcm:$("#idcm").val()},
+	  		success:function(responseText){
+	   			$('#modallibreta').modal('close');
+	   			$("#formLibreta")[0].reset();
+	   		}
+	   	});
+	}
 
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
