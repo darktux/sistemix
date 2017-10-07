@@ -22,7 +22,7 @@
 	    	$printer -> text("\n");
 	    	$i++;
 	    }
-		echo $_POST['idcm'];
+		//echo $_POST['idcm'];
 	    $rs=mysql_query("SELECT asociado_nombre, asociado_correlativo, asociado_direccion, asociado_municipio, asociado_departamento, asociado_dui, asociado_nit, cuenta_fechaapertura FROM tab_asociado, tab_cuenta WHERE cuenta_asociadoid=asociado_id and cuenta_id='".$_POST['idcm']."'");
 	    
 
@@ -37,6 +37,12 @@
 	        $nit = trim($row[6]);
 	        $fechaapertura = trim($row[7]);
 
+
+	        $direccion=$direccion.", ".$municipio.", ".$departamento;
+
+	        //echo substr($direccion, 0, 80); 
+	        //echo substr($direccion, 80);
+
 	        //$ii = str_pad($ii, 5, STR_PAD_LEFT);
 	        $nombre = str_pad($nombre, 50, " ", STR_PAD_RIGHT);
 	        $correlativo = str_pad($correlativo, 5, " ", STR_PAD_RIGHT);
@@ -45,7 +51,20 @@
 	        $fechaapertura = str_pad($fechaapertura, 15, " ", STR_PAD_RIGHT);
 
 	        $printer -> text("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-			$printer -> text("      ".$nombre.$correlativo."\n\n\n            ".$direccion."\n\n         ".$dui."        ".$fechaapertura."\n");
+			$printer -> text(
+				"      ".
+				$nombre.
+				$correlativo.
+				"\n\n\n            ".
+				substr($direccion, 0, 70).
+				"\n            ".
+				substr($direccion, 70).
+				"\n         ".
+				$dui.
+				"        ".
+				$fechaapertura.
+				"\n"
+			);
 	        // echo $nombre.$correlativo.$direccion.$dui.$fechaapertura;
 	    }
     

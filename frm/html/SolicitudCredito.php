@@ -171,7 +171,7 @@
 	    	var formData = new FormData(document.getElementById("formulario22"));
 		    
 		    formData.append("acc", "active");
-			
+			 
 			$.ajax({
 	            url: "php/Credito.php",
 	            type: "post",
@@ -262,8 +262,7 @@
 		    corrTipCre = JSON.stringify(row.tipocredito_correlativo).replace(/"/gi,'');
 		    venOpla = JSON.stringify(row.solicitudcredito_tipopago).replace(/"/gi,'');
 		    $("#nrefcre").val(corrAso+"-"+corrTipCre+"-"+venOpla);
-
-        	$('#modal3').modal('open');
+			$('#modal3').modal('open');
         },
 /*FINALIZA ACCION DEL BOTON APROBAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/

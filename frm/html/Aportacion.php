@@ -96,6 +96,7 @@
 	    	url: "php/printreverso.php",
 	   		data: {idcm:$("#idcm").val()},
 	  		success:function(responseText){
+	  			//alert(responseText);
 	   			$('#modallibreta').modal('close');
 	   			$("#formLibreta")[0].reset();
 	   		}
