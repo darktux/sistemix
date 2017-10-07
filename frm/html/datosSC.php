@@ -601,7 +601,7 @@
 		        }
 		    });
 
-
+ 
 			var idsolcrejs = "no";
 			<?php if( isset( $_GET['idsolcre'] ) ){ echo "idsolcrejs = ' ".$_GET['idsolcre']." '  ;"; } ?>
 			if(idsolcrejs!="no"){
@@ -683,21 +683,22 @@
 
 							//PANTALLA 5
 							$('#tipcreid').val(item[56]);
-							$('#mon').val(item[47]);
-							$('#pla').val(item[51]);
+							$('#mon').val(item[48]);
+							$('#pla').val(item[52]);
+							$('#cuo').val(item[49]);
 							calcular();
-							$('#feccon').val(item[49]);
-							$('#fecpag').val(item[50]);
-							$('#fecfin').val(item[52]);
-							if(item[44]=="01"){
+							$('#feccon').val(item[50]);
+							$('#fecpag').val(item[51]);
+							$('#fecfin').val(item[53]);
+							if(item[45]=="01"){
 			        			$('#vent').prop("checked", true);
 			        		}else{
-			        			if(item[44]=="02"){
+			        			if(item[45]=="02"){
 			        				$('#plan').prop("checked", true);
 			        			}
 			        		}
-							$('#est').val(item[53]);
-
+							$('#est').val(item[54]);
+							alert(item[45]);
 
 							
 			        	});
