@@ -178,6 +178,38 @@
 	</form>
 </div>
 <!-- FINALIZA EL BLOQUE DEL MODAL NUEVA CUENTA-->
+
+<div class="modal modal-fixed-footer" id="modallibretacuenta">
+	<form id="formLibretacuenta">
+		<div class="modal-content" id="modalcontent">
+			<h5 align="center">Imprimir en Libreta de AHORRO</h5>
+			
+				<input type="hidden" name="idcm" id="idcm">
+				<div class="container">
+					<div class="input-field col s12">
+						<input type="number" name="num" id="num" min="0" max="56" class="validate">
+						<label for="num">Digite el último correlativo impreso</label>
+					</div>
+				</div>
+
+				<div class="container">
+					<div class="card-panel grey darken-4 white-text">
+						<i class="material-icons">warning</i>
+						<strong>Información</strong>
+						<p>Digite 0 si imprime en una nueva libreta de AHORRO</p>
+						<p>El máximo valor que el sistema puede imprimir es 57 registros, por lo cual el numero maximo que puede ingresar es 56</p>
+					</div>
+					<a class="btn tooltipped" data-tooltip="Imprime los datos personales al reverso de la libreta" onclick="printReversocuenta()">IMPRIMIR REVERSO DE LA LIBRETA DE AHORRO</a>
+				</div>
+			
+		</div>
+		<div class="modal-footer">
+			<button class="waves-effect waves-light btn" type="submit">Imprimir</button>
+			<button class="modal-action modal-close waves-effect waves-light btn-flat" type="reset">Cancelar</button>
+		</div>
+	</form>
+</div>
+
 <!-- INICIA EL BLOQUE JAVASCRIPT -->
 <script type="text/javascript">
 	var idcuenta=0;
@@ -197,6 +229,8 @@
   		$('.indicator').addClass('teal');
 
   		cargaTipoCuenta();
+
+  		$('#modallibretacuenta').modal();
 
 	    /*INICIA BLOQUE DE CONFIGURACION DEL MODAL BUSCAR */
 		$('#modal1').modal({
@@ -299,6 +333,40 @@
     	return false;
 	}
 	/*FINALIZA LA FUNCION SUBMIT1 PARA GUARDAR Y MODIFICAR */
+
+	$("#formLibretacuenta").on(
+		"submit",
+		function(e){
+	    	e.preventDefault();
+	    	var formData = new FormData(document.getElementById("formLibretacuenta"));
+	    	$.ajax({
+	    		type: "post",
+	    		url: "php/printlibretacuenta.php",
+	    		data: formData,
+	    		cache: false,
+	            contentType: false,
+	     		processData: false,
+	    		success:function(responseText){
+	    			$('#modallibretacuenta').modal('close');
+	    			$("#formLibretacuenta")[0].reset();
+	    		}
+	    	});
+	    }
+	);
+
+	function printReversocuenta(){
+		$.ajax({
+	    	type: "post",
+	    	url: "php/printreversocuenta.php",
+	   		data: {idcm:$("#idcm").val()},
+	  		success:function(responseText){
+	  			//alert(responseText);
+	   			$('#modallibretacuenta').modal('close');
+	   			$("#formLibretacuenta")[0].reset();
+	   		}
+	   	});
+	}
+
 	/*INICIA EL BLOQUE DEL BOTON NUEVA CUENTA DE LA TABLA ASOCIADOS*/
 	function operateFormatter1(value, row, index) {
         return [
@@ -311,6 +379,9 @@
 /*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
+        	'&nbsp;<a class="libreta ml10" href="javascript:void(0)" title="Imprimir libreta de cuenta">',
+                '<i class="material-icons">library_books</i>',
+            '</a>',
         	'&nbsp;<a class="move ml10" href="javascript:void(0)" title="Transacción">',
                 '<i class="material-icons">compare_arrows</i>',
             '</a>',
@@ -329,6 +400,10 @@
 /*FINALIZA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 /*INICIA EL BLOQUE DE LAS ACCIONES DE LOS BOTONES MODIFICAR Y ELIMINAR DE LA TABLA*/
     window.operateEvents = {
+    	'click .libreta': function (e, value, row, index) {
+        	$('#idcm').val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
+        	$('#modallibretacuenta').modal('open');
+        }, 
 /*INICIA ACCION DEL BOTON MODIFICAR (COPIA LOS VALORES DEL REGISTRO A LOS CAMPOS DEL FORMULARIO MODAL)*/
         'click .edit': function (e, value, row, index) {
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/

@@ -26,10 +26,10 @@
 	</div>
 </div>
 
-<div class="modal modal-fixed-footer" id="modallibreta">
-	<form id="formLibreta">
+<div class="modal modal-fixed-footer" id="modallibretaaportacion">
+	<form id="formLibretaaportacion">
 		<div class="modal-content" id="modalcontent">
-			<h5 align="center">Imprimir en Libreta</h5>
+			<h5 align="center">Imprimir en Libreta de APORTACIONES</h5>
 			
 				<input type="hidden" name="idcm" id="idcm">
 				<div class="container">
@@ -42,10 +42,10 @@
 					<div class="card-panel grey darken-4 white-text">
 						<i class="material-icons">warning</i>
 						<strong>Información</strong>
-						<p>Digite 0 si imprime en una nueva libreta</p>
+						<p>Digite 0 si imprime en una nueva libreta de APORTACIONES</p>
 						<p>El máximo valor que el sistema puede imprimir es 57 registros, por lo cual el numero maximo que puede ingresar es 56</p>
 					</div>
-					<a class="btn tooltipped" data-tooltip="Imprime los datos personales al reverso de la libreta" onclick="printReverso()">Imprimir reverso de libreta</a>
+					<a class="btn tooltipped" data-tooltip="Imprime los datos personales al reverso de la libreta" onclick="printReversoaportacion()">IMPRIMIR REVERSO DE LA LIBRETA DE APORTACIONES</a>
 				</div>
 			
 		</div>
@@ -70,35 +70,35 @@
 		/*FINALIZA BLOQUE DE CONFIGURACION DEL MODAL NUEVA CUENTA */
 	});   
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
-	$("#formLibreta").on(
+	$("#formLibretaaportacion").on(
 		"submit",
 		function(e){
 	    	e.preventDefault();
-	    	var formData = new FormData(document.getElementById("formLibreta"));
+	    	var formData = new FormData(document.getElementById("formLibretaaportacion"));
 	    	$.ajax({
 	    		type: "post",
-	    		url: "php/printlibreta.php",
+	    		url: "php/printlibretaaportacion.php",
 	    		data: formData,
 	    		cache: false,
 	            contentType: false,
 	     		processData: false,
 	    		success:function(responseText){
-	    			$('#modallibreta').modal('close');
-	    			$("#formLibreta")[0].reset();
+	    			$('#modallibretaaportacion').modal('close');
+	    			$("#formLibretaaportacion")[0].reset();
 	    		}
 	    	});
 	    }
 	);
 
-	function printReverso(){
+	function printReversoaportacion(){
 		$.ajax({
 	    	type: "post",
-	    	url: "php/printreverso.php",
+	    	url: "php/printreversoaportacion.php",
 	   		data: {idcm:$("#idcm").val()},
 	  		success:function(responseText){
 	  			//alert(responseText);
-	   			$('#modallibreta').modal('close');
-	   			$("#formLibreta")[0].reset();
+	   			$('#modallibretaaportacion').modal('close');
+	   			$("#formLibretaaportacion")[0].reset();
 	   		}
 	   	});
 	}
@@ -106,7 +106,7 @@
 	/*INICIA EL BLOQUE DE LOS BOTONES MODIFICAR, ELIMINAR Y VER DE LA TABLA CUENTAS*/
 	function operateFormatter2(value, row, index) {
         return [
-        	'<a class="libreta ml10" href="javascript:void(0)" title="imprimir libreta">',
+        	'<a class="libreta ml10" href="javascript:void(0)" title="imprimir libreta de aportaciones">',
                 '<i class="material-icons">library_books</i>',
             '</a>&nbsp;',
         	'<a class="print ml10" href="javascript:void(0)" title="imprimir">',
@@ -124,7 +124,7 @@
 
         'click .libreta': function (e, value, row, index) {
         	$('#idcm').val(JSON.stringify(row.cuenta_id).replace(/"/gi,''));
-        	$('#modallibreta').modal('open');
+        	$('#modallibretaaportacion').modal('open');
         }, 
 
     	'click .print': function (e, value, row, index) {
