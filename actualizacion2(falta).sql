@@ -1,1 +1,0 @@
-ALTER TABLE `tab_cuenta_movimiento` ADD `cuentamovimiento_impreso` TINYINT NOT NULL DEFAULT '0'  AFTER `cuentamovimiento_cuentaid`;

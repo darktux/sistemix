@@ -255,7 +255,7 @@
         	$("#nitaprob").val(JSON.stringify(row.asociado_nit).replace(/"/gi,''));
         
         	/*CAMBIAR SEGUN EL FORMULARIO QUE SE TRABAJA, LOS NOMBRES DE CAMPO DE row. SON COMO EN LA BASE DE DATOS***************************************************/
-        	$('select').material_select('destroy');
+			$('select').material_select('destroy');
 		    $('select').material_select();
 
 		    corrAso = JSON.stringify(row.asociado_correlativo).replace(/"/gi,'');

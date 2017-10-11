@@ -163,34 +163,34 @@
 						<div class="row">
 							<h6 class="center"><strong>Ingresos</strong></h6>
 							<div class="input-field col s4">			  		
-								<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00" required>
+								<input type="number" name="suel" value="0.00" onkeyup="sumi()" id="suel" min="0.00" step="0.01" required>
 								<label for="suel" class="active">Sueldo mensual ($)</label>
 							</div>
 							<div class="input-field col s4">			  		
-								<input type="number" value="0.00" name="otroi" id="otroi" onchange="sumi()" min="0.00" >
+								<input type="number" value="0.00" step="0.01" name="otroi" id="otroi" onchange="sumi()" min="0.00" >
 								<label class="active" for="otroi">Otros ingresos ($)</label>
 							</div>
 							<div class="input-field col s4">			  		
-								<input type="number" name="toti" class='teal-text'  id="toti" readonly="true" value="0.00">
+								<input type="number" name="toti" step="0.01" class='teal-text'  id="toti" readonly="true" value="0.00">
 								<label for="toti" class="active">Total ingresos ($)</label>
 							</div>			    
 						</div>
 						<div class="row">
 							<h6 class="center"><strong>Egresos</strong></h6>
 							<div class="input-field col s3">			  		
-								<input type="number" name="gasv" id="gasv" onchange="sume()" value="0.00" min="0.00">
+								<input type="number" name="gasv" id="gasv" step="0.01" onchange="sume()" value="0.00" min="0.00">
 								<label for="gasv" class="active">Gasto vida</label>
 							</div>
 							<div class="input-field col s3">			  		
-								<input type="number" name="pagd" id="pagd" onchange="sume()" value='0.00' min="0.00">
+								<input type="number" name="pagd" id="pagd" step="0.01" onchange="sume()" value='0.00' min="0.00">
 								<label for="pagd" class="active">Pago de deudas</label>
 							</div>
 							<div class="input-field col s3">			  		
-								<input type="number" name="otroe" id="otroe" onchange="sume()" value="0.0" min="0.00">
+								<input type="number" name="otroe" id="otroe" step="0.01" onchange="sume()" value="0.0" min="0.00">
 								<label for="otroe" class="active">Otros egresos</label>
 							</div>
 							<div class="input-field col s3">			  		
-								<input type="number" class='teal-text' name="tote" id="tote" value="0.00" readonly="true" min="0.00">
+								<input type="number" class='teal-text' name="tote" id="tote" value="0.00" readonly="true" min="0.00" step="0.01">
 								<label for="tote" class="active">Total egresos</label>
 							</div>			    
 						</div>
@@ -698,7 +698,7 @@
 			        			}
 			        		}
 							$('#est').val(item[54]);
-							alert(item[45]);
+							//alert(item[45]);
 
 							
 			        	});
@@ -850,7 +850,7 @@
 		});
 		$("#formCodeudor").on("submit",function(e){
 			e.preventDefault();
-			if(confirm("¿Confirma que todos los datos han sido ingresados correctamente?")){
+			if(confirm("¿Confirma que todos los datos del codeudor han sido ingresados correctamente?")){
 				var formData = new FormData(document.getElementById("formCodeudor"));
 				formData.append("idsol",$("#idsol").val());
 				formData.append("acc", "addsol6");
@@ -930,24 +930,26 @@
 
 		function sumi()
 		{
-			//alert('hi bitch');
-			$('#toti').val(parseFloat($('#suel').val())+parseFloat($('#otroi').val()));
+			toti=parseFloat($('#suel').val())+parseFloat($('#otroi').val());
+			$('#toti').val(toti.toFixed(2));
 		}
 
 		function sume()
 		{
-			$('#tote').val(parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val()));
+			tote=parseFloat($('#gasv').val())+parseFloat($('#pagd').val())+parseFloat($('#otroe').val());
+			$('#tote').val(tote.toFixed(2));
 		}
 
 		function sumi2()
 		{
-			//alert('hi bitch');
-			$('#totingco').val(parseFloat($('#suelmenco').val())+parseFloat($('#otringco').val()));
+			totingco=parseFloat($('#suelmenco').val())+parseFloat($('#otringco').val());
+			$('#totingco').val(totingco.toFixed(2));
 		}
 
 		function sume2()
 		{
-			$('#totegrco').val(parseFloat($('#gastvidco').val())+parseFloat($('#pagdeuco').val())+parseFloat($('#otregrco').val()));
+			totegrco=parseFloat($('#gastvidco').val())+parseFloat($('#pagdeuco').val())+parseFloat($('#otregrco').val());
+			$('#totegrco').val(totegrco.toFixed(2));
 		}
 
 		function getCodeudores(){

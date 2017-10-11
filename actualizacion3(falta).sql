@@ -1,0 +1,1 @@
+ALTER TABLE `tab_codeudor` ADD FOREIGN KEY (`codeudor_idsolicitudcredito`) REFERENCES `tab_solicitud_credito`(`solicitudcredito_id`) ON DELETE CASCADE ON UPDATE CASCADE;

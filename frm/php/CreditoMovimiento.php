@@ -11,6 +11,30 @@
             /*CAMBIAR LOS NOMBRES DE LOS CAMPOS SEGUN LA BASE DE DATOS*************************************************************/
             $con->consulta("COMMIT");
             try{ 
+                // $con->consulta("INSERT INTO 
+                //     ".$nombretabla."(
+                //         creditomovimiento_concepto,
+                //         creditomovimiento_fecha,
+                //         creditomovimiento_deposito,
+                //         creditomovimiento_retiro,
+                //         creditomovimiento_interes,
+                //         creditomovimiento_capital,
+                //         creditomovimiento_saldo,
+                //         creditomovimiento_creditoid,
+                //         creditomovimiento_sigfechapago
+                //     ) 
+                //     VALUES(
+                //         '".$_POST['con']."',
+                //         '".$_POST['fec']."',
+                //         ".$_POST['mon'].",
+                //         0.00,
+                //         ".$_POST['int'].",
+                //         ".$_POST['cap'].",
+                //         ".$_POST['sal'].",
+                //         ".$_POST['idcre'].",
+                //         DATE_ADD('".$_POST['fechaactu']."',INTERVAL 30 DAY)
+                //     );
+                // ");
                 $con->consulta("INSERT INTO 
                     ".$nombretabla."(
                         creditomovimiento_concepto,
@@ -20,8 +44,7 @@
                         creditomovimiento_interes,
                         creditomovimiento_capital,
                         creditomovimiento_saldo,
-                        creditomovimiento_creditoid,
-                        creditomovimiento_sigfechapago
+                        creditomovimiento_creditoid
                     ) 
                     VALUES(
                         '".$_POST['con']."',
@@ -31,8 +54,7 @@
                         ".$_POST['int'].",
                         ".$_POST['cap'].",
                         ".$_POST['sal'].",
-                        ".$_POST['idcre'].",
-                        DATE_ADD('".$_POST['fechaactu']."',INTERVAL 30 DAY)
+                        ".$_POST['idcre']."
                     );
                 ");
                 $saldo_capital=0.00;

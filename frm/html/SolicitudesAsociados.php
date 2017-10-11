@@ -641,7 +641,7 @@ function cargarInstituciones(){
 	});
 }
 
-function prepare(){
+function prepare(){ 
 		$('label').addClass("active");
         $("input").prop('disabled', false);
         $('select').material_select('destroy');
@@ -656,9 +656,13 @@ function prepare(){
 			url: "php/Asociado.php",
 			data:{acc:'getCorr'},
 			success:function(data){
-				var corr=parseInt(data);
-				corr++;
-				$("#corr").val(corr);
+				if(data.isNaN){
+					$("#corr").val("1");	
+				}else{
+					var corr=parseInt(data);
+					corr++;
+					$("#corr").val(corr);
+				}
 			}
 		});
 	}
