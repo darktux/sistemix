@@ -52,13 +52,9 @@
 	        $fechaapertura = str_pad($fechaapertura, 15, " ", STR_PAD_RIGHT);
 
 
-	        $printer -> text("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+	        $printer -> text("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"); //////Ajustar pleca n aqui**********************************************************************
 			$printer -> text(
-				"      Tipo de cuenta: ".
-				$tipocuenta.
-				"      No. Cuenta: ".
-				$_POST['idcm'].
-				"\n      ".
+				//"      Tipo de cuenta: ".$tipocuenta."      No. Cuenta: ".$_POST['idcm']."\n      ".
 				$nombre.
 				$correlativo.
 				"\n\n\n            ".
