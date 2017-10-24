@@ -89,7 +89,7 @@ $('#fec').pickadate({
 		    var f = $(this);
 			
 		    	var formData = new FormData(document.getElementById("formulario"));
-		    
+		     
 				$.ajax({
 		            url: "php/Capital.php",
 		            type: "post",

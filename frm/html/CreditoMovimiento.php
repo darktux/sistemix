@@ -117,7 +117,7 @@
 		document.getElementById('titulo2').innerHTML='Movimiento del Crédito # '+idcredito;
 	});
 	/*FINALIZA FUNCION READY PARA INICIALIZAR LOS ELEMENTOS */
-	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */
+	/*INICIA FUNCION REEMPLAZO DE SUBMIT PARA GUARDAR Y MODIFICAR */ 
 	$("#formulario").on(
 		"submit", 
 		function(e){

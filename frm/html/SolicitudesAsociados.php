@@ -656,7 +656,7 @@ function prepare(){
 			url: "php/Asociado.php",
 			data:{acc:'getCorr'},
 			success:function(data){
-				if(data.isNaN){
+				if(data=="NaN"){
 					$("#corr").val("1");	
 				}else{
 					var corr=parseInt(data);
