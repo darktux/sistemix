@@ -438,6 +438,7 @@
 		var dep = $("#con");
 		dep.append("<option value='Voluntaria' >Aportación Voluntaria</option>");
 		dep.append("<option value='Dividendos' >Distribución de Excedentes</option>");
+		dep.append("<option value='Intereses' >Intereses sobre aportaciones</option>");
 		//Carga 1 año para pagar aportaciones
 		var i=1;
 		var j=parseInt(mes);

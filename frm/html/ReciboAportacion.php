@@ -25,9 +25,9 @@
 
 
     $pdf = new FPDF('P','mm','recibo');
-	$pdf->SetMargins(20,10,20);
+	$pdf->SetMargins(1,1,1);
 	$pdf->AddPage();
-	$pdf->SetFont('Arial','B',12);
+	$pdf->SetFont('Courier','B',12);
 
 	$pdf->setXY(30,60);
 	$pdf->Cell(46,5,utf8_decode($fecha),0,0);
