@@ -1,14 +1,14 @@
 <?php
     //Este scrip php se ejecutara automaticamente cada tres meses mediante la funcion CRON del servidor web, la ejecucion sera exactamente los ultimos dias del los meses Marzo, Junio, Septiembre, Diciembre.
-    
-    //el concepto de estos registros sera automaticamente = 'Interes'
-
+    //el concepto de estos registros sera automaticamente = 'Intereses'
     //PASO 1: Recuperacion de todos las cuentas de ahorros
     require('../Conex.php');
+    date_default_timezone_set('AMERICA/EL_SALVADOR');
     $con= new Conex();
     $con->conectar();
     $nombretabla = 'tab_cuenta';
-
+    $ultimacapitalizacion ="";
+    $hoy = date('Y-m-d');
     $con->consulta("
         SELECT 
             c.cuenta_id
@@ -19,44 +19,66 @@
         AND 
             t.tipocuenta_nombre LIKE '%AHORRO%';
     ");
-
     $resultadoaux=$con->getResultado();
-    while ($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
-        
-
+    while($fila = mysql_fetch_array($resultadoaux, MYSQL_ASSOC)) {
         $con->consulta("
             SELECT 
                 m.cuentamovimiento_fecha 
             FROM 
                 tab_cuenta_movimiento m 
             WHERE 
-                m.cuentamovimiento_id = '".$fila['cuenta_id']."' 
+                m.cuentamovimiento_cuentaid = '".$fila['cuenta_id']."' 
             AND 
-                m.cuentamovimiento_concepto = 'Interes' 
+                m.cuentamovimiento_concepto LIKE '%Intereses%' 
             ORDER BY 
                 m.cuentamovimiento_id 
-            DESC 
-            LIMIT 
-                1;
+            DESC LIMIT 
+            1;
         ");
-
-
-        if ($fila2 = mysql_fetch_row($con->getResultado())) {       
-            $fila2['cuentamovimiento_fecha'];
-            echo $fila['cuenta_id']."--".$fila2['cuentamovimiento_fecha']."<br><hr>";
+        if($fila2 = mysql_fetch_row($con->getResultado())) { 
+            $ultimacapitalizacion=$fila2[0];      
         }
         else{
-            echo $fila['cuenta_id']."--".$fila2['cuentamovimiento_fecha']."<br><hr>";
+            $con->consulta("
+                SELECT 
+                    MIN(m.cuentamovimiento_fecha)
+                FROM 
+                    tab_cuenta_movimiento m 
+                WHERE 
+                    m.cuentamovimiento_cuentaid = '".$fila['cuenta_id']."';
+            ");
+            if($fila3 = mysql_fetch_row($con->getResultado())) {     
+                $ultimacapitalizacion=$fila3[0];
+            }
         }
 
 
+        
+        $diferencia = diferenciaDias($ultimacapitalizacion,$hoy);
+
+
+
+        echo $fila['cuenta_id']."--".$ultimacapitalizacion."--".$hoy."--".$diferencia."<br><hr>";
 
 
 
 
 
 
-        $i++;
+
+
+
+
+
     }
+
+function diferenciaDias($inicio, $fin){
+    $inicio = strtotime($inicio);
+    $fin = strtotime($fin);
+    $dif = $fin - $inicio;
+    $diasFalt = (( ( $dif / 60 ) / 60 ) / 24);
+    return ceil($diasFalt);
+}
+
 
 ?>
